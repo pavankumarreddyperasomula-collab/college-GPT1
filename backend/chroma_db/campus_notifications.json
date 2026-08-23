@@ -1,0 +1,447 @@
+[
+  {
+    "id": "notif_8463b861",
+    "theme": "holidayy",
+    "title": "holidayy",
+    "category": "college",
+    "body": "**THEME: HOLIDAYY**  \n**DATE / EFFECTIVE WINDOW: 2026-08-22 to 2026-08-29**\n\n---\n\n**To:** All Students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** College Holiday Notification  \n\n### 1. Announcement\nThe college will remain closed for a holiday from **22\u202fAugust\u202f2026** to **29\u202fAugust\u202f2026**. All academic, administrative, and extracurricular activities are suspended during this period.\n\n### 2. Guidelines\n- **Attendance:** No attendance will be recorded for any classes or labs during the holiday window.  \n- **Examinations & Assignments:** Any exams, quizzes, or assignment deadlines originally scheduled within these dates will be rescheduled; details will be communicated later.  \n- **Library & Labs:** The central library, computer labs, and workshop facilities will be inaccessible.  \n- **Hostel Residents:** Hostel services (mess, housekeeping) will operate on a reduced schedule; a separate notice will be posted in the hostels.  \n\n### 3. Responsibilities\n- **Students:** Use this time for rest, self\u2011study, and personal development. Ensure that any pending academic obligations are addressed promptly after the holiday.  \n- **Faculty:** Update course calendars and inform students of any revised deadlines or class schedules.  \n\n### 4. Emergency Contact\nFor urgent matters during the holiday period, please contact the College Administration Office:\n\n- **Phone:** +91\u2011XXXXXXXXXX  \n- **Email:** admin@srkrengg.edu.in  \n\n---\n\nWe appreciate your cooperation and wish everyone a pleasant and safe holiday.\n\n**Signed,**  \n[Name of Principal]  \nPrincipal, SRKR Engineering College",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-9861",
+    "created_at": "2026-08-23T04:58:50.905450",
+    "date_time_str": "23-08-2026 at 04:58 AM"
+  },
+  {
+    "id": "notif_fec4cbff",
+    "theme": "holiday",
+    "title": "holiday",
+    "category": "college",
+    "body": "**Reasoning Summary**\n\n1. **Identify Requirements**  \n   - Topic: **Holiday**  \n   - Category: **College**  \n   - Validity Window: **2026\u201108\u201122 to 2026\u201108\u201129**  \n   - Formatting rule: The **Notice Theme** and **Effective Dates** must appear in **bold markdown** exactly as `**THEME: {THEME}` and `**DATE / EFFECTIVE WINDOW: {START} to {END}`.  \n\n2. **Structure the Notice**  \n   - Header with bolded theme and dates.  \n   - Opening line addressing students and faculty.  \n   - Key details (closure, suspension of activities, resumption date).  \n   - Guidelines for use of the break and completion of pending tasks.  \n   - Contact instructions for queries.  \n   - Closing signature block.  \n\n3. **Draft the Content**  \n   - Keep language formal, concise, and professional.  \n   - Use bullet points and headings for readability.  \n\n---\n\n## Formal College Notice\n\n**THEME: HOLIDAY**  \n**DATE / EFFECTIVE WINDOW: 2026-08-22 to 2026-08-29**\n\n### NOTICE TO ALL STUDENTS AND FACULTY\n\nSRKR Engineering College will observe a holiday from **2026\u201108\u201122** to **2026\u201108\u201129**. During this period the campus will be closed and all academic activities are suspended.\n\n#### Key Details\n- **Applicability:** All students, faculty, and staff.  \n- **Impact:** All classes, examinations, labs, and administrative services are postponed.  \n- **Resumption:** Normal academic schedule will recommence on **2026\u201108\u201130** (the next working day).\n\n#### Guidelines\n- Use this break for rest, personal development, or family time.  \n- Ensure that any pending assignments, project submissions, or administrative tasks are completed **before** the holiday begins.  \n- If you have any scheduled assessments during the holiday, contact your department head for rescheduling.\n\n#### Contact Instructions\n- **Department Heads:** Reach out via your departmental email or office phone.  \n- **College Administration Office:**  \n  - Phone: +91\u2011XXXXXXXXXX  \n  - Email: admin@srkrengg.edu.in  \n\nFor any further clarification, please do not hesitate to contact the above channels.\n\nWe wish everyone a safe, relaxing, and rejuvenating break.\n\n**Sincerely,**  \n[Name of Signatory]  \nCollege Administrator  \nSRKR Engineering College  \n[Contact Information]",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-9861",
+    "created_at": "2026-08-23T04:55:45.994933",
+    "date_time_str": "23-08-2026 at 04:55 AM"
+  },
+  {
+    "id": "notif_e9a66132",
+    "theme": "time table",
+    "title": "time table",
+    "category": "college",
+    "body": "# College Life\n\nCollege is an important stage in a student's life. It is a place where students gain knowledge, develop skills, make friends, and prepare for their future careers. College life is not only about attending classes and writing examinations; it is also about learning how to communicate, solve problems, work in teams, and become responsible.\n\nStudents participate in various activities such as seminars, workshops, sports, cultural events, technical competitions, and clubs. These activities help students discover their interests and improve their confidence. College also gives students opportunities to meet people from different backgrounds and learn from their experiences.\n\nTechnology has become an important part of modern college education. Students use computers, the internet, programming tools, artificial intelligence, and online learning platforms to improve their knowledge. By combining classroom education with practical projects, students can develop skills that are useful in the real world.\n\nCollege life can sometimes be challenging because students have to manage studies, assignments, projects, examinations, and personal responsibilities. Learning to manage time and maintain a regular routine can help students handle these challenges effectively.\n\nOverall, college is a period of learning, exploration, friendship, and personal growth. The knowledge and experiences gained during these years can help students build a successful and meaningful future.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-21",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-3868",
+    "created_at": "2026-08-23T04:12:53.869439",
+    "date_time_str": "23-08-2026 at 04:12 AM"
+  },
+  {
+    "id": "notif_fb80bf9e",
+    "theme": "time table",
+    "title": "time table",
+    "category": "college",
+    "body": "# College Life\n\nCollege is an important stage in a student's life. It is a place where students gain knowledge, develop skills, make friends, and prepare for their future careers. College life is not only about attending classes and writing examinations; it is also about learning how to communicate, solve problems, work in teams, and become responsible.\n\nStudents participate in various activities such as seminars, workshops, sports, cultural events, technical competitions, and clubs. These activities help students discover their interests and improve their confidence. College also gives students opportunities to meet people from different backgrounds and learn from their experiences.\n\nTechnology has become an important part of modern college education. Students use computers, the internet, programming tools, artificial intelligence, and online learning platforms to improve their knowledge. By combining classroom education with practical projects, students can develop skills that are useful in the real world.\n\nCollege life can sometimes be challenging because students have to manage studies, assignments, projects, examinations, and personal responsibilities. Learning to manage time and maintain a regular routine can help students handle these challenges effectively.\n\nOverall, college is a period of learning, exploration, friendship, and personal growth. The knowledge and experiences gained during these years can help students build a successful and meaningful future.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-21",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-3868",
+    "created_at": "2026-08-23T04:12:38.111764",
+    "date_time_str": "23-08-2026 at 04:12 AM"
+  },
+  {
+    "id": "notif_080cc822",
+    "theme": "dussera",
+    "title": "dussera",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DUSSERA\nCategory: College Administration\nholiday dates : 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'dussera'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-5089",
+    "created_at": "2026-08-23T03:53:48.897442",
+    "date_time_str": "23-08-2026 at 03:53 AM"
+  },
+  {
+    "id": "notif_9ef252d2",
+    "theme": "dussera",
+    "title": "dussera",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DUSSERA\nCategory: College Administration\nholiday dates: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'dussera'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-1825",
+    "created_at": "2026-08-23T03:50:50.168008",
+    "date_time_str": "23-08-2026 at 03:50 AM"
+  },
+  {
+    "id": "notif_dc3a428a",
+    "theme": "college",
+    "title": "college",
+    "category": "college",
+    "body": "# College Life\n\n## 1. Introduction  \nCollege marks a pivotal phase in a student\u2019s journey, offering a blend of academic rigor, personal development, and social interaction. It is a place where learners acquire knowledge, hone essential skills, forge lasting friendships, and lay the groundwork for future careers.\n\n---\n\n## 2. Academic Experience  \n- **Core Learning**  \n  - Attending lectures and seminars  \n  - Completing assignments and examinations  \n- **Skill Development**  \n  - **Communication** \u2013 articulating ideas clearly in written and oral formats  \n  - **Problem\u2011solving** \u2013 applying analytical thinking to complex questions  \n  - **Teamwork** \u2013 collaborating on group projects and presentations  \n  - **Responsibility** \u2013 managing deadlines and ethical conduct  \n\n---\n\n## 3. Extracurricular Activities  \nCollege offers a rich tapestry of opportunities beyond the classroom:\n\n| Category | Examples | Benefits |\n|----------|----------|----------|\n| **Seminars & Workshops** | Guest lectures, industry panels | Exposure to real\u2011world insights |\n| **Sports & Physical Fitness** | Intramural leagues, fitness clubs | Health, teamwork, leadership |\n| **Cultural Events** | Dance, music, drama | Creative expression, cultural awareness |\n| **Technical Competitions** | Hackathons, robotics contests | Practical application of theory |\n| **Clubs & Societies** | Debate, coding, environmental groups | Networking, confidence building |\n\nThese activities help students:\n- Discover personal interests  \n- Build self\u2011confidence  \n- Meet peers from diverse backgrounds  \n- Learn from varied experiences  \n\n---\n\n## 4. Technology Integration  \nModern college education heavily relies on digital tools:\n\n- **Computers & Internet** \u2013 foundational resources for research and communication  \n- **Programming Tools** \u2013 IDEs, version control, cloud services  \n- **Artificial Intelligence** \u2013 AI\u2011driven learning platforms, data analytics  \n- **Online Learning Platforms** \u2013 MOOCs, virtual labs, e\u2011textbooks  \n\nBy blending classroom theory with **practical projects**, students acquire skills directly applicable to the workplace.\n\n---\n\n## 5. Challenges & Time Management  \nBalancing academics and personal life can be demanding. Key challenges include:\n\n- Managing **studies, assignments, and projects**  \n- Preparing for **examinations**  \n- Fulfilling **personal responsibilities** (family, part\u2011time work, health)\n\nEffective strategies:\n- **Prioritize tasks** using to\u2011do lists or digital planners  \n- **Set a consistent routine** (study blocks, breaks, sleep schedule)  \n- **Seek support** from peers, mentors, or counseling services  \n\n---\n\n## 6. Personal Growth & Future Outlook  \nCollege is more than coursework; it is a period of holistic development:\n\n- **Learning** \u2013 deepening subject knowledge and critical thinking  \n- **",
+    "start_date": "2026-08-22",
+    "end_date": "2026-09-21",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-1825",
+    "created_at": "2026-08-23T03:49:31.731340",
+    "date_time_str": "23-08-2026 at 03:49 AM"
+  },
+  {
+    "id": "notif_3724b5ba",
+    "theme": "AI Formatted Lecture Notes: Compiler Design",
+    "title": "AI Formatted Lecture Notes: Compiler Design",
+    "category": "college",
+    "body": "=== COMPILER DESIGN UNIT 1 ===\nDetailed lecture notes converted and dispatched by HOD Arjun to respective CSE students.",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-23",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Arjun-4892",
+    "created_at": "2026-08-23T03:46:06.486309",
+    "date_time_str": "23-08-2026 at 03:46 AM"
+  },
+  {
+    "id": "notif_9161aa4c",
+    "theme": "AI Formatted Lecture Notes: Compiler Design",
+    "title": "AI Formatted Lecture Notes: Compiler Design",
+    "category": "college",
+    "body": "=== COMPILER DESIGN UNIT 1 ===\nDetailed lecture notes converted and dispatched by HOD Arjun to respective CSE students.",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-23",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Arjun-4892",
+    "created_at": "2026-08-23T03:45:42.621632",
+    "date_time_str": "23-08-2026 at 03:45 AM"
+  },
+  {
+    "id": "notif_cad2b588",
+    "theme": "AI Formatted Lecture Notes: Compiler Design",
+    "title": "AI Formatted Lecture Notes: Compiler Design",
+    "category": "college",
+    "body": "=== COMPILER DESIGN UNIT 1 ===\nDetailed lecture notes converted and dispatched by HOD Arjun to respective CSE students.",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-23",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Arjun-4892",
+    "created_at": "2026-08-23T03:45:26.659255",
+    "date_time_str": "23-08-2026 at 03:45 AM"
+  },
+  {
+    "id": "notif_4e17e0a1",
+    "theme": "dasara",
+    "title": "dasara",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DASARA\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'dasara'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Xrdyg-9003",
+    "created_at": "2026-08-23T03:23:04.299592",
+    "date_time_str": "23-08-2026 at 03:23 AM"
+  },
+  {
+    "id": "notif_f18c3b6b",
+    "theme": "holoday",
+    "title": "holoday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: HOLODAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'holoday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-5951",
+    "created_at": "2026-08-23T03:05:28.769066",
+    "date_time_str": "23-08-2026 at 03:05 AM"
+  },
+  {
+    "id": "notif_885fe85f",
+    "theme": "dussera holidays",
+    "title": "dussera holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DUSSERA HOLIDAYS\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'dussera holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Hosteladmin-2926",
+    "created_at": "2026-08-23T03:01:28.360901",
+    "date_time_str": "23-08-2026 at 03:01 AM"
+  },
+  {
+    "id": "notif_141eb59f",
+    "theme": "vinayaka chavithy holidays",
+    "title": "vinayaka chavithy holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHY HOLIDAYS\nCategory: College Administration\nholoidyas: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithy holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "hods",
+      "faculty",
+      "students",
+      "hostel"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-23T02:20:31.625102",
+    "date_time_str": "23-08-2026 at 02:20 AM"
+  },
+  {
+    "id": "notif_ac137807",
+    "theme": "dussera holidays",
+    "title": "dussera holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DUSSERA HOLIDAYS\nCategory: College Administration\nholiday dates: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'dussera holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Pavan001-3960",
+    "created_at": "2026-08-23T01:35:43.361133",
+    "date_time_str": "23-08-2026 at 01:35 AM"
+  },
+  {
+    "id": "notif_a23928ce",
+    "theme": "vinayaka chvithy holidays",
+    "title": "vinayaka chvithy holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHVITHY HOLIDAYS\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chvithy holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Pavan001-7425",
+    "created_at": "2026-08-23T01:20:56.785534",
+    "date_time_str": "23-08-2026 at 01:20 AM"
+  },
+  {
+    "id": "notif_dabd328f",
+    "theme": "vinayaka chavithy",
+    "title": "vinayaka chavithy",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithy'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Pavan-8225",
+    "created_at": "2026-08-23T00:58:48.396319",
+    "date_time_str": "23-08-2026 at 12:58 AM"
+  },
+  {
+    "id": "notif_e1a2abc1",
+    "theme": "vinayaka chavithi holiday",
+    "title": "vinayaka chavithi holiday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHI HOLIDAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithi holiday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Pavan-8225",
+    "created_at": "2026-08-23T00:36:05.482658",
+    "date_time_str": "23-08-2026 at 12:36 AM"
+  },
+  {
+    "id": "notif_6c13e0ac",
+    "theme": "ganesh chaturdi holidays",
+    "title": "ganesh chaturdi holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: GANESH CHATURDI HOLIDAYS\nCategory: College Administration\nholidays duration: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'ganesh chaturdi holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-456783-7055",
+    "created_at": "2026-08-22T20:39:53.974244"
+  },
+  {
+    "id": "notif_9cd2dc9c",
+    "theme": "SECOND SATURDAY",
+    "title": "SECOND SATURDAY",
+    "category": "hostel",
+    "body": "OFFICIAL CIRCULAR: SECOND SATURDAY\nCategory: Hostel Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'SECOND SATURDAY'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-22T19:53:45.557327"
+  },
+  {
+    "id": "notif_9dbd5b1d",
+    "theme": "dussera festival holidays",
+    "title": "dussera festival holidays",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: DUSSERA FESTIVAL HOLIDAYS\nCategory: College Administration\nholidays duration : 2026-10-09 to 2026-10-17\n\nThis notice is issued regarding 'dussera festival holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-10-09",
+    "end_date": "2026-10-17",
+    "audience": [
+      "faculty"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-22T19:29:30.413021"
+  },
+  {
+    "id": "notif_3929dc83",
+    "theme": "vinayaka chavithi holiday",
+    "title": "vinayaka chavithi holiday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHI HOLIDAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithi holiday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "faculty",
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Hosteladmin-9728",
+    "created_at": "2026-08-22T19:24:36.880447"
+  },
+  {
+    "id": "notif_8ed1ba80",
+    "theme": "vinayaka chavithi holiday",
+    "title": "vinayaka chavithi holiday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHI HOLIDAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithi holiday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "faculty",
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Hosteladmin-9728",
+    "created_at": "2026-08-22T19:24:36.527604"
+  },
+  {
+    "id": "notif_5dd16477",
+    "theme": "vinayaka chavithi holiday",
+    "title": "vinayaka chavithi holiday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHI HOLIDAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithi holiday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "faculty",
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Hosteladmin-9728",
+    "created_at": "2026-08-22T19:24:36.360552"
+  },
+  {
+    "id": "notif_c1885a75",
+    "theme": "vinayaka chavithi holiday",
+    "title": "vinayaka chavithi holiday",
+    "category": "college",
+    "body": "OFFICIAL CIRCULAR: VINAYAKA CHAVITHI HOLIDAY\nCategory: College Administration\nEffective Window: 2026-08-22 to 2026-08-29\n\nThis notice is issued regarding 'vinayaka chavithi holiday'. All concerned students and faculty members are requested to take note of the schedule and guidelines.\n\n1. Please ensure compliance with campus regulations during this period.\n2. For any queries or assistance, contact the Administration office or Hostel Warden desk.\n\nIssued by Order of Campus Administration.",
+    "start_date": "2026-08-22",
+    "end_date": "2026-08-29",
+    "audience": [
+      "faculty",
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Hosteladmin-9728",
+    "created_at": "2026-08-22T19:24:35.429012"
+  },
+  {
+    "id": "notif_001",
+    "theme": "Hostel Gate Pass & Night Out Restrictions",
+    "title": "Hostel Gate Pass & Night Out Restrictions",
+    "category": "hostel",
+    "body": "All hostel students must submit weekend night-out pass requests on the portal before Friday 5:00 PM. Verification calls will be placed to parents.",
+    "start_date": "2026-08-20",
+    "end_date": "2026-09-01",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-General",
+    "created_at": "2026-08-22T19:17:13.255910"
+  },
+  {
+    "id": "notif_002",
+    "theme": "Mid-Semester Examination Schedule Announcement",
+    "title": "Mid-Semester Examination Schedule Announcement",
+    "category": "college",
+    "body": "Mid-Semester exams will take place from October 15th to October 22nd. Faculty members are requested to upload question paper drafts by October 5th.",
+    "start_date": "2026-10-15",
+    "end_date": "2026-10-22",
+    "audience": [
+      "students",
+      "faculty",
+      "hod"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-22T19:17:13.255935"
+  }
+]
