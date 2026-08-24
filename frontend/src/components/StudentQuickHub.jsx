@@ -4,6 +4,7 @@ import { BookOpen, Folder, Megaphone, Calendar, MapPin, Bell, User, ArrowRight, 
 const StudentQuickHub = ({
   user,
   unreadCount = 0,
+  documentsCount = 0,
   onOpenRules,
   onOpenDocuments,
   onOpenNotices,
@@ -101,12 +102,19 @@ const StudentQuickHub = ({
             </div>
 
             <div className="space-y-2 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                <Folder className="w-6 h-6" />
+              <div className="flex items-center justify-between">
+                <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                  <Folder className="w-6 h-6" />
+                </div>
+                {documentsCount > 0 && (
+                  <span className="px-3 py-1 rounded-full bg-orange-500 text-white text-xs font-black shadow-md">
+                    {documentsCount} Docs
+                  </span>
+                )}
               </div>
-              <h4 className="text-xl font-black tracking-tight text-white">AI Document Tools</h4>
+              <h4 className="text-xl font-black tracking-tight text-white">Department Documents</h4>
               <p className="text-xs text-slate-300 font-medium leading-relaxed">
-                Paste website text or upload files to convert into organized, clean documents.
+                Official documents sent by your HOD & Faculty with sender identity, plus AI tools.
               </p>
             </div>
 

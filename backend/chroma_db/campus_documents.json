@@ -1,0 +1,67 @@
+[
+  {
+    "id": "doc_e63155be",
+    "title": "geenie_Formatted (4)",
+    "file_name": "geenie_Formatted (4).txt",
+    "body": "=== GEENIE ===\nOrganized Document by COLLEGE GPT AI\nDate: 2026-08-23 02:26 AM\n\n1. Executive Summary\n-------------------\n# The Lost Lantern\n\nLong ago, in a small village surrounded by green hills, there lived a young boy named Arjun. He was curious, hardworking, and always eager to explore the world beyond his village.\n...\n\n2. Detailed Content\n-------------------\n# The Lost Lantern\n\nLong ago, in a small village surrounded by green hills, there lived a young boy named Arjun. He was curious, hardworking, and always eager to explore the world beyond his village.\n\nOne evening, while walking home through the forest, Arjun noticed a faint golden light coming from behind an old tree. Curious, he moved closer and discovered a beautiful lantern lying beneath the roots.\n\nThe lantern was unlike anything he had ever seen. It was covered with strange symbols and gave off a warm golden glow.\n\nArjun picked it up.\n\nSuddenly, a soft voice came from the lantern.\n\n\"Whoever carries me must use my light wisely.\"\n\nArjun was surprised but not frightened. He looked around and asked, \"What can you do?\"\n\nThe lantern replied, \"I can show you the path when you are lost, but I cannot make your choices for you.\"\n\nArjun decided to take the lantern home.\n\nThe next morning, a terrible storm struck the village. The river began to rise, and several families living near the river were unable to find a safe way to higher ground.\n\nArjun remembered the lantern.\n\nHe held it up, and its golden light shone toward a narrow path through the forest. Arjun followed the path and discovered that it led to a high hill above the village.\n\nHe quickly informed the villagers. Everyone followed the safe path and reached the hill before the river overflowed.\n\nThe villagers thanked Arjun for saving them.\n\nThat night, Arjun looked at the lantern and smiled.\n\n\"I understand now,\" he said. \"The lantern didn't save the village. It only showed me the way. I was the one who had to choose to follow it.\"\n\nThe golden light became brighter.\n\nFrom that day forward, Arjun used the lantern whenever someone needed guidance. He never used it for wealth or power.\n\nYears later, people still told stories about the boy with the magical lantern.\n\nAnd whenever someone felt lost, they remembered the lesson of the lantern:\n\nSometimes, all we need is a little light to find the right path\u2014but we must be brave enough to take the first step.\n\n=== End of Formatted Document ===",
+    "category": "college",
+    "sender_name": "Dr. K. V. Sharma",
+    "sender_designation": "Head of Department (HOD - CSE)",
+    "sender_role": "hod",
+    "sender_scope": "AIDS",
+    "created_at": "2026-08-24T17:48:14.161011",
+    "date_time_str": "24-08-2026 at 05:48 PM"
+  },
+  {
+    "id": "doc_78fc42d7",
+    "title": "implementation",
+    "file_name": "trees_in_Ds_Formatted.txt",
+    "body": "# Student Performance Data \u2013 Analysis  \n*(All information is taken verbatim from the raw CSV file provided.)*  \n\n---\n\n## 1. Introduction  \nThis document presents a clean, structured view of the student data supplied.  \nThe goal is to make the information easy to read, while preserving every detail from the original source.\n\n---\n\n## 2. Data Overview  \n\n| Metric | Value |\n|--------|-------|\n| **Total Students** | 15 |\n| **Branches Represented** | AIDS, AIML, CSE, MECH, CSM, ECE |\n| **Years** | 2nd & 3rd year |\n| **Gender Distribution** | 10\u202fM, 5\u202fF |\n\n### 2.1 Branch Distribution  \n\n| Branch | Count |\n|--------|-------|\n| AIDS | 4 |\n| AIML | 2 |\n| CSE | 3 |\n| MECH | 2 |\n| CSM | 2 |\n| ECE | 2 |\n\n### 2.2 Year Distribution  \n\n| Year | Count |\n|------|-------|\n| 2nd | 9 |\n| 3rd",
+    "category": "college",
+    "sender_name": "college admin",
+    "sender_designation": "to my students",
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-7801",
+    "created_at": "2026-08-24T14:58:54.593790",
+    "date_time_str": "24-08-2026 at 02:58 PM"
+  },
+  {
+    "id": "doc_9268cd65",
+    "title": "Test Circular Document",
+    "file_name": "Test_Doc.pdf",
+    "body": "This is a test document dispatched by HOD.",
+    "category": "college",
+    "sender_name": "Dr. K. V. Sharma",
+    "sender_designation": "HOD - CSE",
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-24T14:54:45.377868",
+    "date_time_str": "24-08-2026 at 02:54 PM"
+  },
+  {
+    "id": "doc_001",
+    "title": "R23 B.Tech CSE Department Curriculum & Regulation Guide",
+    "file_name": "R23_CSE_Curriculum.pdf",
+    "body": "Official R23 Academic Regulation & Curriculum breakdown for Computer Science & Engineering students. Includes detailed CIE/SEE marks allocation, internal exam schedules, laboratory requirements, and attendance guidelines.",
+    "category": "college",
+    "sender_name": "Dr. K. V. Sharma",
+    "sender_designation": "Head of Department (HOD - CSE)",
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-24T14:54:28.577709",
+    "date_time_str": "24-08-2026 at 02:54 PM"
+  },
+  {
+    "id": "doc_002",
+    "title": "SRKR Hostel Code of Conduct & Mess Rules",
+    "file_name": "Hostel_Rules_2026.docx",
+    "body": "Mandatory rules for all resident students staying in SRKR Engineering College Hostels (Blocks A, B & C). Details quiet hours (10 PM to 6 AM), mess timing, visitor policies, and gate pass application procedure.",
+    "category": "hostel",
+    "sender_name": "Warden Rajesh",
+    "sender_designation": "Chief Hostel Administrator",
+    "sender_role": "hostel_admin",
+    "sender_scope": "HOSTEL-BLOCK-A",
+    "created_at": "2026-08-24T14:54:28.577714",
+    "date_time_str": "24-08-2026 at 02:54 PM"
+  }
+]

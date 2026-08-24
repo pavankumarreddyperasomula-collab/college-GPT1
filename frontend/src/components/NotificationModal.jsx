@@ -1,11 +1,32 @@
 import React from 'react';
-import { X, Bell, Calendar, Clock, Building, ShieldCheck, Printer } from 'lucide-react';
+import { X, Bell, Calendar, Clock, Building, ShieldCheck, Printer, Trash2 } from 'lucide-react';
+import { API_URL } from '../config';
 
-const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, onClearAll }) => {
+const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAsRead, onClearAll, onDeleteNotice }) => {
   if (!isOpen) return null;
+
+  const userRole = (user?.role || 'student').toLowerCase();
+  const isAdmin = ['super_admin', 'hod', 'hostel_admin', 'faculty'].includes(userRole);
 
   const handlePrint = () => {
     window.print();
+  };
+
+  const handleDelete = async (noticeId) => {
+    if (!window.confirm('Are you sure you want to delete this notice?')) return;
+    try {
+      const res = await fetch(`${API_URL}/delete-notice/${encodeURIComponent(noticeId)}`, {
+        method: 'DELETE'
+      });
+      if (res.ok) {
+        if (onDeleteNotice) onDeleteNotice(noticeId);
+      } else {
+        alert('Failed to delete notice.');
+      }
+    } catch (e) {
+      console.error(e);
+      alert('Error deleting notice.');
+    }
   };
 
   return (
@@ -36,7 +57,7 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
               <Printer className="w-3.5 h-3.5" /> Print Circular
             </button>
 
-            {notifications.length > 0 && (
+            {notifications.length > 0 && isAdmin && (
               <button
                 onClick={onClearAll}
                 className="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors cursor-pointer"
@@ -54,7 +75,7 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
           </div>
         </div>
 
-        {/* Official Printed Paper Circular List (Matching Uploaded Image Format) */}
+        {/* Official Printed Paper Circular List */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-8 flex-1 bg-slate-200/60">
           {notifications.length === 0 ? (
             <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 shadow-sm text-slate-500">
@@ -66,8 +87,19 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
             notifications.map((notif) => (
               <div
                 key={notif.id}
-                className="bg-white border border-slate-300 shadow-md p-6 sm:p-10 rounded-2xl space-y-6 text-slate-900 font-serif relative transition-all hover:shadow-xl"
+                className="bg-white border border-slate-300 shadow-md p-6 sm:p-10 rounded-2xl space-y-6 text-slate-900 font-serif relative transition-all hover:shadow-xl group"
               >
+                {/* Admin Delete Action Button */}
+                {isAdmin && (
+                  <button
+                    onClick={() => handleDelete(notif.id)}
+                    className="absolute top-4 right-4 p-2 rounded-xl bg-red-50 hover:bg-red-600 text-red-600 hover:text-white transition-all cursor-pointer shadow-xs border border-red-200"
+                    title="Delete notice"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                )}
+
                 {/* 1. Official Header */}
                 <div className="text-center space-y-1 border-b border-slate-300 pb-4">
                   <h2 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900 uppercase">
@@ -78,12 +110,11 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                   </p>
                 </div>
 
-                {/* 2. Top Right Date Display (BOLD MARKED HIGHLIGHT) */}
+                {/* 2. Top Right Date Display */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 text-xs sm:text-sm font-bold pt-1">
                   <span className="px-3 py-1 rounded-lg bg-orange-100 text-orange-950 font-sans text-[11px] uppercase font-black tracking-wider border border-orange-300 shadow-2xs">
                     📁 CATEGORY: <strong>{notif.category || 'General'}</strong>
                   </span>
-                  {/* BOLD MARKED DATE BADGE */}
                   <span className="font-black text-amber-950 bg-amber-200/95 border-2 border-amber-400 px-4 py-1.5 rounded-xl font-mono shadow-xs text-xs sm:text-sm tracking-wide">
                     📅 <strong>DATE: {notif.date_time_str || notif.start_date || '20-08-2026'}</strong>
                   </span>
@@ -96,9 +127,8 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                   </h3>
                 </div>
 
-                {/* 4. Notice Theme & Body Text (BOLD MARKED THEME & DATES) */}
+                {/* 4. Notice Theme & Body Text */}
                 <div className="space-y-4 text-sm sm:text-base leading-relaxed text-slate-900 px-1 sm:px-3">
-                  {/* BOLD MARKED THEME BOX */}
                   <div className="p-4 bg-amber-100/90 border-l-8 border-amber-500 rounded-r-2xl shadow-xs font-sans space-y-1">
                     <span className="text-[11px] font-black text-amber-900 uppercase tracking-widest block">
                       📌 OFFICIAL NOTICE THEME (MARKED):
@@ -115,7 +145,6 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                     )}
                   </div>
 
-                  {/* Body Content with **bold** formatting parsed */}
                   <div className="whitespace-pre-wrap font-medium leading-loose text-slate-900 text-sm sm:text-base">
                     {notif.body?.split(/(\*\*.*?\*\*)/g).map((part, idx) => {
                       if (part.startsWith('**') && part.endsWith('**')) {
@@ -130,9 +159,8 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                   </div>
                 </div>
 
-                {/* 5. Official Distribution List & Principal Signature (Matching Image) */}
+                {/* 5. Official Distribution List & Principal Signature */}
                 <div className="pt-6 border-t border-slate-300 grid grid-cols-1 md:grid-cols-3 gap-4 text-[10px] font-sans text-slate-700">
-                  {/* Left Copy-to Column */}
                   <div className="space-y-0.5">
                     <p className="font-bold text-slate-900">Copy to:</p>
                     <p>• The Principal's Table</p>
@@ -148,7 +176,6 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                     <p>• Office file (DPS), Master file</p>
                   </div>
 
-                  {/* Middle Copy-to Column */}
                   <div className="space-y-0.5 pt-3 md:pt-4">
                     <p>• All the Deans</p>
                     <p>• Head Foundation Year & Incubation</p>
@@ -162,9 +189,7 @@ const NotificationModal = ({ isOpen, onClose, notifications = [], onMarkAsRead, 
                     <p>• All Notice boards</p>
                   </div>
 
-                  {/* Right Principal Signature Block */}
                   <div className="flex flex-col items-center justify-end text-center pt-4 md:pt-0">
-                    {/* Simulated Signature Mark */}
                     <div className="w-28 h-10 mb-1 flex items-center justify-center">
                       <svg className="w-24 h-10 text-slate-900 stroke-current fill-none stroke-[2]" viewBox="0 0 100 40">
                         <path d="M10 25 C30 10, 40 35, 60 15 C75 5, 80 30, 90 20" />

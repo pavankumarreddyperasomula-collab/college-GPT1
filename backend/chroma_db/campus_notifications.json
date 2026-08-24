@@ -1,5 +1,23 @@
 [
   {
+    "id": "notif_03fd843a",
+    "theme": "vinayaka fchavithy holidays",
+    "title": "vinayaka fchavithy holidays",
+    "category": "college",
+    "body": "**THEME: VINAYAKA CHAVITHI HOLIDAYS**  \n**DATE / EFFECTIVE WINDOW: 2026-08-24 to 2026-08-31**\n\n---\n\n**To:** All Students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** Closure of College Premises for Vinayaka Chavithi Celebrations  \n\nDear Members of the SRKR Engineering College Community,\n\nIn observance of Vinayaka Chavithi, the college will remain **closed** for the entire duration of the holiday period. Please note the following details:\n\n| Item | Details |\n|------|---------|\n| **Closure Dates** | **24 August 2026 (Monday) \u2013 31 August 2026 (Wednesday)** |\n| **Resumption of Academic Activities** | **01 September 2026 (Thursday)** \u2013 regular schedule resumes |\n| **Classes & Examinations** | All lectures, labs, tutorials, and examinations are suspended during the closure |\n| **Hostel Operations** | Hostel services will operate on a limited basis; essential staff will be on duty. Students residing in hostels should adhere to safety protocols and maintain quiet hours. |\n| **Library & Labs** | Closed for the entire period. Access will be restored on 01 September 2026. |\n| **Administrative Offices** | Closed. Queries will be addressed after reopening. |\n\n### Guidelines for Students & Faculty\n1. **Academic Work:** Use this period to review lecture notes, complete pending assignments, and prepare for upcoming assessments.  \n2. **Online Resources:** Access e\u2011learning portals and digital libraries for self\u2011study.  \n3. **Hostel Residents:** Ensure that all personal belongings are secured. Report any maintenance issues to the hostel warden via email or phone.  \n4. **Emergency Contacts:** In case of any urgent matter, contact the College Helpline at **+91\u2011XXXXXXXXXX** or email **admin@srkr.edu.in**.  \n\n### Contact for Further Information\n- **Dean of Academic Affairs:** Dr. R. Kumar \u2013 **+91\u2011XXXXXXXXXX** / dean.acad@srkr.edu.in  \n- **Hostel Warden (Boys/Girls):** Mr. S. Rao / Ms. L. Nair \u2013 **+91\u2011XXXXXXXXXX** / hostel@srkr.edu.in  \n\nWe wish everyone a joyous and auspicious Vinayaka Chavithi. Thank you for your cooperation.\n\n**Sincerely,**  \n\n[Signature]  \n**Dr. A. Sharma**  \nPrincipal, SRKR Engineering College  \nDate: 24 August 2026",
+    "start_date": "2026-08-24",
+    "end_date": "2026-08-31",
+    "audience": [
+      "students",
+      "faculty",
+      "super_admin"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-24T14:30:26.917481",
+    "date_time_str": "24-08-2026 at 02:30 PM"
+  },
+  {
     "id": "notif_25c29a0f",
     "theme": "holidays",
     "title": "holidays",

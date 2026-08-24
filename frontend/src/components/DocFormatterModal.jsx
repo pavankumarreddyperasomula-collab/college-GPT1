@@ -1,23 +1,43 @@
 import React, { useState } from 'react';
-import { X, Sparkles, Upload, Download, FileText, CheckCircle2, AlertCircle, Send, ShieldCheck, Key, Users } from 'lucide-react';
+import { 
+  X, Sparkles, Upload, Download, FileText, CheckCircle2, AlertCircle, 
+  Send, Users, Search, UserCheck, Calendar, ShieldCheck, Tag, ChevronDown, ChevronUp, FileCode, Trash2
+} from 'lucide-react';
+import { API_URL } from '../config';
 
-const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
+const DocFormatterModal = ({ isOpen, onClose, user, documents = [], onDocumentPublished }) => {
+  const role = (user?.role || 'student').toLowerCase();
+  const isAdmin = ['hod', 'super_admin', 'hostel_admin', 'faculty', 'admin_hod', 'admin_faculty'].includes(role);
+
+  // Tab State: 'received' or 'create'
+  const [activeTab, setActiveTab] = useState('received');
+
+  // Form State
   const [docTitle, setDocTitle] = useState('');
+  const [senderName, setSenderName] = useState(
+    user?.name || user?.username || (role === 'hostel_admin' ? 'Warden Rajesh' : 'Dr. K. V. Sharma')
+  );
+  const [senderDesignation, setSenderDesignation] = useState(
+    user?.designation || (role === 'hostel_admin' ? 'Chief Hostel Administrator' : (role === 'super_admin' ? 'Super Administrator' : 'Head of Department (HOD - CSE)'))
+  );
+  const [targetScope, setTargetScope] = useState(
+    user?.hod_code || user?.department || 'ALL'
+  );
   const [rawText, setRawText] = useState('');
   const [formattedText, setFormattedText] = useState('');
   const [fileName, setFileName] = useState('');
 
+  // UI States
   const [formatting, setFormatting] = useState(false);
   const [sendingToStudents, setSendingToStudents] = useState(false);
   const [error, setError] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
+  const [searchFilter, setSearchFilter] = useState('');
+  const [expandedDocId, setExpandedDocId] = useState(null);
 
   if (!isOpen) return null;
 
-  const role = (user?.role || 'student').toLowerCase();
-  const isAdmin = ['hod', 'super_admin', 'hostel_admin', 'faculty', 'admin_hod'].includes(role);
-
-  // Handle file upload (.txt, .md, .doc text files)
+  // File Upload Handler
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -37,7 +57,7 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
     reader.readAsText(file);
   };
 
-  // Call AI backend to format raw pasted text into organized document
+  // AI Formatting Handler
   const handleFormatAI = async () => {
     if (!rawText.trim()) {
       setError('Please paste raw text or upload a file first.');
@@ -47,7 +67,7 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
     setFormatting(true);
 
     try {
-      const res = await fetch('http://localhost:8000/format-document', {
+      const res = await fetch(`${API_URL}/format-document`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -70,11 +90,11 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
     }
   };
 
-  // Dispatch document directly to respective students based on HOD code
+  // Dispatch Document Handler (Sends to Respective Department Students with Sender Identity)
   const handleSendToStudents = async () => {
     const contentToSend = formattedText || rawText;
     if (!contentToSend.trim()) {
-      setError('Please provide document content or format raw text first.');
+      setError('Please provide document content, paste text, or upload a file first.');
       return;
     }
     const finalTitle = docTitle.trim() || 'Official Department Document';
@@ -82,38 +102,32 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
     setError('');
     setSendingToStudents(true);
 
-    const targetAudience = role === 'hostel_admin' 
-      ? ['hostel'] 
-      : (role === 'super_admin' ? ['all'] : ['students']);
-
     const category = role === 'hostel_admin' ? 'hostel' : 'college';
-    const senderScope = user?.hod_code || user?.username || 'ALL';
-
-    const now = new Date();
-    const startDate = now.toISOString().split('T')[0];
-    const endDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+    const finalScope = targetScope.trim() || user?.hod_code || user?.department || 'ALL';
 
     try {
-      const res = await fetch('http://localhost:8000/send-notice', {
+      const res = await fetch(`${API_URL}/send-document`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          theme: finalTitle,
           title: finalTitle,
           body: contentToSend.trim(),
+          file_name: fileName || `${finalTitle.replace(/\s+/g, '_')}.txt`,
           category: category,
-          start_date: startDate,
-          end_date: endDate,
-          audience: targetAudience,
-          sender_role: role === 'super_admin' ? 'super_admin' : (role === 'hostel_admin' ? 'hostel_admin' : 'hod'),
-          sender_scope: senderScope
+          sender_name: senderName.trim() || user?.name || user?.username || 'Faculty Authority',
+          sender_designation: senderDesignation.trim() || user?.designation || 'Department Authority',
+          sender_role: role,
+          sender_scope: finalScope
         })
       });
       const data = await res.json();
       if (res.ok && data.status === 'success') {
-        setSuccessMsg(`Document "${finalTitle}" sent successfully to your respective students (Code: ${senderScope})!`);
-        if (onNoticePublished) onNoticePublished();
-        setTimeout(() => setSuccessMsg(''), 6000);
+        setSuccessMsg(`Document "${finalTitle}" dispatched directly to ${finalScope} students by ${senderName} (${senderDesignation})!`);
+        if (onDocumentPublished) onDocumentPublished();
+        setTimeout(() => {
+          setSuccessMsg('');
+          setActiveTab('received');
+        }, 2000);
       } else {
         setError(data.detail || data.message || 'Failed to send document to students.');
       }
@@ -124,217 +138,415 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
     }
   };
 
-  // Download formatted document file
-  const handleDownload = () => {
-    const contentToDownload = formattedText || rawText;
-    if (!contentToDownload.trim()) return;
+  // Download Document File
+  const handleDownloadDoc = (docToDownload) => {
+    const content = docToDownload.body || docToDownload.formattedText || rawText;
+    if (!content) return;
 
-    const cleanTitle = (docTitle.trim() || 'Organized_Document').replace(/[^a-zA-Z0-9_-]/g, '_');
-    const blob = new Blob([contentToDownload], { type: 'text/plain;charset=utf-8' });
+    const title = docToDownload.title || docTitle || 'Document';
+    const cleanTitle = title.replace(/[^a-zA-Z0-9_-]/g, '_');
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `${cleanTitle}_Formatted.txt`;
+    link.download = `${cleanTitle}_SRKR.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   };
 
+  // Filtered Documents Search
+  const filteredDocs = documents.filter((d) => {
+    if (!searchFilter.trim()) return true;
+    const q = searchFilter.toLowerCase();
+    return (
+      d.title?.toLowerCase().includes(q) ||
+      d.body?.toLowerCase().includes(q) ||
+      d.sender_name?.toLowerCase().includes(q) ||
+      d.sender_designation?.toLowerCase().includes(q)
+    );
+  });
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
-        {/* Header */}
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in">
+      <div className="bg-white border border-slate-200 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+        {/* Modal Header */}
+        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/90">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-slate-800 text-white flex items-center justify-center shadow-md shadow-slate-800/20">
+            <div className="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center shadow-md shadow-slate-900/20">
               <FileText className="w-5 h-5" />
             </div>
             <div>
               <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                AI Document Formatter & Dispatch
-                {isAdmin && (
-                  <span className="px-2 py-0.5 rounded-full bg-violet-100 text-violet-800 text-[10px] font-black uppercase">
-                    Admin Mode
-                  </span>
-                )}
+                Official Department Documents & AI Tools
+                <span className="px-2.5 py-0.5 rounded-full bg-slate-200 text-slate-800 text-xs font-black">
+                  {documents.length} Available
+                </span>
               </h3>
               <p className="text-xs text-slate-500 font-medium">
-                {isAdmin 
-                  ? 'Convert raw text into clean documents & send to respective students based on code'
-                  : 'Paste raw website text or upload files → AI organizes into clean structured documents'}
+                SAGI RAMA KRISHNAM RAJU ENGINEERING COLLEGE (AUTONOMOUS)
               </p>
             </div>
           </div>
+
           <button
             onClick={onClose}
-            className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+            className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-200 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Content Body */}
-        <div className="p-6 overflow-y-auto space-y-4 flex-1">
+        {/* Tab Navigation Switcher */}
+        <div className="px-6 pt-3 bg-slate-100/60 border-b border-slate-200 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setActiveTab('received')}
+              className={`px-4 py-2.5 text-xs font-extrabold rounded-t-2xl transition-all cursor-pointer flex items-center gap-2 border-t border-x ${
+                activeTab === 'received'
+                  ? 'bg-white text-slate-900 border-slate-200 shadow-xs'
+                  : 'text-slate-500 hover:text-slate-900 border-transparent bg-transparent'
+              }`}
+            >
+              <FileCode className="w-4 h-4 text-orange-600" />
+              <span>Received Department Documents</span>
+              {documents.length > 0 && (
+                <span className="px-2 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-black">
+                  {documents.length}
+                </span>
+              )}
+            </button>
+
+            {isAdmin && (
+              <button
+                onClick={() => setActiveTab('create')}
+                className={`px-4 py-2.5 text-xs font-extrabold rounded-t-2xl transition-all cursor-pointer flex items-center gap-2 border-t border-x ${
+                  activeTab === 'create'
+                    ? 'bg-white text-slate-900 border-slate-200 shadow-xs'
+                    : 'text-slate-500 hover:text-slate-900 border-transparent bg-transparent'
+                }`}
+              >
+                <Upload className="w-4 h-4 text-violet-600" />
+                <span>Upload / Create & Dispatch Document</span>
+                <span className="px-2 py-0.5 rounded-full bg-violet-100 text-violet-800 text-[10px] font-black uppercase">
+                  Admin Mode
+                </span>
+              </button>
+            )}
+          </div>
+
+          {activeTab === 'received' && (
+            <div className="relative hidden sm:block mb-1">
+              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
+              <input
+                type="text"
+                placeholder="Search documents or sender..."
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+                className="pl-8 pr-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs text-slate-800 outline-none focus:border-slate-400"
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 overflow-y-auto space-y-4 flex-1 bg-slate-50/50">
           {error && (
-            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <div className="p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-bold flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {successMsg && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+            <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{successMsg}</span>
             </div>
           )}
 
-          {/* Admin Dispatch Scope Banner */}
-          {isAdmin && (
-            <div className="p-3.5 rounded-2xl bg-violet-50/80 border border-violet-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-              <div className="flex items-center gap-2 text-violet-900 font-bold">
-                <Users className="w-4 h-4 text-violet-600 shrink-0" />
-                <span>
-                  {role === 'super_admin' 
-                    ? 'Target Scope: Campus-wide Broadcast (All Students)' 
-                    : `Target Scope: Respective students linked to code: ${user?.hod_code || 'HOD-MAIN'}`}
-                </span>
-              </div>
-              {user?.hod_code && (
-                <span className="font-mono px-2 py-0.5 rounded bg-white text-violet-800 font-extrabold border border-violet-200 text-[11px] self-start sm:self-auto">
-                  {user.hod_code}
-                </span>
+          {/* TAB 1: RECEIVED DEPARTMENT DOCUMENTS */}
+          {activeTab === 'received' && (
+            <div className="space-y-4">
+              {filteredDocs.length === 0 ? (
+                <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 p-6">
+                  <FileText className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                  <h4 className="text-base font-bold text-slate-800">No documents received yet</h4>
+                  <p className="text-xs text-slate-400 mt-1">
+                    Official files and guidelines sent by your HOD or Faculty will appear here.
+                  </p>
+                </div>
+              ) : (
+                filteredDocs.map((doc) => {
+                  const isExpanded = expandedDocId === doc.id;
+                  return (
+                    <div
+                      key={doc.id}
+                      className="bg-white border border-slate-200 rounded-3xl p-5 sm:p-6 shadow-sm hover:shadow-md transition-all space-y-4"
+                    >
+                      {/* Document Top Row */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                        <div className="space-y-1">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-mono text-[10px] font-extrabold uppercase border border-slate-200">
+                              📄 {doc.file_name || 'Document'}
+                            </span>
+                            <span className="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-[10px] font-black uppercase">
+                              Scope: {doc.sender_scope || 'ALL'}
+                            </span>
+                          </div>
+                          <h4 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+                            {doc.title}
+                          </h4>
+                        </div>
+
+                        {/* Download & Date & Delete */}
+                        <div className="flex items-center gap-2 shrink-0">
+                          {isAdmin && (
+                            <button
+                              onClick={async () => {
+                                if (!window.confirm('Are you sure you want to delete this document?')) return;
+                                try {
+                                  const res = await fetch(`${API_URL}/delete-document/${encodeURIComponent(doc.id)}`, {
+                                    method: 'DELETE'
+                                  });
+                                  if (res.ok && onDocumentPublished) {
+                                    onDocumentPublished();
+                                  }
+                                } catch (err) {
+                                  console.error(err);
+                                }
+                              }}
+                              className="p-1.5 rounded-xl bg-red-50 hover:bg-red-600 text-red-600 hover:text-white transition-all cursor-pointer border border-red-200"
+                              title="Delete document"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          )}
+                          <button
+                            onClick={() => handleDownloadDoc(doc)}
+                            className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
+                          >
+                            <Download className="w-3.5 h-3.5" />
+                            <span>Download (.txt)</span>
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Sender Identity Section (Highlighting Name & Designation) */}
+                      <div className="p-3.5 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-xl bg-orange-500 text-white flex items-center justify-center shrink-0 font-black text-sm">
+                            <UserCheck className="w-5 h-5" />
+                          </div>
+                          <div>
+                            <div className="text-[10px] font-extrabold text-orange-300 uppercase tracking-wider flex items-center gap-1">
+                              <span>OFFICIAL SENDER IDENTITY</span>
+                              <ShieldCheck className="w-3 h-3 text-orange-400" />
+                            </div>
+                            <h5 className="text-xs sm:text-sm font-black text-white">
+                              {doc.sender_name || 'Faculty Member'}{' '}
+                              <span className="font-normal text-slate-300">
+                                ({doc.sender_designation || 'Department Authority'})
+                              </span>
+                            </h5>
+                          </div>
+                        </div>
+
+                        <div className="text-[11px] font-mono text-slate-300 flex items-center gap-1 bg-white/10 px-3 py-1 rounded-xl">
+                          <Calendar className="w-3.5 h-3.5 text-orange-400" />
+                          <span>{doc.date_time_str || doc.created_at?.split('T')[0] || '20-08-2026'}</span>
+                        </div>
+                      </div>
+
+                      {/* Content Body */}
+                      <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans space-y-2">
+                        <p className={isExpanded ? '' : 'line-clamp-3 font-medium'}>
+                          {doc.body}
+                        </p>
+                        {doc.body && doc.body.length > 180 && (
+                          <button
+                            onClick={() => setExpandedDocId(isExpanded ? null : doc.id)}
+                            className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1 cursor-pointer pt-1"
+                          >
+                            {isExpanded ? (
+                              <>Show Less <ChevronUp className="w-3.5 h-3.5" /></>
+                            ) : (
+                              <>Read Full Document Content <ChevronDown className="w-3.5 h-3.5" /></>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })
               )}
             </div>
           )}
 
-          {/* Title & File Upload Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div className="sm:col-span-2">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Document Topic / Title
-              </label>
-              <input
-                type="text"
-                placeholder="e.g. Operating Systems Unit 1 Notes"
-                value={docTitle}
-                onChange={(e) => setDocTitle(e.target.value)}
-                spellCheck={false}
-                autoComplete="off"
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-slate-700 text-slate-900 text-sm outline-none transition-all font-medium"
-              />
-            </div>
+          {/* TAB 2: UPLOAD / CREATE & DISPATCH DOCUMENT (ADMIN MODE) */}
+          {activeTab === 'create' && isAdmin && (
+            <div className="space-y-4">
+              {/* Sender Details Input Box */}
+              {/* Sender Details Input Box & Target Scope */}
+              <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3">
+                <div className="flex items-center gap-2 text-orange-400 font-extrabold text-xs uppercase tracking-wider">
+                  <UserCheck className="w-4 h-4" />
+                  <span>Sender Identity Metadata & Target Audience Scope</span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-extrabold text-slate-300 uppercase tracking-wider mb-1">
+                      Sender Full Name
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Dr. K. V. Sharma"
+                      value={senderName}
+                      onChange={(e) => setSenderName(e.target.value)}
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-800 text-white border border-slate-700 text-xs font-bold outline-none focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-extrabold text-slate-300 uppercase tracking-wider mb-1">
+                      Sender Designation
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Head of Department (HOD - CSE)"
+                      value={senderDesignation}
+                      onChange={(e) => setSenderDesignation(e.target.value)}
+                      className="w-full px-3.5 py-2 rounded-xl bg-slate-800 text-white border border-slate-700 text-xs font-bold outline-none focus:border-orange-500"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-extrabold text-amber-300 uppercase tracking-wider mb-1">
+                      Target Department Scope
+                    </label>
+                    <select
+                      value={targetScope}
+                      onChange={(e) => setTargetScope(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl bg-slate-800 text-amber-200 border border-slate-700 text-xs font-bold outline-none focus:border-orange-500"
+                    >
+                      <option value="AIDS">AIDS - AI & Data Science</option>
+                      <option value="CSE">CSE - Computer Science & Engg</option>
+                      <option value="ECE">ECE - Electronics & Comm Engg</option>
+                      <option value="EEE">EEE - Electrical & Electronics</option>
+                      <option value="MECH">MECH - Mechanical Engg</option>
+                      <option value="CIVIL">CIVIL - Civil Engg</option>
+                      <option value="HOSTEL">HOSTEL - Resident Students</option>
+                      <option value="ALL">ALL - All Campus Students</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
 
-            <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-                Upload File (.txt, .md)
-              </label>
-              <label className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors">
-                <Upload className="w-4 h-4" />
-                <span className="truncate">{fileName || 'Choose File'}</span>
-                <input
-                  type="file"
-                  accept=".txt,.md,.doc,.docx"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-              </label>
-            </div>
-          </div>
+              {/* Document Title & File Upload Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Document Topic / Title
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. R23 AI & DS Unit 1 Lab Manual"
+                    value={docTitle}
+                    onChange={(e) => setDocTitle(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 focus:border-slate-700 text-slate-900 text-sm outline-none font-medium"
+                  />
+                </div>
 
-          {/* Raw Textarea */}
-          <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center justify-between">
-              <span>Paste Raw Unstructured Text</span>
-              <span className="text-[11px] text-slate-400 font-normal">Copy text from external websites, articles, or draft notes</span>
-            </label>
-            <textarea
-              rows={5}
-              placeholder="Paste raw text here from another website..."
-              value={rawText}
-              onChange={(e) => setRawText(e.target.value)}
-              spellCheck={false}
-              className="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-slate-700 text-slate-900 text-xs leading-relaxed outline-none transition-all resize-none font-sans"
-            />
-          </div>
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                    Upload File (.txt, .md, .doc)
+                  </label>
+                  <label className="w-full py-2.5 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 border border-slate-300 text-slate-800 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors">
+                    <Upload className="w-4 h-4" />
+                    <span className="truncate">{fileName || 'Choose File'}</span>
+                    <input
+                      type="file"
+                      accept=".txt,.md,.doc,.docx"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
 
-          {/* AI Action Button */}
-          <div>
-            <button
-              onClick={handleFormatAI}
-              disabled={formatting || !rawText.trim()}
-              className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer disabled:opacity-50"
-            >
-              <Sparkles className={`w-4 h-4 text-emerald-400 ${formatting ? 'animate-spin' : ''}`} />
-              {formatting ? 'Formatting & Organizing Document with AI...' : 'Format Document with COLLEGE GPT AI'}
-            </button>
-          </div>
-
-          {/* Formatted Output Preview */}
-          {formattedText && (
-            <div className="space-y-2 pt-2 border-t border-slate-200">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Organized Formatted Document
+              {/* Content Textarea */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5 flex items-center justify-between">
+                  <span>Document Content / Text Body</span>
+                  <span className="text-[11px] text-slate-400 font-normal">
+                    Uploaded file content or typed text will be sent to students
+                  </span>
                 </label>
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={handleDownload}
-                    className="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer shadow-xs"
-                  >
-                    <Download className="w-3.5 h-3.5" /> Download (.txt)
-                  </button>
-                </div>
+                <textarea
+                  rows={5}
+                  placeholder="Type document text or upload a file above..."
+                  value={rawText}
+                  onChange={(e) => setRawText(e.target.value)}
+                  className="w-full p-4 rounded-2xl bg-white border border-slate-200 focus:border-slate-700 text-slate-900 text-xs leading-relaxed outline-none resize-none font-sans"
+                />
               </div>
 
-              <div className="p-4 rounded-2xl bg-slate-900 text-slate-100 text-xs font-mono leading-relaxed whitespace-pre-wrap max-h-52 overflow-y-auto border border-slate-800">
-                {formattedText}
-              </div>
-            </div>
-          )}
-
-          {/* ADMIN DISPATCH SECTION */}
-          {isAdmin && (
-            <div className="p-4 rounded-2xl bg-gradient-to-r from-violet-50 via-indigo-50 to-purple-50 border border-violet-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Send className="w-4 h-4 text-violet-700" />
-                  <h4 className="text-xs font-extrabold uppercase tracking-wider text-violet-950">
-                    Dispatch Document to Respective Students
-                  </h4>
-                </div>
-                <span className="text-[10px] font-bold text-violet-700 bg-white px-2 py-0.5 rounded-md border border-violet-200">
-                  {role === 'super_admin' ? 'Campus-wide' : `Code: ${user?.hod_code || 'HOD'}`}
-                </span>
-              </div>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                Sends this converted document as an official circular to your respective students. Students who registered with code <span className="font-mono font-bold text-violet-900">{user?.hod_code || 'SUPER-ADMIN'}</span> will immediately receive it in their notice inbox and AI assistant.
-              </p>
+              {/* Optional AI Format Button */}
               <button
-                onClick={handleSendToStudents}
-                disabled={sendingToStudents || (!formattedText && !rawText)}
-                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-violet-600/20 transition-all cursor-pointer disabled:opacity-50"
+                onClick={handleFormatAI}
+                disabled={formatting || !rawText.trim()}
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer disabled:opacity-50"
               >
-                <Send className={`w-4 h-4 ${sendingToStudents ? 'animate-spin' : ''}`} />
-                {sendingToStudents ? 'Dispatching to Students...' : `📤 Send Document to Respective Students (${user?.hod_code || 'All'})`}
+                <Sparkles className={`w-4 h-4 text-emerald-400 ${formatting ? 'animate-spin' : ''}`} />
+                {formatting ? 'Formatting Document with AI...' : 'Optional: AI Format Document with COLLEGE GPT'}
               </button>
+
+              {/* Formatted Text Preview */}
+              {formattedText && (
+                <div className="p-4 rounded-2xl bg-slate-900 text-slate-100 text-xs font-mono leading-relaxed whitespace-pre-wrap max-h-48 overflow-y-auto border border-slate-800">
+                  {formattedText}
+                </div>
+              )}
+
+              {/* Send Document Dispatch Box */}
+              <div className="p-4 rounded-2xl bg-gradient-to-r from-violet-50 via-indigo-50 to-purple-50 border border-violet-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Send className="w-4 h-4 text-violet-700" />
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-violet-950">
+                      Dispatch Document to Students
+                    </h4>
+                  </div>
+                  <span className="text-[10px] font-bold text-violet-700 bg-white px-2 py-0.5 rounded-md border border-violet-200">
+                    Target Scope: {targetScope || 'ALL'}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  Sends this uploaded/created document directly to students in department scope{' '}
+                  <strong className="text-violet-950">{targetScope || 'ALL'}</strong>.
+                  Sender identity will be displayed as: <strong className="text-slate-900">{senderName}</strong> ({senderDesignation}).
+                </p>
+                <button
+                  onClick={handleSendToStudents}
+                  disabled={sendingToStudents || (!formattedText && !rawText)}
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-700 hover:from-violet-700 hover:to-purple-800 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-violet-600/20 transition-all cursor-pointer disabled:opacity-50"
+                >
+                  <Send className={`w-4 h-4 ${sendingToStudents ? 'animate-spin' : ''}`} />
+                  {sendingToStudents ? 'Dispatching Document to Students...' : `📤 Send Document directly to ${targetScope || 'ALL'} Students`}
+                </button>
+              </div>
             </div>
           )}
         </div>
 
-        {/* Footer */}
-        <div className="p-4 border-t border-slate-100 bg-slate-50/80 flex justify-between items-center">
-          <button
-            onClick={handleDownload}
-            disabled={!formattedText && !rawText}
-            className="px-4 py-2 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-800 font-bold text-xs flex items-center gap-1.5 transition-colors disabled:opacity-40 cursor-pointer"
-          >
-            <Download className="w-4 h-4" /> Download File
-          </button>
+        {/* Modal Footer */}
+        <div className="p-4 border-t border-slate-200 bg-white flex justify-between items-center">
+          <span className="text-xs text-slate-500 font-bold">
+            SRKR Engineering College Official Department Document Exchange
+          </span>
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
           >
             Close Panel
           </button>
@@ -345,4 +557,3 @@ const DocFormatterModal = ({ isOpen, onClose, user, onNoticePublished }) => {
 };
 
 export default DocFormatterModal;
-

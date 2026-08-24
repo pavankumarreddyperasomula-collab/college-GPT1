@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calendar, ExternalLink, Sparkles, Film, Code, Trophy, CheckCircle2, PlusCircle, Trash2, Tag, MapPin, Link as LinkIcon, AlertCircle, Users } from 'lucide-react';
+import { API_URL } from '../config';
 
 const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
   const [events, setEvents] = useState([]);
@@ -31,7 +32,7 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
       if (user?.hod_code) {
         queryParams.append('hod_code', user.hod_code);
       }
-      const res = await fetch(`http://localhost:8000/events?${queryParams.toString()}`);
+      const res = await fetch(`${API_URL}/events?${queryParams.toString()}`);
       const data = await res.json();
       if (res.ok && data.status === 'success') {
         setEvents(data.events || []);
@@ -63,7 +64,7 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
     const senderScope = user?.department || user?.hod_code || user?.username || 'ALL';
 
     try {
-      const res = await fetch('http://localhost:8000/events', {
+      const res = await fetch(`${API_URL}/events`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,7 +100,7 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
   const handleDeleteEvent = async (eventId, eventTitle) => {
     if (!window.confirm(`Are you sure you want to delete event "${eventTitle}"?`)) return;
     try {
-      const res = await fetch(`http://localhost:8000/delete-event/${encodeURIComponent(eventId)}`, {
+      const res = await fetch(`${API_URL}/delete-event/${encodeURIComponent(eventId)}`, {
         method: 'DELETE'
       });
       if (res.ok) {
@@ -391,7 +392,7 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
                     </span>
 
                     <div className="flex items-center gap-2">
-                      {isAdmin && (evt.sender_scope === user?.hod_code || role === 'super_admin') && (
+                      {isAdmin && (
                         <button
                           onClick={() => handleDeleteEvent(evt.id, evt.title)}
                           className="px-2.5 py-1 rounded-lg text-red-600 hover:bg-red-50 text-xs font-bold flex items-center gap-1 transition-colors cursor-pointer"

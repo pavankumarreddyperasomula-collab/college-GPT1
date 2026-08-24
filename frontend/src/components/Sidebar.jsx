@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { History, User, PlusCircle, LogOut, X, MessageSquare, ShieldCheck, Trash2, ListFilter, Bell, Clock } from 'lucide-react';
+import { API_URL } from '../config';
 
 const Sidebar = ({
   isOpen = false,
@@ -25,7 +26,7 @@ const Sidebar = ({
   const fetchNotices = async () => {
     setLoadingNotices(true);
     try {
-      const res = await fetch('http://localhost:8000/notices');
+      const res = await fetch(`${API_URL}/notices`);
       const data = await res.json();
       if (res.ok) {
         setNotices(data.notices || []);
@@ -46,7 +47,7 @@ const Sidebar = ({
   const handleDeleteNotice = async (noticeId, title) => {
     if (!window.confirm(`Are you sure you want to delete notice "${title}"?`)) return;
     try {
-      const res = await fetch(`http://localhost:8000/delete-notice/${encodeURIComponent(noticeId)}`, {
+      const res = await fetch(`${API_URL}/delete-notice/${encodeURIComponent(noticeId)}`, {
         method: 'DELETE'
       });
       if (res.ok) {

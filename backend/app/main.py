@@ -5,7 +5,20 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 
-from app.auth import SendOtpRequest, LoginRequest, process_send_otp, authenticate_user
+from app.auth import (
+    SendOtpRequest,
+    LoginRequest,
+    ChangeCredentialsRequest,
+    CreateHostelAdminRequest,
+    UploadHostelStudentsRequest,
+    process_send_otp,
+    authenticate_user,
+    change_credentials,
+    create_hostel_admin,
+    upload_hostel_students_data,
+    get_hostel_students,
+    delete_hostel_student
+)
 from app.rag import (
     query_rag, 
     add_document_to_rag, 
@@ -15,6 +28,7 @@ from app.rag import (
     generate_llm_answer,
     notif_store,
     events_store,
+    documents_store,
     GROQ_API_KEY
 )
 
@@ -56,6 +70,16 @@ class SendNoticeRequest(BaseModel):
     audience: List[str]  # ["hods", "faculty", "students", "hostel", "all"]
     sender_role: str  # "hod", "hostel_admin", "super_admin"
     sender_scope: Optional[str] = None
+
+class SendDocumentRequest(BaseModel):
+    title: str
+    body: str
+    file_name: Optional[str] = None
+    category: Optional[str] = "college"
+    sender_name: Optional[str] = None
+    sender_designation: Optional[str] = None
+    sender_role: Optional[str] = "hod"
+    sender_scope: Optional[str] = "ALL"
 
 class EventRequest(BaseModel):
     title: Optional[str] = "Campus Event"
@@ -220,6 +244,64 @@ def get_notifications_endpoint(
         "notifications": notifs
     }
 
+# ==================== DEPARTMENT DOCUMENTS DISPATCH ENDPOINTS ====================
+
+@app.post("/send-document")
+def send_document_endpoint(req: SendDocumentRequest):
+    title = req.title.strip()
+    body = req.body.strip()
+    if not title or not body:
+        raise HTTPException(status_code=400, detail="Document title and body content are required.")
+
+    sender_role = (req.sender_role or "hod").lower().strip()
+    sender_name = (req.sender_name or "Faculty Authority").strip()
+    sender_designation = (req.sender_designation or "Department Head").strip()
+    sender_scope = (req.sender_scope or "ALL").strip()
+    category = (req.category or "college").lower().strip()
+    file_name = (req.file_name or f"{title.replace(' ', '_')}.txt").strip()
+
+    # Index into RAG vector store for chatbot querying
+    chunks_added = add_document_to_rag(title=title, body=body, category=category)
+
+    now = datetime.now()
+    doc_record = {
+        "id": f"doc_{uuid.uuid4().hex[:8]}",
+        "title": title,
+        "file_name": file_name,
+        "body": body,
+        "category": category,
+        "sender_name": sender_name,
+        "sender_designation": sender_designation,
+        "sender_role": sender_role,
+        "sender_scope": sender_scope,
+        "created_at": now.isoformat(),
+        "date_time_str": now.strftime("%d-%m-%Y at %I:%M %p")
+    }
+    documents_store.add_document(doc_record)
+
+    return {
+        "status": "success",
+        "message": f"Document '{title}' dispatched to students and indexed in RAG knowledge base with {chunks_added} chunk(s).",
+        "document": doc_record
+    }
+
+@app.get("/documents")
+def get_documents_endpoint(
+    role: str = Query("student"),
+    hod_code: Optional[str] = Query(None),
+    is_hostel_resident: bool = Query(False)
+):
+    docs = documents_store.get_user_documents(
+        role=role,
+        hod_code=hod_code,
+        is_hostel_resident=is_hostel_resident
+    )
+    return {
+        "status": "success",
+        "count": len(docs),
+        "documents": docs
+    }
+
 @app.post("/add-notice")
 def add_notice_endpoint(req: NoticeRequest):
     title = req.title.strip()
@@ -257,10 +339,53 @@ def list_notices_endpoint(category: Optional[str] = Query(None)):
 
 @app.delete("/delete-notice/{notice_id}")
 def delete_notice_endpoint(notice_id: str):
-    deleted = delete_document_from_rag(notice_id)
-    if not deleted:
+    deleted_store = notif_store.delete_notice(notice_id)
+    deleted_rag = delete_document_from_rag(notice_id)
+    if not deleted_store and not deleted_rag:
         raise HTTPException(status_code=404, detail="Notice not found or already deleted.")
-    return {"status": "success", "message": f"Notice '{notice_id}' deleted successfully from vector store."}
+    return {"status": "success", "message": f"Notice '{notice_id}' deleted successfully."}
+
+@app.delete("/delete-document/{doc_id}")
+def delete_document_endpoint(doc_id: str):
+    deleted_store = documents_store.delete_document(doc_id)
+    deleted_rag = delete_document_from_rag(doc_id)
+    if not deleted_store and not deleted_rag:
+        raise HTTPException(status_code=404, detail="Document not found or already deleted.")
+    return {"status": "success", "message": f"Document '{doc_id}' deleted successfully."}
+
+# ==================== CREDENTIALS & HOSTEL ADMIN MANAGEMENT ====================
+
+@app.post("/change-credentials")
+def change_credentials_endpoint(req: ChangeCredentialsRequest):
+    res = change_credentials(req)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=400, detail=res.get("message"))
+    return res
+
+@app.post("/create-hostel-admin")
+def create_hostel_admin_endpoint(req: CreateHostelAdminRequest):
+    res = create_hostel_admin(req)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=400, detail=res.get("message"))
+    return res
+
+@app.post("/upload-hostel-students")
+def upload_hostel_students_endpoint(req: UploadHostelStudentsRequest):
+    res = upload_hostel_students_data(req)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=400, detail=res.get("message"))
+    return res
+
+@app.get("/hostel-students")
+def get_hostel_students_endpoint():
+    return get_hostel_students()
+
+@app.delete("/hostel-students/{reg_no}")
+def delete_hostel_student_endpoint(reg_no: str):
+    res = delete_hostel_student(reg_no)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=404, detail=res.get("message"))
+    return res
 
 # ==================== CAMPUS EVENTS ENDPOINTS ====================
 
@@ -316,4 +441,5 @@ def delete_event_endpoint(event_id: str):
     if not deleted:
         raise HTTPException(status_code=404, detail="Event not found or already deleted.")
     return {"status": "success", "message": f"Event '{event_id}' deleted successfully."}
+
 

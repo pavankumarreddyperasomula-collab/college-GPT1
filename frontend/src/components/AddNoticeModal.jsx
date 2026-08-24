@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Send, X, Calendar, Tag, AlertCircle, Edit3 } from 'lucide-react';
+import { API_URL } from '../config';
 
 const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
   const role = (user?.role || 'hod').toLowerCase();
@@ -44,7 +45,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
     setGenerating(true);
 
     try {
-      const res = await fetch('http://localhost:8000/generate-notice', {
+      const res = await fetch(`${API_URL}/generate-notice`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -101,7 +102,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
     setSending(true);
 
     try {
-      const res = await fetch('http://localhost:8000/send-notice', {
+      const res = await fetch(`${API_URL}/send-notice`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

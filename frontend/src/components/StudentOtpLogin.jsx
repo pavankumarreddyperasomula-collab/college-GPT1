@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, User, Lock, Home, GraduationCap, GitBranch, Key, ShieldCheck, Info } from 'lucide-react';
 import SpecularButton from './SpecularButton';
+import { API_URL } from '../config';
 
 const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -73,7 +74,7 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/login', {
+      const res = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

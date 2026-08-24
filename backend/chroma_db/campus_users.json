@@ -1,0 +1,85 @@
+{
+  "25b91a54j0": {
+    "username": "25b91a54j0",
+    "password": "student123",
+    "role": "student",
+    "designation": "Student",
+    "category": "hostel",
+    "hod_code": "HOD-Arjun-4892",
+    "super_admin_key": "SUPER-ADMIN",
+    "is_hostel_resident": true,
+    "college_name": "SRKR Engineering College",
+    "department": "CSE",
+    "branch": "CSE"
+  },
+  "student_ananya": {
+    "username": "student_ananya",
+    "password": "student123",
+    "role": "student",
+    "designation": "Student",
+    "category": "hostel",
+    "hod_code": "HOD-Arjun-4892",
+    "super_admin_key": "SUPER-ADMIN",
+    "is_hostel_resident": true,
+    "college_name": "SRKR Engineering College",
+    "department": "CSE",
+    "branch": "CSE"
+  },
+  "warden_rajesh": {
+    "username": "warden_rajesh",
+    "password": "123456",
+    "role": "hostel_admin",
+    "designation": "Warden Block A",
+    "category": "hostel",
+    "hod_code": "",
+    "college_name": "SRKR Engineering College",
+    "department": "Hostel Affairs",
+    "mobile": "9876543210"
+  },
+  "superadmin_main": {
+    "username": "superadmin_main",
+    "password": "admin123",
+    "role": "super_admin",
+    "super_admin_type": "college",
+    "designation": "College Super Admin",
+    "category": "all",
+    "hod_code": "SUPER-ADMIN",
+    "college_name": "SRKR Engineering College",
+    "department": "College Administration"
+  },
+  "hostel admin 1": {
+    "username": "hostel admin 1",
+    "password": "123456",
+    "role": "super_admin",
+    "super_admin_type": "hostel",
+    "designation": "Hostel Super Admin 1",
+    "category": "hostel",
+    "hod_code": "HOSTEL-SUPER-ADMIN",
+    "college_name": "SRKR Engineering College",
+    "department": "Hostel Administration"
+  },
+  "hostel admin 2": {
+    "username": "hostel admin 2",
+    "password": "12345",
+    "role": "super_admin",
+    "super_admin_type": "hostel",
+    "designation": "Hostel Super Admin 2",
+    "category": "hostel",
+    "hod_code": "HOSTEL-SUPER-ADMIN",
+    "college_name": "SRKR Engineering College",
+    "department": "Hostel Administration"
+  },
+  "25b91a9999": {
+    "username": "25b91a9999",
+    "password": "student123",
+    "role": "student",
+    "designation": "Student",
+    "category": "college",
+    "hod_code": "CSE",
+    "super_admin_key": "SUPER-ADMIN",
+    "is_hostel_resident": false,
+    "college_name": "SRKR Engineering College",
+    "department": "CSE",
+    "branch": "CSE"
+  }
+}

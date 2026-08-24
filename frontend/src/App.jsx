@@ -15,6 +15,7 @@ import DocFormatterModal from './components/DocFormatterModal';
 import EventsModal from './components/EventsModal';
 import StudentQuickHub from './components/StudentQuickHub';
 import AdminQuickHub from './components/AdminQuickHub';
+import { API_URL } from './config';
 
 const App = () => {
   // Navigation & Session View States
@@ -35,8 +36,9 @@ const App = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Notifications
+  // Notifications & Documents
   const [notifications, setNotifications] = useState([]);
+  const [documents, setDocuments] = useState([]);
   const [readNoticeIds, setReadNoticeIds] = useState(() => {
     try {
       const saved = localStorage.getItem('srkr_read_notices');
@@ -71,7 +73,7 @@ const App = () => {
         queryParams.append('hod_code', deptCode);
       }
 
-      const res = await fetch(`http://localhost:8000/notifications?${queryParams.toString()}`);
+      const res = await fetch(`${API_URL}/notifications?${queryParams.toString()}`);
       const data = await res.json();
       if (res.ok && data.status === 'success') {
         setNotifications(data.notifications || []);
@@ -81,11 +83,38 @@ const App = () => {
     }
   };
 
-  // Poll for admin notifications every 3 seconds for instant student inbox updates
+  // Fetch documents for logged in user
+  const fetchDocuments = async () => {
+    if (!user) return;
+    try {
+      const queryParams = new URLSearchParams({
+        role: user.role || 'student',
+        is_hostel_resident: user.is_hostel_resident ? 'true' : 'false'
+      });
+      const deptCode = user.department || user.hod_code;
+      if (deptCode) {
+        queryParams.append('hod_code', deptCode);
+      }
+
+      const res = await fetch(`${API_URL}/documents?${queryParams.toString()}`);
+      const data = await res.json();
+      if (res.ok && data.status === 'success') {
+        setDocuments(data.documents || []);
+      }
+    } catch (err) {
+      console.error('Error fetching documents:', err);
+    }
+  };
+
+  // Poll for notifications and documents every 3 seconds for instant updates
   useEffect(() => {
     if (user && view === 'dashboard') {
       fetchNotifications();
-      const interval = setInterval(fetchNotifications, 3000);
+      fetchDocuments();
+      const interval = setInterval(() => {
+        fetchNotifications();
+        fetchDocuments();
+      }, 3000);
       return () => clearInterval(interval);
     }
   }, [user, view]);
@@ -137,7 +166,7 @@ const App = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:8000/ask', {
+      const res = await fetch(`${API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: text })
@@ -326,6 +355,7 @@ const App = () => {
                   <StudentQuickHub
                     user={user}
                     unreadCount={unreadCount}
+                    documentsCount={documents.length}
                     onOpenRules={() => setIsRulesOpen(true)}
                     onOpenDocuments={() => setIsDocFormatterOpen(true)}
                     onOpenNotices={handleOpenNoticeInbox}
@@ -384,14 +414,17 @@ const App = () => {
       <NotificationModal
         isOpen={isNotificationOpen}
         onClose={() => setIsNotificationOpen(false)}
+        user={user}
         notifications={notifications}
         onClearAll={handleClearNoticeHistory}
+        onDeleteNotice={fetchNotifications}
       />
 
       <ProfileModal
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
         user={user}
+        onUserUpdated={(updatedUser) => setUser(updatedUser)}
       />
 
       <CampusMapModal
@@ -408,7 +441,8 @@ const App = () => {
         isOpen={isDocFormatterOpen}
         onClose={() => setIsDocFormatterOpen(false)}
         user={user}
-        onNoticePublished={fetchNotifications}
+        documents={documents}
+        onDocumentPublished={fetchDocuments}
       />
 
       <EventsModal

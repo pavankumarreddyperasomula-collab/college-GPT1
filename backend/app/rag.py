@@ -7,6 +7,7 @@ from app.config import CHROMA_DB_DIR, GROQ_API_KEY
 
 VECTOR_STORE_FILE = os.path.join(CHROMA_DB_DIR, "campus_knowledge_vectors.json")
 NOTIFICATIONS_FILE = os.path.join(CHROMA_DB_DIR, "campus_notifications.json")
+DOCUMENTS_FILE = os.path.join(CHROMA_DB_DIR, "campus_documents.json")
 
 class LocalVectorStore:
     def __init__(self, storage_file: str):
@@ -180,6 +181,14 @@ class NotificationsStore:
 
         self.notifications.insert(0, notice_data)
         self._save()
+
+    def delete_notice(self, notice_id: str) -> bool:
+        initial_len = len(self.notifications)
+        self.notifications = [n for n in self.notifications if n.get("id") != notice_id]
+        changed = len(self.notifications) < initial_len
+        if changed:
+            self._save()
+        return changed
 
     def get_user_notifications(self, role: str, hod_code: Optional[str] = None, is_hostel_resident: bool = False) -> List[dict]:
         role_clean = role.lower().strip()
@@ -389,6 +398,106 @@ class EventsStore:
 
         return filtered
 
+# Persistent Department Documents Store with Sender Name & Designation Metadata
+class DocumentsStore:
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+        self.documents: List[Dict[str, Any]] = []
+        self._load()
+
+    def _load(self):
+        if os.path.exists(self.file_path):
+            try:
+                with open(self.file_path, "r", encoding="utf-8") as f:
+                    self.documents = json.load(f)
+            except Exception as e:
+                print(f"Documents load error: {e}")
+                self.documents = []
+        else:
+            # Seed default official department documents
+            now_str = datetime.now().strftime("%d-%m-%Y at %I:%M %p")
+            self.documents = [
+                {
+                    "id": "doc_001",
+                    "title": "R23 B.Tech CSE Department Curriculum & Regulation Guide",
+                    "file_name": "R23_CSE_Curriculum.pdf",
+                    "body": "Official R23 Academic Regulation & Curriculum breakdown for Computer Science & Engineering students. Includes detailed CIE/SEE marks allocation, internal exam schedules, laboratory requirements, and attendance guidelines.",
+                    "category": "college",
+                    "sender_name": "Dr. K. V. Sharma",
+                    "sender_designation": "Head of Department (HOD - CSE)",
+                    "sender_role": "hod",
+                    "sender_scope": "CSE",
+                    "created_at": datetime.now().isoformat(),
+                    "date_time_str": now_str
+                },
+                {
+                    "id": "doc_002",
+                    "title": "SRKR Hostel Code of Conduct & Mess Rules",
+                    "file_name": "Hostel_Rules_2026.docx",
+                    "body": "Mandatory rules for all resident students staying in SRKR Engineering College Hostels (Blocks A, B & C). Details quiet hours (10 PM to 6 AM), mess timing, visitor policies, and gate pass application procedure.",
+                    "category": "hostel",
+                    "sender_name": "Warden Rajesh",
+                    "sender_designation": "Chief Hostel Administrator",
+                    "sender_role": "hostel_admin",
+                    "sender_scope": "HOSTEL-BLOCK-A",
+                    "created_at": datetime.now().isoformat(),
+                    "date_time_str": now_str
+                }
+            ]
+            self._save()
+
+    def _save(self):
+        os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
+        with open(self.file_path, "w", encoding="utf-8") as f:
+            json.dump(self.documents, f, indent=2)
+
+    def add_document(self, doc_data: dict):
+        self.documents.insert(0, doc_data)
+        self._save()
+
+    def delete_document(self, doc_id: str) -> bool:
+        initial_len = len(self.documents)
+        self.documents = [d for d in self.documents if d.get("id") != doc_id]
+        changed = len(self.documents) < initial_len
+        if changed:
+            self._save()
+        return changed
+
+    def get_user_documents(self, role: str, hod_code: Optional[str] = None, is_hostel_resident: bool = False) -> List[dict]:
+        role_clean = role.lower().strip()
+        dept_clean = (hod_code or "").upper().strip()
+        filtered = []
+
+        for d in self.documents:
+            sender_role = d.get("sender_role", "").lower().strip()
+            sender_scope = (d.get("sender_scope", "")).upper().strip()
+            cat = d.get("category", "college").lower().strip()
+
+            if role_clean == "student":
+                is_from_dept_hod = bool(
+                    sender_role in ["hod", "faculty", "admin_hod", "admin_faculty"]
+                    and (
+                        not sender_scope
+                        or sender_scope == "ALL"
+                        or not dept_clean
+                        or sender_scope == dept_clean
+                        or dept_clean in sender_scope
+                        or sender_scope in dept_clean
+                    )
+                )
+                is_super_admin_doc = bool(sender_role == "super_admin" or sender_scope == "ALL")
+                is_hostel_doc = bool(is_hostel_resident and (cat == "hostel" or sender_role == "hostel_admin"))
+
+                if is_from_dept_hod or is_super_admin_doc or is_hostel_doc:
+                    filtered.append(d)
+            elif role_clean == "super_admin":
+                filtered.append(d)
+            else:
+                filtered.append(d)
+
+        return filtered
+
+documents_store = DocumentsStore(DOCUMENTS_FILE)
 events_store = EventsStore(EVENTS_FILE)
 notif_store = NotificationsStore(NOTIFICATIONS_FILE)
 

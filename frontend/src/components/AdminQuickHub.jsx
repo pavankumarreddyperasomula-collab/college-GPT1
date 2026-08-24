@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, PlusCircle, Bell, MapPin, Key, Sparkles, Folder, Calendar, ArrowRight, FileText, Megaphone, Compass, BookOpen } from 'lucide-react';
+import { ShieldCheck, PlusCircle, Bell, MapPin, Key, Sparkles, Folder, Calendar, ArrowRight, FileText, Megaphone, Compass, BookOpen, Upload, UserPlus, Home, Lock } from 'lucide-react';
 
 const AdminQuickHub = ({
   user,
@@ -13,16 +13,21 @@ const AdminQuickHub = ({
   onOpenProfile
 }) => {
   const role = (user?.role || 'hod').toLowerCase();
+  const isHostelSuperAdmin = role === 'super_admin' && (user?.super_admin_type === 'hostel' || user?.category === 'hostel' || (user?.username && user?.username.toLowerCase().includes('hostel')));
+  const isCollegeSuperAdmin = role === 'super_admin' && !isHostelSuperAdmin;
+  const isHostelAdmin = role === 'hostel_admin' || isHostelSuperAdmin;
 
   const getRoleTitle = () => {
-    if (role === 'super_admin') return 'Super Admin Control Center';
+    if (isHostelSuperAdmin) return 'Hostel Super Admin Control Center';
+    if (isCollegeSuperAdmin) return 'College Super Admin Control Center';
     if (role === 'hostel_admin') return `${user?.designation || 'Hostel Admin'} Dashboard`;
     if (role === 'faculty') return 'Faculty Administration Portal';
     return 'HOD Department Portal';
   };
 
   const getRoleBadge = () => {
-    if (role === 'super_admin') return 'ALL CAMPUS SCOPE';
+    if (isHostelSuperAdmin) return 'HOSTEL SUPER ADMIN SCOPE';
+    if (isCollegeSuperAdmin) return 'ALL CAMPUS SCOPE';
     if (role === 'hostel_admin') return 'HOSTEL RESIDENTS SCOPE';
     if (role === 'faculty') return `FACULTY - ${user?.department || 'CSE'}`;
     return `HOD CODE: ${user?.hod_code || 'HOD-MAIN'}`;
@@ -31,7 +36,11 @@ const AdminQuickHub = ({
   return (
     <div className="space-y-6 w-full animate-fade-in">
       {/* Top Profile & Scope Header Card */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white shadow-xl space-y-4 border border-orange-400/30 relative overflow-hidden">
+      <div className={`p-6 rounded-3xl text-white shadow-xl space-y-4 border relative overflow-hidden ${
+        isHostelSuperAdmin
+          ? 'bg-gradient-to-r from-amber-600 via-orange-600 to-red-700 border-amber-400/40'
+          : 'bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 border-orange-400/30'
+      }`}>
         <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
         <div className="flex items-center justify-between relative z-10">
@@ -46,14 +55,32 @@ const AdminQuickHub = ({
           <p className="text-xs text-orange-100 font-medium">Logged in as: <span className="font-extrabold text-white">{user?.username}</span> ({user?.designation || user?.role})</p>
         </div>
 
-        {user?.hod_code && (
-          <div className="p-3 rounded-2xl bg-white/20 backdrop-blur-md border border-white/25 text-xs flex items-center justify-between font-mono relative z-10">
-            <span className="text-[11px] text-orange-100 font-sans flex items-center gap-1 font-semibold">
-              <Key className="w-3.5 h-3.5 text-amber-300" /> Your HOD Dispatch Code:
-            </span>
-            <span className="font-extrabold text-white bg-black/20 px-2 py-0.5 rounded-lg">{user.hod_code}</span>
-          </div>
-        )}
+        <div className="pt-2 flex flex-wrap items-center gap-2 relative z-10">
+          <button
+            onClick={onOpenProfile}
+            className="px-3.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-bold text-xs flex items-center gap-1.5 backdrop-blur-md transition-all cursor-pointer border border-white/30"
+          >
+            <Lock className="w-3.5 h-3.5" /> Edit Profile / Password
+          </button>
+
+          {isHostelAdmin && (
+            <button
+              onClick={onOpenProfile}
+              className="px-3.5 py-1.5 rounded-xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
+            >
+              <Upload className="w-3.5 h-3.5" /> Upload Hostel Roster
+            </button>
+          )}
+
+          {isHostelSuperAdmin && (
+            <button
+              onClick={onOpenProfile}
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
+            >
+              <UserPlus className="w-3.5 h-3.5" /> Create Hostel Admin
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Hero Admin Tools Grid */}
@@ -188,55 +215,6 @@ const AdminQuickHub = ({
               </div>
             </div>
           </div>
-
-          {/* 5. 📕 ROLE-BASED RULES CARD */}
-          <div
-            onClick={onOpenRules}
-            className="group relative p-6 rounded-3xl bg-gradient-to-br from-red-600 via-rose-700 to-pink-800 text-white shadow-lg hover:shadow-2xl hover:shadow-red-600/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-rose-400 overflow-hidden flex flex-col justify-between min-h-[190px] sm:col-span-2 lg:col-span-2"
-          >
-            <div className="absolute right-3 top-3 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
-              <BookOpen className="w-24 h-24" />
-            </div>
-
-            <div className="space-y-2 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <h4 className="text-xl font-black tracking-tight text-white">
-                {role === 'faculty'
-                  ? 'Official Faculty Rules & Guidelines'
-                  : role === 'hostel_admin'
-                  ? 'Official Hostel Rules & Regulations'
-                  : role === 'super_admin'
-                  ? 'Official Campus Rules & Governance'
-                  : 'Official Rules & Responsibilities for HOD'}
-              </h4>
-              <p className="text-xs text-rose-100 font-medium leading-relaxed">
-                {role === 'faculty'
-                  ? 'Review official teaching guidelines, syllabus completion norms, evaluation integrity, and student mentorship responsibilities.'
-                  : role === 'hostel_admin'
-                  ? 'Review hostel curfew timings, gate pass verification, mess quality, room inspection, and warden protocols.'
-                  : role === 'super_admin'
-                  ? 'Review overall campus governance policies including HOD directives, faculty rules, hostel regulations, and student code of conduct.'
-                  : 'Review the 18 core administrative directives for HODs (discipline, attendance monitoring, faculty coordination, career development, and accountability).'}
-              </p>
-            </div>
-
-            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-rose-200">
-                {role === 'faculty'
-                  ? 'View Faculty Rules & Guidelines'
-                  : role === 'hostel_admin'
-                  ? 'View Hostel Rules & Regulations'
-                  : role === 'super_admin'
-                  ? 'View Campus Rules & Governance'
-                  : 'View HOD Rules & Code of Conduct'}
-              </span>
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-rose-700 transition-all">
-                <ArrowRight className="w-4 h-4" />
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -244,4 +222,3 @@ const AdminQuickHub = ({
 };
 
 export default AdminQuickHub;
-

@@ -1,24 +1,20 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, Building2, CheckCircle2, Building } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Building2, CheckCircle2, Building, Home } from 'lucide-react';
 import SpecularButton from './SpecularButton';
+import { API_URL } from '../config';
 
 const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
   const [activeTab, setActiveTab] = useState(initialTab); // 'admin' or 'super_admin'
   const [adminType, setAdminType] = useState('HOD'); // 'HOD', 'Faculty', 'Hostel Admin'
 
-  // Form fields for HOD / Faculty
+  // Super Admin category choice
+  const [superAdminCategory, setSuperAdminCategory] = useState('college'); // 'college' or 'hostel'
+
+  // Form fields for HOD / Faculty / Super Admin / Hostel Admin
   const [empId, setEmpId] = useState('');
   const [collegeName, setCollegeName] = useState('SRKR Engineering College');
-  const [department, setDepartment] = useState('CSE'); // Default CSE
-  const [password, setPassword] = useState('admin123');
-
-  // Form fields for Hostel Admin
-  const [hostelAdminName, setHostelAdminName] = useState('');
-  const [hostelAdminMobile, setHostelAdminMobile] = useState('');
-  const [hostelDesignation, setHostelDesignation] = useState('Warden');
-  const [mockOtpOnScreen, setMockOtpOnScreen] = useState('');
-  const [enteredOtp, setEnteredOtp] = useState('');
-  const [hostelOtpStep, setHostelOtpStep] = useState(1);
+  const [department, setDepartment] = useState('CSE');
+  const [password, setPassword] = useState('');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -32,12 +28,17 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
     setError('');
     setLoading(true);
 
-    const roleToSubmit = activeTab === 'super_admin'
-      ? 'super_admin'
-      : (adminType === 'HOD' ? 'hod' : 'faculty');
+    let roleToSubmit = 'hod';
+    if (activeTab === 'super_admin') {
+      roleToSubmit = 'super_admin';
+    } else if (adminType === 'Hostel Admin') {
+      roleToSubmit = 'hostel_admin';
+    } else if (adminType === 'Faculty') {
+      roleToSubmit = 'faculty';
+    }
 
     try {
-      const res = await fetch('http://localhost:8000/login', {
+      const res = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -47,7 +48,10 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           employee_id: empId.trim(),
           college_name: collegeName.trim(),
           department: department.trim(),
-          designation: activeTab === 'super_admin' ? 'Super Admin' : adminType
+          super_admin_type: superAdminCategory,
+          designation: activeTab === 'super_admin'
+            ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin' : 'College Super Admin')
+            : adminType
         })
       });
       const data = await res.json();
@@ -63,78 +67,11 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
     }
   };
 
-  const handleHostelAdminRequestOtp = async (e) => {
-    e.preventDefault();
-    if (!hostelAdminName.trim()) {
-      setError('Please enter your name.');
-      return;
-    }
-    if (!hostelAdminMobile.trim()) {
-      setError('Please enter your mobile number.');
-      return;
-    }
+  const handlePresetSuperAdmin = (type, uname, pwd) => {
+    setSuperAdminCategory(type);
+    setEmpId(uname);
+    setPassword(pwd);
     setError('');
-    setLoading(true);
-
-    try {
-      const res = await fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          role: 'hostel_admin',
-          name: hostelAdminName.trim(),
-          mobile: hostelAdminMobile.trim(),
-          designation: hostelDesignation,
-          college_name: collegeName
-        })
-      });
-      const data = await res.json();
-      if (res.ok && data.status === 'otp_sent') {
-        setMockOtpOnScreen(data.generated_mock_otp);
-        setHostelOtpStep(2);
-      } else {
-        setError(data.message || 'Failed to generate mock OTP.');
-      }
-    } catch (err) {
-      setError('Backend connection error.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleHostelAdminVerifyOtp = async (e) => {
-    e.preventDefault();
-    if (!enteredOtp.trim()) {
-      setError('Please enter the 6-digit OTP code.');
-      return;
-    }
-    setError('');
-    setLoading(true);
-
-    try {
-      const res = await fetch('http://localhost:8000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          role: 'hostel_admin',
-          name: hostelAdminName.trim(),
-          mobile: hostelAdminMobile.trim(),
-          designation: hostelDesignation,
-          otp: enteredOtp.trim(),
-          college_name: collegeName
-        })
-      });
-      const data = await res.json();
-      if (res.ok && data.status === 'success') {
-        onLoginSuccess(data);
-      } else {
-        setError(data.message || 'Invalid OTP code.');
-      }
-    } catch (err) {
-      setError('Backend connection error.');
-    } finally {
-      setLoading(false);
-    }
   };
 
   return (
@@ -150,7 +87,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </button>
         </div>
 
-        {/* SRKR Engineering College Logo at Top Middle */}
+        {/* SRKR Engineering College Logo */}
         <div className="mb-4 flex justify-center">
           <img
             src="/srkr_logo.png"
@@ -163,7 +100,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-5 w-full border border-slate-200">
           <button
             type="button"
-            onClick={() => setActiveTab('admin')}
+            onClick={() => { setActiveTab('admin'); setError(''); setEmpId(''); setPassword(''); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'admin'
                 ? 'bg-white text-orange-700 shadow-xs'
@@ -174,7 +111,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </button>
           <button
             type="button"
-            onClick={() => setActiveTab('super_admin')}
+            onClick={() => { setActiveTab('super_admin'); setError(''); setEmpId('superadmin_main'); setPassword('admin123'); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'super_admin'
                 ? 'bg-white text-slate-900 shadow-xs'
@@ -193,10 +130,12 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </div>
           <div>
             <h2 className="text-xl font-extrabold text-slate-900">
-              {activeTab === 'super_admin' ? 'Super Admin Portal' : `${adminType} Access`}
+              {activeTab === 'super_admin'
+                ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin Portal' : 'College Super Admin Portal')
+                : `${adminType} Access`}
             </h2>
             <p className="text-xs text-slate-500 font-medium">
-              {activeTab === 'super_admin' ? 'Campus broadcast & overall scope' : 'Official administration onboarding'}
+              {activeTab === 'super_admin' ? 'Full administrative authority & dispatch scope' : 'Official administration portal'}
             </p>
           </div>
         </div>
@@ -207,7 +146,71 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </div>
         )}
 
-        {/* Admin Designation Switcher (HOD / Faculty / Hostel Admin) */}
+        {/* Super Admin Sub-Category Selector */}
+        {activeTab === 'super_admin' && (
+          <div className="mb-4 w-full space-y-2">
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              SUPER ADMIN CATEGORY
+            </label>
+            <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 border border-slate-200 rounded-xl">
+              <button
+                type="button"
+                onClick={() => handlePresetSuperAdmin('college', 'superadmin_main', 'admin123')}
+                className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  superAdminCategory === 'college'
+                    ? 'bg-slate-900 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-200/60'
+                }`}
+              >
+                <Building className="w-3.5 h-3.5" /> College Super Admin
+              </button>
+              <button
+                type="button"
+                onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 1', '123456')}
+                className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+                  superAdminCategory === 'hostel'
+                    ? 'bg-amber-600 text-white shadow-xs'
+                    : 'text-slate-600 hover:bg-slate-200/60'
+                }`}
+              >
+                <Home className="w-3.5 h-3.5" /> Hostel Super Admin
+              </button>
+            </div>
+
+            {/* Quick pre-set options for Hostel Super Admin */}
+            {superAdminCategory === 'hostel' && (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-1.5 text-xs text-amber-900">
+                <span className="font-bold text-[11px] uppercase tracking-wider text-amber-800 block">
+                  Select Hostel Super Admin Member:
+                </span>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 1', '123456')}
+                    className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold text-left cursor-pointer transition-all ${
+                      empId === 'hostel admin 1' ? 'bg-amber-600 text-white border-amber-700' : 'bg-white text-slate-800 border-amber-300 hover:bg-amber-100'
+                    }`}
+                  >
+                    1) hostel admin 1
+                    <span className="block text-[10px] opacity-80">Pwd: 123456</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 2', '12345')}
+                    className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold text-left cursor-pointer transition-all ${
+                      empId === 'hostel admin 2' ? 'bg-amber-600 text-white border-amber-700' : 'bg-white text-slate-800 border-amber-300 hover:bg-amber-100'
+                    }`}
+                  >
+                    2) hostel admin 2
+                    <span className="block text-[10px] opacity-80">Pwd: 12345</span>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Academic / Hostel Admin Designation Switcher */}
         {activeTab === 'admin' && (
           <div className="mb-4 w-full">
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
@@ -234,7 +237,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
               </button>
               <button
                 type="button"
-                onClick={() => { setAdminType('Hostel Admin'); setError(''); }}
+                onClick={() => { setAdminType('Hostel Admin'); setError(''); setEmpId('warden_rajesh'); setPassword('123456'); }}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   adminType === 'Hostel Admin' ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
@@ -245,182 +248,84 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </div>
         )}
 
-        {/* 1. Hostel Admin Form */}
-        {activeTab === 'admin' && adminType === 'Hostel Admin' ? (
-          hostelOtpStep === 1 ? (
-            <form onSubmit={handleHostelAdminRequestOtp} className="space-y-3.5 w-full">
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  FULL NAME
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Rajesh Kumar"
-                  value={hostelAdminName}
-                  onChange={(e) => setHostelAdminName(e.target.value)}
-                  spellCheck={false}
-                  autoComplete="off"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-amber-600 text-slate-900 text-sm outline-none transition-all"
-                />
-              </div>
+        {/* Standard Login Form */}
+        <form onSubmit={handleStandardSubmit} className="space-y-3.5 w-full">
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              USERNAME / ID
+            </label>
+            <input
+              type="text"
+              required
+              placeholder={
+                activeTab === 'super_admin'
+                  ? (superAdminCategory === 'hostel' ? 'hostel admin 1' : 'superadmin_main')
+                  : (adminType === 'Hostel Admin' ? 'warden_rajesh' : 'HOD_CSE_001')
+              }
+              value={empId}
+              onChange={(e) => setEmpId(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all font-medium"
+            />
+          </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  MOBILE NUMBER
-                </label>
-                <input
-                  type="tel"
-                  required
-                  placeholder="e.g. 9876543210"
-                  value={hostelAdminMobile}
-                  onChange={(e) => setHostelAdminMobile(e.target.value)}
-                  spellCheck={false}
-                  autoComplete="off"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-amber-600 text-slate-900 text-sm outline-none transition-all"
-                />
-              </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              COLLEGE NAME
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="SRKR Engineering College"
+              value={collegeName}
+              onChange={(e) => setCollegeName(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all font-medium"
+            />
+          </div>
 
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  HOSTEL DESIGNATION
-                </label>
-                <select
-                  value={hostelDesignation}
-                  onChange={(e) => setHostelDesignation(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-semibold outline-none transition-all cursor-pointer"
-                >
-                  <option value="Warden">Hostel Warden</option>
-                  <option value="Coordinator">Hostel Coordinator</option>
-                  <option value="In-charge">Hostel In-charge</option>
-                </select>
-              </div>
-
-              <div className="pt-1">
-                <SpecularButton
-                  type="submit"
-                  disabled={loading}
-                  baseColor="#d97706"
-                  className="w-full"
-                >
-                  {loading ? 'Generating Mock OTP...' : 'Generate On-Screen Mock OTP'}
-                </SpecularButton>
-              </div>
-            </form>
-          ) : (
-            <form onSubmit={handleHostelAdminVerifyOtp} className="space-y-3.5 w-full">
-              <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 space-y-1">
-                <span className="text-xs font-bold flex items-center gap-1.5 text-amber-700">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> UI Mock OTP Code:
-                </span>
-                <div className="text-2xl font-mono font-extrabold tracking-widest text-amber-800 text-center py-1 bg-amber-100/70 rounded-xl">
-                  {mockOtpOnScreen}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  ENTER MOCK OTP CODE
-                </label>
-                <input
-                  type="text"
-                  maxLength={6}
-                  required
-                  placeholder="Enter 6-digit code"
-                  value={enteredOtp}
-                  onChange={(e) => setEnteredOtp(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-center font-mono text-xl tracking-widest outline-none transition-all"
-                />
-              </div>
-
-              <div className="pt-1">
-                <SpecularButton
-                  type="submit"
-                  disabled={loading}
-                  baseColor="#d97706"
-                  className="w-full"
-                >
-                  {loading ? 'Verifying...' : `Enter ${hostelDesignation} Dashboard`}
-                </SpecularButton>
-              </div>
-            </form>
-          )
-        ) : (
-          /* 2. HOD / Faculty / Super Admin Form */
-          <form onSubmit={handleStandardSubmit} className="space-y-3.5 w-full">
+          {activeTab === 'admin' && adminType !== 'Hostel Admin' && (
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                EMPLOYEE ID / USERNAME
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
+                <Building className="w-3.5 h-3.5 text-indigo-600" /> DEPARTMENT
               </label>
-              <input
-                type="text"
-                required
-                placeholder={activeTab === 'super_admin' ? 'SUPER_001' : 'hosteladmin_arjun'}
-                value={empId}
-                onChange={(e) => setEmpId(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                COLLEGE NAME
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="SRKR Engineering College"
-                value={collegeName}
-                onChange={(e) => setCollegeName(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all"
-              />
-            </div>
-
-            {activeTab === 'admin' && (
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                  <Building className="w-3.5 h-3.5 text-indigo-600" /> DEPARTMENT
-                </label>
-                <select
-                  value={department}
-                  onChange={(e) => setDepartment(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-xs font-bold outline-none transition-all cursor-pointer"
-                >
-                  <option value="CSE">CSE (Computer Science & Engineering)</option>
-                  <option value="ECE">ECE (Electronics & Communication)</option>
-                  <option value="EEE">EEE (Electrical & Electronics)</option>
-                  <option value="MECHANICAL">MECHANICAL Engineering</option>
-                  <option value="IT">IT (Information Technology)</option>
-                </select>
-              </div>
-            )}
-
-            <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                PERSONAL PASSWORD
-              </label>
-              <input
-                type="password"
-                required
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all"
-              />
-            </div>
-
-            <div className="pt-1">
-              <SpecularButton
-                type="submit"
-                disabled={loading}
-                baseColor={activeTab === 'super_admin' ? '#0f172a' : '#4f46e5'}
-                className="w-full"
+              <select
+                value={department}
+                onChange={(e) => setDepartment(e.target.value)}
+                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-xs font-bold outline-none transition-all cursor-pointer"
               >
-                {loading ? 'Authenticating...' : `Enter ${activeTab === 'super_admin' ? 'Super Admin' : adminType} Dashboard`}
-              </SpecularButton>
+                <option value="CSE">CSE (Computer Science & Engineering)</option>
+                <option value="ECE">ECE (Electronics & Communication)</option>
+                <option value="EEE">EEE (Electrical & Electronics)</option>
+                <option value="MECHANICAL">MECHANICAL Engineering</option>
+                <option value="IT">IT (Information Technology)</option>
+              </select>
             </div>
-          </form>
-        )}
+          )}
+
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              PASSWORD
+            </label>
+            <input
+              type="password"
+              required
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all"
+            />
+          </div>
+
+          <div className="pt-1">
+            <SpecularButton
+              type="submit"
+              disabled={loading}
+              baseColor={activeTab === 'super_admin' ? (superAdminCategory === 'hostel' ? '#d97706' : '#0f172a') : '#4f46e5'}
+              className="w-full"
+            >
+              {loading ? 'Authenticating...' : `Enter ${activeTab === 'super_admin' ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin' : 'College Super Admin') : adminType} Dashboard`}
+            </SpecularButton>
+          </div>
+        </form>
       </div>
     </div>
   );
