@@ -55,38 +55,31 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
 
   const handlePostEvent = async (e) => {
     e.preventDefault();
-    if (!title.trim()) {
-      setError('Please enter the event title.');
-      return;
-    }
-    if (!regLink.trim()) {
-      setError('Please provide the official registration link / URL.');
-      return;
-    }
-
     setError('');
     setPosting(true);
 
-    const senderScope = user?.hod_code || user?.username || 'ALL';
+    const eventTitle = title.trim() || 'SRKR Campus Event';
+    const eventLink = regLink.trim() || 'https://srkr.ac.in';
+    const senderScope = user?.department || user?.hod_code || user?.username || 'ALL';
 
     try {
       const res = await fetch('http://localhost:8000/events', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          title: title.trim(),
-          category: category.trim(),
-          date: date.trim(),
-          location: location.trim(),
-          description: description.trim() || `Official campus event: ${title.trim()}`,
-          link: regLink.trim(),
+          title: eventTitle,
+          category: category.trim() || 'Campus Event',
+          date: date.trim() || new Date().toISOString().split('T')[0],
+          location: location.trim() || 'SRKR Campus Grounds',
+          description: description.trim() || `Official SRKR campus event: ${eventTitle}`,
+          link: eventLink,
           sender_role: role === 'super_admin' ? 'super_admin' : (role === 'hostel_admin' ? 'hostel_admin' : 'hod'),
           sender_scope: senderScope
         })
       });
       const data = await res.json();
       if (res.ok && data.status === 'success') {
-        setSuccessMsg(`Event "${title}" posted successfully! Visible to students linked with code: ${senderScope}`);
+        setSuccessMsg(`Event "${eventTitle}" posted successfully!`);
         setTitle('');
         setRegLink('');
         setDescription('');
@@ -209,17 +202,16 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
               </div>
 
               <p className="text-xs text-blue-900 font-medium">
-                When you post this event, the registration link will automatically appear in the event list for students registered with your special HOD Code: <strong className="font-mono text-blue-950">{user?.hod_code || 'SUPER-ADMIN'}</strong>.
+                When you post this event, it will automatically appear in the event list for students in your department (<strong className="font-mono text-blue-950">{user?.department || user?.hod_code || 'All Campus'}</strong>).
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Event Title / Name
+                    Event Title / Name (Optional)
                   </label>
                   <input
                     type="text"
-                    required
                     placeholder="e.g. SRKR CodeCraft 2026 Hackathon"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
@@ -229,11 +221,10 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                    <LinkIcon className="w-3 h-3 text-blue-600" /> Registration URL / Form Link
+                    <LinkIcon className="w-3 h-3 text-blue-600" /> Registration URL / Form Link (Optional)
                   </label>
                   <input
                     type="url"
-                    required
                     placeholder="https://forms.gle/xyz or https://srkr.ac.in/event"
                     value={regLink}
                     onChange={(e) => setRegLink(e.target.value)}
@@ -243,11 +234,10 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Event Date
+                    Event Date (Optional)
                   </label>
                   <input
                     type="date"
-                    required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 focus:border-blue-600 text-slate-900 text-xs outline-none"
@@ -256,11 +246,10 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                    Location / Venue
+                    Location / Venue (Optional)
                   </label>
                   <input
                     type="text"
-                    required
                     placeholder="e.g. CSE Seminar Hall / Main Grounds"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}

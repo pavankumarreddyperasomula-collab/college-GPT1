@@ -83,10 +83,7 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
           is_new_user: isRegister,
           is_hostel_resident: isHostelResident,
           department: department,
-          branch: branch,
-          hod_key: hodKey.trim().toUpperCase(),
-          super_admin_key: superAdminKey.trim().toUpperCase(),
-          mobile: mobile.trim()
+          branch: branch
         })
       });
       const data = await res.json();
@@ -95,8 +92,7 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
           ...data,
           department: data.department || department,
           branch: data.branch || branch,
-          hod_code: data.hod_code || hodKey.trim().toUpperCase(),
-          super_admin_key: data.super_admin_key || superAdminKey.trim().toUpperCase()
+          hod_code: data.department || department
         });
       } else {
         setError(data.detail || data.message || 'Student authentication failed.');
@@ -225,7 +221,7 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
             </div>
           </div>
 
-          {/* REGISTRATION ONLY FIELDS: DEPARTMENT, BRANCH, HOD KEY, SUPER ADMIN KEY */}
+          {/* REGISTRATION ONLY FIELDS: DEPARTMENT & BRANCH */}
           {isRegister && (
             <>
               {/* Department */}
@@ -262,45 +258,6 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
                     </option>
                   ))}
                 </select>
-              </div>
-
-              {/* 1. HOD / ADMIN KEY BLOCK */}
-              <div className="p-3 rounded-2xl bg-amber-50/70 border border-amber-200/80 space-y-1.5">
-                <label className="block text-xs font-extrabold text-amber-900 uppercase tracking-wider flex items-center gap-1.5">
-                  <Key className="w-3.5 h-3.5 text-amber-600" /> HOD / ADMIN KEY
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. HOD-Arjun-4892 or HOD-Priya-1204"
-                  value={hodKey}
-                  onChange={(e) => setHodKey(e.target.value)}
-                  spellCheck={false}
-                  autoComplete="off"
-                  className="w-full px-3 py-2 rounded-xl bg-white border border-amber-300 focus:border-amber-600 text-slate-900 text-xs font-mono font-bold outline-none transition-all"
-                />
-                <p className="text-[10px] text-amber-800 leading-snug flex items-start gap-1">
-                  <Info className="w-3 h-3 text-amber-600 shrink-0 mt-0.5" />
-                  Notices sent by this HOD will ONLY be delivered to students who enter their respective HOD key.
-                </p>
-              </div>
-
-              {/* 2. SUPER ADMIN KEY BLOCK */}
-              <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-1.5">
-                <label className="block text-xs font-extrabold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-slate-700" /> SUPER ADMIN KEY
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. SUPER-ADMIN"
-                  value={superAdminKey}
-                  onChange={(e) => setSuperAdminKey(e.target.value)}
-                  spellCheck={false}
-                  autoComplete="off"
-                  className="w-full px-3 py-2 rounded-xl bg-white border border-slate-300 focus:border-slate-800 text-slate-900 text-xs font-mono font-bold outline-none transition-all"
-                />
-                <p className="text-[10px] text-slate-500 leading-snug">
-                  Key for campus-wide general administrative notices and announcements.
-                </p>
               </div>
             </>
           )}

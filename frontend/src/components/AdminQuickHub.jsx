@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, PlusCircle, Bell, MapPin, Key, Sparkles, Folder, Calendar, ArrowRight, FileText, Megaphone, Compass } from 'lucide-react';
+import { ShieldCheck, PlusCircle, Bell, MapPin, Key, Sparkles, Folder, Calendar, ArrowRight, FileText, Megaphone, Compass, BookOpen } from 'lucide-react';
 
 const AdminQuickHub = ({
   user,
@@ -9,6 +9,7 @@ const AdminQuickHub = ({
   onOpenDocuments,
   onOpenEvents,
   onOpenMaps,
+  onOpenRules,
   onOpenProfile
 }) => {
   const role = (user?.role || 'hod').toLowerCase();
@@ -183,6 +184,55 @@ const AdminQuickHub = ({
             <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
               <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-200">Open Campus Map</span>
               <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-amber-600 transition-all">
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </div>
+
+          {/* 5. 📕 ROLE-BASED RULES CARD */}
+          <div
+            onClick={onOpenRules}
+            className="group relative p-6 rounded-3xl bg-gradient-to-br from-red-600 via-rose-700 to-pink-800 text-white shadow-lg hover:shadow-2xl hover:shadow-red-600/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-rose-400 overflow-hidden flex flex-col justify-between min-h-[190px] sm:col-span-2 lg:col-span-2"
+          >
+            <div className="absolute right-3 top-3 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+              <BookOpen className="w-24 h-24" />
+            </div>
+
+            <div className="space-y-2 relative z-10">
+              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <h4 className="text-xl font-black tracking-tight text-white">
+                {role === 'faculty'
+                  ? 'Official Faculty Rules & Guidelines'
+                  : role === 'hostel_admin'
+                  ? 'Official Hostel Rules & Regulations'
+                  : role === 'super_admin'
+                  ? 'Official Campus Rules & Governance'
+                  : 'Official Rules & Responsibilities for HOD'}
+              </h4>
+              <p className="text-xs text-rose-100 font-medium leading-relaxed">
+                {role === 'faculty'
+                  ? 'Review official teaching guidelines, syllabus completion norms, evaluation integrity, and student mentorship responsibilities.'
+                  : role === 'hostel_admin'
+                  ? 'Review hostel curfew timings, gate pass verification, mess quality, room inspection, and warden protocols.'
+                  : role === 'super_admin'
+                  ? 'Review overall campus governance policies including HOD directives, faculty rules, hostel regulations, and student code of conduct.'
+                  : 'Review the 18 core administrative directives for HODs (discipline, attendance monitoring, faculty coordination, career development, and accountability).'}
+              </p>
+            </div>
+
+            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-rose-200">
+                {role === 'faculty'
+                  ? 'View Faculty Rules & Guidelines'
+                  : role === 'hostel_admin'
+                  ? 'View Hostel Rules & Regulations'
+                  : role === 'super_admin'
+                  ? 'View Campus Rules & Governance'
+                  : 'View HOD Rules & Code of Conduct'}
+              </span>
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-rose-700 transition-all">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>

@@ -152,15 +152,102 @@ const SRKR_RULES = [
   }
 ];
 
-const RulesModal = ({ isOpen, onClose }) => {
+const HOD_RULES = [
+  { num: 1, title: "Maintain Discipline", detail: "Ensure students and staff follow college rules." },
+  { num: 2, title: "Monitor Attendance", detail: "Regularly review student and faculty attendance." },
+  { num: 3, title: "Check Academic Progress", detail: "Monitor syllabus completion, internal exams, assignments, and results." },
+  { num: 4, title: "Faculty Coordination", detail: "Conduct regular department meetings and distribute work fairly." },
+  { num: 5, title: "Student Support", detail: "Listen to student problems and help resolve academic issues." },
+  { num: 6, title: "Timetable Management", detail: "Ensure classes, labs, and faculty schedules are properly organized." },
+  { num: 7, title: "Laboratory Management", detail: "Make sure labs have required equipment, software, and safety procedures." },
+  { num: 8, title: "Performance Monitoring", detail: "Review faculty and student performance periodically." },
+  { num: 9, title: "Encourage Projects", detail: "Promote internships, hackathons, research projects, seminars, and competitions." },
+  { num: 10, title: "Maintain Records", detail: "Keep proper records of attendance, marks, meetings, activities, and departmental documents." },
+  { num: 11, title: "Communication", detail: "Clearly communicate college policies and important announcements to students and faculty." },
+  { num: 12, title: "Fairness and Transparency", detail: "Avoid favoritism and make decisions based on clear rules." },
+  { num: 13, title: "Industry Connection", detail: "Encourage collaboration with companies, alumni, and industry professionals." },
+  { num: 14, title: "Career Development", detail: "Support students with placements, internships, certifications, and skill development." },
+  { num: 15, title: "Regular Feedback", detail: "Collect feedback from students and faculty and take appropriate action." },
+  { num: 16, title: "Safety and Respect", detail: "Maintain a respectful, inclusive, and safe learning environment." },
+  { num: 17, title: "Department Development", detail: "Plan improvements to infrastructure, courses, laboratories, and teaching methods." },
+  { num: 18, title: "Accountability", detail: "Take responsibility for departmental performance and report important matters to college administration." }
+];
+
+const FACULTY_RULES = [
+  { num: 1, title: "Punctuality & Class Conduct", detail: "Arrive on time for lectures and practical lab sessions without delay." },
+  { num: 2, title: "Syllabus Coverage", detail: "Complete the prescribed curriculum accurately as per the academic calendar schedule." },
+  { num: 3, title: "Evaluation Integrity", detail: "Conduct fair, unbiased grading for internal examinations, assignments, and practical tests." },
+  { num: 4, title: "Student Mentorship", detail: "Act as academic counselor, mentor, and guide for assigned student batches." },
+  { num: 5, title: "Classroom Discipline", detail: "Maintain orderly classroom environment and enforce mandatory attendance policies." },
+  { num: 6, title: "Academic Record Maintenance", detail: "Update attendance registers, marks lists, and course logs in the portal regularly." },
+  { num: 7, title: "Lab Preparation & Safety", detail: "Ensure laboratory experiments are properly set up and safety guidelines strictly followed." },
+  { num: 8, title: "Research & Skill Upgrade", detail: "Engage in research paper publications, FDPs, workshops, and technical certifications." },
+  { num: 9, title: "Fairness & Anti-Bias", detail: "Treat all students equally with dignity and respect without favoritism or discrimination." },
+  { num: 10, title: "Departmental Collaboration", detail: "Attend department meetings and actively participate in accreditation (NBA/NAAC) work." },
+  { num: 11, title: "Anti-Ragging Support", detail: "Assist college authorities in maintaining a strict, 100% ragging-free campus environment." },
+  { num: 12, title: "Professional Conduct", detail: "Adhere strictly to official SRKR code of conduct, dress code, and administrative directives." }
+];
+
+const HOSTEL_RULES = [
+  { num: 1, title: "Maintain Cleanliness", detail: "Keep rooms, bathrooms, corridors, and common areas clean." },
+  { num: 2, title: "Follow Timings", detail: "Students must return to the hostel before the designated curfew time." },
+  { num: 3, title: "Maintain Silence", detail: "Avoid loud music, shouting, and disturbances, especially during study and sleeping hours." },
+  { num: 4, title: "Respect Others", detail: "Treat roommates, hostel staff, and other students respectfully." },
+  { num: 5, title: "Take Care of Property", detail: "Do not damage hostel furniture, electrical equipment, or other facilities." },
+  { num: 6, title: "No Unauthorized Visitors", detail: "Visitors are allowed only with proper permission and must follow hostel visiting hours." },
+  { num: 7, title: "Attendance", detail: "Students must attend hostel roll calls or attendance checks when required." },
+  { num: 8, title: "No Smoking or Alcohol", detail: "Smoking, alcohol, and illegal substances are strictly prohibited." },
+  { num: 9, title: "Use Electrical Appliances Responsibly", detail: "Do not use unauthorized or unsafe electrical appliances." },
+  { num: 10, title: "Keep Valuables Safe", detail: "Students are responsible for their own money, phones, laptops, and other belongings." },
+  { num: 11, title: "Follow Safety Rules", detail: "Do not tamper with fire alarms, extinguishers, electrical systems, or emergency equipment." },
+  { num: 12, title: "No Bullying or Harassment", detail: "Bullying, fighting, ragging, harassment, or threatening behavior is strictly prohibited." },
+  { num: 13, title: "Keep Common Facilities Orderly", detail: "Use kitchens, study rooms, recreation areas, and other shared facilities responsibly." },
+  { num: 14, title: "Report Problems", detail: "Inform the hostel warden immediately about maintenance issues, emergencies, or safety concerns." },
+  { num: 15, title: "Follow Warden Instructions", detail: "Students must comply with reasonable instructions given by the hostel warden or management." },
+  { num: 16, title: "No Unauthorized Room Changes", detail: "Students should not change rooms or allow others to occupy their room without permission." },
+  { num: 17, title: "Maintain Personal Hygiene", detail: "Keep personal belongings organized and maintain good hygiene." },
+  { num: 18, title: "Observe Hostel Leave Procedures", detail: "Students must obtain permission and record their details before leaving the hostel when required." },
+  { num: 19, title: "Do Not Misuse the Internet", detail: "Hostel internet should not be used for illegal, harmful, or inappropriate activities." },
+  { num: 20, title: "Be Responsible", detail: "Every student is expected to contribute to a safe, peaceful, and respectful hostel environment." }
+];
+
+const RulesModal = ({ isOpen, onClose, user }) => {
+  const role = (user?.role || 'student').toLowerCase();
+
+  const getDefaultTab = () => {
+    if (role === 'faculty') return 'faculty';
+    if (role === 'hostel_admin') return 'hostel';
+    if (role === 'hod' || role === 'super_admin') return 'hod';
+    return 'student';
+  };
+
   const [search, setSearch] = useState('');
+  const [activeTab, setActiveTab] = useState(getDefaultTab());
 
   if (!isOpen) return null;
 
-  const filteredRules = SRKR_RULES.filter(
+  const filteredStudentRules = SRKR_RULES.filter(
     (r) =>
       r.title.toLowerCase().includes(search.toLowerCase()) ||
       r.points.some((p) => p.toLowerCase().includes(search.toLowerCase()))
+  );
+
+  const filteredHodRules = HOD_RULES.filter(
+    (r) =>
+      r.title.toLowerCase().includes(search.toLowerCase()) ||
+      r.detail.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const filteredFacultyRules = FACULTY_RULES.filter(
+    (r) =>
+      r.title.toLowerCase().includes(search.toLowerCase()) ||
+      r.detail.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const filteredHostelRules = HOSTEL_RULES.filter(
+    (r) =>
+      r.title.toLowerCase().includes(search.toLowerCase()) ||
+      r.detail.toLowerCase().includes(search.toLowerCase())
   );
 
   const handlePrint = () => {
@@ -201,12 +288,77 @@ const RulesModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
+        {/* Tab Switcher */}
+        <div className="flex bg-slate-100 p-1.5 border-b border-slate-200 overflow-x-auto">
+          {(role === 'hod' || role === 'super_admin') && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('hod')}
+              className={`flex-1 py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
+                activeTab === 'hod'
+                  ? 'bg-rose-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              👔 HOD Rules & Responsibilities ({HOD_RULES.length})
+            </button>
+          )}
+
+          {(role === 'faculty' || role === 'super_admin') && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('faculty')}
+              className={`flex-1 py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
+                activeTab === 'faculty'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              👨‍🏫 Faculty Rules ({FACULTY_RULES.length})
+            </button>
+          )}
+
+          {(role === 'hostel_admin' || role === 'super_admin' || role === 'student') && (
+            <button
+              type="button"
+              onClick={() => setActiveTab('hostel')}
+              className={`flex-1 py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
+                activeTab === 'hostel'
+                  ? 'bg-amber-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              🏨 Hostel Rules ({HOSTEL_RULES.length})
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setActiveTab('student')}
+            className={`flex-1 py-2 px-3 rounded-xl text-xs font-black transition-all cursor-pointer whitespace-nowrap ${
+              activeTab === 'student'
+                ? 'bg-slate-900 text-white shadow-sm'
+                : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            🎓 Student Rules ({SRKR_RULES.length})
+          </button>
+        </div>
+
         {/* Search Bar */}
         <div className="p-4 border-b border-slate-100 bg-white">
           <div className="relative">
             <input
               type="text"
-              placeholder="Search rules (e.g. Attendance, ID Card, Examinations, Anti-Ragging)..."
+              placeholder={`Search ${
+                activeTab === 'faculty'
+                  ? 'Faculty Rules (e.g. Syllabus, Evaluation, Mentorship)...'
+                  : activeTab === 'hostel'
+                  ? 'Hostel Rules (e.g. Curfew, Gate Pass, Mess)...'
+                  : activeTab === 'hod'
+                  ? 'HOD Rules (e.g. Discipline, Attendance, Projects)...'
+                  : 'Student Rules (e.g. Attendance, ID Card, Examinations)...'
+              }`}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-900 focus:bg-white focus:border-red-500 outline-none transition-all"
@@ -215,7 +367,7 @@ const RulesModal = ({ isOpen, onClose }) => {
           </div>
         </div>
 
-        {/* Document Content View with SRKR Logo Header */}
+        {/* Document Content View */}
         <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 bg-slate-50/30 font-sans">
           {/* Document Header Page */}
           <div className="text-center border-b border-slate-200 pb-6 mb-6">
@@ -230,34 +382,116 @@ const RulesModal = ({ isOpen, onClose }) => {
             <p className="text-xs font-bold text-slate-600 uppercase tracking-widest mt-1">
               SRKR MARG, CHINAAMIRAM, BHIMAVARAM-534204, A.P.
             </p>
-            <div className="inline-block mt-3 px-4 py-1 rounded-full bg-red-100 text-red-800 border border-red-200 text-xs font-extrabold tracking-wider uppercase">
-              GENERAL COLLEGE RULES & REGULATIONS FOR STUDENTS
+            <div className={`inline-block mt-3 px-4 py-1.5 rounded-full border text-xs font-extrabold tracking-wider uppercase ${
+              activeTab === 'faculty'
+                ? 'bg-indigo-100 text-indigo-900 border-indigo-200'
+                : activeTab === 'hostel'
+                ? 'bg-amber-100 text-amber-900 border-amber-200'
+                : activeTab === 'hod'
+                ? 'bg-rose-100 text-rose-900 border-rose-200'
+                : 'bg-red-100 text-red-800 border-red-200'
+            }`}>
+              {activeTab === 'faculty'
+                ? 'OFFICIAL FACULTY RULES & ACADEMIC GUIDELINES'
+                : activeTab === 'hostel'
+                ? 'OFFICIAL HOSTEL RULES & REGULATIONS'
+                : activeTab === 'hod'
+                ? 'OFFICIAL RULES & RESPONSIBILITIES FOR HOD'
+                : 'GENERAL COLLEGE RULES & REGULATIONS FOR STUDENTS'}
             </div>
           </div>
 
-          {/* Rules List */}
-          <div className="space-y-6">
-            {filteredRules.map((rule) => (
-              <div
-                key={rule.num}
-                className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-red-300 transition-colors space-y-2.5"
-              >
-                <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                  <span className="w-7 h-7 rounded-xl bg-red-100 text-red-700 flex items-center justify-center text-xs font-black">
-                    {rule.num}
-                  </span>
-                  {rule.title}
-                </h3>
-                <ul className="space-y-1.5 pl-9">
-                  {rule.points.map((pt, pIdx) => (
-                    <li key={pIdx} className="text-xs text-slate-700 leading-relaxed list-disc">
-                      {pt}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          {/* FACULTY RULES VIEW */}
+          {activeTab === 'faculty' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredFacultyRules.map((rule) => (
+                <div
+                  key={rule.num}
+                  className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-indigo-300 hover:shadow-sm transition-all space-y-1.5"
+                >
+                  <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                      {rule.num}
+                    </span>
+                    {rule.title}
+                  </h3>
+                  <p className="text-xs text-slate-700 leading-relaxed pl-8 font-medium">
+                    {rule.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* HOSTEL RULES VIEW */}
+          {activeTab === 'hostel' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredHostelRules.map((rule) => (
+                <div
+                  key={rule.num}
+                  className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-amber-300 hover:shadow-sm transition-all space-y-1.5"
+                >
+                  <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg bg-amber-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                      {rule.num}
+                    </span>
+                    {rule.title}
+                  </h3>
+                  <p className="text-xs text-slate-700 leading-relaxed pl-8 font-medium">
+                    {rule.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* HOD RULES VIEW */}
+          {activeTab === 'hod' && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {filteredHodRules.map((rule) => (
+                <div
+                  key={rule.num}
+                  className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-rose-300 hover:shadow-sm transition-all space-y-1.5"
+                >
+                  <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-lg bg-rose-600 text-white flex items-center justify-center text-xs font-black shrink-0">
+                      {rule.num}
+                    </span>
+                    {rule.title}
+                  </h3>
+                  <p className="text-xs text-slate-700 leading-relaxed pl-8 font-medium">
+                    {rule.detail}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* STUDENT RULES VIEW */}
+          {activeTab === 'student' && (
+            <div className="space-y-6">
+              {filteredStudentRules.map((rule) => (
+                <div
+                  key={rule.num}
+                  className="p-5 rounded-2xl bg-white border border-slate-200 shadow-2xs hover:border-red-300 transition-colors space-y-2.5"
+                >
+                  <h3 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-xl bg-red-100 text-red-700 flex items-center justify-center text-xs font-black">
+                      {rule.num}
+                    </span>
+                    {rule.title}
+                  </h3>
+                  <ul className="space-y-1.5 pl-9">
+                    {rule.points.map((pt, pIdx) => (
+                      <li key={pIdx} className="text-xs text-slate-700 leading-relaxed list-disc">
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Anti-Ragging Banner */}
           <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-center justify-between text-xs text-red-900">

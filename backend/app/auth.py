@@ -136,10 +136,8 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
         pwd = (req.password or "").strip()
         is_hostel = bool(req.is_hostel_resident)
         is_new = bool(req.is_new_user)
-        dept = req.department or "CSE"
-        brch = req.branch or dept
-        hod_k = (req.hod_key or req.hod_code or "").strip().upper()
-        super_k = (req.super_admin_key or "").strip().upper()
+        dept = (req.department or "CSE").upper().strip()
+        brch = (req.branch or dept).upper().strip()
 
         if not uname:
             return LoginResponse(status="error", message="Username is required.", username="", role="student")
@@ -157,6 +155,7 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
         if not is_new and uname in REGISTERED_USERS:
             u = REGISTERED_USERS[uname]
             if u["password"] == pwd or not pwd: # allow smooth password check
+                student_dept = (u.get("department") or dept).upper().strip()
                 return LoginResponse(
                     status="success",
                     message=f"Welcome back, {uname}!",
@@ -164,11 +163,11 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
                     role="student",
                     designation="Student",
                     category="hostel" if u.get("is_hostel_resident") else "college",
-                    hod_code=u.get("hod_code", ""),
-                    super_admin_key=u.get("super_admin_key", ""),
+                    hod_code=student_dept,
+                    super_admin_key="SUPER-ADMIN",
                     is_hostel_resident=u.get("is_hostel_resident", False),
                     college_name="SRKR Engineering College",
-                    department=u.get("department", dept),
+                    department=student_dept,
                     branch=u.get("branch", brch)
                 )
             else:
@@ -183,8 +182,8 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             "role": "student",
             "designation": "Student",
             "category": "hostel" if is_hostel else "college",
-            "hod_code": hod_k,
-            "super_admin_key": super_k,
+            "hod_code": dept,
+            "super_admin_key": "SUPER-ADMIN",
             "is_hostel_resident": is_hostel,
             "college_name": "SRKR Engineering College",
             "department": dept,
@@ -198,8 +197,8 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             role="student",
             designation="Student",
             category="hostel" if is_hostel else "college",
-            hod_code=hod_k,
-            super_admin_key=super_k,
+            hod_code=dept,
+            super_admin_key="SUPER-ADMIN",
             is_hostel_resident=is_hostel,
             college_name="SRKR Engineering College",
             department=dept,

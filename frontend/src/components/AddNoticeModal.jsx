@@ -18,6 +18,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
   const [audFaculty, setAudFaculty] = useState(role === 'hod');
   const [audHods, setAudHods] = useState(false);
   const [audHostel, setAudHostel] = useState(role === 'hostel_admin');
+  const [audSuperAdmin, setAudSuperAdmin] = useState(false);
   const [audAll, setAudAll] = useState(false);
 
   const [generating, setGenerating] = useState(false);
@@ -79,6 +80,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
     } else if (role === 'hod') {
       if (audStudents) audience.push('students');
       if (audFaculty) audience.push('faculty');
+      if (audSuperAdmin) audience.push('super_admin');
     } else if (role === 'super_admin') {
       if (audAll) {
         audience = ['all'];
@@ -111,7 +113,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
           end_date: endDate,
           audience: audience,
           sender_role: role,
-          sender_scope: user?.hod_code || user?.username || 'ALL'
+          sender_scope: user?.department || user?.hod_code || user?.username || 'ALL'
         })
       });
       const data = await res.json();
@@ -284,9 +286,9 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
               </div>
             )}
 
-            {/* HOD: Students / Faculty */}
+            {/* HOD: Students / Faculty / Super Admin */}
             {role === 'hod' && (
-              <div className="flex items-center gap-6 p-3 rounded-xl bg-slate-50 border border-slate-200">
+              <div className="flex flex-wrap items-center gap-5 p-3 rounded-xl bg-slate-50 border border-slate-200">
                 <label className="flex items-center gap-2 text-xs font-semibold text-slate-800 cursor-pointer">
                   <input
                     type="checkbox"
@@ -294,7 +296,7 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
                     onChange={(e) => setAudStudents(e.target.checked)}
                     className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-slate-300"
                   />
-                  Linked Students
+                  Students ({user?.department || 'My Department'})
                 </label>
                 <label className="flex items-center gap-2 text-xs font-semibold text-slate-800 cursor-pointer">
                   <input
@@ -303,7 +305,16 @@ const AddNoticeModal = ({ isOpen, onClose, user, onNoticeAdded }) => {
                     onChange={(e) => setAudFaculty(e.target.checked)}
                     className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-slate-300"
                   />
-                  Linked Faculty
+                  Faculty
+                </label>
+                <label className="flex items-center gap-2 text-xs font-semibold text-slate-800 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={audSuperAdmin}
+                    onChange={(e) => setAudSuperAdmin(e.target.checked)}
+                    className="w-4 h-4 rounded text-orange-600 focus:ring-orange-500 border-slate-300"
+                  />
+                  Super Admin
                 </label>
               </div>
             )}

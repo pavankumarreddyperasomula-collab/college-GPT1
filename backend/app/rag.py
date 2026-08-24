@@ -90,8 +90,16 @@ class LocalVectorStore:
             scored.append((total_score, doc))
 
         scored.sort(key=lambda x: x[0], reverse=True)
-        top_docs = [item[1]["text"] for item in scored[:n_results]]
-        top_metas = [item[1]["metadata"] for item in scored[:n_results]]
+        scored_relevant = [item for item in scored if item[0] > 0.0]
+
+        if not scored_relevant:
+            return {
+                "documents": [[]],
+                "metadatas": [[]]
+            }
+
+        top_docs = [item[1]["text"] for item in scored_relevant[:n_results]]
+        top_metas = [item[1]["metadata"] for item in scored_relevant[:n_results]]
 
         return {
             "documents": [top_docs],
@@ -161,12 +169,12 @@ class NotificationsStore:
             # Force audience to hostel-resident students ONLY server-side
             notice_data["audience"] = ["hostel"]
         elif sender_role == "hod":
-            # Allow only students / faculty within HOD scope
-            allowed = [a for a in client_audience if a in ["students", "faculty"]]
+            # Allow students, faculty, or super_admin within HOD department scope
+            allowed = [a for a in client_audience if a in ["students", "faculty", "super_admin", "superadmin"]]
             notice_data["audience"] = allowed if allowed else ["students"]
         elif sender_role == "super_admin":
             if "all" in client_audience:
-                notice_data["audience"] = ["hods", "faculty", "students", "hostel"]
+                notice_data["audience"] = ["hods", "faculty", "students", "hostel", "super_admin"]
             else:
                 notice_data["audience"] = client_audience
 
@@ -175,7 +183,7 @@ class NotificationsStore:
 
     def get_user_notifications(self, role: str, hod_code: Optional[str] = None, is_hostel_resident: bool = False) -> List[dict]:
         role_clean = role.lower().strip()
-        hod_clean = (hod_code or "").upper().strip()
+        dept_clean = (hod_code or "").upper().strip()
         filtered = []
 
         for n in self.notifications:
@@ -185,12 +193,18 @@ class NotificationsStore:
 
             # 1. Student Filtering
             if role_clean == "student":
-                # From linked HOD (only if student provided that HOD's key)
-                is_from_linked_hod = bool(
+                # From HOD matching student's department or HOD code
+                is_from_dept_hod = bool(
                     sender_role == "hod"
-                    and sender_scope
-                    and hod_clean
-                    and sender_scope.strip().upper() == hod_clean.strip().upper()
+                    and ("students" in aud or "all" in aud)
+                    and (
+                        not sender_scope
+                        or sender_scope == "ALL"
+                        or not dept_clean
+                        or sender_scope == dept_clean
+                        or dept_clean in sender_scope
+                        or sender_scope in dept_clean
+                    )
                 )
                 # Super Admin student broadcast
                 is_student_broadcast = bool(
@@ -203,25 +217,22 @@ class NotificationsStore:
                     and ("hostel" in aud or sender_role == "hostel_admin")
                 )
 
-                if is_from_linked_hod or is_student_broadcast or is_hostel_notice:
+                if is_from_dept_hod or is_student_broadcast or is_hostel_notice:
                     filtered.append(n)
 
             # 2. Faculty Filtering
             elif role_clean == "faculty":
-                # Must be explicitly targeted to "faculty"
-                if "faculty" in aud:
+                if "faculty" in aud or "all" in aud:
                     filtered.append(n)
 
             # 3. HOD Filtering
             elif role_clean in ["hod", "admin_hod"]:
-                # Targeted to "hods" from Super Admin
-                if "hods" in aud:
+                if "hods" in aud or "all" in aud:
                     filtered.append(n)
 
             # 4. Hostel Admin Filtering
             elif role_clean == "hostel_admin":
-                # Targeted to "hostel"
-                if "hostel" in aud:
+                if "hostel" in aud or "all" in aud:
                     filtered.append(n)
 
             # 5. Super Admin Filtering
@@ -476,18 +487,22 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
     metadatas = results.get("metadatas", [[]])[0]
 
     sources = []
-    seen_titles = set()
-    for meta in metadatas:
-        if meta and meta.get("title") not in seen_titles:
-            sources.append({
-                "title": meta.get("title", "Notice"),
-                "category": meta.get("category", "general")
-            })
-            seen_titles.add(meta.get("title"))
+    if documents:
+        seen_titles = set()
+        for meta in metadatas:
+            if meta and meta.get("title") not in seen_titles:
+                sources.append({
+                    "title": meta.get("title", "Notice"),
+                    "category": meta.get("category", "general")
+                })
+                seen_titles.add(meta.get("title"))
 
     context_str = "\n\n".join(documents) if documents else "No relevant campus records found."
 
     answer = generate_llm_answer(query, context_str, documents, metadatas)
+
+    if "do not have information about that particular topic" in answer:
+        sources = []
 
     return {
         "answer": answer,
@@ -571,7 +586,9 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
         system_prompt = (
             "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
             "Help students and staff with campus rules, hostels, exams, events, notices, navigation, and academic syllabus queries. "
-            "When answering questions about courses, R23 B.Tech AI & DS syllabus, course codes, credits, and units, reference the provided SRKR campus context accurately, concisely, and clearly."
+            "CRITICAL INSTRUCTION: Rely strictly on the provided official SRKR campus context to answer questions. "
+            "If the provided campus context does not contain relevant information to answer the user's question, or if you do not know about that particular topic, respond politely saying: "
+            "'I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance.'"
         )
         user_prompt = f"Official SRKR Campus Context, Syllabus & Notices:\n{context}\n\nUser Question/Message: {query}"
 
@@ -592,9 +609,9 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
             except Exception as e:
                 print(f"Groq API model {model_name} failed: {e}")
 
-    # Fallback if API key unavailable or failed
+    # Fallback if API key unavailable, context missing, or model failed
     if not documents or context == "No relevant campus records found.":
-        return "I could not find a specific syllabus topic, rule, or notice answering your question in the campus database. Please consult the department or admin office."
+        return "I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance."
 
     primary_doc = documents[0]
     title = metadatas[0].get("title", "Campus Information") if metadatas else "Notice"

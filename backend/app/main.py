@@ -58,14 +58,14 @@ class SendNoticeRequest(BaseModel):
     sender_scope: Optional[str] = None
 
 class EventRequest(BaseModel):
-    title: str
+    title: Optional[str] = "Campus Event"
     category: Optional[str] = "Campus Event"
     date: Optional[str] = None
-    location: Optional[str] = "SRKR Engineering College"
-    description: str
-    link: str
-    sender_role: str  # "hod", "super_admin", "faculty", etc.
-    sender_scope: Optional[str] = None  # e.g., HOD-Arjun-4892
+    location: Optional[str] = "SRKR Campus Grounds"
+    description: Optional[str] = "Official SRKR campus event."
+    link: Optional[str] = "https://srkr.ac.in"
+    sender_role: Optional[str] = "hod"
+    sender_scope: Optional[str] = "ALL"
 
 @app.get("/")
 def read_root():
@@ -278,24 +278,23 @@ def get_events_endpoint(
 
 @app.post("/events")
 def create_event_endpoint(req: EventRequest):
-    title = req.title.strip()
-    link = req.link.strip()
-    desc = req.description.strip()
-    if not title:
-        raise HTTPException(status_code=400, detail="Event title is required.")
-    if not link:
-        raise HTTPException(status_code=400, detail="Event registration link is required.")
+    now = datetime.now()
+    title = (req.title or "").strip() or "SRKR Campus Event"
+    link = (req.link or "").strip() or "https://srkr.ac.in"
+    desc = (req.description or "").strip() or f"Official SRKR campus announcement for {title}."
+    cat = (req.category or "").strip() or "Campus Event"
+    loc = (req.location or "").strip() or "SRKR Campus Grounds"
+    evt_date = (req.date or "").strip() or now.strftime("%d-%m-%Y")
 
-    sender_role = req.sender_role.lower().strip()
+    sender_role = (req.sender_role or "hod").lower().strip()
     sender_scope = (req.sender_scope or "ALL").strip()
 
-    now = datetime.now()
     event_record = {
         "id": f"evt_{uuid.uuid4().hex[:8]}",
         "title": title,
-        "category": req.category.strip() if req.category else "Campus Event",
-        "date": req.date.strip() if req.date else now.strftime("%d-%m-%Y"),
-        "location": req.location.strip() if req.location else "SRKR Campus Grounds",
+        "category": cat,
+        "date": evt_date,
+        "location": loc,
         "description": desc,
         "link": link,
         "status": "Active Registration",
@@ -307,7 +306,7 @@ def create_event_endpoint(req: EventRequest):
 
     return {
         "status": "success",
-        "message": f"Event '{title}' posted successfully with registration link.",
+        "message": f"Event '{title}' posted successfully.",
         "event": event_record
     }
 

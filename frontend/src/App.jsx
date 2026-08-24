@@ -66,8 +66,9 @@ const App = () => {
         role: user.role || 'student',
         is_hostel_resident: user.is_hostel_resident ? 'true' : 'false'
       });
-      if (user.hod_code) {
-        queryParams.append('hod_code', user.hod_code);
+      const deptCode = user.department || user.hod_code;
+      if (deptCode) {
+        queryParams.append('hod_code', deptCode);
       }
 
       const res = await fetch(`http://localhost:8000/notifications?${queryParams.toString()}`);
@@ -341,6 +342,7 @@ const App = () => {
                     onOpenDocuments={() => setIsDocFormatterOpen(true)}
                     onOpenEvents={() => setIsEventsOpen(true)}
                     onOpenMaps={() => setIsMapsOpen(true)}
+                    onOpenRules={() => setIsRulesOpen(true)}
                     onOpenProfile={() => setIsProfileOpen(true)}
                   />
                 )}

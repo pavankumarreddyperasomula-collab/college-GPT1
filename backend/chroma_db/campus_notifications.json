@@ -1,5 +1,224 @@
 [
   {
+    "id": "notif_25c29a0f",
+    "theme": "holidays",
+    "title": "holidays",
+    "category": "college",
+    "body": "**THEME: HOLIDAYS**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30**\n\n---\n\n**To:** All students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** College Holiday Schedule  \n\nDear Members of the SRKR Engineering College Community,\n\nPlease be informed that the college will observe a holiday period as detailed below:\n\n| **Period** | **Dates** |\n|------------|-----------|\n| **Holiday Closure** | **23 August 2026 \u2013 30 August 2026** |\n\nDuring this interval, all academic classes, examinations, laboratory sessions, and administrative offices will remain closed. Normal operations will resume on **31 August 2026** (Wednesday).\n\n### Guidelines\n\n1. **Attendance & Assignments**  \n   - No attendance will be taken.  \n   - Submit any pending assignments before the start of the holiday or by the first working day after the break.\n\n2. **Laboratory & Workshop Access**  \n   - All labs and workshops will be locked. Access is prohibited unless prior written permission is obtained from the Head of Department.\n\n3. **Library Services**  \n   - The library will be closed. Books may be returned on the first working day after the holiday.\n\n4. **Emergency Contacts**  \n   - For urgent matters (e.g., health emergencies, security issues), contact the Campus Security Office at **+91\u2011XXXXXXXXXX** or email **security@srkr.edu**.\n\n5. **Travel & Accommodation (Hostel Residents)**  \n   - Hostel facilities will be limited. Residents are advised to arrange personal accommodations if staying on campus.  \n   - Notify the Hostel Warden of any extended stay or early departure.\n\n### Contact Instructions\n\n- **Academic Queries:** Department Heads (see departmental directory)  \n- **Administrative Queries:** Office of the Principal, Tel: **+91\u2011XXXXXXXXXX**, Email: **principal@srkr.edu**  \n- **Hostel Queries:** Hostel Warden, Tel: **+91\u2011XXXXXXXXXX**, Email: **hostel@srkr.edu**\n\nWe wish everyone a restful and safe break. Thank you for your cooperation.\n\n**Sincerely,**  \n[Name]  \nPrincipal, SRKR Engineering College  \nDate: 23 August 2026",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-30",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-23T11:40:49.571175",
+    "date_time_str": "23-08-2026 at 11:40 AM"
+  },
+  {
+    "id": "notif_43c495e9",
+    "theme": "no holiday tommorow",
+    "title": "no holiday tommorow",
+    "category": "hostel",
+    "body": "**THEME: NO HOLIDAY TOMORROW**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30**\n\n---\n\n**To:** All Hostel Residents, SRKR Engineering College  \n**From:** Hostel Administration, SRKR Engineering College  \n**Subject:** No Holiday on 24\u2011August\u20112026 (Tomorrow)\n\nDear Students,\n\nPlease be informed that **there will be no holiday tomorrow, 24\u2011August\u20112026**. All regular academic and hostel schedules will be observed.\n\n### Key Points\n- **Attendance:** Mandatory for all scheduled classes, labs, and hostel activities.  \n- **Meal Timings:** Breakfast, lunch, and dinner will be served as per the usual timetable.  \n- **Library & Study Areas:** Open during normal hours.  \n- **Security & Maintenance:** Night\u2011time security patrols and routine maintenance will continue as scheduled.\n\n### Guidelines\n1. **Report to your respective wardens** for any concerns regarding class or hostel schedules.  \n2. **Maintain discipline** and adhere to the college code of conduct throughout the day.  \n3. **If you have a genuine emergency**, inform the hostel warden immediately for appropriate assistance.\n\n### Contact Information\n- **Hostel Warden:** Mr. R. Kumar \u2013 Phone: 98765\u201143210 \u2013 Email: warden.kumar@srkr.edu  \n- **Student Affairs Office:** Ms. A. Singh \u2013 Phone: 98765\u201143211 \u2013 Email: studentaffairs@srkr.edu  \n- **Emergency Helpline (24\u2011hr):** 1122334455\n\nWe appreciate your cooperation and understanding.\n\n**Sincerely,**  \nHostel Administration  \nSRKR Engineering College  \nDate: 23\u2011August\u20112026",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-30",
+    "audience": [
+      "hostel"
+    ],
+    "sender_role": "hostel_admin",
+    "sender_scope": "pavan kumar",
+    "created_at": "2026-08-23T11:09:26.282199",
+    "date_time_str": "23-08-2026 at 11:09 AM"
+  },
+  {
+    "id": "notif_ba3fc12f",
+    "theme": "tommorow holiday",
+    "title": "tommorow holiday",
+    "category": "hostel",
+    "body": "**THEME: TOMORROW HOLIDAY**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30**\n\n---\n\n**To:** All Hostel Residents (Students & Faculty)  \n**From:** Hostel Administration, SRKR Engineering College  \n**Subject:** Holiday Notification \u2013 Hostel Operations\n\nDear Residents,\n\nPlease be informed that **tomorrow (2026\u201108\u201124)** will be observed as a college holiday. Academic classes are suspended; however, the hostel will remain open for accommodation.\n\n### Guidelines\n- **Access:** Ensure you carry a valid ID card for entry and exit.\n- **Security:** Keep your room doors locked and report any suspicious activity to the hostel warden immediately.\n- **Quiet Hours:** Maintain silence after 10:00\u202fPM to respect fellow residents.\n- **Facilities:** Common areas (laundry, mess) will operate on a reduced schedule; check the notice board for timings.\n\n### Contact for Queries\n- **Hostel Warden:** Mr.\u202fR.\u202fK.\u202fMohan \u2013 98765\u202f43210 / warden.hostel@srkr.edu  \n- **Emergency Helpline:** 112 (Campus Security)\n\nWe appreciate your cooperation. Enjoy the holiday responsibly.\n\n**Sincerely,**  \n[Name]  \nHostel Administrator  \nSRKR Engineering College",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-30",
+    "audience": [
+      "hostel"
+    ],
+    "sender_role": "hostel_admin",
+    "sender_scope": "pavan kumar",
+    "created_at": "2026-08-23T11:08:12.026854",
+    "date_time_str": "23-08-2026 at 11:08 AM"
+  },
+  {
+    "id": "notif_2d2dd768",
+    "theme": "trees",
+    "title": "trees",
+    "category": "college",
+    "body": "# Trees\n\n## 1. Introduction  \nTrees are the best.  \n*(This succinct statement captures the essence of the topic and serves as the foundation for the discussion that follows.)*\n\n## 2. Why Trees Matter  \n### 2.1 Ecological Significance  \n- **Oxygen Production** \u2013 Through photosynthesis, trees release oxygen, sustaining life on Earth.  \n- **Carbon Sequestration** \u2013 Trees absorb CO\u2082, helping mitigate climate change.  \n- **Habitat Creation** \u2013 They provide shelter and food for countless species.  \n\n### 2.2 Environmental Benefits  \n- **Water Regulation** \u2013 Roots reduce runoff and improve groundwater recharge.  \n- **Air Quality Improvement** \u2013 Trees filter pollutants and particulate matter.  \n- **Temperature Moderation** \u2013 Shade and transpiration lower ambient temperatures.  \n\n### 2.3 Socio\u2011Economic Value  \n- **Timber and Non\u2011Timber Products** \u2013 Wood, fruit, nuts, and medicinal compounds.  \n- **Recreation and Tourism** \u2013 Parks, trails, and scenic landscapes attract visitors.  \n- **Cultural and Aesthetic Appeal** \u2013 Symbolism in art, literature, and community identity.  \n\n## 3. Types of Trees  \n| Category | Typical Examples | Key Characteristics |\n|----------|------------------|---------------------|\n| **Deciduous** | Oak, Maple, Birch | Shed leaves seasonally; broad canopy |\n| **Evergreen** | Pine, Spruce, Cedar",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-22",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-CSE-1001",
+    "created_at": "2026-08-23T10:16:13.518911",
+    "date_time_str": "23-08-2026 at 10:16 AM"
+  },
+  {
+    "id": "notif_a1ecd4c5",
+    "theme": "trees",
+    "title": "trees",
+    "category": "college",
+    "body": "trees are the best",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-22",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-CSE-1001",
+    "created_at": "2026-08-23T10:15:37.439939",
+    "date_time_str": "23-08-2026 at 10:15 AM"
+  },
+  {
+    "id": "notif_273e1360",
+    "theme": "clg holiday",
+    "title": "clg holiday",
+    "category": "college",
+    "body": "**THEME: COLLEGE HOLIDAY**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30**\n\n---\n\n**To:** All Students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** College Holiday Announcement  \n\nDear Members of the SRKR Engineering College Community,\n\nPlease be informed that the college will observe a holiday for the period indicated above. All academic and administrative activities will be suspended during this time.\n\n### Key Details\n- **Holiday Period:** 23\u202fAugust\u202f2026\u202f\u2013\u202f30\u202fAugust\u202f2026 (inclusive)  \n- **Campus Status:** All buildings, laboratories, libraries, and hostels will remain closed.  \n- **Classes & Exams:** No lectures, tutorials, practical sessions, or examinations will be conducted.  \n\n### Guidelines\n1. **Attendance:** No attendance will be recorded for the holiday dates.  \n2. **Assignments & Submissions:** Any deadlines falling within the holiday window will be automatically extended by the same number of days; please check with your respective department for specific adjustments.  \n3. **Emergency Access:** In case of a genuine emergency, contact the Campus Security Office (extension 101) for assistance.  \n\n### Contact for Queries\n- **Principal\u2019s Office:** principal@srkrcet.ac.in | +91\u2011XXXXXXXXXX  \n- **Student Affairs:** studentaffairs@srkrcet.ac.in | +91\u2011XXXXXXXXXX  \n\nWe appreciate your cooperation and wish everyone a restful break.\n\n**Regards,**  \n[Signature]  \n**Dr.\u202fA.\u202fK.\u202fReddy**  \nPrincipal, SRKR Engineering College  \n---",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-30",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-23T09:24:10.636013",
+    "date_time_str": "23-08-2026 at 09:24 AM"
+  },
+  {
+    "id": "notif_b8c1d795",
+    "theme": "vinayaka chavithy holidays",
+    "title": "vinayaka chavithy holidays",
+    "category": "college",
+    "body": "**NOTICE**\n\n**THEME: VINAYAKA CHAVITHY HOLIDAYS**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30**\n\nDear Students, Faculty, and Staff,\n\nIn observance of Vinayaka Chavithy, SRKR Engineering College will be **closed** for the period indicated above. All academic sessions, examinations, laboratory work, and administrative offices will remain non\u2011operational during this window.\n\n---\n\n### Guidelines & Instructions\n1. **Academic Activities**  \n   - No classes, tutorials, or labs will be conducted.  \n   - Assignments and project work due during this period may be submitted **no later than 2026\u201109\u201102** (subject to faculty approval).\n\n2. **Hostel & Campus Facilities**  \n   - Hostel mess services will operate on a **limited menu**; timings will be posted on the notice board.  \n   - Library and sports facilities will be **closed**.\n\n3. **Emergency Services**  \n   - Campus security and medical emergency services will remain active 24\u00d77.  \n   - For any urgent matters, contact the Campus Security Desk at **+91\u2011XXXXXXXXXX**.\n\n4. **Communication**  \n   - All official communications (emails, notices) will resume on **2026\u201108\u201131**.  \n   - Faculty are requested to update their students regarding any rescheduling of assessments.\n\n---\n\n### Contact Information\n- **Principal\u2019s Office:** principal@srkr.edu | +91\u2011XXXXXXXXXX  \n- **Hostel Administration:** hosteladmin@srkr.edu | +91\u2011XXXXXXXXXX  \n- **Student Affairs:** studentaffairs@srkr.edu | +91\u2011XXXXXXXXXX  \n\nWe wish everyone a joyous and peaceful Vinayaka Chavithy celebration. Thank you for your cooperation.\n\n*Prepared by: Office of the Principal*  \n*Date of Issue: 2026\u201108\u201123*",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-30",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "IT",
+    "created_at": "2026-08-23T09:21:30.567691",
+    "date_time_str": "23-08-2026 at 09:21 AM"
+  },
+  {
+    "id": "notif_7b1a71f0",
+    "theme": "CSE Department Project Review",
+    "title": "CSE Department Project Review",
+    "category": "college",
+    "body": "All CSE students & Super Admin notice",
+    "start_date": "2026-08-25",
+    "end_date": "2026-08-30",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "CSE",
+    "created_at": "2026-08-23T09:15:41.108626",
+    "date_time_str": "23-08-2026 at 09:15 AM"
+  },
+  {
+    "id": "notif_7578bc32",
+    "theme": "sanskriti",
+    "title": "sanskriti",
+    "category": "college",
+    "body": "**THEME: SANSKRITI**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-24**  \n\n---\n\n**SRKR Engineering College**  \n**NOTICE TO ALL STUDENTS AND FACULTY**\n\n**Subject:** Cultural Celebration \u2013 *SANSKRITI*  \n\nThe College is pleased to announce **SANSKRITI**, a cultural celebration aimed at fostering appreciation of diverse traditions and artistic expressions within our campus community.\n\n---\n\n### Event Details\n- **Date:** 23\u202fAugust\u202f2026 (with preparatory activities on 22\u202fAugust\u202f2026)  \n- **Time:** 10:00\u202fAM \u2013 4:00\u202fPM  \n- **Venue:** College Auditorium, Main Campus  \n\n### Participation Guidelines\n1. **Eligibility:** Open to all students and faculty across every department.  \n2. **Activities:** Music, dance, drama, poetry, folk arts, culinary displays, and any other culturally\u2011relevant performances.  \n3. **Registration:**  \n   - Submit a brief description of your act (max\u202f150\u202fwords) to your Department Head.  \n   - Deadline for registration: **22\u202fAugust\u202f2026**.  \n4. **Logistics:**  \n   - Teams may request basic equipment (audio, lighting) via the Cultural Committee at least 48\u202fhours before the event.  \n   - All performances must respect the College\u2019s code of conduct and be free from offensive content.  \n\n### Contact for Queries\n- **Cultural Committee Coordinator:** Ms. Ananya Rao  \n- **Email:** cultural.committee@srkr.edu.in  \n- **Phone:** +91\u201198765\u201143210  \n\n---\n\nWe look forward to your enthusiastic participation and to making **SANSKRITI** a memorable showcase of our vibrant campus culture.  \n\n*Issued by the Office of Student Affairs*  \n*Date of Issue: 23\u202fAugust\u202f2026*",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-24",
+    "audience": [
+      "hods",
+      "faculty",
+      "students",
+      "hostel"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-23T09:00:56.155668",
+    "date_time_str": "23-08-2026 at 09:00 AM"
+  },
+  {
+    "id": "notif_ac2128b2",
+    "theme": "trees in Ds",
+    "title": "trees in Ds",
+    "category": "college",
+    "body": "# Student Performance Data \u2013 Analysis  \n*(All information is taken verbatim from the raw CSV file provided.)*  \n\n---\n\n## 1. Introduction  \nThis document presents a clean, structured view of the student data supplied.  \nThe goal is to make the information easy to read, while preserving every detail from the original source.\n\n---\n\n## 2. Data Overview  \n\n| Metric | Value |\n|--------|-------|\n| **Total Students** | 15 |\n| **Branches Represented** | AIDS, AIML, CSE, MECH, CSM, ECE |\n| **Years** | 2nd & 3rd year |\n| **Gender Distribution** | 10\u202fM, 5\u202fF |\n\n### 2.1 Branch Distribution  \n\n| Branch | Count |\n|--------|-------|\n| AIDS | 4 |\n| AIML | 2 |\n| CSE | 3 |\n| MECH | 2 |\n| CSM | 2 |\n| ECE | 2 |\n\n### 2.2 Year Distribution  \n\n| Year | Count |\n|------|-------|\n| 2nd | 9 |\n| 3rd",
+    "start_date": "2026-08-23",
+    "end_date": "2026-09-22",
+    "audience": [
+      "students"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-0116",
+    "created_at": "2026-08-23T08:51:35.689291",
+    "date_time_str": "23-08-2026 at 08:51 AM"
+  },
+  {
+    "id": "notif_25f251d6",
+    "theme": "holiday",
+    "title": "holiday",
+    "category": "college",
+    "body": "**THEME: COLLEGE HOLIDAY**  \n**DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-24**\n\n---\n\n**To:** All Students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** Observance of College Holiday  \n\nDear Members of the SRKR Engineering College Community,\n\nPlease be informed that the college will observe a holiday on the above\u2011mentioned dates. The purpose of this break is to provide a short period of rest and rejuvenation for everyone.\n\n### Guidelines\n\n- **Academic Activities:** All classes, examinations, labs, and tutorials are suspended during the holiday period.\n- **College Premises:** Administrative offices, libraries, and campus facilities will remain closed from **2026\u201108\u201123** to **2026\u201108\u201124**.\n- **Student Responsibilities:**  \n  - Ensure that any pending assignments or project work is completed before the holiday.  \n  - Use the time for self\u2011study, rest, or personal development activities.  \n- **Faculty Responsibilities:**  \n  - Update course portals with any announcements regarding post\u2011holiday schedules.  \n  - Respond to urgent student queries via official email, if necessary.\n\n### Contact for Queries\n\n- **Office of the Principal:** principal@srkr.edu | +91\u2011XXXXXXXXXX  \n- **Student Affairs Office:** studentaffairs@srkr.edu | +91\u2011XXXXXXXXXX  \n- **Faculty Support Desk:** faculty@srkr.edu | +91\u2011XXXXXXXXXX  \n\nWe wish you a pleasant and productive break. Thank you for your cooperation.\n\n**Sincerely,**  \n[Name]  \nPrincipal, SRKR Engineering College  \nDate: 2026\u201108\u201122 (issued)",
+    "start_date": "2026-08-23",
+    "end_date": "2026-08-24",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-0116",
+    "created_at": "2026-08-23T08:50:29.903819",
+    "date_time_str": "23-08-2026 at 08:50 AM"
+  },
+  {
+    "id": "notif_1b139400",
+    "theme": "summer holidays",
+    "title": "summer holidays",
+    "category": "college",
+    "body": "**THEME: SUMMER HOLIDAYS**  \n**DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30**\n\n---\n\n**To:** All Students, Faculty, and Staff  \n**From:** Office of the Principal, SRKR Engineering College  \n**Subject:** Summer Holidays \u2013 Closure of College Campus  \n\nDear Members of the SRKR Engineering College Community,\n\nPlease be informed that the college will be closed for summer holidays from **2026\u201105\u201101** through **2026\u201105\u201130**. Normal academic and administrative activities will resume on **2026\u201106\u201101**.\n\n### Key Guidelines\n- **Attendance:** No classes, labs, or examinations will be conducted during this period.\n- **Library & Labs:** All library services and laboratory facilities will remain shut. Materials may be collected/returned only on the first working day after the holidays.\n- **Hostel:** Hostel facilities will operate on a reduced staff schedule. Residents should adhere to hostel rules and report any emergencies to the warden on call.\n- **Emergency Contacts:** For urgent matters (medical, safety, or administrative), contact the on\u2011call staff listed below.\n\n### Contact Information\n- **Principal (Emergency):** +91\u2011XXXXXXXXXX | principal@srkr.edu.in  \n- **Hostel Warden (On\u2011Call):** +91\u2011XXXXXXXXXX | warden@srkr.edu.in  \n- **Administration Office:** +91\u2011XXXXXXXXXX | admin@srkr.edu.in  \n\nWe encourage you to use this break for rest, self\u2011study, and personal development. Should you have any queries, please reach out to the appropriate contact above.\n\nWishing everyone a pleasant and productive summer break.\n\n**Sincerely,**  \n[Name]  \nCollege Administrator  \nSRKR Engineering College",
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-30",
+    "audience": [
+      "hods",
+      "faculty",
+      "students",
+      "hostel"
+    ],
+    "sender_role": "super_admin",
+    "sender_scope": "ALL-SUPER-ADMIN",
+    "created_at": "2026-08-23T08:15:15.355525",
+    "date_time_str": "23-08-2026 at 08:15 AM"
+  },
+  {
+    "id": "notif_bec41899",
+    "theme": "summer  holidays",
+    "title": "summer  holidays",
+    "category": "college",
+    "body": "**Reasoning Summary**\n\n1. **Identify core details** \u2013  \n   - **Notice Theme:** *Summer Holidays*  \n   - **Validity Window (Effective Dates):** 2026\u201105\u201101 to 2026\u201105\u201130  \n\n2. **Determine the essential sections for a college\u2011level notice** \u2013  \n   - Heading with bolded theme and dates (as mandated).  \n   - Address line (students & faculty).  \n   - Announcement of the holiday period and suspension of academic activities.  \n   - Key guidelines (duration, expectations, resumption date).  \n   - Contact information for queries.  \n   - Closing signature.\n\n3. **Apply the required markdown formatting** \u2013  \n   - Theme must appear as `**THEME: SUMMER HOLIDAYS**`.  \n   - Dates must appear as `**DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30**`.\n\n---\n\n**THEME: SUMMER HOLIDAYS**  \n**DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30**\n\n---\n\n**To:** All Students and Faculty of SRKR Engineering College  \n\n**Subject:** Summer Holiday Schedule  \n\nDear Members of the SRKR Engineering College Community,\n\nThe college will observe **summer holidays** from **2026\u201105\u201101** through **2026\u201105\u201130**. During this period, all academic activities\u2014including lectures, tutorials, laboratory sessions, and examinations\u2014will be **suspended**.\n\n### Key Guidelines\n- **Holiday Period:** 1\u202fMay\u202f2026\u202f\u2013\u202f30\u202fMay\u202f2026.  \n- **Resumption of Regular Academic Schedule:** 31\u202fMay\u202f2026.  \n- **Expectations:**  \n  - Students are encouraged to use this time for rest, self\u2011study, and personal development.  \n  - Faculty may utilize the break for research, curriculum planning, or professional development.  \n- **Campus Facilities:** Library and common areas will remain open on limited hours; please refer to the campus portal for detailed timings.\n\n### Contact for Queries\n- **Principal:** [principal@srkr.edu](mailto:principal@srkr.edu)  \n- **Registrar:** [registrar@srkr.edu](mailto:registrar@srkr.edu)  \n\nWe wish everyone a pleasant and rejuvenating summer break.\n\n**Sincerely,**  \nAcademic Administration Office  \nSRKR Engineering College  \n\n---",
+    "start_date": "2026-05-01",
+    "end_date": "2026-05-30",
+    "audience": [
+      "students",
+      "faculty"
+    ],
+    "sender_role": "hod",
+    "sender_scope": "HOD-Collegeadmin-0116",
+    "created_at": "2026-08-23T08:13:22.930040",
+    "date_time_str": "23-08-2026 at 08:13 AM"
+  },
+  {
     "id": "notif_8463b861",
     "theme": "holidayy",
     "title": "holidayy",

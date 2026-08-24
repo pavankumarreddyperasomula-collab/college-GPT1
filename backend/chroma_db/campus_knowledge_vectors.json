@@ -241,7 +241,7 @@
   },
   {
     "id": "college_vinayaka_chavithy_holidays_0",
-    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): OFFICIAL CIRCULAR: VINAYAKA CHAVITHY HOLIDAYS Category: College Administration holoidyas: 2026-08-22 to 2026-08-29 This notice is issued regarding 'vinayaka chavithy holidays'. All concerned students and faculty members are requested to take note of the schedule and guidelines. 1. Please ensure compliance with campus regulations during this period. 2. For any queries or assistance, contact the Administration office or Hostel",
+    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): **NOTICE** **THEME: VINAYAKA CHAVITHY HOLIDAYS** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30** Dear Students, Faculty, and Staff, In observance of Vinayaka Chavithy, SRKR Engineering College will be **closed** for the period indicated above. All academic sessions, examinations, laboratory work, and administrative offices will remain non\u2011operational during this window. --- ### Guidelines & Instructions 1. **Academic Activities** - No",
     "metadata": {
       "title": "vinayaka chavithy holidays",
       "category": "college"
@@ -249,7 +249,7 @@
   },
   {
     "id": "college_vinayaka_chavithy_holidays_1",
-    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): or assistance, contact the Administration office or Hostel Warden desk. Issued by Order of Campus Administration.",
+    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): Guidelines & Instructions 1. **Academic Activities** - No classes, tutorials, or labs will be conducted. - Assignments and project work due during this period may be submitted **no later than 2026\u201109\u201102** (subject to faculty approval). 2. **Hostel & Campus Facilities** - Hostel mess services will operate on a **limited menu**; timings will be posted on the notice board.",
     "metadata": {
       "title": "vinayaka chavithy holidays",
       "category": "college"
@@ -1121,7 +1121,7 @@
   },
   {
     "id": "college_holiday_0",
-    "text": "[HOLIDAY] (college): **Reasoning Summary** 1. **Identify Requirements** - Topic: **Holiday** - Category: **College** - Validity Window: **2026\u201108\u201122 to 2026\u201108\u201129** - Formatting rule: The **Notice Theme** and **Effective Dates** must appear in **bold markdown** exactly as `**THEME: {THEME}` and `**DATE / EFFECTIVE WINDOW: {START} to {END}`. 2. **Structure the Notice** - Header with bolded theme and dates. - Opening line addressing",
+    "text": "[HOLIDAY] (college): **THEME: COLLEGE HOLIDAY** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-24** --- **To:** All Students, Faculty, and Staff **From:** Office of the Principal, SRKR Engineering College **Subject:** Observance of College Holiday Dear Members of the SRKR Engineering College Community, Please be informed that the college will observe a holiday on the above\u2011mentioned dates. The purpose of this break is",
     "metadata": {
       "title": "holiday",
       "category": "college"
@@ -1129,7 +1129,7 @@
   },
   {
     "id": "college_holiday_1",
-    "text": "[HOLIDAY] (college): bolded theme and dates. - Opening line addressing students and faculty. - Key details (closure, suspension of activities, resumption date). - Guidelines for use of the break and completion of pending tasks. - Contact instructions for queries. - Closing signature block. 3. **Draft the Content** - Keep language formal, concise, and professional. - Use bullet points and headings",
+    "text": "[HOLIDAY] (college): above\u2011mentioned dates. The purpose of this break is to provide a short period of rest and rejuvenation for everyone. ### Guidelines - **Academic Activities:** All classes, examinations, labs, and tutorials are suspended during the holiday period. - **College Premises:** Administrative offices, libraries, and campus facilities will remain closed from **2026\u201108\u201123** to **2026\u201108\u201124**. - **Student Responsibilities:** - Ensure that",
     "metadata": {
       "title": "holiday",
       "category": "college"
@@ -1137,7 +1137,7 @@
   },
   {
     "id": "college_holiday_2",
-    "text": "[HOLIDAY] (college): and professional. - Use bullet points and headings for readability. --- ## Formal College Notice **THEME: HOLIDAY** **DATE / EFFECTIVE WINDOW: 2026-08-22 to 2026-08-29** ### NOTICE TO ALL STUDENTS AND FACULTY SRKR Engineering College will observe a holiday from **2026\u201108\u201122** to **2026\u201108\u201129**. During this period the campus will be closed and all academic activities are suspended. #### Key",
+    "text": "[HOLIDAY] (college): to **2026\u201108\u201124**. - **Student Responsibilities:** - Ensure that any pending assignments or project work is completed before the holiday. - Use the time for self\u2011study, rest, or personal development activities. - **Faculty Responsibilities:** - Update course portals with any announcements regarding post\u2011holiday schedules. - Respond to urgent student queries via official email, if necessary. ### Contact for Queries",
     "metadata": {
       "title": "holiday",
       "category": "college"
@@ -1145,7 +1145,7 @@
   },
   {
     "id": "college_holiday_3",
-    "text": "[HOLIDAY] (college): and all academic activities are suspended. #### Key Details - **Applicability:** All students, faculty, and staff. - **Impact:** All classes, examinations, labs, and administrative services are postponed. - **Resumption:** Normal academic schedule will recommence on **2026\u201108\u201130** (the next working day). #### Guidelines - Use this break for rest, personal development, or family time. - Ensure that any pending",
+    "text": "[HOLIDAY] (college): official email, if necessary. ### Contact for Queries - **Office of the Principal:** principal@srkr.edu | +91\u2011XXXXXXXXXX - **Student Affairs Office:** studentaffairs@srkr.edu | +91\u2011XXXXXXXXXX - **Faculty Support Desk:** faculty@srkr.edu | +91\u2011XXXXXXXXXX We wish you a pleasant and productive break. Thank you for your cooperation. **Sincerely,** [Name] Principal, SRKR Engineering College Date: 2026\u201108\u201122 (issued)",
     "metadata": {
       "title": "holiday",
       "category": "college"
@@ -1153,7 +1153,7 @@
   },
   {
     "id": "college_holiday_4",
-    "text": "[HOLIDAY] (college): or family time. - Ensure that any pending assignments, project submissions, or administrative tasks are completed **before** the holiday begins. - If you have any scheduled assessments during the holiday, contact your department head for rescheduling. #### Contact Instructions - **Department Heads:** Reach out via your departmental email or office phone. - **College Administration Office:** - Phone: +91\u2011XXXXXXXXXX",
+    "text": "[HOLIDAY] (college): 2026\u201108\u201122 (issued)",
     "metadata": {
       "title": "holiday",
       "category": "college"
@@ -1204,6 +1204,382 @@
     "text": "[HOLIDAYY] (college): admin@srkrengg.edu.in --- We appreciate your cooperation and wish everyone a pleasant and safe holiday. **Signed,** [Name of Principal] Principal, SRKR Engineering College",
     "metadata": {
       "title": "holidayy",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_0",
+    "text": "[SUMMER  HOLIDAYS] (college): **Reasoning Summary** 1. **Identify core details** \u2013 - **Notice Theme:** *Summer Holidays* - **Validity Window (Effective Dates):** 2026\u201105\u201101 to 2026\u201105\u201130 2. **Determine the essential sections for a college\u2011level notice** \u2013 - Heading with bolded theme and dates (as mandated). - Address line (students & faculty). - Announcement of the holiday period and suspension of academic activities. - Key",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_1",
+    "text": "[SUMMER  HOLIDAYS] (college): period and suspension of academic activities. - Key guidelines (duration, expectations, resumption date). - Contact information for queries. - Closing signature. 3. **Apply the required markdown formatting** \u2013 - Theme must appear as `**THEME: SUMMER HOLIDAYS**`. - Dates must appear as `**DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30**`. --- **THEME: SUMMER HOLIDAYS** **DATE / EFFECTIVE WINDOW: 2026-05-01 to",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_2",
+    "text": "[SUMMER  HOLIDAYS] (college): SUMMER HOLIDAYS** **DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30** --- **To:** All Students and Faculty of SRKR Engineering College **Subject:** Summer Holiday Schedule Dear Members of the SRKR Engineering College Community, The college will observe **summer holidays** from **2026\u201105\u201101** through **2026\u201105\u201130**. During this period, all academic activities\u2014including lectures, tutorials, laboratory sessions, and examinations\u2014will be **suspended**. ### Key Guidelines",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_3",
+    "text": "[SUMMER  HOLIDAYS] (college): sessions, and examinations\u2014will be **suspended**. ### Key Guidelines - **Holiday Period:** 1 May 2026 \u2013 30 May 2026. - **Resumption of Regular Academic Schedule:** 31 May 2026. - **Expectations:** - Students are encouraged to use this time for rest, self\u2011study, and personal development. - Faculty may utilize the break for research, curriculum planning, or professional development. - **Campus",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_4",
+    "text": "[SUMMER  HOLIDAYS] (college): research, curriculum planning, or professional development. - **Campus Facilities:** Library and common areas will remain open on limited hours; please refer to the campus portal for detailed timings. ### Contact for Queries - **Principal:** [principal@srkr.edu](mailto:principal@srkr.edu) - **Registrar:** [registrar@srkr.edu](mailto:registrar@srkr.edu) We wish everyone a pleasant and rejuvenating summer break. **Sincerely,** Academic Administration Office SRKR Engineering College ---",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer__holidays_5",
+    "text": "[SUMMER  HOLIDAYS] (college): Office SRKR Engineering College ---",
+    "metadata": {
+      "title": "summer  holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer_holidays_0",
+    "text": "[SUMMER HOLIDAYS] (college): **THEME: SUMMER HOLIDAYS** **DATE / EFFECTIVE WINDOW: 2026-05-01 to 2026-05-30** --- **To:** All Students, Faculty, and Staff **From:** Office of the Principal, SRKR Engineering College **Subject:** Summer Holidays \u2013 Closure of College Campus Dear Members of the SRKR Engineering College Community, Please be informed that the college will be closed for summer holidays from **2026\u201105\u201101** through **2026\u201105\u201130**. Normal",
+    "metadata": {
+      "title": "summer holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer_holidays_1",
+    "text": "[SUMMER HOLIDAYS] (college): for summer holidays from **2026\u201105\u201101** through **2026\u201105\u201130**. Normal academic and administrative activities will resume on **2026\u201106\u201101**. ### Key Guidelines - **Attendance:** No classes, labs, or examinations will be conducted during this period. - **Library & Labs:** All library services and laboratory facilities will remain shut. Materials may be collected/returned only on the first working day after the holidays.",
+    "metadata": {
+      "title": "summer holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer_holidays_2",
+    "text": "[SUMMER HOLIDAYS] (college): on the first working day after the holidays. - **Hostel:** Hostel facilities will operate on a reduced staff schedule. Residents should adhere to hostel rules and report any emergencies to the warden on call. - **Emergency Contacts:** For urgent matters (medical, safety, or administrative), contact the on\u2011call staff listed below. ### Contact Information - **Principal (Emergency):** +91\u2011XXXXXXXXXX |",
+    "metadata": {
+      "title": "summer holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer_holidays_3",
+    "text": "[SUMMER HOLIDAYS] (college): ### Contact Information - **Principal (Emergency):** +91\u2011XXXXXXXXXX | principal@srkr.edu.in - **Hostel Warden (On\u2011Call):** +91\u2011XXXXXXXXXX | warden@srkr.edu.in - **Administration Office:** +91\u2011XXXXXXXXXX | admin@srkr.edu.in We encourage you to use this break for rest, self\u2011study, and personal development. Should you have any queries, please reach out to the appropriate contact above. Wishing everyone a pleasant and productive summer break. **Sincerely,** [Name]",
+    "metadata": {
+      "title": "summer holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_summer_holidays_4",
+    "text": "[SUMMER HOLIDAYS] (college): a pleasant and productive summer break. **Sincerely,** [Name] College Administrator SRKR Engineering College",
+    "metadata": {
+      "title": "summer holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_in_Ds_0",
+    "text": "[TREES IN DS] (college): # Student Performance Data \u2013 Analysis *(All information is taken verbatim from the raw CSV file provided.)* --- ## 1. Introduction This document presents a clean, structured view of the student data supplied. The goal is to make the information easy to read, while preserving every detail from the original source. --- ## 2. Data Overview | Metric",
+    "metadata": {
+      "title": "trees in Ds",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_in_Ds_1",
+    "text": "[TREES IN DS] (college): source. --- ## 2. Data Overview | Metric | Value | |--------|-------| | **Total Students** | 15 | | **Branches Represented** | AIDS, AIML, CSE, MECH, CSM, ECE | | **Years** | 2nd & 3rd year | | **Gender Distribution** | 10 M, 5 F | ### 2.1 Branch Distribution | Branch | Count | |--------|-------| | AIDS",
+    "metadata": {
+      "title": "trees in Ds",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_in_Ds_2",
+    "text": "[TREES IN DS] (college): | Branch | Count | |--------|-------| | AIDS | 4 | | AIML | 2 | | CSE | 3 | | MECH | 2 | | CSM | 2 | | ECE | 2 | ### 2.2 Year Distribution | Year | Count | |------|-------| | 2nd | 9 | | 3rd",
+    "metadata": {
+      "title": "trees in Ds",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_in_Ds_3",
+    "text": "[TREES IN DS] (college): | | 3rd",
+    "metadata": {
+      "title": "trees in Ds",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_sanskriti_0",
+    "text": "[SANSKRITI] (college): **THEME: SANSKRITI** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-24** --- **SRKR Engineering College** **NOTICE TO ALL STUDENTS AND FACULTY** **Subject:** Cultural Celebration \u2013 *SANSKRITI* The College is pleased to announce **SANSKRITI**, a cultural celebration aimed at fostering appreciation of diverse traditions and artistic expressions within our campus community. --- ### Event Details - **Date:** 23 August 2026 (with",
+    "metadata": {
+      "title": "sanskriti",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_sanskriti_1",
+    "text": "[SANSKRITI] (college): Event Details - **Date:** 23 August 2026 (with preparatory activities on 22 August 2026) - **Time:** 10:00 AM \u2013 4:00 PM - **Venue:** College Auditorium, Main Campus ### Participation Guidelines 1. **Eligibility:** Open to all students and faculty across every department. 2. **Activities:** Music, dance, drama, poetry, folk arts, culinary displays, and any other culturally\u2011relevant performances. 3. **Registration:**",
+    "metadata": {
+      "title": "sanskriti",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_sanskriti_2",
+    "text": "[SANSKRITI] (college): displays, and any other culturally\u2011relevant performances. 3. **Registration:** - Submit a brief description of your act (max 150 words) to your Department Head. - Deadline for registration: **22 August 2026**. 4. **Logistics:** - Teams may request basic equipment (audio, lighting) via the Cultural Committee at least 48 hours before the event. - All performances must respect the College\u2019s",
+    "metadata": {
+      "title": "sanskriti",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_sanskriti_3",
+    "text": "[SANSKRITI] (college): event. - All performances must respect the College\u2019s code of conduct and be free from offensive content. ### Contact for Queries - **Cultural Committee Coordinator:** Ms. Ananya Rao - **Email:** cultural.committee@srkr.edu.in - **Phone:** +91\u201198765\u201143210 --- We look forward to your enthusiastic participation and to making **SANSKRITI** a memorable showcase of our vibrant campus culture. *Issued by the Office",
+    "metadata": {
+      "title": "sanskriti",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_sanskriti_4",
+    "text": "[SANSKRITI] (college): our vibrant campus culture. *Issued by the Office of Student Affairs* *Date of Issue: 23 August 2026*",
+    "metadata": {
+      "title": "sanskriti",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_CSE_Department_Project_Review_0",
+    "text": "[CSE DEPARTMENT PROJECT REVIEW] (college): All CSE students & Super Admin notice",
+    "metadata": {
+      "title": "CSE Department Project Review",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_vinayaka_chavithy_holidays_2",
+    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): timings will be posted on the notice board. - Library and sports facilities will be **closed**. 3. **Emergency Services** - Campus security and medical emergency services will remain active 24\u00d77. - For any urgent matters, contact the Campus Security Desk at **+91\u2011XXXXXXXXXX**. 4. **Communication** - All official communications (emails, notices) will resume on **2026\u201108\u201131**. - Faculty are requested",
+    "metadata": {
+      "title": "vinayaka chavithy holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_vinayaka_chavithy_holidays_3",
+    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): will resume on **2026\u201108\u201131**. - Faculty are requested to update their students regarding any rescheduling of assessments. --- ### Contact Information - **Principal\u2019s Office:** principal@srkr.edu | +91\u2011XXXXXXXXXX - **Hostel Administration:** hosteladmin@srkr.edu | +91\u2011XXXXXXXXXX - **Student Affairs:** studentaffairs@srkr.edu | +91\u2011XXXXXXXXXX We wish everyone a joyous and peaceful Vinayaka Chavithy celebration. Thank you for your cooperation. *Prepared by: Office of",
+    "metadata": {
+      "title": "vinayaka chavithy holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_vinayaka_chavithy_holidays_4",
+    "text": "[VINAYAKA CHAVITHY HOLIDAYS] (college): you for your cooperation. *Prepared by: Office of the Principal* *Date of Issue: 2026\u201108\u201123*",
+    "metadata": {
+      "title": "vinayaka chavithy holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_clg_holiday_0",
+    "text": "[CLG HOLIDAY] (college): **THEME: COLLEGE HOLIDAY** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30** --- **To:** All Students, Faculty, and Staff **From:** Office of the Principal, SRKR Engineering College **Subject:** College Holiday Announcement Dear Members of the SRKR Engineering College Community, Please be informed that the college will observe a holiday for the period indicated above. All academic and administrative activities will",
+    "metadata": {
+      "title": "clg holiday",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_clg_holiday_1",
+    "text": "[CLG HOLIDAY] (college): indicated above. All academic and administrative activities will be suspended during this time. ### Key Details - **Holiday Period:** 23 August 2026 \u2013 30 August 2026 (inclusive) - **Campus Status:** All buildings, laboratories, libraries, and hostels will remain closed. - **Classes & Exams:** No lectures, tutorials, practical sessions, or examinations will be conducted. ### Guidelines 1. **Attendance:** No",
+    "metadata": {
+      "title": "clg holiday",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_clg_holiday_2",
+    "text": "[CLG HOLIDAY] (college): will be conducted. ### Guidelines 1. **Attendance:** No attendance will be recorded for the holiday dates. 2. **Assignments & Submissions:** Any deadlines falling within the holiday window will be automatically extended by the same number of days; please check with your respective department for specific adjustments. 3. **Emergency Access:** In case of a genuine emergency, contact the Campus",
+    "metadata": {
+      "title": "clg holiday",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_clg_holiday_3",
+    "text": "[CLG HOLIDAY] (college): case of a genuine emergency, contact the Campus Security Office (extension 101) for assistance. ### Contact for Queries - **Principal\u2019s Office:** principal@srkrcet.ac.in | +91\u2011XXXXXXXXXX - **Student Affairs:** studentaffairs@srkrcet.ac.in | +91\u2011XXXXXXXXXX We appreciate your cooperation and wish everyone a restful break. **Regards,** [Signature] **Dr. A. K. Reddy** Principal, SRKR Engineering College ---",
+    "metadata": {
+      "title": "clg holiday",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_clg_holiday_4",
+    "text": "[CLG HOLIDAY] (college): ---",
+    "metadata": {
+      "title": "clg holiday",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_0",
+    "text": "[TREES] (college): # Trees ## 1. Introduction Trees are the best. *(This succinct statement captures the essence of the topic and serves as the foundation for the discussion that follows.)* ## 2. Why Trees Matter ### 2.1 Ecological Significance - **Oxygen Production** \u2013 Through photosynthesis, trees release oxygen, sustaining life on Earth. - **Carbon Sequestration** \u2013 Trees absorb CO\u2082, helping",
+    "metadata": {
+      "title": "trees",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_1",
+    "text": "[TREES] (college): - **Carbon Sequestration** \u2013 Trees absorb CO\u2082, helping mitigate climate change. - **Habitat Creation** \u2013 They provide shelter and food for countless species. ### 2.2 Environmental Benefits - **Water Regulation** \u2013 Roots reduce runoff and improve groundwater recharge. - **Air Quality Improvement** \u2013 Trees filter pollutants and particulate matter. - **Temperature Moderation** \u2013 Shade and transpiration lower ambient",
+    "metadata": {
+      "title": "trees",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_2",
+    "text": "[TREES] (college): **Temperature Moderation** \u2013 Shade and transpiration lower ambient temperatures. ### 2.3 Socio\u2011Economic Value - **Timber and Non\u2011Timber Products** \u2013 Wood, fruit, nuts, and medicinal compounds. - **Recreation and Tourism** \u2013 Parks, trails, and scenic landscapes attract visitors. - **Cultural and Aesthetic Appeal** \u2013 Symbolism in art, literature, and community identity. ## 3. Types of Trees | Category |",
+    "metadata": {
+      "title": "trees",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_trees_3",
+    "text": "[TREES] (college): ## 3. Types of Trees | Category | Typical Examples | Key Characteristics | |----------|------------------|---------------------| | **Deciduous** | Oak, Maple, Birch | Shed leaves seasonally; broad canopy | | **Evergreen** | Pine, Spruce, Cedar",
+    "metadata": {
+      "title": "trees",
+      "category": "college"
+    }
+  },
+  {
+    "id": "hostel_tommorow_holiday_0",
+    "text": "[TOMMOROW HOLIDAY] (hostel): **THEME: TOMORROW HOLIDAY** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30** --- **To:** All Hostel Residents (Students & Faculty) **From:** Hostel Administration, SRKR Engineering College **Subject:** Holiday Notification \u2013 Hostel Operations Dear Residents, Please be informed that **tomorrow (2026\u201108\u201124)** will be observed as a college holiday. Academic classes are suspended; however, the hostel will remain open for accommodation. ###",
+    "metadata": {
+      "title": "tommorow holiday",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_tommorow_holiday_1",
+    "text": "[TOMMOROW HOLIDAY] (hostel): the hostel will remain open for accommodation. ### Guidelines - **Access:** Ensure you carry a valid ID card for entry and exit. - **Security:** Keep your room doors locked and report any suspicious activity to the hostel warden immediately. - **Quiet Hours:** Maintain silence after 10:00 PM to respect fellow residents. - **Facilities:** Common areas (laundry, mess) will",
+    "metadata": {
+      "title": "tommorow holiday",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_tommorow_holiday_2",
+    "text": "[TOMMOROW HOLIDAY] (hostel): residents. - **Facilities:** Common areas (laundry, mess) will operate on a reduced schedule; check the notice board for timings. ### Contact for Queries - **Hostel Warden:** Mr. R. K. Mohan \u2013 98765 43210 / warden.hostel@srkr.edu - **Emergency Helpline:** 112 (Campus Security) We appreciate your cooperation. Enjoy the holiday responsibly. **Sincerely,** [Name] Hostel Administrator SRKR Engineering College",
+    "metadata": {
+      "title": "tommorow holiday",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_tommorow_holiday_3",
+    "text": "[TOMMOROW HOLIDAY] (hostel): [Name] Hostel Administrator SRKR Engineering College",
+    "metadata": {
+      "title": "tommorow holiday",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_no_holiday_tommorow_0",
+    "text": "[NO HOLIDAY TOMMOROW] (hostel): **THEME: NO HOLIDAY TOMORROW** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30** --- **To:** All Hostel Residents, SRKR Engineering College **From:** Hostel Administration, SRKR Engineering College **Subject:** No Holiday on 24\u2011August\u20112026 (Tomorrow) Dear Students, Please be informed that **there will be no holiday tomorrow, 24\u2011August\u20112026**. All regular academic and hostel schedules will be observed. ### Key Points - **Attendance:**",
+    "metadata": {
+      "title": "no holiday tommorow",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_no_holiday_tommorow_1",
+    "text": "[NO HOLIDAY TOMMOROW] (hostel): will be observed. ### Key Points - **Attendance:** Mandatory for all scheduled classes, labs, and hostel activities. - **Meal Timings:** Breakfast, lunch, and dinner will be served as per the usual timetable. - **Library & Study Areas:** Open during normal hours. - **Security & Maintenance:** Night\u2011time security patrols and routine maintenance will continue as scheduled. ### Guidelines 1.",
+    "metadata": {
+      "title": "no holiday tommorow",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_no_holiday_tommorow_2",
+    "text": "[NO HOLIDAY TOMMOROW] (hostel): maintenance will continue as scheduled. ### Guidelines 1. **Report to your respective wardens** for any concerns regarding class or hostel schedules. 2. **Maintain discipline** and adhere to the college code of conduct throughout the day. 3. **If you have a genuine emergency**, inform the hostel warden immediately for appropriate assistance. ### Contact Information - **Hostel Warden:** Mr. R.",
+    "metadata": {
+      "title": "no holiday tommorow",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "hostel_no_holiday_tommorow_3",
+    "text": "[NO HOLIDAY TOMMOROW] (hostel): ### Contact Information - **Hostel Warden:** Mr. R. Kumar \u2013 Phone: 98765\u201143210 \u2013 Email: warden.kumar@srkr.edu - **Student Affairs Office:** Ms. A. Singh \u2013 Phone: 98765\u201143211 \u2013 Email: studentaffairs@srkr.edu - **Emergency Helpline (24\u2011hr):** 1122334455 We appreciate your cooperation and understanding. **Sincerely,** Hostel Administration SRKR Engineering College Date: 23\u2011August\u20112026",
+    "metadata": {
+      "title": "no holiday tommorow",
+      "category": "hostel"
+    }
+  },
+  {
+    "id": "college_holidays_0",
+    "text": "[HOLIDAYS] (college): **THEME: HOLIDAYS** **DATE / EFFECTIVE WINDOW: 2026-08-23 to 2026-08-30** --- **To:** All students, Faculty, and Staff **From:** Office of the Principal, SRKR Engineering College **Subject:** College Holiday Schedule Dear Members of the SRKR Engineering College Community, Please be informed that the college will observe a holiday period as detailed below: | **Period** | **Dates** | |------------|-----------| | **Holiday",
+    "metadata": {
+      "title": "holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_holidays_1",
+    "text": "[HOLIDAYS] (college): | **Period** | **Dates** | |------------|-----------| | **Holiday Closure** | **23 August 2026 \u2013 30 August 2026** | During this interval, all academic classes, examinations, laboratory sessions, and administrative offices will remain closed. Normal operations will resume on **31 August 2026** (Wednesday). ### Guidelines 1. **Attendance & Assignments** - No attendance will be taken. - Submit any pending",
+    "metadata": {
+      "title": "holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_holidays_2",
+    "text": "[HOLIDAYS] (college): attendance will be taken. - Submit any pending assignments before the start of the holiday or by the first working day after the break. 2. **Laboratory & Workshop Access** - All labs and workshops will be locked. Access is prohibited unless prior written permission is obtained from the Head of Department. 3. **Library Services** - The library will",
+    "metadata": {
+      "title": "holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_holidays_3",
+    "text": "[HOLIDAYS] (college): Department. 3. **Library Services** - The library will be closed. Books may be returned on the first working day after the holiday. 4. **Emergency Contacts** - For urgent matters (e.g., health emergencies, security issues), contact the Campus Security Office at **+91\u2011XXXXXXXXXX** or email **security@srkr.edu**. 5. **Travel & Accommodation (Hostel Residents)** - Hostel facilities will be limited. Residents are",
+    "metadata": {
+      "title": "holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_holidays_4",
+    "text": "[HOLIDAYS] (college): - Hostel facilities will be limited. Residents are advised to arrange personal accommodations if staying on campus. - Notify the Hostel Warden of any extended stay or early departure. ### Contact Instructions - **Academic Queries:** Department Heads (see departmental directory) - **Administrative Queries:** Office of the Principal, Tel: **+91\u2011XXXXXXXXXX**, Email: **principal@srkr.edu** - **Hostel Queries:** Hostel Warden, Tel: **+91\u2011XXXXXXXXXX**,",
+    "metadata": {
+      "title": "holidays",
+      "category": "college"
+    }
+  },
+  {
+    "id": "college_holidays_5",
+    "text": "[HOLIDAYS] (college): **principal@srkr.edu** - **Hostel Queries:** Hostel Warden, Tel: **+91\u2011XXXXXXXXXX**, Email: **hostel@srkr.edu** We wish everyone a restful and safe break. Thank you for your cooperation. **Sincerely,** [Name] Principal, SRKR Engineering College Date: 23 August 2026",
+    "metadata": {
+      "title": "holidays",
       "category": "college"
     }
   }
