@@ -672,64 +672,70 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
     if is_greeting:
         fallback_greeting = "Hello! Greetings! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?"
         if GROQ_API_KEY:
-            models_to_try = ["groq/compound", "groq/compound-mini", "qwen/qwen3.6-27b", "openai/gpt-oss-20b"]
+            try:
+                from groq import Groq
+                client = Groq(api_key=GROQ_API_KEY)
+                models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
+                system_prompt = (
+                    "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
+                    "The user is greeting you formally or informally. "
+                    "Respond warmly, politely, and professionally. Introduce yourself and explain how you can help them with SRKR campus information, R23 B.Tech AI & DS syllabus, course structures, hostel rules, exam schedules, and notices."
+                )
+                for model_name in models_to_try:
+                    try:
+                        completion = client.chat.completions.create(
+                            model=model_name,
+                            messages=[
+                                {"role": "system", "content": system_prompt},
+                                {"role": "user", "content": query}
+                            ],
+                            temperature=0.5,
+                            max_tokens=250
+                        )
+                        answer_text = completion.choices[0].message.content.strip()
+                        if answer_text:
+                            return answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
+                    except Exception as e:
+                        print(f"Groq API model {model_name} failed on greeting: {e}")
+            except Exception as ge:
+                print(f"Groq import or init error on greeting: {ge}")
+        return fallback_greeting
+
+    if GROQ_API_KEY:
+        try:
             from groq import Groq
             client = Groq(api_key=GROQ_API_KEY)
+            models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
+            
             system_prompt = (
                 "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
-                "The user is greeting you formally or informally. "
-                "Respond warmly, politely, and professionally. Introduce yourself and explain how you can help them with SRKR campus information, R23 B.Tech AI & DS syllabus, course structures, hostel rules, exam schedules, and notices."
+                "Help students and staff with campus rules, hostels, exams, events, notices, navigation, and academic syllabus queries. "
+                "CRITICAL INSTRUCTION: Rely strictly on the provided official SRKR campus context to answer questions. "
+                "If the provided campus context does not contain relevant information to answer the user's question, or if you do not know about that particular topic, respond politely saying: "
+                "'I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance.'"
             )
+            user_prompt = f"Official SRKR Campus Context, Syllabus & Notices:\n{context}\n\nUser Question/Message: {query}"
+
             for model_name in models_to_try:
                 try:
                     completion = client.chat.completions.create(
                         model=model_name,
                         messages=[
                             {"role": "system", "content": system_prompt},
-                            {"role": "user", "content": query}
+                            {"role": "user", "content": user_prompt}
                         ],
-                        temperature=0.5,
-                        max_tokens=250
+                        temperature=0.3,
+                        max_tokens=550
                     )
                     answer_text = completion.choices[0].message.content.strip()
                     if answer_text:
+                        # Clean non-breaking unicode spaces and hyphens
+                        answer_text = answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
                         return answer_text
                 except Exception as e:
-                    print(f"Groq API model {model_name} failed on greeting: {e}")
-        return fallback_greeting
-
-    if GROQ_API_KEY:
-        models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
-        from groq import Groq
-        client = Groq(api_key=GROQ_API_KEY)
-        
-        system_prompt = (
-            "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
-            "Help students and staff with campus rules, hostels, exams, events, notices, navigation, and academic syllabus queries. "
-            "CRITICAL INSTRUCTION: Rely strictly on the provided official SRKR campus context to answer questions. "
-            "If the provided campus context does not contain relevant information to answer the user's question, or if you do not know about that particular topic, respond politely saying: "
-            "'I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance.'"
-        )
-        user_prompt = f"Official SRKR Campus Context, Syllabus & Notices:\n{context}\n\nUser Question/Message: {query}"
-
-        for model_name in models_to_try:
-            try:
-                completion = client.chat.completions.create(
-                    model=model_name,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt}
-                    ],
-                    temperature=0.3,
-                    max_tokens=550
-                )
-                answer_text = completion.choices[0].message.content.strip()
-                if answer_text:
-                    # Clean non-breaking unicode spaces and hyphens
-                    answer_text = answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
-                    return answer_text
-            except Exception as e:
-                print(f"Groq API model {model_name} failed: {e}")
+                    print(f"Groq API model {model_name} failed: {e}")
+        except Exception as ge:
+            print(f"Groq import or init error: {ge}")
 
     # Fallback if API key unavailable, context missing, or model failed
     if not documents or context == "No relevant campus records found.":
