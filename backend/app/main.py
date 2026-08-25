@@ -146,9 +146,19 @@ def login_endpoint(req: LoginRequest):
 
 @app.post("/ask")
 def ask_endpoint(req: QueryRequest):
-    if not req.query.strip():
-        raise HTTPException(status_code=400, detail="Query cannot be empty.")
-    return query_rag(req.query.strip())
+    try:
+        q = (req.query or "").strip()
+        if not q:
+            raise HTTPException(status_code=400, detail="Query cannot be empty.")
+        return query_rag(q)
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        print(f"Error in ask_endpoint: {e}")
+        return {
+            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?",
+            "sources": []
+        }
 
 @app.post("/format-document")
 def format_document_endpoint(req: FormatDocRequest):
