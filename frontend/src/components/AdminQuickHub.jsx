@@ -15,6 +15,7 @@ const AdminQuickHub = ({
   const role = (user?.role || 'hod').toLowerCase();
   const isHostelSuperAdmin = role === 'super_admin' && (user?.super_admin_type === 'hostel' || user?.category === 'hostel' || (user?.username && user?.username.toLowerCase().includes('hostel')));
   const isCollegeSuperAdmin = role === 'super_admin' && !isHostelSuperAdmin;
+  const isSuperAdmin = role === 'super_admin';
   const isHostelAdmin = role === 'hostel_admin' || isHostelSuperAdmin;
 
   const getRoleTitle = () => {
