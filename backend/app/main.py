@@ -38,7 +38,9 @@ app = FastAPI(title="Campus Assistant API", version="3.0.0")
 
 origins = [
     "https://college-gpt-1.vercel.app",
+    "https://college-gpt-1.vercel.app/",
     "https://college-gpt1.onrender.com",
+    "https://college-gpt1.onrender.com/",
     "http://localhost:5173",
     "http://localhost:3001",
     "http://localhost:3000",
@@ -50,12 +52,28 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_origin_regex=r"https://.*\.vercel\.app",
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.middleware("http")
+async def db_session_middleware(request, call_next):
+    response = await call_next(request)
+    origin = request.headers.get("origin")
+    if origin:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Access-Control-Allow-Credentials"] = "true"
+        response.headers["Access-Control-Allow-Methods"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+    else:
+        response.headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+@app.options("/{full_path:path}")
+async def options_handler(full_path: str):
+    return {"status": "ok"}
 
 class QueryRequest(BaseModel):
     query: str
