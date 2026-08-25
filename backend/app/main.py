@@ -76,6 +76,26 @@ async def db_session_middleware(request, call_next):
 async def options_handler(full_path: str):
     return {"status": "ok"}
 
+@app.get("/")
+def read_root():
+    return {
+        "status": "online",
+        "app": "COLLEGE GPT Backend API",
+        "college": "SRKR Engineering College",
+        "version": "3.0.0"
+    }
+
+@app.post("/send-otp")
+def send_otp_endpoint(req: SendOtpRequest):
+    return process_send_otp(req.mobile)
+
+@app.post("/login")
+def login_endpoint(req: LoginRequest):
+    res = authenticate_user(req)
+    if res.status == "error":
+        raise HTTPException(status_code=401, detail=res.message)
+    return res
+
 class AttachedFilePayload(BaseModel):
     file_name: str
     content: str
