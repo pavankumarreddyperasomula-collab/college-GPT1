@@ -1,9 +1,9 @@
 import uuid
 from datetime import datetime
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, HTTPException, Query, UploadFile, File, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 from app.auth import (
     SendOtpRequest,
@@ -24,6 +24,7 @@ from app.auth import (
 from app.rag import (
     query_rag, 
     add_document_to_rag, 
+    process_uploaded_file,
     get_all_documents, 
     delete_document_from_rag,
     generate_notice_llm_draft,
@@ -75,8 +76,76 @@ async def db_session_middleware(request, call_next):
 async def options_handler(full_path: str):
     return {"status": "ok"}
 
+class AttachedFilePayload(BaseModel):
+    file_name: str
+    content: str
+    category: Optional[str] = "college"
+
 class QueryRequest(BaseModel):
     query: str
+    attached_file: Optional[AttachedFilePayload] = None
+
+@app.post("/upload-document")
+async def upload_document_endpoint(
+    request: Request,
+    file: Optional[UploadFile] = File(None),
+    category: Optional[str] = Form("college")
+):
+    try:
+        if file:
+            content_bytes = await file.read()
+            res = process_uploaded_file(
+                file_name=file.filename,
+                file_bytes=content_bytes,
+                category=category or "college"
+            )
+            return res
+
+        body_json = await request.json()
+        file_name = body_json.get("file_name") or body_json.get("filename") or "document.txt"
+        content = body_json.get("content") or body_json.get("body") or ""
+        cat = body_json.get("category") or "college"
+
+        if not content:
+            raise HTTPException(status_code=400, detail="No file or document content provided.")
+
+        res = process_uploaded_file(
+            file_name=file_name,
+            file_bytes=content.encode("utf-8"),
+            category=cat
+        )
+        return res
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        print(f"Error in upload_document_endpoint: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/ask")
+def ask_endpoint(req: QueryRequest):
+    try:
+        if req.attached_file and req.attached_file.file_name and req.attached_file.content:
+            process_uploaded_file(
+                file_name=req.attached_file.file_name,
+                file_bytes=req.attached_file.content.encode("utf-8"),
+                category=req.attached_file.category or "college"
+            )
+
+        q = (req.query or "").strip()
+        if not q:
+            if req.attached_file:
+                q = f"Summarize and explain the key points of the uploaded document '{req.attached_file.file_name}'."
+            else:
+                raise HTTPException(status_code=400, detail="Query cannot be empty.")
+        return query_rag(q)
+    except HTTPException as he:
+        raise he
+    except Exception as e:
+        print(f"Error in ask_endpoint: {e}")
+        return {
+            "answer": "I am here to assist you! Please feel free to ask any questions about SRKR Engineering College (hostels, syllabus, exam dates, rules, notices) or any general questions.",
+            "sources": []
+        }
 
 class FormatDocRequest(BaseModel):
     title: str
@@ -123,42 +192,6 @@ class EventRequest(BaseModel):
     link: Optional[str] = "https://srkr.ac.in"
     sender_role: Optional[str] = "hod"
     sender_scope: Optional[str] = "ALL"
-
-@app.get("/")
-def read_root():
-    return {
-        "status": "online",
-        "app": "COLLEGE GPT Backend API",
-        "college": "SRKR Engineering College",
-        "version": "3.0.0"
-    }
-
-@app.post("/send-otp")
-def send_otp_endpoint(req: SendOtpRequest):
-    return process_send_otp(req.mobile)
-
-@app.post("/login")
-def login_endpoint(req: LoginRequest):
-    res = authenticate_user(req)
-    if res.status == "error":
-        raise HTTPException(status_code=401, detail=res.message)
-    return res
-
-@app.post("/ask")
-def ask_endpoint(req: QueryRequest):
-    try:
-        q = (req.query or "").strip()
-        if not q:
-            raise HTTPException(status_code=400, detail="Query cannot be empty.")
-        return query_rag(q)
-    except HTTPException as he:
-        raise he
-    except Exception as e:
-        print(f"Error in ask_endpoint: {e}")
-        return {
-            "answer": "I am here to assist you! Please feel free to ask any questions about SRKR Engineering College (hostels, syllabus, exam dates, rules, notices) or any general questions.",
-            "sources": []
-        }
 
 @app.post("/format-document")
 def format_document_endpoint(req: FormatDocRequest):

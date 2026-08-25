@@ -158,18 +158,34 @@ const App = () => {
     setView('dashboard');
   };
 
-  const handleSendMessage = async (text) => {
-    if (!text.trim()) return;
+  const handleSendMessage = async (text, attachedFile = null) => {
+    if (!text.trim() && !attachedFile) return;
 
-    const newMsg = { sender: 'user', text };
+    let userMsgText = text.trim();
+    if (attachedFile) {
+      userMsgText = `📄 **Attached File**: \`${attachedFile.name}\`\n${userMsgText}`;
+    }
+
+    const newMsg = { sender: 'user', text: userMsgText };
     setMessages((prev) => [...prev, newMsg]);
     setLoading(true);
 
     try {
+      const payload = {
+        query: text.trim() || `Explain and summarize ${attachedFile?.name}`,
+        ...(attachedFile ? {
+          attached_file: {
+            file_name: attachedFile.name,
+            content: attachedFile.text,
+            category: 'college'
+          }
+        } : {})
+      };
+
       const res = await fetch(`${API_URL}/ask`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: text })
+        body: JSON.stringify(payload)
       });
       const data = await res.json();
       if (res.ok) {
@@ -181,6 +197,10 @@ const App = () => {
             sources: data.sources || []
           }
         ]);
+        // Refresh documents list after new file indexing
+        if (attachedFile) {
+          fetchDocuments();
+        }
       } else {
         setMessages((prev) => [
           ...prev,

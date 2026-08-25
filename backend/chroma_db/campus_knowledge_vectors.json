@@ -1750,5 +1750,35 @@
       "title": "geenie_Formatted (4)",
       "category": "college"
     }
+  },
+  {
+    "id": "college_SRKR_AI_GPU_Lab_Guide_0",
+    "text": "[SRKR AI GPU LAB GUIDE] (college): The SRKR Artificial Intelligence Lab has 60 High Performance RTX GPUs installed in Block C room 302.",
+    "metadata": {
+      "title": "SRKR AI GPU Lab Guide",
+      "category": "college",
+      "file_name": "SRKR_AI_GPU_Lab.txt",
+      "content_hash": "53996047e984e11a37184438c1051c77"
+    }
+  },
+  {
+    "id": "college_Srkr_Attendance_Policy_2026_0",
+    "text": "[SRKR ATTENDANCE POLICY 2026] (college): SRKR Engineering College Mandatory Attendance Rule: Minimum 75% attendance is required to sit for end-semester exams. Students with 65-74% attendance must submit a medical certificate and pay condonation fees.",
+    "metadata": {
+      "title": "Srkr Attendance Policy 2026",
+      "category": "college",
+      "file_name": "SRKR_Attendance_Policy_2026.txt",
+      "content_hash": "cd3b937a55e75800631794e32107f420"
+    }
+  },
+  {
+    "id": "college_Srkr_Scholarship_Notice_2026_0",
+    "text": "[SRKR SCHOLARSHIP NOTICE 2026] (college): SRKR Engineering College Merit Scholarship 2026: Students scoring GPA > 9.0 are eligible for a 50% tuition waiver.",
+    "metadata": {
+      "title": "Srkr Scholarship Notice 2026",
+      "category": "college",
+      "file_name": "SRKR_Scholarship_Notice_2026.txt",
+      "content_hash": "b7a70fa04cf45c17d478a30a9e1c097a"
+    }
   }
 ]

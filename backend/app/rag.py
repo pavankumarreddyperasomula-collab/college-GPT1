@@ -1,6 +1,9 @@
 import os
 import json
 import re
+import io
+import hashlib
+import uuid
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 from app.config import CHROMA_DB_DIR, GROQ_API_KEY
@@ -522,18 +525,128 @@ def chunk_text(text: str, title: str, category: str, chunk_size: int = 350, over
         idx += 1
     return chunks
 
-def add_document_to_rag(title: str, body: str, category: str) -> int:
+def is_document_duplicate(title: str, body: str, file_name: Optional[str] = None) -> bool:
+    clean_title = title.lower().strip()
+    clean_file = (file_name or "").lower().strip()
+    body_hash = hashlib.md5(body.strip().encode("utf-8")).hexdigest()
+
+    # Check collection documents
+    for doc in collection.documents:
+        meta = doc.get("metadata", {})
+        doc_title = (meta.get("title") or "").lower().strip()
+        doc_file = (meta.get("file_name") or "").lower().strip()
+        doc_hash = meta.get("content_hash")
+        
+        if doc_hash and doc_hash == body_hash:
+            return True
+        if clean_file and doc_file and doc_file == clean_file:
+            return True
+        if clean_title and doc_title and doc_title == clean_title:
+            return True
+
+    # Check documents_store
+    for doc in documents_store.documents:
+        doc_title = (doc.get("title") or "").lower().strip()
+        doc_file = (doc.get("file_name") or "").lower().strip()
+        doc_hash = doc.get("content_hash")
+        
+        if doc_hash and doc_hash == body_hash:
+            return True
+        if clean_file and doc_file and doc_file == clean_file:
+            return True
+        if clean_title and doc_title and doc_title == clean_title:
+            return True
+
+    return False
+
+def add_document_to_rag(
+    title: str,
+    body: str,
+    category: str = "college",
+    file_name: Optional[str] = None,
+    sender_name: Optional[str] = "Student Upload",
+    sender_designation: Optional[str] = "Uploaded Document"
+) -> dict:
+    if is_document_duplicate(title, body, file_name):
+        print(f"Document '{title}' already exists in database. Skipping duplicate insertion.")
+        return {
+            "status": "already_exists",
+            "message": f"Document '{title}' already exists in the campus database.",
+            "chunks": 0,
+            "title": title
+        }
+
+    body_hash = hashlib.md5(body.strip().encode("utf-8")).hexdigest()
     chunks = chunk_text(body, title, category)
     ids = [c["id"] for c in chunks]
     documents = [c["text"] for c in chunks]
-    metadatas = [c["metadata"] for c in chunks]
+    metadatas = [{**c["metadata"], "file_name": file_name or title, "content_hash": body_hash} for c in chunks]
 
     collection.add(
         ids=ids,
         documents=documents,
         metadatas=metadatas
     )
-    return len(chunks)
+
+    now_str = datetime.now().strftime("%d-%m-%Y at %I:%M %p")
+    doc_entry = {
+        "id": f"doc_{uuid.uuid4().hex[:8]}",
+        "title": title,
+        "file_name": file_name or f"{title}.txt",
+        "body": body[:500] + ("..." if len(body) > 500 else ""),
+        "category": category,
+        "content_hash": body_hash,
+        "sender_name": sender_name,
+        "sender_designation": sender_designation,
+        "sender_role": "user",
+        "created_at": datetime.now().isoformat(),
+        "date_time_str": now_str
+    }
+    documents_store.add_document(doc_entry)
+
+    return {
+        "status": "success",
+        "message": f"Document '{title}' successfully added and indexed into RAG database.",
+        "chunks": len(chunks),
+        "title": title
+    }
+
+def process_uploaded_file(file_name: str, file_bytes: bytes, category: str = "college") -> dict:
+    clean_name = file_name.strip()
+    text_content = ""
+
+    if clean_name.lower().endswith(".pdf"):
+        try:
+            import pypdf
+            reader = pypdf.PdfReader(io.BytesIO(file_bytes))
+            pages_text = []
+            for page in reader.pages:
+                extracted = page.extract_text()
+                if extracted:
+                    pages_text.append(extracted)
+            text_content = "\n".join(pages_text).strip()
+        except Exception as pe:
+            print(f"Error parsing PDF file {clean_name}: {pe}")
+            return {"status": "error", "message": f"Failed to extract text from PDF file '{clean_name}'."}
+    else:
+        try:
+            text_content = file_bytes.decode("utf-8", errors="ignore").strip()
+        except Exception as te:
+            print(f"Error decoding text file {clean_name}: {te}")
+            return {"status": "error", "message": f"Failed to decode text from file '{clean_name}'."}
+
+    if not text_content:
+        return {"status": "error", "message": f"File '{clean_name}' is empty or no readable text was found."}
+
+    title = os.path.splitext(clean_name)[0].replace("_", " ").replace("-", " ").title()
+    return add_document_to_rag(
+        title=title,
+        body=text_content,
+        category=category,
+        file_name=clean_name,
+        sender_name="User Upload",
+        sender_designation="Uploaded Document"
+    )
 
 def delete_document_from_rag(identifier: str) -> bool:
     return collection.delete(identifier)
