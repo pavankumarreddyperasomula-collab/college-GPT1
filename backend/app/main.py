@@ -144,10 +144,12 @@ async def upload_document_endpoint(
 @app.post("/ask")
 def ask_endpoint(req: QueryRequest):
     try:
+        attached_name = None
         if req.attached_file and req.attached_file.file_name and req.attached_file.content:
+            attached_name = req.attached_file.file_name
             process_uploaded_file(
                 file_name=req.attached_file.file_name,
-                file_bytes=req.attached_file.content.encode("utf-8"),
+                file_bytes=req.attached_file.content,
                 category=req.attached_file.category or "college"
             )
 
@@ -157,7 +159,7 @@ def ask_endpoint(req: QueryRequest):
                 q = f"Summarize and explain the key points of the uploaded document '{req.attached_file.file_name}'."
             else:
                 raise HTTPException(status_code=400, detail="Query cannot be empty.")
-        return query_rag(q)
+        return query_rag(q, attached_file_name=attached_name)
     except HTTPException as he:
         raise he
     except Exception as e:

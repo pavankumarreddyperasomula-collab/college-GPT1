@@ -46,9 +46,15 @@ class LocalVectorStore:
                 })
         self._save()
 
-    def delete(self, doc_id: str) -> bool:
+    def delete(self, identifier: str) -> bool:
+        clean_id = (identifier or "").strip().lower()
         initial_len = len(self.documents)
-        self.documents = [d for d in self.documents if d["id"] != doc_id and d["metadata"].get("title") != doc_id]
+        self.documents = [
+            d for d in self.documents
+            if d["id"].strip().lower() != clean_id
+            and (d["metadata"].get("title") or "").strip().lower() != clean_id
+            and (d["metadata"].get("file_name") or "").strip().lower() != clean_id
+        ]
         changed = len(self.documents) < initial_len
         if changed:
             self._save()
@@ -528,35 +534,13 @@ def chunk_text(text: str, title: str, category: str, chunk_size_words: int = 250
     return chunks
 
 def is_document_duplicate(title: str, body: str, file_name: Optional[str] = None) -> bool:
-    clean_title = title.lower().strip()
-    clean_file = (file_name or "").lower().strip()
     body_hash = hashlib.md5(body.strip().encode("utf-8")).hexdigest()
 
-    # Check collection documents
+    # Only skip if exact content MD5 hash is already indexed in collection documents
     for doc in collection.documents:
         meta = doc.get("metadata", {})
-        doc_title = (meta.get("title") or "").lower().strip()
-        doc_file = (meta.get("file_name") or "").lower().strip()
         doc_hash = meta.get("content_hash")
-        
         if doc_hash and doc_hash == body_hash:
-            return True
-        if clean_file and doc_file and doc_file == clean_file:
-            return True
-        if clean_title and doc_title and doc_title == clean_title:
-            return True
-
-    # Check documents_store
-    for doc in documents_store.documents:
-        doc_title = (doc.get("title") or "").lower().strip()
-        doc_file = (doc.get("file_name") or "").lower().strip()
-        doc_hash = doc.get("content_hash")
-        
-        if doc_hash and doc_hash == body_hash:
-            return True
-        if clean_file and doc_file and doc_file == clean_file:
-            return True
-        if clean_title and doc_title and doc_title == clean_title:
             return True
 
     return False
@@ -569,17 +553,31 @@ def add_document_to_rag(
     sender_name: Optional[str] = "Student Upload",
     sender_designation: Optional[str] = "Uploaded Document"
 ) -> dict:
-    if is_document_duplicate(title, body, file_name):
-        print(f"Document '{title}' already exists in database. Skipping duplicate insertion.")
+    if not body or len(body.strip()) < 10:
         return {
-            "status": "already_exists",
-            "message": f"Document '{title}' already exists in the campus database.",
+            "status": "error",
+            "message": "Empty or invalid document body provided.",
             "chunks": 0,
             "title": title
         }
 
     body_hash = hashlib.md5(body.strip().encode("utf-8")).hexdigest()
+
+    # Generate fresh chunks
     chunks = chunk_text(body, title, category)
+    if not chunks:
+        return {
+            "status": "error",
+            "message": "Failed to generate text chunks from document.",
+            "chunks": 0,
+            "title": title
+        }
+
+    # Clean up any stale zero-chunk entries for this file or title
+    if file_name:
+        collection.delete(file_name)
+    collection.delete(title)
+
     ids = [c["id"] for c in chunks]
     documents = [c["text"] for c in chunks]
     metadatas = [{**c["metadata"], "file_name": file_name or title, "content_hash": body_hash} for c in chunks]
@@ -606,6 +604,8 @@ def add_document_to_rag(
     }
     documents_store.add_document(doc_entry)
 
+    print(f"SUCCESS: Indexed '{title}' ({file_name}) into RAG database with {len(chunks)} chunk(s).")
+
     return {
         "status": "success",
         "message": f"Document '{title}' successfully added and indexed into RAG database.",
@@ -613,37 +613,69 @@ def add_document_to_rag(
         "title": title
     }
 
-def process_uploaded_file(file_name: str, file_bytes: bytes, category: str = "college") -> dict:
+import base64
+
+def process_uploaded_file(file_name: str, file_bytes: Any, category: str = "college") -> dict:
     clean_name = file_name.strip()
     text_content = ""
 
-    if clean_name.lower().endswith(".pdf"):
+    # Auto-decode base64 if payload was stringified by frontend Data URL
+    raw_bytes = b""
+    if isinstance(file_bytes, str):
+        content_str = file_bytes.strip()
+        if "," in content_str and ("data:" in content_str[:30] or "base64" in content_str[:30]):
+            content_str = content_str.split(",", 1)[1].strip()
         try:
-            import pypdf
-            reader = pypdf.PdfReader(io.BytesIO(file_bytes))
-            pages_text = []
-            for i, page in enumerate(reader.pages):
-                extracted = page.extract_text()
-                if extracted and len(extracted.strip()) > 10:
-                    pages_text.append(extracted.strip())
-            text_content = "\n\n".join(pages_text).strip()
-        except Exception as pe:
-            print(f"Error parsing PDF file {clean_name}: {pe}")
-            return {
-                "status": "error",
-                "message": f"Failed to extract text from PDF '{clean_name}'. The file format may be unreadable or corrupted."
-            }
+            raw_bytes = base64.b64decode(content_str)
+        except Exception:
+            raw_bytes = content_str.encode("utf-8", errors="ignore")
+    elif isinstance(file_bytes, bytes):
+        raw_bytes = file_bytes
+        if clean_name.lower().endswith(".pdf") and not (raw_bytes.startswith(b"%PDF") or b"%PDF" in raw_bytes[:1024]):
+            try:
+                decoded_str = raw_bytes.decode("utf-8", errors="ignore").strip()
+                if "," in decoded_str and ("data:" in decoded_str[:30] or "base64" in decoded_str[:30]):
+                    decoded_str = decoded_str.split(",", 1)[1].strip()
+                raw_bytes = base64.b64decode(decoded_str)
+            except Exception:
+                pass
+
+    if clean_name.lower().endswith(".pdf"):
+        # 1. Primary: Try pypdf extraction if file has PDF header
+        if raw_bytes.startswith(b"%PDF") or b"%PDF" in raw_bytes[:1024]:
+            try:
+                import pypdf
+                pdf_stream = io.BytesIO(raw_bytes)
+                reader = pypdf.PdfReader(pdf_stream)
+                pages_text = []
+                for i, page in enumerate(reader.pages):
+                    extracted = page.extract_text()
+                    if extracted and len(extracted.strip()) > 3:
+                        pages_text.append(extracted.strip())
+                text_content = "\n\n".join(pages_text).strip()
+            except Exception as pe:
+                print(f"pypdf extraction warning for {clean_name}: {pe}")
+                text_content = ""
+
+        # 2. Fallback: Try decoding UTF-8 text if pypdf yielded empty text
+        if not text_content or len(re.sub(r'\s+', '', text_content)) < 15:
+            try:
+                decoded_text = raw_bytes.decode("utf-8", errors="ignore").strip()
+                if len(re.sub(r'\s+', '', decoded_text)) > 20:
+                    text_content = decoded_text
+            except Exception as fe:
+                print(f"Text fallback decoding error: {fe}")
 
         # Check for scanned PDF (image only without selectable text)
         non_space_chars = re.sub(r'\s+', '', text_content)
-        if not text_content or len(non_space_chars) < 25:
+        if not text_content or len(non_space_chars) < 15:
             return {
                 "status": "error",
                 "message": f"Could not extract selectable text from PDF '{clean_name}'. This file appears to be a scanned image or non-searchable document without OCR text. Please upload a PDF with selectable text or a TXT document."
             }
     else:
         try:
-            text_content = file_bytes.decode("utf-8", errors="ignore").strip()
+            text_content = raw_bytes.decode("utf-8", errors="ignore").strip()
         except Exception as te:
             print(f"Error decoding text file {clean_name}: {te}")
             return {
@@ -703,9 +735,9 @@ def is_formal_greeting(query: str) -> bool:
         return True
     return False
 
-def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
+def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = None) -> Dict[str, Any]:
     try:
-        if is_formal_greeting(query):
+        if is_formal_greeting(query) and not attached_file_name:
             context_str = "User query is a formal greeting."
             answer = generate_llm_answer(query, context_str, [], [], is_greeting=True)
             return {
@@ -716,21 +748,46 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
         category_filter = detect_query_category(query)
         
         where_clause = None
-        if category_filter:
+        if category_filter and not attached_file_name:
             where_clause = {"category": category_filter}
 
         documents = []
         metadatas = []
+
+        # If user attached a specific file, include all chunks matching this file
+        if attached_file_name:
+            clean_att = attached_file_name.strip().lower()
+            clean_stem = os.path.splitext(clean_att)[0].replace("_", " ").replace("-", " ").strip().lower()
+
+            for doc in collection.documents:
+                meta = doc.get("metadata", {})
+                doc_file = (meta.get("file_name") or "").strip().lower()
+                doc_title = (meta.get("title") or "").strip().lower()
+                doc_id = (doc.get("id") or "").strip().lower()
+
+                if (clean_att and clean_att in doc_file) or (clean_stem and (clean_stem in doc_file or clean_stem in doc_title or clean_stem in doc_id)):
+                    if doc["text"] not in documents:
+                        documents.append(doc["text"])
+                        metadatas.append(meta)
+
         try:
             results = collection.query(
                 query_text=query,
                 n_results=top_k,
                 where=where_clause if where_clause else None
             )
-            documents = results.get("documents", [[]])[0]
-            metadatas = results.get("metadatas", [[]])[0]
+            q_docs = results.get("documents", [[]])[0]
+            q_metas = results.get("metadatas", [[]])[0]
+            for d, m in zip(q_docs, q_metas):
+                if d not in documents and len(documents) < 6:
+                    documents.append(d)
+                    metadatas.append(m)
         except Exception as ce:
             print(f"ChromaDB query error: {ce}")
+
+        # Strictly cap total context to top 3 chunks max (~600 words / ~800 tokens) to ensure fast completion under 1,200 tokens
+        documents = documents[:3]
+        metadatas = metadatas[:3]
 
         sources = []
         if documents:
@@ -769,7 +826,7 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
         "Keep it clear, concise, and structured with key details, guidelines, and contact instructions for students/faculty."
     )
     if GROQ_API_KEY:
-        models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
+        models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
         for model_name in models_to_try:
@@ -822,7 +879,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
             try:
                 from groq import Groq
                 client = Groq(api_key=GROQ_API_KEY)
-                models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
+                models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
                 system_prompt = (
                     "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
                     "Respond warmly, politely, and professionally to greetings. Introduce yourself and explain how you can help with SRKR campus info, hostels, exams, notices, as well as general academic and technical questions."
@@ -851,7 +908,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
         try:
             from groq import Groq
             client = Groq(api_key=GROQ_API_KEY)
-            models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
+            models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
             
             system_prompt = (
                 "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, polite, precise, and articulate AI assistant created for SRKR Engineering College.\n\n"

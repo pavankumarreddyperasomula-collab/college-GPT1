@@ -16,33 +16,33 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
     }
   };
 
-  const handleFileChange = async (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    try {
-      let fileText = '';
-      if (file.name.toLowerCase().endsWith('.pdf')) {
-        const arrayBuffer = await file.arrayBuffer();
-        fileText = btoa(
-          new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
-        );
-      } else {
-        fileText = await file.text();
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const fileContent = event.target?.result || '';
+        setAttachedFile({
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          text: fileContent,
+          isPdf: file.name.toLowerCase().endsWith('.pdf'),
+          file: file
+        });
+      } catch (err) {
+        console.error("Error setting attached file:", err);
+        alert("Failed to process attached file. Please try again.");
       }
+    };
+    reader.onerror = (err) => {
+      console.error("FileReader error:", err);
+      alert("Error reading file from disk. Please select a valid file.");
+    };
 
-      setAttachedFile({
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        text: fileText,
-        isPdf: file.name.toLowerCase().endsWith('.pdf'),
-        file: file
-      });
-    } catch (err) {
-      console.error("Error reading attached file:", err);
-      alert("Failed to read file. Please ensure it is a valid text, PDF, Markdown, or JSON file.");
-    }
+    reader.readAsDataURL(file);
   };
 
   const handleRemoveFile = () => {
