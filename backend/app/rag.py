@@ -91,7 +91,8 @@ class LocalVectorStore:
             scored.append((total_score, doc))
 
         scored.sort(key=lambda x: x[0], reverse=True)
-        scored_relevant = [item for item in scored if item[0] > 0.0]
+        # Require meaningful score threshold (>= 2.5) to avoid matching common stop-words
+        scored_relevant = [item for item in scored if item[0] >= 2.5]
 
         if not scored_relevant:
             return {
@@ -556,14 +557,12 @@ def detect_query_category(query: str) -> Optional[str]:
 
 def is_formal_greeting(query: str) -> bool:
     q = query.lower().strip()
-    # Remove punctuation
     q_clean = re.sub(r'[^\w\s]', '', q)
     greetings = [
         "hi", "hello", "hey", "good morning", "good afternoon", "good evening",
         "greetings", "how are you", "who are you", "what can you do", "help",
         "namaste", "good day", "how do you do", "hello sir", "hello madam"
     ]
-    # Check exact match or query starting/ending with greeting words if query is short
     if q_clean in greetings:
         return True
     words = q_clean.split()
@@ -604,7 +603,7 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
         if documents:
             seen_titles = set()
             for meta in metadatas:
-                if meta and meta.get("title") not in seen_titles:
+                if meta and meta.get("title") and meta.get("title") not in seen_titles:
                     sources.append({
                         "title": meta.get("title", "Notice"),
                         "category": meta.get("category", "general")
@@ -615,7 +614,8 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
 
         answer = generate_llm_answer(query, context_str, documents, metadatas)
 
-        if "do not have information about that particular topic" in answer:
+        # If no documents were retrieved, do not attach fake sources
+        if not documents:
             sources = []
 
         return {
@@ -625,7 +625,7 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
     except Exception as e:
         print(f"query_rag top-level exception: {e}")
         return {
-            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?",
+            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech syllabus details, course structures, hostel guidelines, exam schedules, and general questions. How may I assist you today?",
             "sources": []
         }
 
@@ -637,7 +637,7 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
         "Keep it clear, concise, and structured with key details, guidelines, and contact instructions for students/faculty."
     )
     if GROQ_API_KEY:
-        models_to_try = ["groq/compound", "groq/compound-mini", "qwen/qwen3.6-27b", "openai/gpt-oss-20b"]
+        models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
         for model_name in models_to_try:
@@ -653,7 +653,7 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
                 )
                 draft = completion.choices[0].message.content.strip()
                 if draft:
-                    return draft
+                    return clean_llm_text(draft)
             except Exception as e:
                 print(f"Notice generation LLM error with {model_name}: {e}")
 
@@ -667,10 +667,27 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
         f"Issued by Order of Campus Administration."
     )
 
+def clean_llm_text(text: str) -> str:
+    """Helper to strip reasoning tags like <think> and normalize unicode spaces/hyphens."""
+    if not text:
+        return ""
+    # Strip <think>...</think> if present
+    text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL).strip()
+    # Normalize unicode special characters
+    text = (text.replace('\u202f', ' ')
+               .replace('\u00a0', ' ')
+               .replace('\u2011', '-')
+               .replace('\u2013', '-')
+               .replace('\u2014', '-')
+               .replace('\u201c', '"')
+               .replace('\u201d', '"')
+               .replace('\u2018', "'")
+               .replace('\u2019', "'"))
+    return text
 
 def generate_llm_answer(query: str, context: str, documents: List[str], metadatas: List[dict], is_greeting: bool = False) -> str:
     if is_greeting:
-        fallback_greeting = "Hello! Greetings! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?"
+        fallback_greeting = "Hello! Greetings! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech syllabus details, course structures, hostel guidelines, exam schedules, campus notices, and general questions. How may I assist you today?"
         if GROQ_API_KEY:
             try:
                 from groq import Groq
@@ -678,8 +695,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                 models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
                 system_prompt = (
                     "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
-                    "The user is greeting you formally or informally. "
-                    "Respond warmly, politely, and professionally. Introduce yourself and explain how you can help them with SRKR campus information, R23 B.Tech AI & DS syllabus, course structures, hostel rules, exam schedules, and notices."
+                    "Respond warmly, politely, and professionally to greetings. Introduce yourself and explain how you can help with SRKR campus info, hostels, exams, notices, as well as general academic and technical questions."
                 )
                 for model_name in models_to_try:
                     try:
@@ -694,7 +710,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                         )
                         answer_text = completion.choices[0].message.content.strip()
                         if answer_text:
-                            return answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
+                            return clean_llm_text(answer_text)
                     except Exception as e:
                         print(f"Groq API model {model_name} failed on greeting: {e}")
             except Exception as ge:
@@ -708,13 +724,13 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
             models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
             
             system_prompt = (
-                "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
-                "Help students and staff with campus rules, hostels, exams, events, notices, navigation, and academic syllabus queries. "
-                "CRITICAL INSTRUCTION: Rely strictly on the provided official SRKR campus context to answer questions. "
-                "If the provided campus context does not contain relevant information to answer the user's question, or if you do not know about that particular topic, respond politely saying: "
-                "'I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance.'"
+                "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, polite, and articulate AI assistant created for SRKR Engineering College.\n\n"
+                "YOUR CORE GOALS & INSTRUCTIONS:\n"
+                "1. **Campus-Specific Queries**: When the user asks about SRKR Engineering College (e.g. hostel rules, mess timings, exam schedules, syllabus, department notices, campus events, or fests), ALWAYS prioritize and rely on the provided Official Campus Context records below.\n"
+                "2. **General Knowledge & Conversational Questions**: If the user asks general questions (e.g. programming, computer science, math, general science, study advice, career tips, general knowledge, or conversational chats), answer accurately, clearly, and helpful using your general AI capabilities. DO NOT refuse to answer general questions or claim you lack information simply because it is not a campus rule!\n"
+                "3. **Clear & Structured Formatting**: Format all your answers using clean, structured Markdown (use subheadings ###, bold text **key concepts**, bullet points, numbered lists, or code blocks `` ` `` where appropriate). Keep explanations clear, readable, and directly to the point like a top AI assistant."
             )
-            user_prompt = f"Official SRKR Campus Context, Syllabus & Notices:\n{context}\n\nUser Question/Message: {query}"
+            user_prompt = f"Official SRKR Campus Context & Notices (Use if relevant to campus query):\n{context}\n\nUser Question/Message: {query}"
 
             for model_name in models_to_try:
                 try:
@@ -724,26 +740,31 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                             {"role": "system", "content": system_prompt},
                             {"role": "user", "content": user_prompt}
                         ],
-                        temperature=0.3,
-                        max_tokens=550
+                        temperature=0.4,
+                        max_tokens=650
                     )
                     answer_text = completion.choices[0].message.content.strip()
                     if answer_text:
-                        # Clean non-breaking unicode spaces and hyphens
-                        answer_text = answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
-                        return answer_text
+                        cleaned = clean_llm_text(answer_text)
+                        if cleaned:
+                            return cleaned
                 except Exception as e:
                     print(f"Groq API model {model_name} failed: {e}")
         except Exception as ge:
             print(f"Groq import or init error: {ge}")
 
     # Fallback if API key unavailable, context missing, or model failed
-    if not documents or context == "No relevant campus records found.":
-        return "I am sorry, but I do not have information about that particular topic in the campus database. Please contact the department or admin office for further assistance."
+    if documents and context != "No relevant campus records found.":
+        primary_doc = documents[0]
+        title = metadatas[0].get("title", "Campus Information") if metadatas else "Notice"
+        clean_doc = primary_doc.split("]: ", 1)[-1] if "]: " in primary_doc else primary_doc
+        return f"### **{title}**\n\n{clean_doc}"
 
-    primary_doc = documents[0]
-    title = metadatas[0].get("title", "Campus Information") if metadatas else "Notice"
-    clean_doc = primary_doc.split("]: ", 1)[-1] if "]: " in primary_doc else primary_doc
-    return f"According to the official **{title}**:\n\n{clean_doc}"
+    return (
+        f"I am happy to assist you! Regarding **'{query}'**:\n\n"
+        "If you are asking about SRKR campus schedules, hostel rules, or official notices, please check the **Quick Hub** or **Notifications** tab in the app. "
+        "For specific official requests, you can also reach out to the campus department office or hostel warden desk."
+    )
+
 
 

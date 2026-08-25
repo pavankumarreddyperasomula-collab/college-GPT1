@@ -156,7 +156,7 @@ def ask_endpoint(req: QueryRequest):
     except Exception as e:
         print(f"Error in ask_endpoint: {e}")
         return {
-            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?",
+            "answer": "I am here to assist you! Please feel free to ask any questions about SRKR Engineering College (hostels, syllabus, exam dates, rules, notices) or any general questions.",
             "sources": []
         }
 
