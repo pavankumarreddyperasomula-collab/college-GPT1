@@ -188,9 +188,10 @@ const App = () => {
         ]);
       }
     } catch (err) {
+      console.error("Chat API error:", err);
       setMessages((prev) => [
         ...prev,
-        { sender: 'bot', text: 'Cannot connect to backend server on port 8000.' }
+        { sender: 'bot', text: 'Cannot connect to AI backend service. If using Render free hosting, the backend takes ~30s to wake up on the first request. Please try asking again.' }
       ]);
     } finally {
       setLoading(false);
