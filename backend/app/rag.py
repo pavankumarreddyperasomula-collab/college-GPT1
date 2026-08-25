@@ -572,51 +572,62 @@ def is_formal_greeting(query: str) -> bool:
     return False
 
 def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
-    if is_formal_greeting(query):
-        context_str = "User query is a formal greeting."
-        answer = generate_llm_answer(query, context_str, [], [], is_greeting=True)
+    try:
+        if is_formal_greeting(query):
+            context_str = "User query is a formal greeting."
+            answer = generate_llm_answer(query, context_str, [], [], is_greeting=True)
+            return {
+                "answer": answer,
+                "sources": []
+            }
+
+        category_filter = detect_query_category(query)
+        
+        where_clause = None
+        if category_filter:
+            where_clause = {"category": category_filter}
+
+        documents = []
+        metadatas = []
+        try:
+            results = collection.query(
+                query_text=query,
+                n_results=top_k,
+                where=where_clause if where_clause else None
+            )
+            documents = results.get("documents", [[]])[0]
+            metadatas = results.get("metadatas", [[]])[0]
+        except Exception as ce:
+            print(f"ChromaDB query error: {ce}")
+
+        sources = []
+        if documents:
+            seen_titles = set()
+            for meta in metadatas:
+                if meta and meta.get("title") not in seen_titles:
+                    sources.append({
+                        "title": meta.get("title", "Notice"),
+                        "category": meta.get("category", "general")
+                    })
+                    seen_titles.add(meta.get("title"))
+
+        context_str = "\n\n".join(documents) if documents else "No relevant campus records found."
+
+        answer = generate_llm_answer(query, context_str, documents, metadatas)
+
+        if "do not have information about that particular topic" in answer:
+            sources = []
+
         return {
             "answer": answer,
+            "sources": sources
+        }
+    except Exception as e:
+        print(f"query_rag top-level exception: {e}")
+        return {
+            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech AI & DS syllabus details, course structures, hostel guidelines, exam schedules, and campus notices. How may I assist you today?",
             "sources": []
         }
-
-    category_filter = detect_query_category(query)
-    
-    where_clause = None
-    if category_filter:
-        where_clause = {"category": category_filter}
-
-    results = collection.query(
-        query_text=query,
-        n_results=top_k,
-        where=where_clause if where_clause else None
-    )
-
-    documents = results.get("documents", [[]])[0]
-    metadatas = results.get("metadatas", [[]])[0]
-
-    sources = []
-    if documents:
-        seen_titles = set()
-        for meta in metadatas:
-            if meta and meta.get("title") not in seen_titles:
-                sources.append({
-                    "title": meta.get("title", "Notice"),
-                    "category": meta.get("category", "general")
-                })
-                seen_titles.add(meta.get("title"))
-
-    context_str = "\n\n".join(documents) if documents else "No relevant campus records found."
-
-    answer = generate_llm_answer(query, context_str, documents, metadatas)
-
-    if "do not have information about that particular topic" in answer:
-        sources = []
-
-    return {
-        "answer": answer,
-        "sources": sources
-    }
 
 def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_date: str) -> str:
     prompt = (
