@@ -27,6 +27,7 @@ const App = () => {
   const [isAddNoticeOpen, setIsAddNoticeOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [profileModalTab, setProfileModalTab] = useState('profile');
   const [isMapsOpen, setIsMapsOpen] = useState(false);
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isDocFormatterOpen, setIsDocFormatterOpen] = useState(false);
@@ -394,7 +395,8 @@ const App = () => {
                     onOpenEvents={() => setIsEventsOpen(true)}
                     onOpenMaps={() => setIsMapsOpen(true)}
                     onOpenRules={() => setIsRulesOpen(true)}
-                    onOpenProfile={() => setIsProfileOpen(true)}
+                    onOpenProfile={() => { setProfileModalTab('profile'); setIsProfileOpen(true); }}
+                    onOpenAddStaff={() => { setProfileModalTab('create_staff'); setIsProfileOpen(true); }}
                   />
                 )}
               </div>
@@ -445,6 +447,7 @@ const App = () => {
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
         user={user}
+        initialTab={profileModalTab}
         onUserUpdated={(updatedUser) => setUser(updatedUser)}
       />
 

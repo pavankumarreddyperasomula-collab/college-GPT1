@@ -10,7 +10,8 @@ const AdminQuickHub = ({
   onOpenEvents,
   onOpenMaps,
   onOpenRules,
-  onOpenProfile
+  onOpenProfile,
+  onOpenAddStaff
 }) => {
   const role = (user?.role || 'hod').toLowerCase();
   const isHostelSuperAdmin = role === 'super_admin' && (user?.super_admin_type === 'hostel' || user?.category === 'hostel' || (user?.username && user?.username.toLowerCase().includes('hostel')));
@@ -75,7 +76,7 @@ const AdminQuickHub = ({
 
           {isSuperAdmin && (
             <button
-              onClick={onOpenProfile}
+              onClick={onOpenAddStaff || onOpenProfile}
               className="px-3.5 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
             >
               <UserPlus className="w-3.5 h-3.5" /> Add Staff Member

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, User, ShieldCheck, Key, Home, Building, Phone, Briefcase, GitBranch, GraduationCap, Lock, Upload, UserPlus, FileText, Trash2, CheckCircle2 } from 'lucide-react';
 import { API_URL } from '../config';
 
-const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
+const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'profile' }) => {
   if (!isOpen || !user) return null;
 
   const role = (user.role || 'student').toLowerCase();
@@ -11,7 +11,13 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
   const isSuperAdmin = role === 'super_admin';
   const isHostelAdmin = role === 'hostel_admin' || isHostelSuperAdmin;
 
-  const [activeTab, setActiveTab] = useState('profile'); // 'profile', 'credentials', 'create_staff', 'upload_students'
+  const [activeTab, setActiveTab] = useState(initialTab); // 'profile', 'credentials', 'create_staff', 'upload_students'
+
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab(initialTab || 'profile');
+    }
+  }, [isOpen, initialTab]);
 
   // Change Credentials Form state
   const [newUsername, setNewUsername] = useState(user.username || '');

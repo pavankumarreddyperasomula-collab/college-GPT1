@@ -343,102 +343,41 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             branch=brch
         )
 
-    # 2. HOD Login (Strict Invite-Only - Account must be provisioned by Super Admin)
-    if role in ["hod", "admin_hod"]:
-        emp_id = (req.employee_id or req.username or "").strip()
+    # 2. Staff Account Login (HOD, Faculty, Hostel Admin) - Strict Invite-Only Provisioned Access
+    if role in ["hod", "faculty", "hostel_admin", "admin_hod", "admin_faculty", "admin_hostel", "admin", "staff"]:
+        emp_id = (req.employee_id or req.username or req.name or "").strip()
         pwd = (req.password or "").strip()
 
         if not emp_id or not pwd:
-            return LoginResponse(status="error", message="Username and Password are required for HOD login.", username="", role="hod")
+            return LoginResponse(status="error", message="Username/Employee ID and Password are required for staff login.", username="", role=role)
 
         existing_user = find_user(emp_id)
-        if existing_user and existing_user.get("role") in ["hod", "admin_hod"]:
+        if existing_user and existing_user.get("role") in ["hod", "faculty", "hostel_admin", "admin_hod", "admin_faculty", "admin_hostel", "super_admin"]:
             if existing_user.get("password") == pwd:
+                user_role = existing_user.get("role")
+                user_dept = existing_user.get("department", "CSE")
                 return LoginResponse(
                     status="success",
-                    message=f"Welcome HOD '{existing_user.get('username')}'!",
+                    message=f"Welcome {existing_user.get('designation', 'Staff Member')} '{existing_user.get('username')}'!",
                     username=existing_user.get("username"),
-                    role="hod",
-                    designation=existing_user.get("designation", "HOD"),
-                    category="college",
+                    role=user_role,
+                    designation=existing_user.get("designation", "Staff Member"),
+                    category=existing_user.get("category", "college"),
                     hod_code=existing_user.get("hod_code"),
                     college_name=existing_user.get("college_name", "SRKR Engineering College"),
-                    department=existing_user.get("department", "CSE"),
-                    employee_id=emp_id
-                )
-            else:
-                return LoginResponse(status="error", message="Incorrect password for HOD account.", username="", role="hod")
-
-        return LoginResponse(
-            status="error",
-            message="Account not provisioned. HOD accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
-            username="",
-            role="hod"
-        )
-
-    # 3. Faculty Login (Strict Invite-Only - Account must be provisioned by Super Admin)
-    if role in ["faculty", "admin_faculty"]:
-        emp_id = (req.employee_id or req.username or "").strip()
-        pwd = (req.password or "").strip()
-
-        if not emp_id or not pwd:
-            return LoginResponse(status="error", message="Username and Password are required for Faculty login.", username="", role="faculty")
-
-        existing_user = find_user(emp_id)
-        if existing_user and existing_user.get("role") in ["faculty", "admin_faculty"]:
-            if existing_user.get("password") == pwd:
-                return LoginResponse(
-                    status="success",
-                    message=f"Welcome Faculty '{existing_user.get('username')}'!",
-                    username=existing_user.get("username"),
-                    role="faculty",
-                    designation=existing_user.get("designation", "Faculty"),
-                    category="college",
-                    hod_code=existing_user.get("hod_code"),
-                    college_name=existing_user.get("college_name", "SRKR Engineering College"),
-                    department=existing_user.get("department", "CSE"),
-                    employee_id=emp_id
-                )
-            else:
-                return LoginResponse(status="error", message="Incorrect password for Faculty account.", username="", role="faculty")
-
-        return LoginResponse(
-            status="error",
-            message="Account not provisioned. Faculty accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
-            username="",
-            role="faculty"
-        )
-
-    # 4. Hostel Admin Login (Strict Invite-Only - Account must be provisioned by Super Admin)
-    if role in ["hostel_admin", "admin_hostel"]:
-        uname = (req.username or req.name or "").strip()
-        pwd = (req.password or "").strip()
-
-        if not uname or not pwd:
-            return LoginResponse(status="error", message="Username and Password are required for Hostel Admin login.", username="", role="hostel_admin")
-
-        existing_user = find_user(uname)
-        if existing_user and existing_user.get("role") in ["hostel_admin", "admin_hostel"]:
-            if existing_user.get("password") == pwd:
-                return LoginResponse(
-                    status="success",
-                    message=f"Welcome Hostel Admin '{existing_user.get('username')}'!",
-                    username=existing_user.get("username"),
-                    role="hostel_admin",
-                    designation=existing_user.get("designation", "Hostel Warden"),
-                    category="hostel",
+                    department=user_dept,
                     mobile=existing_user.get("mobile", "9876543210"),
-                    college_name=existing_user.get("college_name", "SRKR Engineering College"),
-                    department="Hostel Administration"
+                    employee_id=existing_user.get("employee_id", emp_id),
+                    super_admin_type=existing_user.get("super_admin_type")
                 )
             else:
-                return LoginResponse(status="error", message="Incorrect password for Hostel Admin.", username="", role="hostel_admin")
+                return LoginResponse(status="error", message="Incorrect password for staff account.", username="", role=role)
 
         return LoginResponse(
             status="error",
-            message="Hostel Admin account not provisioned. Accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
+            message="Account not provisioned. Staff accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
             username="",
-            role="hostel_admin"
+            role=role
         )
 
     # 5. Super Admin (College Super Admin or Hostel Super Admin)

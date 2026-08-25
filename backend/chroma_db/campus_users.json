@@ -125,5 +125,29 @@
     "hod_code": "HOD-HOSTEL-4892",
     "college_name": "SRKR Engineering College",
     "department": "Hostel Affairs"
+  },
+  "hod_ece_srkr": {
+    "username": "hod_ece_srkr",
+    "password": "srkr1234",
+    "role": "hod",
+    "designation": "HOD - Electronics & Communication",
+    "category": "college",
+    "hod_code": "HOD-ECE-5841",
+    "college_name": "SRKR Engineering College",
+    "department": "ECE",
+    "employee_id": "EMP_HOD_ECE",
+    "mobile": "9876543210"
+  },
+  "fac_ai_srkr": {
+    "username": "fac_ai_srkr",
+    "password": "facpassword123",
+    "role": "faculty",
+    "designation": "Assistant Professor (AI & DS)",
+    "category": "college",
+    "hod_code": "HOD-AIDS-4892",
+    "college_name": "SRKR Engineering College",
+    "department": "AIDS",
+    "employee_id": "EMP_FAC_AI_SRKR",
+    "mobile": "9876543210"
   }
 }
