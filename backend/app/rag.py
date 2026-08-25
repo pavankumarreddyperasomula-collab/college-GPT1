@@ -688,7 +688,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
         return fallback_greeting
 
     if GROQ_API_KEY:
-        models_to_try = ["groq/compound", "groq/compound-mini", "qwen/qwen3.6-27b", "openai/gpt-oss-20b"]
+        models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
         
@@ -714,6 +714,8 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                 )
                 answer_text = completion.choices[0].message.content.strip()
                 if answer_text:
+                    # Clean non-breaking unicode spaces and hyphens
+                    answer_text = answer_text.replace('\u202f', ' ').replace('\u2011', '-').replace('\u2013', '-').replace('\u2014', '-')
                     return answer_text
             except Exception as e:
                 print(f"Groq API model {model_name} failed: {e}")
