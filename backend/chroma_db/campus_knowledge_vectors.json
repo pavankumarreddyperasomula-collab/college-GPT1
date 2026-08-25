@@ -1780,5 +1780,15 @@
       "file_name": "SRKR_Scholarship_Notice_2026.txt",
       "content_hash": "b7a70fa04cf45c17d478a30a9e1c097a"
     }
+  },
+  {
+    "id": "college_Srkr_Ai_Research_Grant_2026_0_9c93",
+    "text": "[SRKR AI RESEARCH GRANT 2026] (college): SRKR Engineering College AI Research Grant 2026: The Department of CSE has received a 50 Lakh INR research grant from DST for Autonomous Drone Navigation. Principal investigator: Dr. K. Suresh.",
+    "metadata": {
+      "title": "Srkr Ai Research Grant 2026",
+      "category": "college",
+      "file_name": "SRKR_AI_Research_Grant_2026.txt",
+      "content_hash": "8392c2fca723a7361c16729c843a11b5"
+    }
   }
 ]

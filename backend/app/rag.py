@@ -505,23 +505,25 @@ documents_store = DocumentsStore(DOCUMENTS_FILE)
 events_store = EventsStore(EVENTS_FILE)
 notif_store = NotificationsStore(NOTIFICATIONS_FILE)
 
-def chunk_text(text: str, title: str, category: str, chunk_size: int = 350, overlap: int = 50) -> List[Dict[str, Any]]:
+def chunk_text(text: str, title: str, category: str, chunk_size_words: int = 250, overlap_words: int = 40) -> List[Dict[str, Any]]:
     words = text.split()
+    if not words:
+        return []
     chunks = []
     start = 0
     idx = 0
     while start < len(words):
-        end = start + (chunk_size // 6)
+        end = min(start + chunk_size_words, len(words))
         chunk_words = words[start:end]
         chunk_content = " ".join(chunk_words)
         chunks.append({
-            "id": f"{category}_{title.replace(' ', '_')}_{idx}",
+            "id": f"{category}_{title.replace(' ', '_')}_{idx}_{uuid.uuid4().hex[:4]}",
             "text": f"[{title.upper()}] ({category}): {chunk_content}",
             "metadata": {"title": title, "category": category}
         })
-        start += (chunk_size // 6) - (overlap // 6)
-        if start >= len(words):
+        if end >= len(words):
             break
+        start += (chunk_size_words - overlap_words)
         idx += 1
     return chunks
 
@@ -620,23 +622,41 @@ def process_uploaded_file(file_name: str, file_bytes: bytes, category: str = "co
             import pypdf
             reader = pypdf.PdfReader(io.BytesIO(file_bytes))
             pages_text = []
-            for page in reader.pages:
+            for i, page in enumerate(reader.pages):
                 extracted = page.extract_text()
-                if extracted:
-                    pages_text.append(extracted)
-            text_content = "\n".join(pages_text).strip()
+                if extracted and len(extracted.strip()) > 10:
+                    pages_text.append(extracted.strip())
+            text_content = "\n\n".join(pages_text).strip()
         except Exception as pe:
             print(f"Error parsing PDF file {clean_name}: {pe}")
-            return {"status": "error", "message": f"Failed to extract text from PDF file '{clean_name}'."}
+            return {
+                "status": "error",
+                "message": f"Failed to extract text from PDF '{clean_name}'. The file format may be unreadable or corrupted."
+            }
+
+        # Check for scanned PDF (image only without selectable text)
+        non_space_chars = re.sub(r'\s+', '', text_content)
+        if not text_content or len(non_space_chars) < 25:
+            return {
+                "status": "error",
+                "message": f"Could not extract selectable text from PDF '{clean_name}'. This file appears to be a scanned image or non-searchable document without OCR text. Please upload a PDF with selectable text or a TXT document."
+            }
     else:
         try:
             text_content = file_bytes.decode("utf-8", errors="ignore").strip()
         except Exception as te:
             print(f"Error decoding text file {clean_name}: {te}")
-            return {"status": "error", "message": f"Failed to decode text from file '{clean_name}'."}
+            return {
+                "status": "error",
+                "message": f"Failed to decode text from file '{clean_name}'."
+            }
 
-    if not text_content:
-        return {"status": "error", "message": f"File '{clean_name}' is empty or no readable text was found."}
+        non_space_chars = re.sub(r'\s+', '', text_content)
+        if not text_content or len(non_space_chars) < 10:
+            return {
+                "status": "error",
+                "message": f"File '{clean_name}' is empty or contains no readable text."
+            }
 
     title = os.path.splitext(clean_name)[0].replace("_", " ").replace("-", " ").title()
     return add_document_to_rag(
@@ -727,7 +747,6 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
 
         answer = generate_llm_answer(query, context_str, documents, metadatas)
 
-        # If no documents were retrieved, do not attach fake sources
         if not documents:
             sources = []
 
@@ -738,7 +757,7 @@ def query_rag(query: str, top_k: int = 4) -> Dict[str, Any]:
     except Exception as e:
         print(f"query_rag top-level exception: {e}")
         return {
-            "answer": "Hello! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech syllabus details, course structures, hostel guidelines, exam schedules, and general questions. How may I assist you today?",
+            "answer": "I don't have that information in the provided campus records. Please check the Notifications tab or reach out to the campus administration office.",
             "sources": []
         }
 
@@ -784,9 +803,7 @@ def clean_llm_text(text: str) -> str:
     """Helper to strip reasoning tags like <think> and normalize unicode spaces/hyphens."""
     if not text:
         return ""
-    # Strip <think>...</think> if present
     text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL).strip()
-    # Normalize unicode special characters
     text = (text.replace('\u202f', ' ')
                .replace('\u00a0', ' ')
                .replace('\u2011', '-')
@@ -837,11 +854,14 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
             models_to_try = ["groq/compound-mini", "groq/compound", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"]
             
             system_prompt = (
-                "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, polite, and articulate AI assistant created for SRKR Engineering College.\n\n"
-                "YOUR CORE GOALS & INSTRUCTIONS:\n"
-                "1. **Campus-Specific Queries**: When the user asks about SRKR Engineering College (e.g. hostel rules, mess timings, exam schedules, syllabus, department notices, campus events, or fests), ALWAYS prioritize and rely on the provided Official Campus Context records below.\n"
-                "2. **General Knowledge & Conversational Questions**: If the user asks general questions (e.g. programming, computer science, math, general science, study advice, career tips, general knowledge, or conversational chats), answer accurately, clearly, and helpful using your general AI capabilities. DO NOT refuse to answer general questions or claim you lack information simply because it is not a campus rule!\n"
-                "3. **Clear & Structured Formatting**: Format all your answers using clean, structured Markdown (use subheadings ###, bold text **key concepts**, bullet points, numbered lists, or code blocks `` ` `` where appropriate). Keep explanations clear, readable, and directly to the point like a top AI assistant."
+                "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, polite, precise, and articulate AI assistant created for SRKR Engineering College.\n\n"
+                "YOUR CORE GOALS & STRICT RULES:\n"
+                "1. **Campus & Uploaded Document Queries**: When answering questions about SRKR Engineering College (hostel rules, syllabus, exam schedules, department notices, campus events) or about uploaded files, documents, and guidelines:\n"
+                "   - Base your answer STRICTLY on the provided Official Campus Context records below.\n"
+                "   - **STRICT ANTI-HALLUCINATION RULE**: If the answer isn't in the provided context, say you don't have that information — NEVER guess or invent details!\n"
+                "2. **Handling Scanned, Missing, or Unreadable Documents**: If the context indicates that a PDF or document is unreadable, scanned, empty, or missing requested information, explicitly state that you don't have that information in the provided context and ask the user to provide a searchable text document.\n"
+                "3. **General Knowledge & Conversational Questions**: If the user asks general academic or technical questions (e.g. programming syntax, math calculations, science concepts, general study advice, or greetings), answer clearly, accurately, and helpfully using your general AI capabilities.\n"
+                "4. **Clear & Structured Formatting**: Format all your answers using clean, structured Markdown (use subheadings ###, bold text **key concepts**, bullet points, numbered lists, or code blocks where appropriate)."
             )
             user_prompt = f"Official SRKR Campus Context & Notices (Use if relevant to campus query):\n{context}\n\nUser Question/Message: {query}"
 
@@ -853,7 +873,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                             {"role": "system", "content": system_prompt},
                             {"role": "user", "content": user_prompt}
                         ],
-                        temperature=0.4,
+                        temperature=0.3,
                         max_tokens=650
                     )
                     answer_text = completion.choices[0].message.content.strip()
@@ -874,9 +894,9 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
         return f"### **{title}**\n\n{clean_doc}"
 
     return (
-        f"I am happy to assist you! Regarding **'{query}'**:\n\n"
-        "If you are asking about SRKR campus schedules, hostel rules, or official notices, please check the **Quick Hub** or **Notifications** tab in the app. "
-        "For specific official requests, you can also reach out to the campus department office or hostel warden desk."
+        f"I don't have that information in the provided campus records for **'{query}'**. "
+        "If the answer isn't in the provided context, I am instructed to inform you that I don't have that information rather than guessing. "
+        "Please check official college notices or upload a readable text document."
     )
 
 
