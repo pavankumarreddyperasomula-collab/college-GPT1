@@ -72,12 +72,12 @@ const AdminQuickHub = ({
             </button>
           )}
 
-          {isHostelSuperAdmin && (
+          {isSuperAdmin && (
             <button
               onClick={onOpenProfile}
               className="px-3.5 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-emerald-950 font-black text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
             >
-              <UserPlus className="w-3.5 h-3.5" /> Create Hostel Admin
+              <UserPlus className="w-3.5 h-3.5" /> Add Staff Member
             </button>
           )}
         </div>

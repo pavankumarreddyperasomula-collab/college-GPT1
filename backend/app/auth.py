@@ -64,6 +64,17 @@ class CreateHostelAdminRequest(BaseModel):
     designation: Optional[str] = "Hostel Admin / Warden"
     mobile: Optional[str] = "9876543210"
 
+class CreateStaffAccountRequest(BaseModel):
+    created_by: str
+    role: str  # "hod", "faculty", "hostel_admin"
+    username: str
+    password: str
+    department: Optional[str] = "CSE"
+    designation: Optional[str] = None
+    employee_id: Optional[str] = None
+    mobile: Optional[str] = "9876543210"
+    hod_code: Optional[str] = None
+
 class UploadHostelStudentsRequest(BaseModel):
     uploaded_by: str
     file_name: Optional[str] = "hostel_students_list.txt"
@@ -76,7 +87,7 @@ DEFAULT_REGISTERED_USERS = {
         "role": "student",
         "designation": "Student",
         "category": "hostel",
-        "hod_code": "HOD-Arjun-4892",
+        "hod_code": "HOD-CSE-4892",
         "super_admin_key": "SUPER-ADMIN",
         "is_hostel_resident": True,
         "college_name": "SRKR Engineering College",
@@ -89,12 +100,44 @@ DEFAULT_REGISTERED_USERS = {
         "role": "student",
         "designation": "Student",
         "category": "hostel",
-        "hod_code": "HOD-Arjun-4892",
+        "hod_code": "HOD-CSE-4892",
         "super_admin_key": "SUPER-ADMIN",
         "is_hostel_resident": True,
         "college_name": "SRKR Engineering College",
         "department": "CSE",
         "branch": "CSE"
+    },
+    "hod_cse": {
+        "username": "hod_cse",
+        "password": "admin123",
+        "role": "hod",
+        "designation": "HOD - CSE",
+        "category": "college",
+        "hod_code": "HOD-CSE-4892",
+        "college_name": "SRKR Engineering College",
+        "department": "CSE",
+        "employee_id": "EMP_HOD_CSE"
+    },
+    "fac_cse": {
+        "username": "fac_cse",
+        "password": "admin123",
+        "role": "faculty",
+        "designation": "Faculty - CSE",
+        "category": "college",
+        "hod_code": "HOD-CSE-4892",
+        "college_name": "SRKR Engineering College",
+        "department": "CSE",
+        "employee_id": "EMP_FAC_CSE"
+    },
+    "hosteladmin_arjun": {
+        "username": "hosteladmin_arjun",
+        "password": "admin123",
+        "role": "hod",
+        "designation": "HOD Hostel Affairs",
+        "category": "hostel",
+        "hod_code": "HOD-HOSTEL-4892",
+        "college_name": "SRKR Engineering College",
+        "department": "Hostel Affairs"
     },
     "warden_rajesh": {
         "username": "warden_rajesh",
@@ -102,7 +145,7 @@ DEFAULT_REGISTERED_USERS = {
         "role": "hostel_admin",
         "designation": "Warden Block A",
         "category": "hostel",
-        "hod_code": "",
+        "hod_code": "HOSTEL-ADMIN",
         "college_name": "SRKR Engineering College",
         "department": "Hostel Affairs",
         "mobile": "9876543210"
@@ -118,7 +161,6 @@ DEFAULT_REGISTERED_USERS = {
         "college_name": "SRKR Engineering College",
         "department": "College Administration"
     },
-    # Hostel Super Admin 1: username "hostel admin 1", password "123456"
     "hostel admin 1": {
         "username": "hostel admin 1",
         "password": "123456",
@@ -130,7 +172,6 @@ DEFAULT_REGISTERED_USERS = {
         "college_name": "SRKR Engineering College",
         "department": "Hostel Administration"
     },
-    # Hostel Super Admin 2: username "hostel admin 2", password "12345"
     "hostel admin 2": {
         "username": "hostel admin 2",
         "password": "12345",
@@ -214,7 +255,7 @@ def is_student_hostel_resident(username_or_reg: str) -> bool:
 def generate_hod_code(identifier: str) -> str:
     clean_name = "".join(c for c in identifier if c.isalnum()) or "Dept"
     rand_digits = "".join(random.choices(string.digits, k=4))
-    return f"HOD-{clean_name.capitalize()}-{rand_digits}"
+    return f"HOD-{clean_name.upper()}-{rand_digits}"
 
 def generate_mock_otp() -> str:
     return "".join(random.choices(string.digits, k=6))
@@ -245,10 +286,8 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
         if not uname:
             return LoginResponse(status="error", message="Username / Registration Number is required.", username="", role="student")
 
-        # Automatically check if student is in Hostel Student Roster
         is_hostel = is_student_hostel_resident(uname) or bool(req.is_hostel_resident)
 
-        # Look up existing user
         existing_user = find_user(uname)
         if existing_user:
             if existing_user.get("password") == pwd or not pwd:
@@ -273,7 +312,6 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
         if not pwd:
             return LoginResponse(status="error", message="Password is required to set up student account.", username="", role="student")
 
-        # Save new student user
         new_student = {
             "username": uname,
             "password": pwd,
@@ -305,113 +343,83 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             branch=brch
         )
 
-    # 2. HOD Onboarding / Login
+    # 2. HOD Login (Strict Invite-Only - Account must be provisioned by Super Admin)
     if role in ["hod", "admin_hod"]:
-        emp_id = (req.employee_id or req.username or "HOD_001").strip()
-        dept = req.department or "Computer Science"
-        pwd = req.password or "admin123"
-        col_name = req.college_name or "SRKR Engineering College"
+        emp_id = (req.employee_id or req.username or "").strip()
+        pwd = (req.password or "").strip()
+
+        if not emp_id or not pwd:
+            return LoginResponse(status="error", message="Username and Password are required for HOD login.", username="", role="hod")
 
         existing_user = find_user(emp_id)
-        if existing_user and existing_user.get("password") == pwd:
-            return LoginResponse(
-                status="success",
-                message=f"Welcome HOD {emp_id}!",
-                username=existing_user.get("username", emp_id),
-                role="hod",
-                designation="HOD",
-                category="college",
-                hod_code=existing_user.get("hod_code"),
-                college_name=existing_user.get("college_name", col_name),
-                department=existing_user.get("department", dept),
-                employee_id=emp_id
-            )
-
-        assigned_hod_code = generate_hod_code(emp_id.split("@")[0].split("_")[0])
-        users[emp_id] = {
-            "username": emp_id,
-            "password": pwd,
-            "role": "hod",
-            "designation": "HOD",
-            "category": "college",
-            "hod_code": assigned_hod_code,
-            "college_name": col_name,
-            "department": dept
-        }
-        save_users(users)
+        if existing_user and existing_user.get("role") in ["hod", "admin_hod"]:
+            if existing_user.get("password") == pwd:
+                return LoginResponse(
+                    status="success",
+                    message=f"Welcome HOD '{existing_user.get('username')}'!",
+                    username=existing_user.get("username"),
+                    role="hod",
+                    designation=existing_user.get("designation", "HOD"),
+                    category="college",
+                    hod_code=existing_user.get("hod_code"),
+                    college_name=existing_user.get("college_name", "SRKR Engineering College"),
+                    department=existing_user.get("department", "CSE"),
+                    employee_id=emp_id
+                )
+            else:
+                return LoginResponse(status="error", message="Incorrect password for HOD account.", username="", role="hod")
 
         return LoginResponse(
-            status="success",
-            message=f"HOD Onboarded. Generated HOD Code: {assigned_hod_code}",
-            username=emp_id,
-            role="hod",
-            designation="HOD",
-            category="college",
-            hod_code=assigned_hod_code,
-            college_name=col_name,
-            department=dept,
-            employee_id=emp_id
+            status="error",
+            message="Account not provisioned. HOD accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
+            username="",
+            role="hod"
         )
 
-    # 3. Faculty Onboarding / Login
+    # 3. Faculty Login (Strict Invite-Only - Account must be provisioned by Super Admin)
     if role in ["faculty", "admin_faculty"]:
-        emp_id = (req.employee_id or req.username or "FAC_001").strip()
-        dept = req.department or "Computer Science"
-        pwd = req.password or "admin123"
-        col_name = req.college_name or "SRKR Engineering College"
+        emp_id = (req.employee_id or req.username or "").strip()
+        pwd = (req.password or "").strip()
+
+        if not emp_id or not pwd:
+            return LoginResponse(status="error", message="Username and Password are required for Faculty login.", username="", role="faculty")
 
         existing_user = find_user(emp_id)
-        if existing_user and existing_user.get("password") == pwd:
-            return LoginResponse(
-                status="success",
-                message=f"Welcome Faculty {emp_id}!",
-                username=existing_user.get("username", emp_id),
-                role="faculty",
-                designation="Faculty",
-                category="college",
-                hod_code=existing_user.get("hod_code"),
-                college_name=existing_user.get("college_name", col_name),
-                department=existing_user.get("department", dept),
-                employee_id=emp_id
-            )
-
-        hod_scope = (req.hod_code or f"HOD-{dept[:4].upper()}-1001").upper()
-        users[emp_id] = {
-            "username": emp_id,
-            "password": pwd,
-            "role": "faculty",
-            "designation": "Faculty",
-            "category": "college",
-            "hod_code": hod_scope,
-            "college_name": col_name,
-            "department": dept
-        }
-        save_users(users)
+        if existing_user and existing_user.get("role") in ["faculty", "admin_faculty"]:
+            if existing_user.get("password") == pwd:
+                return LoginResponse(
+                    status="success",
+                    message=f"Welcome Faculty '{existing_user.get('username')}'!",
+                    username=existing_user.get("username"),
+                    role="faculty",
+                    designation=existing_user.get("designation", "Faculty"),
+                    category="college",
+                    hod_code=existing_user.get("hod_code"),
+                    college_name=existing_user.get("college_name", "SRKR Engineering College"),
+                    department=existing_user.get("department", "CSE"),
+                    employee_id=emp_id
+                )
+            else:
+                return LoginResponse(status="error", message="Incorrect password for Faculty account.", username="", role="faculty")
 
         return LoginResponse(
-            status="success",
-            message="Faculty Onboarded Successfully.",
-            username=emp_id,
-            role="faculty",
-            designation="Faculty",
-            category="college",
-            hod_code=hod_scope,
-            college_name=col_name,
-            department=dept,
-            employee_id=emp_id
+            status="error",
+            message="Account not provisioned. Faculty accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
+            username="",
+            role="faculty"
         )
 
-    # 4. Hostel Admin Login
+    # 4. Hostel Admin Login (Strict Invite-Only - Account must be provisioned by Super Admin)
     if role in ["hostel_admin", "admin_hostel"]:
         uname = (req.username or req.name or "").strip()
         pwd = (req.password or "").strip()
 
-        if not uname:
-            return LoginResponse(status="error", message="Username is required for Hostel Admin login.", username="", role="hostel_admin")
+        if not uname or not pwd:
+            return LoginResponse(status="error", message="Username and Password are required for Hostel Admin login.", username="", role="hostel_admin")
 
         existing_user = find_user(uname)
-        if existing_user:
-            if existing_user.get("password") == pwd or not pwd:
+        if existing_user and existing_user.get("role") in ["hostel_admin", "admin_hostel"]:
+            if existing_user.get("password") == pwd:
                 return LoginResponse(
                     status="success",
                     message=f"Welcome Hostel Admin '{existing_user.get('username')}'!",
@@ -426,7 +434,12 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             else:
                 return LoginResponse(status="error", message="Incorrect password for Hostel Admin.", username="", role="hostel_admin")
 
-        return LoginResponse(status="error", message="Hostel Admin account not found. Please contact Hostel Super Admin to create your account.", username="", role="hostel_admin")
+        return LoginResponse(
+            status="error",
+            message="Hostel Admin account not provisioned. Accounts are invite-only and created by Super Admin. Please contact Super Admin to get your account created.",
+            username="",
+            role="hostel_admin"
+        )
 
     # 5. Super Admin (College Super Admin or Hostel Super Admin)
     if role in ["super_admin", "superadmin", "hostel_super_admin", "college_super_admin"]:
@@ -453,7 +466,6 @@ def authenticate_user(req: LoginRequest) -> LoginResponse:
             else:
                 return LoginResponse(status="error", message="Incorrect password for Super Admin.", username="", role="super_admin")
 
-        # Fallback check for initial hostel admin 1 & 2
         if normalize_key(uname) in ["hostel admin 1", "hosteladmin1"] and pwd == "123456":
             return LoginResponse(
                 status="success",
@@ -557,6 +569,56 @@ def create_hostel_admin(req: CreateHostelAdminRequest) -> dict:
         "status": "success",
         "message": f"Hostel Admin '{uname}' created successfully!",
         "user": new_admin
+    }
+
+def create_staff_account(req: CreateStaffAccountRequest) -> dict:
+    users = load_users()
+    uname = req.username.strip()
+    pwd = req.password.strip()
+    target_role = req.role.lower().strip()
+    dept = (req.department or "CSE").upper().strip()
+
+    if not uname or not pwd:
+        return {"status": "error", "message": "Username and Password are required to provision a staff account."}
+
+    if target_role not in ["hod", "faculty", "hostel_admin"]:
+        return {"status": "error", "message": "Invalid staff role specified. Must be 'hod', 'faculty', or 'hostel_admin'."}
+
+    if find_user(uname):
+        return {"status": "error", "message": f"Staff username '{uname}' already exists in system."}
+
+    assigned_hod_code = req.hod_code
+    if target_role == "hod" and not assigned_hod_code:
+        assigned_hod_code = generate_hod_code(dept)
+    elif not assigned_hod_code:
+        assigned_hod_code = f"HOD-{dept}-4892"
+
+    desig = req.designation or (
+        f"Head of Department (HOD - {dept})" if target_role == "hod"
+        else f"Faculty Member ({dept})" if target_role == "faculty"
+        else "Hostel Warden"
+    )
+
+    new_staff = {
+        "username": uname,
+        "password": pwd,
+        "role": target_role,
+        "designation": desig,
+        "category": "hostel" if target_role == "hostel_admin" else "college",
+        "hod_code": assigned_hod_code,
+        "college_name": "SRKR Engineering College",
+        "department": dept,
+        "employee_id": req.employee_id or f"EMP_{uname.upper()}",
+        "mobile": req.mobile or "9876543210"
+    }
+
+    users[uname] = new_staff
+    save_users(users)
+
+    return {
+        "status": "success",
+        "message": f"Staff account ({target_role.upper()}) provisioned for '{uname}' with HOD Code '{assigned_hod_code}'!",
+        "user": new_staff
     }
 
 def upload_hostel_students_data(req: UploadHostelStudentsRequest) -> dict:

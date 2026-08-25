@@ -10,11 +10,13 @@ from app.auth import (
     LoginRequest,
     ChangeCredentialsRequest,
     CreateHostelAdminRequest,
+    CreateStaffAccountRequest,
     UploadHostelStudentsRequest,
     process_send_otp,
     authenticate_user,
     change_credentials,
     create_hostel_admin,
+    create_staff_account,
     upload_hostel_students_data,
     get_hostel_students,
     delete_hostel_student
@@ -365,6 +367,13 @@ def change_credentials_endpoint(req: ChangeCredentialsRequest):
 @app.post("/create-hostel-admin")
 def create_hostel_admin_endpoint(req: CreateHostelAdminRequest):
     res = create_hostel_admin(req)
+    if res.get("status") == "error":
+        raise HTTPException(status_code=400, detail=res.get("message"))
+    return res
+
+@app.post("/create-staff-account")
+def create_staff_account_endpoint(req: CreateStaffAccountRequest):
+    res = create_staff_account(req)
     if res.get("status") == "error":
         raise HTTPException(status_code=400, detail=res.get("message"))
     return res

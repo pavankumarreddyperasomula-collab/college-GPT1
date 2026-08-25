@@ -8,9 +8,10 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
   const role = (user.role || 'student').toLowerCase();
   const isHostelSuperAdmin = role === 'super_admin' && (user.super_admin_type === 'hostel' || user.category === 'hostel' || (user.username && user.username.toLowerCase().includes('hostel')));
   const isCollegeSuperAdmin = role === 'super_admin' && !isHostelSuperAdmin;
+  const isSuperAdmin = role === 'super_admin';
   const isHostelAdmin = role === 'hostel_admin' || isHostelSuperAdmin;
 
-  const [activeTab, setActiveTab] = useState('profile'); // 'profile', 'credentials', 'create_admin', 'upload_students'
+  const [activeTab, setActiveTab] = useState('profile'); // 'profile', 'credentials', 'create_staff', 'upload_students'
 
   // Change Credentials Form state
   const [newUsername, setNewUsername] = useState(user.username || '');
@@ -19,15 +20,18 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
   const [credError, setCredError] = useState('');
   const [credLoading, setCredLoading] = useState(false);
 
-  // Create Hostel Admin Form state
-  const [adminUname, setAdminUname] = useState('');
-  const [adminPwd, setAdminPwd] = useState('');
-  const [adminDesig, setAdminDesig] = useState('Hostel Warden Block A');
-  const [createMsg, setCreateMsg] = useState('');
-  const [createError, setCreateError] = useState('');
-  const [createLoading, setCreateLoading] = useState(false);
+  // Staff Account Provisioning State (Super Admin Only)
+  const [staffRole, setStaffRole] = useState('hod'); // 'hod', 'faculty', 'hostel_admin'
+  const [staffUname, setStaffUname] = useState('');
+  const [staffPwd, setStaffPwd] = useState('');
+  const [staffDept, setStaffDept] = useState('CSE');
+  const [staffDesig, setStaffDesig] = useState('');
+  const [staffMobile, setStaffMobile] = useState('9876543210');
+  const [staffMsg, setStaffMsg] = useState('');
+  const [staffError, setStaffError] = useState('');
+  const [staffLoading, setStaffLoading] = useState(false);
 
-  // Upload Hostel Students Data state
+  // Hostel Roster Upload State
   const [rawStudentData, setRawStudentData] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploadMsg, setUploadMsg] = useState('');
@@ -85,35 +89,39 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
     }
   };
 
-  const handleCreateHostelAdmin = async (e) => {
+  const handleCreateStaffAccount = async (e) => {
     e.preventDefault();
-    setCreateMsg('');
-    setCreateError('');
-    setCreateLoading(true);
+    setStaffMsg('');
+    setStaffError('');
+    setStaffLoading(true);
 
     try {
-      const res = await fetch(`${API_URL}/create-hostel-admin`, {
+      const res = await fetch(`${API_URL}/create-staff-account`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           created_by: user.username,
-          username: adminUname.trim(),
-          password: adminPwd.trim(),
-          designation: adminDesig
+          role: staffRole,
+          username: staffUname.trim(),
+          password: staffPwd.trim(),
+          department: staffDept,
+          designation: staffDesig.trim() || undefined,
+          mobile: staffMobile.trim()
         })
       });
       const data = await res.json();
       if (res.ok && data.status === 'success') {
-        setCreateMsg(data.message);
-        setAdminUname('');
-        setAdminPwd('');
+        setStaffMsg(data.message);
+        setStaffUname('');
+        setStaffPwd('');
+        setStaffDesig('');
       } else {
-        setCreateError(data.detail || data.message || 'Failed to create Hostel Admin.');
+        setStaffError(data.detail || data.message || 'Failed to provision staff account.');
       }
     } catch (err) {
-      setCreateError('Backend server error.');
+      setStaffError('Backend server error.');
     } finally {
-      setCreateLoading(false);
+      setStaffLoading(false);
     }
   };
 
@@ -182,7 +190,7 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
             <img src="/srkr_logo.png" alt="SRKR Logo" className="h-9 object-contain" />
             <div>
               <h3 className="text-lg font-extrabold text-slate-900">
-                {isHostelSuperAdmin ? 'Hostel Super Admin Hub' : 'User Account & Profile'}
+                {isHostelSuperAdmin ? 'Hostel Super Admin Hub' : (isCollegeSuperAdmin ? 'College Super Admin Hub' : 'User Account & Profile')}
               </h3>
               <p className="text-xs text-slate-500 font-medium">
                 SRKR COLLEGE GPT account & settings
@@ -227,14 +235,14 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
             </button>
           )}
 
-          {isHostelSuperAdmin && (
+          {isSuperAdmin && (
             <button
-              onClick={() => setActiveTab('create_admin')}
+              onClick={() => setActiveTab('create_staff')}
               className={`px-3 py-2 rounded-xl transition-all cursor-pointer shrink-0 flex items-center gap-1 ${
-                activeTab === 'create_admin' ? 'bg-white text-emerald-700 shadow-xs' : 'text-slate-500 hover:text-slate-800'
+                activeTab === 'create_staff' ? 'bg-white text-emerald-700 shadow-xs' : 'text-slate-500 hover:text-slate-800'
               }`}
             >
-              <UserPlus className="w-3.5 h-3.5 text-emerald-600" /> Create Hostel Admin
+              <UserPlus className="w-3.5 h-3.5 text-emerald-600" /> Add Staff Member
             </button>
           )}
         </div>
@@ -296,13 +304,13 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
                   </div>
                 )}
 
-                {isHostelSuperAdmin && (
-                  <div className="p-4 rounded-2xl bg-amber-100/70 border border-amber-300 space-y-2 text-xs text-amber-950">
-                    <h5 className="font-black flex items-center gap-1.5 text-amber-900">
-                      <ShieldCheck className="w-4 h-4 text-amber-700" /> Hostel Super Admin Directives
-                    </h5>
+                {isSuperAdmin && (
+                  <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200 space-y-2 text-xs text-indigo-950">
+                    <span className="font-bold uppercase tracking-wider text-[11px] text-indigo-900 block flex items-center gap-1.5">
+                      <UserPlus className="w-4 h-4 text-indigo-600" /> Invite-Only Staff Account Provisioning Active
+                    </span>
                     <p className="leading-relaxed">
-                      You are one of the 2 authorized Hostel Super Admin members. You have overall hostel administration rights, including uploading student rosters and creating Hostel Admins.
+                      Public admin self-registration is disabled. Super Admin has exclusive authority to provision HOD, Faculty, and Hostel Admin accounts from the <strong>"Add Staff Member"</strong> tab.
                     </p>
                   </div>
                 )}
@@ -310,11 +318,11 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
             </div>
           )}
 
-          {/* TAB 2: CHANGE CREDENTIALS */}
+          {/* TAB 2: EDIT CREDENTIALS */}
           {activeTab === 'credentials' && (
             <form onSubmit={handleChangeCredentials} className="space-y-3.5">
-              <div className="p-3 bg-violet-50 border border-violet-200 rounded-xl text-xs text-violet-900 font-medium">
-                Update your login username and/or personal password. Next login will require the updated credentials.
+              <div className="p-3 bg-violet-50 border border-violet-100 rounded-xl text-xs text-violet-900 font-medium">
+                Update your account username and password for instant login.
               </div>
 
               {credMsg && (
@@ -335,8 +343,8 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
                 </label>
                 <input
                   type="text"
-                  disabled
-                  value={user.username}
+                  readOnly
+                  value={user.username || ''}
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-500 font-mono text-xs cursor-not-allowed"
                 />
               </div>
@@ -459,72 +467,130 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated }) => {
             </div>
           )}
 
-          {/* TAB 4: CREATE HOSTEL ADMIN (HOSTEL SUPER ADMIN ONLY) */}
-          {activeTab === 'create_admin' && isHostelSuperAdmin && (
-            <form onSubmit={handleCreateHostelAdmin} className="space-y-3.5">
+          {/* TAB 4: PROVISION STAFF ACCOUNT (SUPER ADMIN ONLY) */}
+          {activeTab === 'create_staff' && isSuperAdmin && (
+            <form onSubmit={handleCreateStaffAccount} className="space-y-3.5">
               <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-900 font-medium">
-                As Hostel Super Admin, create a new Hostel Admin user and assign their username & password.
+                Provision a new HOD, Faculty, or Hostel Admin account. Hand the provisioned username & password directly to the staff member.
               </div>
 
-              {createMsg && (
+              {staffMsg && (
                 <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> {createMsg}
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" /> {staffMsg}
                 </div>
               )}
 
-              {createError && (
+              {staffError && (
                 <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-bold">
-                  {createError}
+                  {staffError}
                 </div>
               )}
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  HOSTEL ADMIN USERNAME
+                  STAFF ROLE
                 </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. hostel_warden_block_b"
-                  value={adminUname}
-                  onChange={(e) => setAdminUname(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-sm font-medium outline-none"
-                />
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setStaffRole('hod')}
+                    className={`py-2 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
+                      staffRole === 'hod' ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    HOD
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStaffRole('faculty')}
+                    className={`py-2 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
+                      staffRole === 'faculty' ? 'bg-emerald-600 text-white border-emerald-700 shadow-xs' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    Faculty
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setStaffRole('hostel_admin')}
+                    className={`py-2 rounded-xl text-xs font-bold border cursor-pointer transition-all ${
+                      staffRole === 'hostel_admin' ? 'bg-amber-600 text-white border-amber-700 shadow-xs' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                    }`}
+                  >
+                    Hostel Admin
+                  </button>
+                </div>
               </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    USERNAME / ID
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. hod_ece_srkr"
+                    value={staffUname}
+                    onChange={(e) => setStaffUname(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-bold outline-none"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    ASSIGN PASSWORD
+                  </label>
+                  <input
+                    type="password"
+                    required
+                    placeholder="Initial password"
+                    value={staffPwd}
+                    onChange={(e) => setStaffPwd(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-bold outline-none"
+                  />
+                </div>
+              </div>
+
+              {staffRole !== 'hostel_admin' && (
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                    DEPARTMENT
+                  </label>
+                  <select
+                    value={staffDept}
+                    onChange={(e) => setStaffDept(e.target.value)}
+                    className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-bold outline-none cursor-pointer"
+                  >
+                    <option value="CSE">CSE (Computer Science)</option>
+                    <option value="ECE">ECE (Electronics & Comm.)</option>
+                    <option value="EEE">EEE (Electrical & Electronics)</option>
+                    <option value="MECHANICAL">MECHANICAL Engineering</option>
+                    <option value="IT">IT (Information Technology)</option>
+                  </select>
+                </div>
+              )}
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  ASSIGN INITIAL PASSWORD
-                </label>
-                <input
-                  type="password"
-                  required
-                  placeholder="Assign password"
-                  value={adminPwd}
-                  onChange={(e) => setAdminPwd(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-sm outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  DESIGNATION / BLOCK
+                  DESIGNATION / TITLE
                 </label>
                 <input
                   type="text"
-                  placeholder="e.g. Warden - Block A"
-                  value={adminDesig}
-                  onChange={(e) => setAdminDesig(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-semibold outline-none"
+                  placeholder={
+                    staffRole === 'hod' ? 'Head of Department (HOD - ECE)' : (staffRole === 'faculty' ? 'Assistant Professor' : 'Warden - Block B')
+                  }
+                  value={staffDesig}
+                  onChange={(e) => setStaffDesig(e.target.value)}
+                  className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white text-slate-900 text-xs font-medium outline-none"
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={createLoading || !adminUname.trim() || !adminPwd.trim()}
+                disabled={staffLoading || !staffUname.trim() || !staffPwd.trim()}
                 className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-md transition-all cursor-pointer"
               >
-                {createLoading ? 'Creating Account...' : 'Create & Save Hostel Admin Credentials'}
+                {staffLoading ? 'Provisioning Staff Account...' : `Provision ${staffRole.toUpperCase()} Account`}
               </button>
             </form>
           )}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ShieldCheck, Building2, CheckCircle2, Building, Home } from 'lucide-react';
+import { ArrowLeft, ShieldCheck, Building2, CheckCircle2, Building, Home, Lock, Info } from 'lucide-react';
 import SpecularButton from './SpecularButton';
 import { API_URL } from '../config';
 
@@ -11,10 +11,8 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
   const [superAdminCategory, setSuperAdminCategory] = useState('college'); // 'college' or 'hostel'
 
   // Form fields for HOD / Faculty / Super Admin / Hostel Admin
-  const [empId, setEmpId] = useState('');
-  const [collegeName, setCollegeName] = useState('SRKR Engineering College');
-  const [department, setDepartment] = useState('CSE');
-  const [password, setPassword] = useState('');
+  const [empId, setEmpId] = useState('hod_cse');
+  const [password, setPassword] = useState('admin123');
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,6 +21,10 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
     e.preventDefault();
     if (!empId.trim()) {
       setError('Please enter your Employee ID / Username.');
+      return;
+    }
+    if (!password.trim()) {
+      setError('Please enter your password.');
       return;
     }
     setError('');
@@ -46,12 +48,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           username: empId.trim(),
           password: password.trim(),
           employee_id: empId.trim(),
-          college_name: collegeName.trim(),
-          department: department.trim(),
-          super_admin_type: superAdminCategory,
-          designation: activeTab === 'super_admin'
-            ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin' : 'College Super Admin')
-            : adminType
+          super_admin_type: superAdminCategory
         })
       });
       const data = await res.json();
@@ -61,7 +58,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         setError(data.detail || data.message || 'Authentication failed.');
       }
     } catch (err) {
-      setError('Cannot connect to backend server on port 8000.');
+      setError('Cannot connect to backend server.');
     } finally {
       setLoading(false);
     }
@@ -69,6 +66,13 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
 
   const handlePresetSuperAdmin = (type, uname, pwd) => {
     setSuperAdminCategory(type);
+    setEmpId(uname);
+    setPassword(pwd);
+    setError('');
+  };
+
+  const handlePresetStaff = (type, uname, pwd) => {
+    setAdminType(type);
     setEmpId(uname);
     setPassword(pwd);
     setError('');
@@ -97,10 +101,10 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-5 w-full border border-slate-200">
+        <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-4 w-full border border-slate-200">
           <button
             type="button"
-            onClick={() => { setActiveTab('admin'); setError(''); setEmpId(''); setPassword(''); }}
+            onClick={() => { setActiveTab('admin'); setError(''); handlePresetStaff('HOD', 'hod_cse', 'admin123'); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'admin'
                 ? 'bg-white text-orange-700 shadow-xs'
@@ -111,7 +115,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </button>
           <button
             type="button"
-            onClick={() => { setActiveTab('super_admin'); setError(''); setEmpId('superadmin_main'); setPassword('admin123'); }}
+            onClick={() => { setActiveTab('super_admin'); setError(''); handlePresetSuperAdmin('college', 'superadmin_main', 'admin123'); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'super_admin'
                 ? 'bg-white text-slate-900 shadow-xs'
@@ -122,7 +126,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           </button>
         </div>
 
-        <div className="flex items-center gap-3 mb-4 w-full">
+        <div className="flex items-center gap-3 mb-3 w-full">
           <div className={`w-10 h-10 rounded-2xl text-white flex items-center justify-center shrink-0 shadow-lg ${
             activeTab === 'super_admin' ? 'bg-slate-900 shadow-slate-900/30' : 'bg-orange-600 shadow-orange-600/30'
           }`}>
@@ -135,9 +139,17 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                 : `${adminType} Access`}
             </h2>
             <p className="text-xs text-slate-500 font-medium">
-              {activeTab === 'super_admin' ? 'Full administrative authority & dispatch scope' : 'Official administration portal'}
+              {activeTab === 'super_admin' ? 'Full administrative authority & provisioning scope' : 'Invite-only staff administration portal'}
             </p>
           </div>
+        </div>
+
+        {/* Invite-Only Banner Notice */}
+        <div className="p-3 mb-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-900 text-xs font-medium w-full flex items-start gap-2">
+          <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+          <p className="leading-tight">
+            <strong>Invite-Only Access:</strong> Staff accounts are provisioned exclusively by Campus Super Admin. Enter your assigned credentials below.
+          </p>
         </div>
 
         {error && (
@@ -212,14 +224,14 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
 
         {/* Academic / Hostel Admin Designation Switcher */}
         {activeTab === 'admin' && (
-          <div className="mb-4 w-full">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-              DESIGNATION CHOICE
+          <div className="mb-4 w-full space-y-2">
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              SELECT STAFF ROLE PRESET
             </label>
             <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-50 border border-slate-200 rounded-xl">
               <button
                 type="button"
-                onClick={() => { setAdminType('HOD'); setError(''); }}
+                onClick={() => handlePresetStaff('HOD', 'hod_cse', 'admin123')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   adminType === 'HOD' ? 'bg-violet-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
@@ -228,7 +240,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
               </button>
               <button
                 type="button"
-                onClick={() => { setAdminType('Faculty'); setError(''); }}
+                onClick={() => handlePresetStaff('Faculty', 'fac_cse', 'admin123')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   adminType === 'Faculty' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
@@ -237,7 +249,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
               </button>
               <button
                 type="button"
-                onClick={() => { setAdminType('Hostel Admin'); setError(''); setEmpId('warden_rajesh'); setPassword('123456'); }}
+                onClick={() => handlePresetStaff('Hostel Admin', 'warden_rajesh', '123456')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                   adminType === 'Hostel Admin' ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
                 }`}
@@ -252,54 +264,17 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         <form onSubmit={handleStandardSubmit} className="space-y-3.5 w-full">
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-              USERNAME / ID
+              PROVISIONED USERNAME / ID
             </label>
             <input
               type="text"
               required
-              placeholder={
-                activeTab === 'super_admin'
-                  ? (superAdminCategory === 'hostel' ? 'hostel admin 1' : 'superadmin_main')
-                  : (adminType === 'Hostel Admin' ? 'warden_rajesh' : 'HOD_CSE_001')
-              }
+              placeholder="Enter provisioned username"
               value={empId}
               onChange={(e) => setEmpId(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all font-medium"
             />
           </div>
-
-          <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-              COLLEGE NAME
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="SRKR Engineering College"
-              value={collegeName}
-              onChange={(e) => setCollegeName(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all font-medium"
-            />
-          </div>
-
-          {activeTab === 'admin' && adminType !== 'Hostel Admin' && (
-            <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                <Building className="w-3.5 h-3.5 text-indigo-600" /> DEPARTMENT
-              </label>
-              <select
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-                className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-xs font-bold outline-none transition-all cursor-pointer"
-              >
-                <option value="CSE">CSE (Computer Science & Engineering)</option>
-                <option value="ECE">ECE (Electronics & Communication)</option>
-                <option value="EEE">EEE (Electrical & Electronics)</option>
-                <option value="MECHANICAL">MECHANICAL Engineering</option>
-                <option value="IT">IT (Information Technology)</option>
-              </select>
-            </div>
-          )}
 
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">

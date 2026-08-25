@@ -5,7 +5,7 @@
     "role": "student",
     "designation": "Student",
     "category": "hostel",
-    "hod_code": "HOD-Arjun-4892",
+    "hod_code": "HOD-CSE-4892",
     "super_admin_key": "SUPER-ADMIN",
     "is_hostel_resident": true,
     "college_name": "SRKR Engineering College",
@@ -18,7 +18,7 @@
     "role": "student",
     "designation": "Student",
     "category": "hostel",
-    "hod_code": "HOD-Arjun-4892",
+    "hod_code": "HOD-CSE-4892",
     "super_admin_key": "SUPER-ADMIN",
     "is_hostel_resident": true,
     "college_name": "SRKR Engineering College",
@@ -31,7 +31,7 @@
     "role": "hostel_admin",
     "designation": "Warden Block A",
     "category": "hostel",
-    "hod_code": "",
+    "hod_code": "HOSTEL-ADMIN",
     "college_name": "SRKR Engineering College",
     "department": "Hostel Affairs",
     "mobile": "9876543210"
@@ -81,5 +81,49 @@
     "college_name": "SRKR Engineering College",
     "department": "CSE",
     "branch": "CSE"
+  },
+  "hod_ece_test": {
+    "username": "hod_ece_test",
+    "password": "password123",
+    "role": "hod",
+    "designation": "Head of Department (HOD - ECE)",
+    "category": "college",
+    "hod_code": "HOD-ECE-1847",
+    "college_name": "SRKR Engineering College",
+    "department": "ECE",
+    "employee_id": "EMP_HOD_ECE_TEST",
+    "mobile": "9876543210"
+  },
+  "hod_cse": {
+    "username": "hod_cse",
+    "password": "admin123",
+    "role": "hod",
+    "designation": "HOD - CSE",
+    "category": "college",
+    "hod_code": "HOD-CSE-4892",
+    "college_name": "SRKR Engineering College",
+    "department": "CSE",
+    "employee_id": "EMP_HOD_CSE"
+  },
+  "fac_cse": {
+    "username": "fac_cse",
+    "password": "admin123",
+    "role": "faculty",
+    "designation": "Faculty - CSE",
+    "category": "college",
+    "hod_code": "HOD-CSE-4892",
+    "college_name": "SRKR Engineering College",
+    "department": "CSE",
+    "employee_id": "EMP_FAC_CSE"
+  },
+  "hosteladmin_arjun": {
+    "username": "hosteladmin_arjun",
+    "password": "admin123",
+    "role": "hod",
+    "designation": "HOD Hostel Affairs",
+    "category": "hostel",
+    "hod_code": "HOD-HOSTEL-4892",
+    "college_name": "SRKR Engineering College",
+    "department": "Hostel Affairs"
   }
 }
