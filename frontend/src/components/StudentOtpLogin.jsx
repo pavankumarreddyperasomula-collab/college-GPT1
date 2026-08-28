@@ -106,13 +106,13 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
   };
 
   return (
-    <div className="relative w-full h-[100dvh] flex flex-col items-center justify-center p-4 bg-gradient-to-br from-orange-50/80 via-rose-50/50 to-amber-50/40 overflow-hidden">
-      <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-xl border border-orange-100/80 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-orange-900/5 animate-fade-in flex flex-col items-center max-h-[95vh] overflow-y-auto">
+    <div className="login-bg-container relative w-full h-[100dvh] flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div className="glass-panel-pure max-w-md w-full p-6 sm:p-8 animate-fade-in flex flex-col items-center max-h-[95vh] overflow-y-auto">
         {/* Top Navigation */}
         <div className="w-full flex items-center justify-between mb-2">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/80 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" /> Back to role selection
           </button>
@@ -123,19 +123,19 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
           <img
             src="/srkr_logo.png"
             alt="SRKR Engineering College Logo"
-            className="h-12 sm:h-14 object-contain drop-shadow-sm hover:scale-105 transition-transform"
+            className="h-12 sm:h-14 object-contain filter drop-shadow-md hover:scale-105 transition-transform"
           />
         </div>
 
         {/* Mode Switcher Tabs */}
-        <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-4 w-full border border-slate-200">
+        <div className="flex bg-white/10 backdrop-blur-md p-1.5 rounded-2xl mb-4 w-full border border-white/20">
           <button
             type="button"
             onClick={() => { setIsRegister(false); setError(''); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               !isRegister
-                ? 'bg-white text-orange-600 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-white/25 text-white shadow-xs border border-white/30 backdrop-blur-md'
+                : 'text-white/70 hover:text-white'
             }`}
           >
             Student Login
@@ -145,8 +145,8 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
             onClick={() => { setIsRegister(true); setError(''); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               isRegister
-                ? 'bg-white text-rose-600 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-white/25 text-white shadow-xs border border-white/30 backdrop-blur-md'
+                : 'text-white/70 hover:text-white'
             }`}
           >
             Create Account
@@ -154,33 +154,33 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
         </div>
 
         <div className="flex items-center gap-3 mb-3 w-full">
-          <div className="w-9 h-9 rounded-2xl bg-orange-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-orange-600/25">
-            <User className="w-4 h-4" />
+          <div className="w-10 h-10 rounded-2xl glass-icon-badge flex items-center justify-center shrink-0 shadow-inner">
+            <User className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-extrabold text-slate-900">
+            <h2 className="text-lg font-extrabold text-white tracking-tight">
               {isRegister ? 'New Student Registration' : 'Student Portal Access'}
             </h2>
-            <p className="text-[11px] text-slate-500 font-medium">
-              {isRegister ? 'Enter 10-char roll number & HOD/Admin keys' : 'Enter 10-digit roll number to continue'}
+            <p className="text-[11px] text-white/80 font-medium">
+              {isRegister ? 'Enter 10-char roll number & details' : 'Enter 10-digit roll number to continue'}
             </p>
           </div>
         </div>
 
         {error && (
-          <div className="mb-3 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium w-full">
+          <div className="mb-3 p-3 rounded-xl bg-red-500/25 backdrop-blur-md border border-red-400/40 text-red-100 text-xs font-medium w-full">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-3 w-full">
-          {/* USERNAME Field (10-characters starting with 25b91a) */}
+        <form onSubmit={handleSubmit} className="space-y-3.5 w-full">
+          {/* USERNAME Field */}
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-white/90 uppercase tracking-wider">
                 STUDENT USERNAME / ROLL NO
               </label>
-              <span className="text-[10px] font-mono font-bold text-orange-700 bg-orange-100/80 px-1.5 py-0.5 rounded">
+              <span className="text-[10px] font-mono font-bold text-white bg-white/20 border border-white/30 px-2 py-0.5 rounded-full">
                 Starts with "25b91a" (10 chars)
               </span>
             </div>
@@ -194,18 +194,18 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
                 onChange={(e) => setUsername(e.target.value)}
                 spellCheck={false}
                 autoComplete="off"
-                className="w-full pl-4 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-orange-600 text-slate-900 text-sm font-mono outline-none transition-all"
+                className="glass-input-pure w-full pl-4 pr-10 py-2.5 rounded-xl text-white text-sm font-mono outline-none transition-all"
               />
-              <User className="w-4 h-4 text-slate-400 absolute right-3.5 top-3 pointer-events-none" />
+              <User className="w-4 h-4 text-white/60 absolute right-3.5 top-3 pointer-events-none" />
             </div>
-            <p className="text-[10px] text-slate-400 mt-1">
-              Must be exactly 10 characters (e.g. <span className="font-mono text-slate-600 font-bold">25b91a54j0</span>).
+            <p className="text-[10px] text-white/70 mt-1">
+              Must be exactly 10 characters (e.g. <span className="font-mono text-white font-bold">25b91a54j0</span>).
             </p>
           </div>
 
           {/* PASSWORD Field */}
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-white/90 uppercase tracking-wider mb-1">
               {isRegister ? 'CREATE PASSWORD' : 'PASSWORD'}
             </label>
             <div className="relative">
@@ -216,9 +216,9 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 spellCheck={false}
-                className="w-full pl-4 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-orange-600 text-slate-900 text-sm outline-none transition-all"
+                className="glass-input-pure w-full pl-4 pr-10 py-2.5 rounded-xl text-white text-sm outline-none transition-all"
               />
-              <Lock className="w-4 h-4 text-slate-400 absolute right-3.5 top-3 pointer-events-none" />
+              <Lock className="w-4 h-4 text-white/60 absolute right-3.5 top-3 pointer-events-none" />
             </div>
           </div>
 
@@ -227,34 +227,34 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
             <>
               {/* Department */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                  <GraduationCap className="w-3.5 h-3.5 text-orange-600" /> DEPARTMENT
+                <label className="block text-xs font-bold text-white/90 uppercase tracking-wider mb-1 flex items-center gap-1">
+                  <GraduationCap className="w-3.5 h-3.5 text-amber-300" /> DEPARTMENT
                 </label>
                 <select
                   value={department}
                   onChange={(e) => handleDepartmentChange(e.target.value)}
-                  className="w-full px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-orange-600 text-slate-900 text-xs font-bold outline-none transition-all cursor-pointer"
+                  className="glass-input-pure w-full px-4 py-2.5 rounded-xl text-white text-xs font-bold outline-none transition-all cursor-pointer"
                 >
-                  <option value="CSE">CSE (Computer Science & Engineering)</option>
-                  <option value="IT">IT (Information Technology)</option>
-                  <option value="ECE">ECE (Electronics & Communication)</option>
-                  <option value="EEE">EEE (Electrical & Electronics)</option>
-                  <option value="MECHANICAL">MECHANICAL Engineering</option>
+                  <option value="CSE" className="bg-slate-900 text-white">CSE (Computer Science & Engineering)</option>
+                  <option value="IT" className="bg-slate-900 text-white">IT (Information Technology)</option>
+                  <option value="ECE" className="bg-slate-900 text-white">ECE (Electronics & Communication)</option>
+                  <option value="EEE" className="bg-slate-900 text-white">EEE (Electrical & Electronics)</option>
+                  <option value="MECHANICAL" className="bg-slate-900 text-white">MECHANICAL Engineering</option>
                 </select>
               </div>
 
               {/* Branch */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-                  <GitBranch className="w-3.5 h-3.5 text-rose-600" /> BRANCH / SPECIALIZATION
+                <label className="block text-xs font-bold text-white/90 uppercase tracking-wider mb-1 flex items-center gap-1">
+                  <GitBranch className="w-3.5 h-3.5 text-amber-300" /> BRANCH / SPECIALIZATION
                 </label>
                 <select
                   value={branch}
                   onChange={(e) => setBranch(e.target.value)}
-                  className="w-full px-4 py-2 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-rose-600 text-slate-900 text-xs font-bold outline-none transition-all cursor-pointer"
+                  className="glass-input-pure w-full px-4 py-2.5 rounded-xl text-white text-xs font-bold outline-none transition-all cursor-pointer"
                 >
                   {getBranchOptions().map((opt) => (
-                    <option key={opt.value} value={opt.value}>
+                    <option key={opt.value} value={opt.value} className="bg-slate-900 text-white">
                       {opt.label}
                     </option>
                   ))}
@@ -264,19 +264,19 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
           )}
 
           {/* Hostel Resident Checkbox */}
-          <div className="p-3 rounded-xl bg-orange-50/70 border border-orange-200/80">
+          <div className="p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={isHostelResident}
                 onChange={(e) => setIsHostelResident(e.target.checked)}
-                className="w-4 h-4 mt-0.5 rounded text-orange-600 focus:ring-orange-500 border-slate-300"
+                className="w-4 h-4 mt-0.5 rounded accent-amber-400 border-white/30 bg-white/10"
               />
               <div>
-                <span className="text-xs font-bold text-slate-900 flex items-center gap-1.5">
-                  <Home className="w-3.5 h-3.5 text-orange-600" /> I am a hostel resident
+                <span className="text-xs font-bold text-white flex items-center gap-1.5">
+                  <Home className="w-3.5 h-3.5 text-amber-300" /> I am a hostel resident
                 </span>
-                <p className="text-[10px] text-slate-500 mt-0.5 leading-snug">
+                <p className="text-[10px] text-white/80 mt-0.5 leading-snug">
                   Check if staying in SRKR college hostel for curfew & mess notices.
                 </p>
               </div>
@@ -295,8 +295,8 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
           </div>
 
           <div className="text-center pt-1">
-            <p className="text-[11px] text-slate-400">
-              Demo Student: <span className="font-mono text-slate-700 font-bold">25b91a54j0</span> / <span className="font-mono text-slate-700 font-bold">student123</span>
+            <p className="text-[11px] text-white/70 font-medium">
+              Demo Student: <span className="font-mono text-white font-bold">25b91a54j0</span> / <span className="font-mono text-white font-bold">student123</span>
             </p>
           </div>
         </form>
@@ -306,3 +306,4 @@ const StudentOtpLogin = ({ onBack, onLoginSuccess }) => {
 };
 
 export default StudentOtpLogin;
+

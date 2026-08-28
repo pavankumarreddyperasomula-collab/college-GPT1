@@ -7,32 +7,119 @@ html, body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 237, 213, 0.6) 0%, rgba(254, 242, 242, 0.7) 45.8%, rgba(248, 250, 252, 0.9) 100%);
-  color: #0f172a;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0f172a;
+  color: #ffffff;
 }
 
-/* Custom Modern Reddish-Orange Glassmorphism Scrollbar */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Custom Glassmorphism Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 237, 213, 0.3);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(249, 115, 22, 0.35);
+  background: rgba(255, 255, 255, 0.25);
   border-radius: 9999px;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #ea580c, #e11d48);
+  background: rgba(255, 255, 255, 0.45);
 }
 
-/* Reddish Orange White Glassmorphism Design System Utility Classes */
+/* =========================================================
+   PURE GLASSMORPHISM DESIGN SYSTEM FOR CAMPUS GPT LOGIN & APP
+   ========================================================= */
+
+/* 1. Full Screen Campus Background Container with Subtle Overlay */
+.login-bg-container {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.65)), url('/srkr_campus_bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Fallback if background image load fails */
+.login-bg-container-fallback {
+  background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.95)), url('/srkr_campus_map.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* 2. Transparent Glass Panel Effect (Main Containers) */
+.glass-panel-pure {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+}
+
+/* 3. Transparent Glass Card Effect (Role Selection & Interactive Cards) */
+.glass-card-pure {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover States for Glass Cards */
+.glass-card-pure:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.02);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+}
+
+/* 4. Frosted Glass Input Fields */
+.glass-input-pure {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-input-pure::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.glass-input-pure:focus {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.50);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
+  outline: none;
+}
+
+/* 5. Frosted Glass Icon Badges */
+.glass-icon-badge {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Legacy & App Dashboard Glass Styles */
 .glass-panel {
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(16px);
@@ -103,31 +190,4 @@ html, body {
   animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Warm Reddish-Orange Aurora Glow Animations */
-@keyframes auroraGlow1 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.5; }
-  50% { transform: translate(40px, -30px) scale(1.15); opacity: 0.7; }
-}
-
-@keyframes auroraGlow2 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.4; }
-  50% { transform: translate(-35px, 25px) scale(1.2); opacity: 0.65; }
-}
-
-@keyframes auroraGlow3 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.45; }
-  50% { transform: translate(25px, 35px) scale(1.1); opacity: 0.6; }
-}
-
-.animate-aurora-glow-1 {
-  animation: auroraGlow1 9s ease-in-out infinite;
-}
-
-.animate-aurora-glow-2 {
-  animation: auroraGlow2 11s ease-in-out infinite;
-}
-
-.animate-aurora-glow-3 {
-  animation: auroraGlow3 13s ease-in-out infinite;
-}
 

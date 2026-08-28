@@ -79,13 +79,13 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
   };
 
   return (
-    <div className="relative w-full h-[100dvh] flex flex-col items-center justify-center p-4 bg-gradient-to-br from-orange-50/80 via-rose-50/50 to-amber-50/40 overflow-hidden">
-      <div className="relative z-10 max-w-md w-full bg-white/95 backdrop-blur-xl border border-orange-100/80 rounded-3xl p-7 sm:p-8 shadow-2xl shadow-orange-900/5 animate-fade-in flex flex-col items-center max-h-[95vh] overflow-y-auto">
+    <div className="login-bg-container relative w-full h-[100dvh] flex flex-col items-center justify-center p-4 overflow-hidden">
+      <div className="glass-panel-pure max-w-md w-full p-7 sm:p-8 animate-fade-in flex flex-col items-center max-h-[95vh] overflow-y-auto">
         {/* Top Navigation */}
         <div className="w-full flex items-center justify-between mb-3">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-orange-600 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/80 hover:text-white transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" /> Back to role selection
           </button>
@@ -96,19 +96,19 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
           <img
             src="/srkr_logo.png"
             alt="SRKR Engineering College Logo"
-            className="h-14 sm:h-16 object-contain drop-shadow-sm hover:scale-105 transition-transform"
+            className="h-14 sm:h-16 object-contain filter drop-shadow-md hover:scale-105 transition-transform"
           />
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex bg-slate-100 p-1.5 rounded-2xl mb-4 w-full border border-slate-200">
+        <div className="flex bg-white/10 backdrop-blur-md p-1.5 rounded-2xl mb-4 w-full border border-white/20">
           <button
             type="button"
             onClick={() => { setActiveTab('admin'); setError(''); handlePresetStaff('HOD', 'hod_cse', 'admin123'); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'admin'
-                ? 'bg-white text-orange-700 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-white/25 text-white shadow-xs border border-white/30 backdrop-blur-md'
+                : 'text-white/70 hover:text-white'
             }`}
           >
             Academic / Hostel Admin
@@ -118,8 +118,8 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
             onClick={() => { setActiveTab('super_admin'); setError(''); handlePresetSuperAdmin('college', 'superadmin_main', 'admin123'); }}
             className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               activeTab === 'super_admin'
-                ? 'bg-white text-slate-900 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                ? 'bg-white/25 text-white shadow-xs border border-white/30 backdrop-blur-md'
+                : 'text-white/70 hover:text-white'
             }`}
           >
             Super Admin
@@ -127,33 +127,31 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         </div>
 
         <div className="flex items-center gap-3 mb-3 w-full">
-          <div className={`w-10 h-10 rounded-2xl text-white flex items-center justify-center shrink-0 shadow-lg ${
-            activeTab === 'super_admin' ? 'bg-slate-900 shadow-slate-900/30' : 'bg-orange-600 shadow-orange-600/30'
-          }`}>
-            {activeTab === 'super_admin' ? <Building2 className="w-5 h-5" /> : <ShieldCheck className="w-5 h-5" />}
+          <div className="w-10 h-10 rounded-2xl glass-icon-badge flex items-center justify-center shrink-0 shadow-inner">
+            {activeTab === 'super_admin' ? <Building2 className="w-5 h-5 text-white" /> : <ShieldCheck className="w-5 h-5 text-white" />}
           </div>
           <div>
-            <h2 className="text-xl font-extrabold text-slate-900">
+            <h2 className="text-xl font-extrabold text-white tracking-tight">
               {activeTab === 'super_admin'
                 ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin Portal' : 'College Super Admin Portal')
                 : `${adminType} Access`}
             </h2>
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-xs text-white/80 font-medium">
               {activeTab === 'super_admin' ? 'Full administrative authority & provisioning scope' : 'Invite-only staff administration portal'}
             </p>
           </div>
         </div>
 
         {/* Invite-Only Banner Notice */}
-        <div className="p-3 mb-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-amber-900 text-xs font-medium w-full flex items-start gap-2">
-          <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-          <p className="leading-tight">
-            <strong>Invite-Only Access:</strong> Staff accounts are provisioned exclusively by Campus Super Admin. Enter your assigned credentials below.
+        <div className="p-3 mb-4 rounded-2xl bg-amber-500/20 backdrop-blur-md border border-amber-400/30 text-white text-xs font-medium w-full flex items-start gap-2">
+          <Info className="w-4 h-4 text-amber-300 shrink-0 mt-0.5" />
+          <p className="leading-tight text-white/90">
+            <strong className="text-white">Invite-Only Access:</strong> Staff accounts are provisioned exclusively by Campus Super Admin. Enter your assigned credentials below.
           </p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium w-full">
+          <div className="mb-4 p-3 rounded-xl bg-red-500/25 backdrop-blur-md border border-red-400/40 text-red-100 text-xs font-medium w-full">
             {error}
           </div>
         )}
@@ -161,17 +159,17 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         {/* Super Admin Sub-Category Selector */}
         {activeTab === 'super_admin' && (
           <div className="mb-4 w-full space-y-2">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-white/90 uppercase tracking-wider">
               SUPER ADMIN CATEGORY
             </label>
-            <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 border border-slate-200 rounded-xl">
+            <div className="grid grid-cols-2 gap-2 p-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl">
               <button
                 type="button"
                 onClick={() => handlePresetSuperAdmin('college', 'superadmin_main', 'admin123')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                   superAdminCategory === 'college'
-                    ? 'bg-slate-900 text-white shadow-xs'
-                    : 'text-slate-600 hover:bg-slate-200/60'
+                    ? 'bg-white/30 text-white border border-white/40 shadow-xs'
+                    : 'text-white/70 hover:text-white'
                 }`}
               >
                 <Building className="w-3.5 h-3.5" /> College Super Admin
@@ -181,8 +179,8 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                 onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 1', '123456')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                   superAdminCategory === 'hostel'
-                    ? 'bg-amber-600 text-white shadow-xs'
-                    : 'text-slate-600 hover:bg-slate-200/60'
+                    ? 'bg-white/30 text-white border border-white/40 shadow-xs'
+                    : 'text-white/70 hover:text-white'
                 }`}
               >
                 <Home className="w-3.5 h-3.5" /> Hostel Super Admin
@@ -191,8 +189,8 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
 
             {/* Quick pre-set options for Hostel Super Admin */}
             {superAdminCategory === 'hostel' && (
-              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl space-y-1.5 text-xs text-amber-900">
-                <span className="font-bold text-[11px] uppercase tracking-wider text-amber-800 block">
+              <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl space-y-1.5 text-xs text-white">
+                <span className="font-bold text-[11px] uppercase tracking-wider text-amber-200 block">
                   Select Hostel Super Admin Member:
                 </span>
                 <div className="grid grid-cols-2 gap-2">
@@ -200,7 +198,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                     type="button"
                     onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 1', '123456')}
                     className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold text-left cursor-pointer transition-all ${
-                      empId === 'hostel admin 1' ? 'bg-amber-600 text-white border-amber-700' : 'bg-white text-slate-800 border-amber-300 hover:bg-amber-100'
+                      empId === 'hostel admin 1' ? 'bg-white/30 text-white border-white/50' : 'bg-white/10 text-white/90 border-white/20 hover:bg-white/20'
                     }`}
                   >
                     1) hostel admin 1
@@ -210,7 +208,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                     type="button"
                     onClick={() => handlePresetSuperAdmin('hostel', 'hostel admin 2', '12345')}
                     className={`px-2.5 py-1.5 rounded-lg border text-xs font-bold text-left cursor-pointer transition-all ${
-                      empId === 'hostel admin 2' ? 'bg-amber-600 text-white border-amber-700' : 'bg-white text-slate-800 border-amber-300 hover:bg-amber-100'
+                      empId === 'hostel admin 2' ? 'bg-white/30 text-white border-white/50' : 'bg-white/10 text-white/90 border-white/20 hover:bg-white/20'
                     }`}
                   >
                     2) hostel admin 2
@@ -225,15 +223,15 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         {/* Academic / Hostel Admin Designation Switcher */}
         {activeTab === 'admin' && (
           <div className="mb-4 w-full space-y-2">
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+            <label className="block text-xs font-bold text-white/90 uppercase tracking-wider">
               SELECT STAFF ROLE PRESET
             </label>
-            <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-50 border border-slate-200 rounded-xl">
+            <div className="grid grid-cols-3 gap-1.5 p-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl">
               <button
                 type="button"
                 onClick={() => handlePresetStaff('HOD', 'hod_cse', 'admin123')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  adminType === 'HOD' ? 'bg-violet-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
+                  adminType === 'HOD' ? 'bg-white/30 text-white border border-white/40 shadow-xs' : 'text-white/70 hover:text-white'
                 }`}
               >
                 HOD
@@ -242,7 +240,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                 type="button"
                 onClick={() => handlePresetStaff('Faculty', 'fac_cse', 'admin123')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  adminType === 'Faculty' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
+                  adminType === 'Faculty' ? 'bg-white/30 text-white border border-white/40 shadow-xs' : 'text-white/70 hover:text-white'
                 }`}
               >
                 Faculty
@@ -251,7 +249,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
                 type="button"
                 onClick={() => handlePresetStaff('Hostel Admin', 'warden_rajesh', '123456')}
                 className={`py-2 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                  adminType === 'Hostel Admin' ? 'bg-amber-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-200/60'
+                  adminType === 'Hostel Admin' ? 'bg-white/30 text-white border border-white/40 shadow-xs' : 'text-white/70 hover:text-white'
                 }`}
               >
                 Hostel Admin
@@ -263,7 +261,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
         {/* Standard Login Form */}
         <form onSubmit={handleStandardSubmit} className="space-y-3.5 w-full">
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-white/90 uppercase tracking-wider mb-1">
               PROVISIONED USERNAME / ID
             </label>
             <input
@@ -272,12 +270,12 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
               placeholder="Enter provisioned username"
               value={empId}
               onChange={(e) => setEmpId(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all font-medium"
+              className="glass-input-pure w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none transition-all font-medium"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-bold text-white/90 uppercase tracking-wider mb-1">
               PASSWORD
             </label>
             <input
@@ -286,7 +284,7 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-600 text-slate-900 text-sm outline-none transition-all"
+              className="glass-input-pure w-full px-4 py-2.5 rounded-xl text-white text-sm outline-none transition-all"
             />
           </div>
 
@@ -294,7 +292,6 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
             <SpecularButton
               type="submit"
               disabled={loading}
-              baseColor={activeTab === 'super_admin' ? (superAdminCategory === 'hostel' ? '#d97706' : '#0f172a') : '#4f46e5'}
               className="w-full"
             >
               {loading ? 'Authenticating...' : `Enter ${activeTab === 'super_admin' ? (superAdminCategory === 'hostel' ? 'Hostel Super Admin' : 'College Super Admin') : adminType} Dashboard`}
@@ -307,3 +304,4 @@ const AdminLogin = ({ onBack, onLoginSuccess, initialTab = 'admin' }) => {
 };
 
 export default AdminLogin;
+
