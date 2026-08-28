@@ -65,15 +65,16 @@ const Sidebar = ({
       {isOpen && (
         <div
           onClick={handleCloseClick}
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-30 lg:hidden"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40"
         />
       )}
 
       <aside
-        className={`fixed lg:static top-0 right-0 h-full w-80 glass-panel border-l border-orange-200/80 z-40 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-xl ${
-          isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
+        className={`fixed top-0 right-0 h-full w-80 sm:w-96 glass-panel border-l border-orange-200/80 z-50 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-2xl ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
+
         {/* Navigation Tabs */}
         <div className="p-3 border-b border-orange-200/60 flex items-center justify-between bg-gradient-to-r from-orange-50/60 via-rose-50/40 to-white">
           <div className="flex bg-white/80 p-1 rounded-2xl border border-orange-200/80 gap-1 w-full mr-2 shadow-2xs">
