@@ -16,6 +16,7 @@ import EventsModal from './components/EventsModal';
 import StudentQuickHub from './components/StudentQuickHub';
 import AdminQuickHub from './components/AdminQuickHub';
 import Aurora from './components/Aurora';
+import { X } from 'lucide-react';
 import { API_URL } from './config';
 
 const App = () => {
@@ -33,6 +34,9 @@ const App = () => {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isDocFormatterOpen, setIsDocFormatterOpen] = useState(false);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
+
+  // Chat Panel Toggle State
+  const [isChatOpen, setIsChatOpen] = useState(true);
 
   // Chat Threads
   const [messages, setMessages] = useState([]);
@@ -163,6 +167,9 @@ const App = () => {
   const handleSendMessage = async (text, attachedFile = null) => {
     if (!text.trim() && !attachedFile) return;
 
+    // Ensure chat panel is open when a message is sent
+    setIsChatOpen(true);
+
     let userMsgText = text.trim();
     if (attachedFile) {
       userMsgText = `📄 **Attached File**: \`${attachedFile.name}\`\n${userMsgText}`;
@@ -277,6 +284,8 @@ const App = () => {
             onOpenNotifications={handleOpenNoticeInbox}
             onOpenProfile={() => setIsProfileOpen(true)}
             onOpenAddNotice={() => setIsAddNoticeOpen(true)}
+            isChatOpen={isChatOpen}
+            onToggleChat={() => setIsChatOpen(!isChatOpen)}
           />
 
           {/* Live Search Results Overlay Dropdown */}
@@ -361,7 +370,10 @@ const App = () => {
               onClose={() => setIsSidebarOpen(false)}
               onToggle={() => setIsSidebarOpen(!isSidebarOpen)}
               history={messages.filter((m) => m.sender === 'user').map((m) => m.text)}
-              onSelectHistory={handleSendMessage}
+              onSelectHistory={(q) => {
+                setIsChatOpen(true);
+                handleSendMessage(q);
+              }}
               user={user}
               onOpenAddNotice={() => setIsAddNoticeOpen(true)}
               onOpenAddNoticeModal={() => setIsAddNoticeOpen(true)}
@@ -374,10 +386,10 @@ const App = () => {
               }}
             />
 
-            {/* Main Content Area: 50% / 50% Dashboard Split */}
+            {/* Main Content Area: Responsive Flexible Grid */}
             <main className="flex-1 flex flex-col lg:flex-row overflow-hidden p-4 sm:p-6 gap-6 w-full">
-              {/* LEFT HALF: CAMPUS QUICK HUB (50% WIDTH) */}
-              <div className="w-full lg:w-1/2 overflow-y-auto pr-1">
+              {/* CAMPUS QUICK HUB (EXPANDS TO 100% WIDTH WHEN AI CHAT IS CLOSED) */}
+              <div className={`w-full ${isChatOpen ? 'lg:w-1/2' : 'w-full'} overflow-y-auto pr-1 transition-all duration-300`}>
                 {user?.role === 'student' ? (
                   <StudentQuickHub
                     user={user}
@@ -406,26 +418,40 @@ const App = () => {
                 )}
               </div>
 
-              {/* RIGHT HALF: EXPANDED AI CHAT PANEL (50% WIDTH) */}
-              <div className="w-full lg:w-1/2 shrink-0 flex flex-col glass-panel border border-orange-200/90 rounded-3xl overflow-hidden shadow-xl max-h-[85vh] lg:max-h-none">
-                <div className="p-3.5 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white font-black text-xs flex items-center justify-between shrink-0 shadow-xs">
-                  <span className="flex items-center gap-1.5 tracking-tight">
-                    ✨ SRKR Assistant Chat
-                  </span>
-                  <span className="text-[10px] bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full font-mono font-extrabold border border-white/30">
-                    AI Online
-                  </span>
+              {/* AI CHAT PANEL WITH CLOSE (X) BUTTON */}
+              {isChatOpen && (
+                <div className="w-full lg:w-1/2 shrink-0 flex flex-col glass-panel border border-orange-200/90 rounded-3xl overflow-hidden shadow-xl max-h-[85vh] lg:max-h-none animate-fade-in">
+                  <div className="p-3.5 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white font-black text-xs flex items-center justify-between shrink-0 shadow-xs">
+                    <span className="flex items-center gap-1.5 tracking-tight">
+                      ✨ SRKR Assistant Chat
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full font-mono font-extrabold border border-white/30">
+                        AI Online
+                      </span>
+                      <button
+                        onClick={() => setIsChatOpen(false)}
+                        className="p-1 hover:bg-white/20 rounded-xl text-white transition-colors cursor-pointer"
+                        title="Close AI Assistant Chat Box"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <ChatThread
+                    messages={messages}
+                    loading={loading}
+                    onQuickQuery={(q) => {
+                      setIsChatOpen(true);
+                      handleSendMessage(q);
+                    }}
+                  />
+                  <ChatInput
+                    onSendMessage={handleSendMessage}
+                    loading={loading}
+                  />
                 </div>
-                <ChatThread
-                  messages={messages}
-                  loading={loading}
-                  onQuickQuery={handleSendMessage}
-                />
-                <ChatInput
-                  onSendMessage={handleSendMessage}
-                  loading={loading}
-                />
-              </div>
+              )}
             </main>
           </div>
         </div>

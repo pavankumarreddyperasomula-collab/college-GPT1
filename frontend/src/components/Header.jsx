@@ -10,7 +10,9 @@ const Header = ({
   onOpenMaps,
   onOpenNotifications,
   onOpenProfile,
-  onOpenAddNotice
+  onOpenAddNotice,
+  isChatOpen = true,
+  onToggleChat = () => {}
 }) => {
   const isNoticeCreator = user?.role === 'hod' || user?.role === 'hostel_admin' || user?.role === 'super_admin';
 
@@ -66,6 +68,20 @@ const Header = ({
 
       {/* Action Controls */}
       <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        {/* AI Chat Box Toggle Button */}
+        <button
+          onClick={onToggleChat}
+          className={`flex items-center gap-1.5 px-3 py-2 rounded-2xl border text-xs font-extrabold transition-all duration-200 shadow-2xs group cursor-pointer ${
+            isChatOpen
+              ? 'bg-gradient-to-r from-orange-600 to-rose-600 text-white border-orange-500 shadow-md shadow-orange-600/20'
+              : 'bg-white/80 hover:bg-orange-50/90 border-orange-200/80 hover:border-orange-400 text-slate-800'
+          }`}
+          title={isChatOpen ? "Close AI Assistant Chat Box" : "Open AI Assistant Chat Box"}
+        >
+          <Sparkles className={`w-4 h-4 ${isChatOpen ? 'text-amber-200 animate-pulse' : 'text-orange-600'}`} />
+          <span className="hidden sm:inline">{isChatOpen ? 'Hide Chat' : 'AI Chat'}</span>
+        </button>
+
         {/* Create Notice Button for Authorized Roles */}
         {isNoticeCreator && (
           <button
@@ -138,5 +154,6 @@ const Header = ({
 };
 
 export default Header;
+
 
 
