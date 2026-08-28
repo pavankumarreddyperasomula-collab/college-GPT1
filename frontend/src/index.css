@@ -8,62 +8,126 @@ html, body {
   padding: 0;
   overflow: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: #f8fafc;
+  background: radial-gradient(circle at 10% 20%, rgba(255, 237, 213, 0.6) 0%, rgba(254, 242, 242, 0.7) 45.8%, rgba(248, 250, 252, 0.9) 100%);
   color: #0f172a;
 }
 
-/* Custom modern scrollbar for chat and modals */
+/* Custom Modern Reddish-Orange Glassmorphism Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: rgba(255, 237, 213, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgba(249, 115, 22, 0.35);
   border-radius: 9999px;
+  backdrop-filter: blur(4px);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  background: linear-gradient(135deg, #ea580c, #e11d48);
+}
+
+/* Reddish Orange White Glassmorphism Design System Utility Classes */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(234, 88, 12, 0.07);
+}
+
+.glass-panel-orange {
+  background: linear-gradient(135deg, rgba(255, 247, 237, 0.85) 0%, rgba(255, 255, 255, 0.75) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(234, 88, 12, 0.22);
+  box-shadow: 0 10px 30px -5px rgba(234, 88, 12, 0.12);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 146, 60, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(234, 88, 12, 0.45);
+  box-shadow: 0 12px 28px -6px rgba(225, 29, 72, 0.15);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 146, 60, 0.25);
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-input:focus-within, .glass-input:focus {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #ea580c;
+  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.15);
+}
+
+.orange-glow-text {
+  background: linear-gradient(135deg, #ea580c 0%, #e11d48 50%, #c2410c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow-orange-border {
+  box-shadow: 0 0 20px -2px rgba(234, 88, 12, 0.25);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Aurora Glow Background Animations */
+/* Warm Reddish-Orange Aurora Glow Animations */
 @keyframes auroraGlow1 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(30px, -20px) scale(1.1); }
+  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.5; }
+  50% { transform: translate(40px, -30px) scale(1.15); opacity: 0.7; }
 }
 
 @keyframes auroraGlow2 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(-30px, 20px) scale(1.15); }
+  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.4; }
+  50% { transform: translate(-35px, 25px) scale(1.2); opacity: 0.65; }
 }
 
 @keyframes auroraGlow3 {
-  0%, 100% { transform: translate(0px, 0px) scale(1); }
-  50% { transform: translate(20px, 30px) scale(1.05); }
+  0%, 100% { transform: translate(0px, 0px) scale(1); opacity: 0.45; }
+  50% { transform: translate(25px, 35px) scale(1.1); opacity: 0.6; }
 }
 
 .animate-aurora-glow-1 {
-  animation: auroraGlow1 8s ease-in-out infinite;
+  animation: auroraGlow1 9s ease-in-out infinite;
 }
 
 .animate-aurora-glow-2 {
-  animation: auroraGlow2 10s ease-in-out infinite;
+  animation: auroraGlow2 11s ease-in-out infinite;
 }
 
 .animate-aurora-glow-3 {
-  animation: auroraGlow3 12s ease-in-out infinite;
+  animation: auroraGlow3 13s ease-in-out infinite;
 }
+

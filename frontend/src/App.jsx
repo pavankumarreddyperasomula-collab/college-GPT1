@@ -15,6 +15,7 @@ import DocFormatterModal from './components/DocFormatterModal';
 import EventsModal from './components/EventsModal';
 import StudentQuickHub from './components/StudentQuickHub';
 import AdminQuickHub from './components/AdminQuickHub';
+import Aurora from './components/Aurora';
 import { API_URL } from './config';
 
 const App = () => {
@@ -231,7 +232,10 @@ const App = () => {
   };
 
   return (
-    <div className="w-full h-[100dvh] flex flex-col bg-slate-50 overflow-hidden font-sans text-slate-900">
+    <div className="w-full h-[100dvh] flex flex-col relative overflow-hidden font-sans text-slate-900 bg-gradient-to-br from-orange-50/70 via-rose-50/50 to-amber-50/60">
+      {/* Warm Reddish-Orange Ambient Aurora Backdrop Glow */}
+      <Aurora colorStops={["#ff6b35", "#f72585", "#ffb703"]} />
+
       {/* 1. Entry Screens */}
       {view === 'role_selection' && (
         <RoleSelection onSelectRole={handleSelectRole} />
@@ -262,7 +266,7 @@ const App = () => {
 
       {/* 2. Main Dashboard Interface */}
       {view === 'dashboard' && (
-        <div className="flex flex-col h-[100dvh] overflow-hidden bg-slate-50">
+        <div className="flex flex-col h-[100dvh] overflow-hidden relative z-10">
           <Header
             user={user}
             unreadCount={unreadCount}
@@ -276,14 +280,14 @@ const App = () => {
 
           {/* Live Search Results Overlay Dropdown */}
           {searchResults && (
-            <div className="bg-white border-b border-orange-200 shadow-lg px-6 py-4 z-30 max-h-72 overflow-y-auto space-y-3">
+            <div className="glass-panel border-b border-orange-300 shadow-xl px-6 py-4 z-30 max-h-72 overflow-y-auto space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-black uppercase text-orange-700 tracking-wider">
+                <h4 className="text-xs font-black uppercase text-orange-800 tracking-wider">
                   Live Search Results for "{searchQuery}"
                 </h4>
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="text-xs font-bold text-slate-500 hover:text-slate-800"
+                  className="text-xs font-extrabold text-orange-700 hover:text-orange-950"
                 >
                   Clear Search
                 </button>
@@ -292,13 +296,13 @@ const App = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {/* Search Notices */}
                 {searchResults.notices.length > 0 && (
-                  <div className="space-y-1.5 p-3 rounded-2xl bg-orange-50/60 border border-orange-100">
-                    <span className="text-[10px] font-extrabold uppercase text-orange-800">Matching Notices ({searchResults.notices.length})</span>
+                  <div className="space-y-1.5 p-3 rounded-2xl glass-card">
+                    <span className="text-[10px] font-black uppercase text-orange-900">Matching Notices ({searchResults.notices.length})</span>
                     {searchResults.notices.map(n => (
                       <button
                         key={n.id}
                         onClick={() => { handleOpenNoticeInbox(); setSearchQuery(''); }}
-                        className="w-full text-left p-2 rounded-xl bg-white hover:bg-orange-100/50 border border-orange-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
+                        className="w-full text-left p-2 rounded-xl bg-white/90 hover:bg-orange-100/70 border border-orange-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
                       >
                         📢 NOTICE: {n.theme || n.title}
                       </button>
@@ -308,13 +312,13 @@ const App = () => {
 
                 {/* Search Rules */}
                 {searchResults.rules.length > 0 && (
-                  <div className="space-y-1.5 p-3 rounded-2xl bg-rose-50/60 border border-rose-100">
-                    <span className="text-[10px] font-extrabold uppercase text-rose-800">Matching Rules ({searchResults.rules.length})</span>
+                  <div className="space-y-1.5 p-3 rounded-2xl glass-card">
+                    <span className="text-[10px] font-black uppercase text-rose-900">Matching Rules ({searchResults.rules.length})</span>
                     {searchResults.rules.map((r, rIdx) => (
                       <button
                         key={rIdx}
                         onClick={() => { r.action(); setSearchQuery(''); }}
-                        className="w-full text-left p-2 rounded-xl bg-white hover:bg-rose-100/50 border border-rose-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
+                        className="w-full text-left p-2 rounded-xl bg-white/90 hover:bg-rose-100/70 border border-rose-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
                       >
                         📕 {r.name}
                       </button>
@@ -324,13 +328,13 @@ const App = () => {
 
                 {/* Search Events & Maps */}
                 {(searchResults.events.length > 0 || searchResults.maps.length > 0) && (
-                  <div className="space-y-1.5 p-3 rounded-2xl bg-amber-50/60 border border-amber-100">
-                    <span className="text-[10px] font-extrabold uppercase text-amber-800">Events & Maps</span>
+                  <div className="space-y-1.5 p-3 rounded-2xl glass-card">
+                    <span className="text-[10px] font-black uppercase text-amber-900">Events & Maps</span>
                     {searchResults.events.map((e, eIdx) => (
                       <button
                         key={eIdx}
                         onClick={() => { e.action(); setSearchQuery(''); }}
-                        className="w-full text-left p-2 rounded-xl bg-white hover:bg-amber-100/50 border border-amber-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
+                        className="w-full text-left p-2 rounded-xl bg-white/90 hover:bg-amber-100/70 border border-amber-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
                       >
                         🎟️ {e.name}
                       </button>
@@ -339,7 +343,7 @@ const App = () => {
                       <button
                         key={mIdx}
                         onClick={() => { m.action(); setSearchQuery(''); }}
-                        className="w-full text-left p-2 rounded-xl bg-white hover:bg-amber-100/50 border border-amber-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
+                        className="w-full text-left p-2 rounded-xl bg-white/90 hover:bg-amber-100/70 border border-amber-200 text-xs font-bold text-slate-900 truncate block shadow-2xs cursor-pointer"
                       >
                         📍 {m.name}
                       </button>
@@ -402,12 +406,12 @@ const App = () => {
               </div>
 
               {/* COMPACT AI CHAT SIDEBAR (30-35% WIDTH - COMPACT SIDE PANEL) */}
-              <div className="w-full lg:w-[380px] shrink-0 flex flex-col bg-white border border-slate-200/90 rounded-3xl overflow-hidden shadow-md max-h-[85vh] lg:max-h-none">
-                <div className="p-3.5 bg-gradient-to-r from-orange-600 to-rose-600 text-white font-extrabold text-xs flex items-center justify-between shrink-0">
-                  <span className="flex items-center gap-1.5">
+              <div className="w-full lg:w-[380px] shrink-0 flex flex-col glass-panel border border-orange-200/90 rounded-3xl overflow-hidden shadow-xl max-h-[85vh] lg:max-h-none">
+                <div className="p-3.5 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white font-black text-xs flex items-center justify-between shrink-0 shadow-xs">
+                  <span className="flex items-center gap-1.5 tracking-tight">
                     ✨ SRKR Assistant Chat
                   </span>
-                  <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full font-mono">
+                  <span className="text-[10px] bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full font-mono font-extrabold border border-white/30">
                     AI Online
                   </span>
                 </div>

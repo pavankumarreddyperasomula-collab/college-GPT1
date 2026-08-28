@@ -511,7 +511,7 @@ documents_store = DocumentsStore(DOCUMENTS_FILE)
 events_store = EventsStore(EVENTS_FILE)
 notif_store = NotificationsStore(NOTIFICATIONS_FILE)
 
-def chunk_text(text: str, title: str, category: str, chunk_size_words: int = 250, overlap_words: int = 40) -> List[Dict[str, Any]]:
+def chunk_text(text: str, title: str, category: str, chunk_size_words: int = 550, overlap_words: int = 100) -> List[Dict[str, Any]]:
     words = text.split()
     if not words:
         return []
@@ -563,7 +563,7 @@ def add_document_to_rag(
 
     body_hash = hashlib.md5(body.strip().encode("utf-8")).hexdigest()
 
-    # Generate fresh chunks
+    # Generate fresh comprehensive chunks (550 words each)
     chunks = chunk_text(body, title, category)
     if not chunks:
         return {
@@ -651,7 +651,7 @@ def process_uploaded_file(file_name: str, file_bytes: Any, category: str = "coll
                 for i, page in enumerate(reader.pages):
                     extracted = page.extract_text()
                     if extracted and len(extracted.strip()) > 3:
-                        pages_text.append(extracted.strip())
+                        pages_text.append(f"--- Page {i+1} ---\n" + extracted.strip())
                 text_content = "\n\n".join(pages_text).strip()
             except Exception as pe:
                 print(f"pypdf extraction warning for {clean_name}: {pe}")
@@ -735,7 +735,104 @@ def is_formal_greeting(query: str) -> bool:
         return True
     return False
 
-def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = None) -> Dict[str, Any]:
+def is_full_document_query(query: str) -> bool:
+    """
+    Detects if a user query is asking for comprehensive or complete document information
+    (e.g., 'list all subjects', 'summarize the entire syllabus', 'courses for second year').
+    """
+    if not query:
+        return False
+    q_clean = query.lower().strip()
+    trigger_phrases = [
+        "all subjects", "list all", "entire syllabus", "full syllabus",
+        "complete list", "everything in", "all units", "all courses",
+        "summarize the entire", "summarize whole", "give me all",
+        "all topics", "whole document", "entire document", "list every",
+        "all modules", "full document", "all details", "all contents",
+        "all subjects in", "list of all", "show all", "give all",
+        "all semester", "all papers", "all regulations",
+        "courses for", "subjects for", "course structure", "give me the courses",
+        "syllabus for", "second year", "2nd year", "second sem", "2nd sem",
+        "1st year", "first year", "3rd year", "third year", "4th year", "fourth year"
+    ]
+    return any(phrase in q_clean for phrase in trigger_phrases)
+
+def generate_map_reduce_answer(
+    query: str,
+    attached_docs: List[str],
+    attached_metas: List[dict],
+    search_docs: List[str],
+    search_metas: List[dict],
+    max_tokens: int = 6000
+) -> str:
+    """
+    Map-Reduce pattern for large attached documents.
+    1. Map step: Sends chunk batches to LLM to extract relevant information.
+    2. Reduce step: Combines partial extractions and generates final comprehensive answer.
+    """
+    if not GROQ_API_KEY:
+        combined_context = "\n\n".join(attached_docs + search_docs)
+        return generate_llm_answer(query, combined_context, attached_docs + search_docs, attached_metas + search_metas, max_tokens=max_tokens)
+
+    try:
+        from groq import Groq
+        client = Groq(api_key=GROQ_API_KEY)
+        models_to_try = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "groq/compound", "qwen/qwen3.6-27b"]
+
+        # Group attached chunks into batches of 3 chunks each (~1600 words)
+        batch_size = 3
+        chunk_batches = []
+        for i in range(0, len(attached_docs), batch_size):
+            chunk_batches.append("\n\n".join(attached_docs[i:i+batch_size]))
+
+        extracted_sections = []
+        for idx, batch_text in enumerate(chunk_batches):
+            map_prompt = (
+                f"You are inspecting Section {idx+1} of an uploaded document context.\n"
+                f"User Question: '{query}'\n\n"
+                f"Section Text:\n{batch_text}\n\n"
+                "Task: Extract ALL relevant details, subject names, course codes, unit titles (Unit I, Unit II, Unit III, Unit IV, Unit V), topics, rules, and facts matching the query from this section. "
+                "Do NOT skip any units, courses, or details. "
+                "If this section contains NO relevant information for the query, reply strictly with the word 'NONE'."
+            )
+            section_ext = None
+            for model_name in models_to_try:
+                try:
+                    completion = client.chat.completions.create(
+                        model=model_name,
+                        messages=[
+                            {"role": "system", "content": "You are a precise academic document information extractor. Do NOT output <think> tags or reasoning steps."},
+                            {"role": "user", "content": map_prompt}
+                        ],
+                        temperature=0.2,
+                        max_tokens=1500
+                    )
+                    out = completion.choices[0].message.content.strip()
+                    cleaned_out = clean_llm_text(out)
+                    if cleaned_out and not re.search(r'^\s*NONE\.?\s*$', cleaned_out, flags=re.IGNORECASE):
+                        section_ext = cleaned_out
+                        break
+                except Exception as me:
+                    print(f"Map-reduce section {idx} error with {model_name}: {me}")
+            
+            if section_ext:
+                extracted_sections.append(f"--- Document Section {idx+1} Extractions ---\n{section_ext}")
+
+        if search_docs:
+            extracted_sections.append("--- Generic Search Context ---\n" + "\n\n".join(search_docs))
+
+        if not extracted_sections:
+            combined_context = "\n\n".join(attached_docs + search_docs)
+            return generate_llm_answer(query, combined_context, attached_docs + search_docs, attached_metas + search_metas, max_tokens=max_tokens)
+
+        reduced_context = "\n\n".join(extracted_sections)
+        return generate_llm_answer(query, reduced_context, attached_docs + search_docs, attached_metas + search_metas, max_tokens=max_tokens)
+    except Exception as e:
+        print(f"generate_map_reduce_answer exception: {e}")
+        combined_context = "\n\n".join(attached_docs + search_docs)
+        return generate_llm_answer(query, combined_context, attached_docs + search_docs, attached_metas + search_metas, max_tokens=max_tokens)
+
+def query_rag(query: str, top_k: int = 3, attached_file_name: Optional[str] = None) -> Dict[str, Any]:
     try:
         if is_formal_greeting(query) and not attached_file_name:
             context_str = "User query is a formal greeting."
@@ -746,18 +843,20 @@ def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = No
             }
 
         category_filter = detect_query_category(query)
+        is_full_doc = is_full_document_query(query)
         
         where_clause = None
         if category_filter and not attached_file_name:
             where_clause = {"category": category_filter}
 
-        documents = []
-        metadatas = []
+        attached_docs = []
+        attached_metas = []
 
-        # If user attached a specific file, include all chunks matching this file
+        # 1. Attached File Chunks (DO NOT CAP attached file chunks)
         if attached_file_name:
             clean_att = attached_file_name.strip().lower()
             clean_stem = os.path.splitext(clean_att)[0].replace("_", " ").replace("-", " ").strip().lower()
+            stem_words = set(clean_stem.split())
 
             for doc in collection.documents:
                 meta = doc.get("metadata", {})
@@ -765,10 +864,23 @@ def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = No
                 doc_title = (meta.get("title") or "").strip().lower()
                 doc_id = (doc.get("id") or "").strip().lower()
 
-                if (clean_att and clean_att in doc_file) or (clean_stem and (clean_stem in doc_file or clean_stem in doc_title or clean_stem in doc_id)):
-                    if doc["text"] not in documents:
-                        documents.append(doc["text"])
-                        metadatas.append(meta)
+                file_words = set(doc_file.replace("_", " ").replace("-", " ").split())
+                title_words = set(doc_title.replace("_", " ").replace("-", " ").split())
+
+                is_stem_match = bool(
+                    (clean_att and clean_att in doc_file) or
+                    (clean_stem and (clean_stem in doc_file or clean_stem in doc_title or clean_stem in doc_id)) or
+                    (stem_words and len(stem_words.intersection(file_words | title_words)) >= min(3, len(stem_words)))
+                )
+
+                if is_stem_match:
+                    if doc["text"] not in attached_docs:
+                        attached_docs.append(doc["text"])
+                        attached_metas.append(meta)
+
+        # 2. Generic Search Chunks (Capped to top_k) - ALWAYS run vector search as fallback/supplement
+        search_docs = []
+        search_metas = []
 
         try:
             results = collection.query(
@@ -779,15 +891,34 @@ def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = No
             q_docs = results.get("documents", [[]])[0]
             q_metas = results.get("metadatas", [[]])[0]
             for d, m in zip(q_docs, q_metas):
-                if d not in documents and len(documents) < 6:
-                    documents.append(d)
-                    metadatas.append(m)
+                if d not in attached_docs and d not in search_docs:
+                    search_docs.append(d)
+                    search_metas.append(m)
         except Exception as ce:
             print(f"ChromaDB query error: {ce}")
 
-        # Strictly cap total context to top 3 chunks max (~600 words / ~800 tokens) to ensure fast completion under 1,200 tokens
-        documents = documents[:3]
-        metadatas = metadatas[:3]
+        # Capping ONLY generic keyword-search results to top_k
+        search_docs = search_docs[:top_k]
+        search_metas = search_metas[:top_k]
+
+        # Combine: Attached-file chunks (uncapped) + Generic search chunks (capped to top_k)
+        documents = attached_docs + search_docs
+        metadatas = attached_metas + search_metas
+
+        # Ensure total context text stays under 14,000 characters to prevent Groq 413 token limit errors
+        max_context_chars = 14000
+        current_chars = 0
+        trimmed_docs = []
+        trimmed_metas = []
+        for d, m in zip(documents, metadatas):
+            if current_chars + len(d) <= max_context_chars or not trimmed_docs:
+                trimmed_docs.append(d)
+                trimmed_metas.append(m)
+                current_chars += len(d)
+            else:
+                break
+        documents = trimmed_docs
+        metadatas = trimmed_metas
 
         sources = []
         if documents:
@@ -800,9 +931,19 @@ def query_rag(query: str, top_k: int = 4, attached_file_name: Optional[str] = No
                     })
                     seen_titles.add(meta.get("title"))
 
-        context_str = "\n\n".join(documents) if documents else "No relevant campus records found."
+        # High output token budget (3500 tokens) so full document answers are never truncated
+        max_tokens = 3500 if (attached_file_name or is_full_doc) else 2000
 
-        answer = generate_llm_answer(query, context_str, documents, metadatas)
+        # Trigger Map-Reduce pattern for very long attached documents (> 6 chunks)
+        if len(attached_docs) > 6 and (is_full_doc or sum(len(d) for d in attached_docs) > 5000):
+            answer = generate_map_reduce_answer(
+                query, attached_docs, attached_metas, search_docs, search_metas, max_tokens=max_tokens
+            )
+        else:
+            context_str = "\n\n".join(documents) if documents else "No relevant campus records found."
+            answer = generate_llm_answer(
+                query, context_str, documents, metadatas, max_tokens=max_tokens
+            )
 
         if not documents:
             sources = []
@@ -826,7 +967,7 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
         "Keep it clear, concise, and structured with key details, guidelines, and contact instructions for students/faculty."
     )
     if GROQ_API_KEY:
-        models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
+        models_to_try = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "groq/compound", "qwen/qwen3.6-27b"]
         from groq import Groq
         client = Groq(api_key=GROQ_API_KEY)
         for model_name in models_to_try:
@@ -838,7 +979,7 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
                         {"role": "user", "content": prompt}
                     ],
                     temperature=0.4,
-                    max_tokens=350
+                    max_tokens=800
                 )
                 draft = completion.choices[0].message.content.strip()
                 if draft:
@@ -857,10 +998,11 @@ def generate_notice_llm_draft(theme: str, category: str, start_date: str, end_da
     )
 
 def clean_llm_text(text: str) -> str:
-    """Helper to strip reasoning tags like <think> and normalize unicode spaces/hyphens."""
+    """Helper to strip reasoning tags (<think>), meta-commentary, operational headers, and normalize unicode."""
     if not text:
         return ""
-    text = re.sub(r'<think>.*?</think>', '', text, flags=re.DOTALL).strip()
+    
+    # Normalize unicode hyphens/quotes/spaces FIRST
     text = (text.replace('\u202f', ' ')
                .replace('\u00a0', ' ')
                .replace('\u2011', '-')
@@ -870,16 +1012,34 @@ def clean_llm_text(text: str) -> str:
                .replace('\u201d', '"')
                .replace('\u2018', "'")
                .replace('\u2019', "'"))
-    return text
 
-def generate_llm_answer(query: str, context: str, documents: List[str], metadatas: List[dict], is_greeting: bool = False) -> str:
+    # Strip <think>...</think> XML blocks (including unclosed <think> blocks)
+    text = re.sub(r'<think>.*?(?:</think>|\Z)', '', text, flags=re.DOTALL | re.IGNORECASE).strip()
+    
+    # Strip reasoning prose headers if present at start
+    text = re.sub(r'^(Here\'s a thinking process|Thinking Process|Analyze User Input):.*?\n\n(?=[#A-Z0-9|])', '', text, flags=re.DOTALL | re.IGNORECASE).strip()
+
+    # Clean out internal section extraction headers if any leak into text
+    text = re.sub(r'--- Document Section \d+ Extractions ---', '', text)
+    text = re.sub(r'--- Generic Search Context ---', '', text)
+    
+    return text.strip()
+
+def generate_llm_answer(
+    query: str, 
+    context: str, 
+    documents: List[str], 
+    metadatas: List[dict], 
+    is_greeting: bool = False,
+    max_tokens: int = 3000
+) -> str:
     if is_greeting:
         fallback_greeting = "Hello! Greetings! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech syllabus details, course structures, hostel guidelines, exam schedules, campus notices, and general questions. How may I assist you today?"
         if GROQ_API_KEY:
             try:
                 from groq import Groq
                 client = Groq(api_key=GROQ_API_KEY)
-                models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
+                models_to_try = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "groq/compound", "qwen/qwen3.6-27b"]
                 system_prompt = (
                     "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, helpful, and friendly AI chatbot for SRKR Engineering College. "
                     "Respond warmly, politely, and professionally to greetings. Introduce yourself and explain how you can help with SRKR campus info, hostels, exams, notices, as well as general academic and technical questions."
@@ -893,7 +1053,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                                 {"role": "user", "content": query}
                             ],
                             temperature=0.5,
-                            max_tokens=250
+                            max_tokens=400
                         )
                         answer_text = completion.choices[0].message.content.strip()
                         if answer_text:
@@ -904,21 +1064,23 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                 print(f"Groq import or init error on greeting: {ge}")
         return fallback_greeting
 
+    if max_tokens <= 3000 and is_full_document_query(query):
+        max_tokens = 6000
+
     if GROQ_API_KEY:
         try:
             from groq import Groq
             client = Groq(api_key=GROQ_API_KEY)
-            models_to_try = ["openai/gpt-oss-20b", "qwen/qwen3.6-27b", "openai/gpt-oss-120b", "groq/compound"]
+            models_to_try = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "groq/compound", "qwen/qwen3.6-27b"]
             
             system_prompt = (
                 "You are SRKR Campus AI Assistant (SRKR College GPT), an intelligent, polite, precise, and articulate AI assistant created for SRKR Engineering College.\n\n"
                 "YOUR CORE GOALS & STRICT RULES:\n"
-                "1. **Campus & Uploaded Document Queries**: When answering questions about SRKR Engineering College (hostel rules, syllabus, exam schedules, department notices, campus events) or about uploaded files, documents, and guidelines:\n"
-                "   - Base your answer STRICTLY on the provided Official Campus Context records below.\n"
-                "   - **STRICT ANTI-HALLUCINATION RULE**: If the answer isn't in the provided context, say you don't have that information — NEVER guess or invent details!\n"
-                "2. **Handling Scanned, Missing, or Unreadable Documents**: If the context indicates that a PDF or document is unreadable, scanned, empty, or missing requested information, explicitly state that you don't have that information in the provided context and ask the user to provide a searchable text document.\n"
-                "3. **General Knowledge & Conversational Questions**: If the user asks general academic or technical questions (e.g. programming syntax, math calculations, science concepts, general study advice, or greetings), answer clearly, accurately, and helpfully using your general AI capabilities.\n"
-                "4. **Clear & Structured Formatting**: Format all your answers using clean, structured Markdown (use subheadings ###, bold text **key concepts**, bullet points, numbered lists, or code blocks where appropriate)."
+                "1. **NO REASONING TAGS OR META-LOGS**: Do NOT output <think> tags, internal thinking steps, analysis logs, operation descriptions, or meta-text. Directly provide ONLY the final formatted response to the user.\n"
+                "2. **RICH & STRUCTURED FORMATTING**: ALWAYS format all your answers using clean, structured Markdown. Use subheadings (###), Markdown tables for listing courses, subjects, schedules, or marks, bold key terms (**Course Code**, **Credits**), and bulleted/numbered lists. NEVER return raw or plain unstructured text.\n"
+                "3. **Exhaustive & Complete Answers**: Provide FULL and comprehensive answers listing ALL courses and subjects present in the context without skipping or truncating any.\n"
+                "4. **Campus & Document Queries**: Base your answer STRICTLY on the provided Official Campus Context records below. **STRICT ANTI-HALLUCINATION RULE**: If requested information isn't in the provided context, state clearly what is available and what is missing — NEVER guess or invent details!\n"
+                "5. **General Knowledge & Conversational Questions**: For general academic/technical questions, answer clearly and accurately using Markdown structure."
             )
             user_prompt = f"Official SRKR Campus Context & Notices (Use if relevant to campus query):\n{context}\n\nUser Question/Message: {query}"
 
@@ -931,7 +1093,7 @@ def generate_llm_answer(query: str, context: str, documents: List[str], metadata
                             {"role": "user", "content": user_prompt}
                         ],
                         temperature=0.3,
-                        max_tokens=650
+                        max_tokens=max_tokens
                     )
                     answer_text = completion.choices[0].message.content.strip()
                     if answer_text:

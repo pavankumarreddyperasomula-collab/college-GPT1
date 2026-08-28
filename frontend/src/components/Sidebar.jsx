@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { History, User, PlusCircle, LogOut, X, MessageSquare, ShieldCheck, Trash2, ListFilter, Bell, Clock } from 'lucide-react';
+import { History, User, PlusCircle, LogOut, X, MessageSquare, ShieldCheck, Trash2, ListFilter, Bell, Clock, Sparkles } from 'lucide-react';
 import { API_URL } from '../config';
 
 const Sidebar = ({
@@ -65,36 +65,36 @@ const Sidebar = ({
       {isOpen && (
         <div
           onClick={handleCloseClick}
-          className="fixed inset-0 bg-slate-900/30 backdrop-blur-xs z-30 lg:hidden"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-30 lg:hidden"
         />
       )}
 
       <aside
-        className={`fixed lg:static top-0 right-0 h-full w-80 bg-white/95 border-l border-slate-200 backdrop-blur-xl z-40 flex flex-col justify-between transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:static top-0 right-0 h-full w-80 glass-panel border-l border-orange-200/80 z-40 flex flex-col justify-between transition-transform duration-300 ease-in-out shadow-xl ${
           isOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
         }`}
       >
         {/* Navigation Tabs */}
-        <div className="p-3 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
-          <div className="flex bg-slate-100 p-1 rounded-xl border border-slate-200 gap-1 w-full mr-2">
+        <div className="p-3 border-b border-orange-200/60 flex items-center justify-between bg-gradient-to-r from-orange-50/60 via-rose-50/40 to-white">
+          <div className="flex bg-white/80 p-1 rounded-2xl border border-orange-200/80 gap-1 w-full mr-2 shadow-2xs">
             <button
               onClick={() => setActiveTab('history')}
-              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+              className={`flex-1 py-1.5 px-2 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${
                 activeTab === 'history'
-                  ? 'bg-white text-orange-700 shadow-xs'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-gradient-to-r from-orange-600 to-rose-600 text-white shadow-md shadow-orange-600/20'
+                  : 'text-slate-600 hover:text-orange-900 hover:bg-orange-50/50'
               }`}
             >
               <History className="w-3.5 h-3.5" />
-              <span>Chat History</span>
+              <span>History</span>
             </button>
 
             <button
               onClick={() => setActiveTab('notices')}
-              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+              className={`flex-1 py-1.5 px-2 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer ${
                 activeTab === 'notices'
-                  ? 'bg-white text-rose-700 shadow-xs'
-                  : 'text-slate-500 hover:text-slate-800'
+                  ? 'bg-gradient-to-r from-orange-600 to-rose-600 text-white shadow-md shadow-orange-600/20'
+                  : 'text-slate-600 hover:text-orange-900 hover:bg-orange-50/50'
               }`}
             >
               <ListFilter className="w-3.5 h-3.5" />
@@ -104,7 +104,7 @@ const Sidebar = ({
 
           <button
             onClick={handleCloseClick}
-            className="p-1.5 rounded-lg hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-colors shrink-0"
+            className="p-1.5 rounded-xl hover:bg-orange-100/60 text-slate-500 hover:text-orange-900 transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -112,9 +112,10 @@ const Sidebar = ({
 
         {/* Tab 1: Session Chat History */}
         {activeTab === 'history' && (
-          <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          <div className="flex-1 overflow-y-auto p-4 space-y-2.5">
             {safeHistory.length === 0 ? (
-              <div className="text-center py-12 text-slate-400 text-xs font-medium">
+              <div className="text-center py-14 p-4 text-slate-400 text-xs font-medium">
+                <Sparkles className="w-8 h-8 text-orange-400/60 mx-auto mb-2 animate-pulse" />
                 No previous questions in this session yet.
               </div>
             ) : (
@@ -122,10 +123,12 @@ const Sidebar = ({
                 <button
                   key={idx}
                   onClick={() => onSelectHistory(q)}
-                  className="w-full p-3 rounded-xl bg-slate-50 hover:bg-orange-50 border border-slate-200/80 hover:border-orange-300 text-left text-xs text-slate-700 hover:text-orange-950 flex items-center gap-2 transition-all duration-200 group shadow-2xs cursor-pointer"
+                  className="w-full p-3 rounded-2xl glass-card text-left text-xs font-semibold text-slate-800 hover:text-orange-950 flex items-center gap-2.5 group cursor-pointer"
                 >
-                  <MessageSquare className="w-3.5 h-3.5 text-orange-600 shrink-0 group-hover:scale-110 transition-transform" />
-                  <span className="truncate">{q}</span>
+                  <div className="w-6 h-6 rounded-lg bg-orange-100/80 text-orange-600 flex items-center justify-center shrink-0 group-hover:bg-gradient-to-tr group-hover:from-orange-600 group-hover:to-rose-600 group-hover:text-white transition-all shadow-2xs">
+                    <MessageSquare className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="truncate flex-1">{q}</span>
                 </button>
               ))
             )}
@@ -136,10 +139,10 @@ const Sidebar = ({
         {activeTab === 'notices' && (
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-bold text-slate-700">Vector Store Documents</span>
+              <span className="text-xs font-black text-orange-950 uppercase tracking-wider">Vector Store Documents</span>
               <button
                 onClick={fetchNotices}
-                className="text-[10px] text-orange-600 hover:underline font-bold"
+                className="text-[10px] text-orange-600 hover:text-rose-600 hover:underline font-extrabold"
               >
                 Refresh
               </button>
@@ -153,28 +156,28 @@ const Sidebar = ({
               notices.map((n) => (
                 <div
                   key={n.id}
-                  className="p-3 rounded-xl bg-slate-50 border border-slate-200 flex flex-col justify-between gap-2 group hover:border-orange-300 transition-colors"
+                  className="p-3 rounded-2xl glass-card flex flex-col justify-between gap-2 group"
                 >
                   <div>
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-xs font-extrabold text-slate-900 truncate max-w-[150px]">{n.title}</span>
-                      <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold">
+                      <span className="text-[9px] uppercase px-2 py-0.5 rounded-full bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-800 font-extrabold border border-emerald-500/30">
                         {n.category}
                       </span>
                     </div>
                     <p className="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">{n.snippet}</p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-1.5 border-t border-slate-200/60 text-[10px]">
-                    <span className="text-slate-500 font-medium flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-emerald-600" />
+                  <div className="flex items-center justify-between pt-2 border-t border-orange-100 text-[10px]">
+                    <span className="text-slate-500 font-semibold flex items-center gap-1">
+                      <Clock className="w-3 h-3 text-orange-600" />
                       {n.date_time_str || n.date || 'Passed: 23-08-2026 10:00 AM'}
                     </span>
 
                     {isNoticeCreator && (
                       <button
                         onClick={() => handleDeleteNotice(n.id, n.title)}
-                        className="text-[10px] text-red-600 hover:text-red-700 flex items-center gap-1 font-bold transition-colors"
+                        className="text-[10px] text-red-600 hover:text-red-700 flex items-center gap-1 font-bold transition-colors cursor-pointer"
                       >
                         <Trash2 className="w-3 h-3" /> Delete
                       </button>
@@ -187,21 +190,20 @@ const Sidebar = ({
         )}
 
         {/* Profile & Admin Actions */}
-        <div className="p-4 border-t border-slate-200 bg-slate-50/60 space-y-3">
+        <div className="p-4 border-t border-orange-200/60 bg-gradient-to-b from-white/60 to-orange-50/70 space-y-3">
           {/* Notification Bell Inbox Button */}
           <button
             onClick={onOpenNotifications}
-            className="w-full py-2.5 px-4 bg-slate-100 hover:bg-orange-50 border border-slate-200 text-slate-800 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-colors shadow-2xs cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-2xl glass-card text-slate-900 font-extrabold text-xs flex items-center justify-center gap-2 hover:border-orange-400 hover:bg-white transition-all duration-200 cursor-pointer shadow-2xs"
           >
             <Bell className="w-4 h-4 text-orange-600" />
             <span>Open Notice Inbox</span>
           </button>
 
-          {/* EXCLUDE FROM COMPONENT TREE FOR FACULTY AND STUDENT ROLES */}
           {isNoticeCreator && (
             <button
               onClick={handleAddNoticeClick}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-orange-600 via-rose-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-md shadow-orange-600/20 transition-all duration-200 cursor-pointer"
+              className="w-full py-2.5 px-4 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 hover:from-orange-700 hover:to-rose-700 text-white font-extrabold rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md shadow-orange-600/20 transition-all duration-200 cursor-pointer"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Create Notice</span>
@@ -210,18 +212,18 @@ const Sidebar = ({
 
           <div
             onClick={onOpenProfile}
-            className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 shadow-2xs cursor-pointer hover:border-orange-300 transition-colors"
+            className="flex items-center justify-between p-3 rounded-2xl glass-card cursor-pointer hover:border-orange-400 group"
           >
             <div className="flex items-center gap-3 overflow-hidden">
-              <div className="w-9 h-9 rounded-xl bg-orange-100 text-orange-700 border border-orange-200 flex items-center justify-center font-bold text-xs shrink-0">
-                {isNoticeCreator ? <ShieldCheck className="w-4 h-4 text-orange-600" /> : <User className="w-4 h-4 text-rose-600" />}
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-600 to-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-md shadow-orange-600/20">
+                {isNoticeCreator ? <ShieldCheck className="w-4 h-4 text-white" /> : <User className="w-4 h-4 text-white" />}
               </div>
               <div className="truncate">
-                <div className="text-xs font-bold text-slate-900 truncate">{user?.username || 'User'}</div>
-                <div className="text-[10px] text-slate-500 capitalize flex items-center gap-1 font-medium">
+                <div className="text-xs font-black text-slate-900 truncate">{user?.username || 'User'}</div>
+                <div className="text-[10px] text-orange-800 capitalize flex items-center gap-1 font-bold">
                   <span>{user?.designation || user?.role}</span>
                   {user?.hod_code && (
-                    <span className="px-1.5 py-0.5 rounded bg-violet-100 text-violet-700 font-mono text-[9px] font-bold">
+                    <span className="px-1.5 py-0.5 rounded-md bg-orange-100 text-orange-800 font-mono text-[9px] font-extrabold border border-orange-200">
                       {user.hod_code}
                     </span>
                   )}
@@ -232,7 +234,7 @@ const Sidebar = ({
             <button
               onClick={(e) => { e.stopPropagation(); onLogout(); }}
               title="Logout"
-              className="p-1.5 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors"
+              className="p-1.5 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -244,3 +246,4 @@ const Sidebar = ({
 };
 
 export default Sidebar;
+

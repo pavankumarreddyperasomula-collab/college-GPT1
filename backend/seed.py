@@ -197,6 +197,17 @@ SEED_DOCUMENTS = [
                 "Total Credits: 20, CIE: 270, SEE: 560, Total Marks: 830."
     },
     {
+        "title": "B23HS2101 Universal Human Values-II Syllabus",
+        "category": "college",
+        "body": "Course Code: B23HS2101 Category: HS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: UNIVERSAL HUMAN VALUES-II: UNDERSTANDING HARMONY AND ETHICAL HUMAN CONDUCT (Common to all Programmes of Engineering).\n"
+                "Unit-I (10 Hrs): Introduction to Value Education & Self Exploration: Need, Basic Guidelines, Content and Process for Value Education. Self-Exploration: Content and Process, Natural Acceptance, Experiential Validation, Continuous Happiness and Prosperity.\n"
+                "Unit-II (10 Hrs): Harmony in the Human Being (Self and Body): Understanding Human Being as Co-existence of Self ('I') and Body. Harmony of 'I' with Body: Sanyam and Health, Correct Appraisal of Physical Needs.\n"
+                "Unit-III (10 Hrs): Harmony in the Family and Society: Understanding Harmony in Family (Basic unit of human interaction), Trust (Vishwas) and Respect (Samman) as Foundational Values, Justice in Human Relationships, Extension of Family Values to Society (Undivided Society, Universal Human Order).\n"
+                "Unit-IV (10 Hrs): Harmony in Nature/Existence: Interconnectedness and Mutual Fulfillment among the Four Orders of Nature (Human, Animal, Bio/Plant, Physical), Recyclability and Self-regulation, Holistic Perception of Harmony in Existence.\n"
+                "Unit-V (10 Hrs): Implications of Holistic Understanding & Professional Ethics: Natural Acceptance of Human Values, Definitiveness of Ethical Human Conduct, Basis for Humanistic Education, Humanistic Constitution and Universal Human Order, Competence in Professional Ethics, Eco-friendly Production Systems.\n"
+                "Textbooks: Human Values and Professional Ethics by R.R. Gaur, R. Sangal, G.P. Bagaria."
+    },
+    {
         "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
         "category": "college",
         "body": "Course Code: B23BS2101 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DISCRETE MATHEMATICS AND GRAPH THEORY (Common to CSE, CSBS, AIML, IT, AIDS, CSG, CIC, CSIT).\n"
@@ -376,9 +387,10 @@ def seed_database():
     print("Resetting/seeding ChromaDB with campus documents...")
     total_chunks = 0
     for doc in SEED_DOCUMENTS:
-        count = add_document_to_rag(doc["title"], doc["body"], doc["category"])
-        total_chunks += count
-        print(f"  [+] Added '{doc['title']}' ({doc['category']}) -> {count} chunk(s)")
+        res = add_document_to_rag(doc["title"], doc["body"], doc["category"])
+        chunks_added = res.get("chunks", 1) if isinstance(res, dict) else res
+        total_chunks += chunks_added
+        print(f"  [+] Added '{doc['title']}' ({doc['category']}) -> {chunks_added} chunk(s)")
     
     print(f"\nSeeding complete! {len(SEED_DOCUMENTS)} documents ({total_chunks} chunks) seeded successfully into ChromaDB persistent store.")
 

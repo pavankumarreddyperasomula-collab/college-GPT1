@@ -72,7 +72,7 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
   };
 
   return (
-    <div className="p-3 sm:p-4 bg-white/95 backdrop-blur-md border-t border-slate-200 sticky bottom-0 z-20">
+    <div className="p-3 sm:p-4 glass-panel border-t border-orange-200/80 sticky bottom-0 z-20">
       {/* Hidden File Input */}
       <input
         type="file"
@@ -84,18 +84,18 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
 
       {/* Attachment Preview Badge Chip */}
       {attachedFile && (
-        <div className="mb-2.5 flex items-center justify-between px-3 py-1.5 rounded-xl bg-orange-50/90 border border-orange-200 text-xs font-semibold text-orange-950 animate-fade-in shadow-2xs">
+        <div className="mb-2.5 flex items-center justify-between px-3.5 py-1.5 rounded-2xl bg-gradient-to-r from-orange-100/90 via-rose-100/80 to-amber-100/90 border border-orange-300 text-xs font-bold text-orange-950 animate-fade-in shadow-2xs">
           <div className="flex items-center gap-2 truncate">
             <FileText className="w-4 h-4 text-orange-600 shrink-0" />
             <span className="truncate">{attachedFile.name}</span>
-            <span className="text-[10px] text-orange-700/80 font-normal shrink-0">
+            <span className="text-[10px] text-orange-800 font-bold shrink-0">
               ({(attachedFile.size / 1024).toFixed(1)} KB)
             </span>
           </div>
           <button
             type="button"
             onClick={handleRemoveFile}
-            className="p-1 hover:bg-orange-200/60 rounded-lg text-orange-700 hover:text-orange-950 transition-colors cursor-pointer shrink-0 ml-2"
+            className="p-1 hover:bg-orange-200 rounded-xl text-orange-800 hover:text-orange-950 transition-colors cursor-pointer shrink-0 ml-2"
             title="Remove file"
           >
             <X className="w-3.5 h-3.5" />
@@ -104,15 +104,15 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
       )}
 
       <form onSubmit={handleSubmit} className="w-full relative flex items-center gap-2">
-        {/* ChatGPT Style Paperclip Attachment Button */}
+        {/* Attachment Button */}
         <button
           type="button"
           onClick={handleFileClick}
           disabled={isDisabled}
-          className="w-10 h-10 rounded-2xl bg-slate-100 hover:bg-orange-100/70 border border-slate-200 hover:border-orange-300 text-slate-600 hover:text-orange-700 flex items-center justify-center transition-all duration-200 cursor-pointer shrink-0 disabled:opacity-40"
+          className="w-10 h-10 rounded-2xl glass-card hover:border-orange-400 text-orange-600 hover:text-rose-600 flex items-center justify-center transition-all duration-200 cursor-pointer shrink-0 disabled:opacity-40"
           title="Upload document to RAG database"
         >
-          <Paperclip className="w-4.5 h-4.5 text-slate-600 hover:text-orange-600" />
+          <Paperclip className="w-4.5 h-4.5 text-orange-600" />
         </button>
 
         {/* Input Text Field */}
@@ -130,13 +130,13 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
             disabled={isDisabled}
             spellCheck={false}
             autoComplete="off"
-            className="w-full pl-4 pr-12 py-2.5 bg-slate-50 border border-slate-200 focus:bg-white focus:border-orange-600 focus:ring-2 focus:ring-orange-600/20 rounded-2xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none shadow-xs transition-all duration-200"
+            className="w-full pl-4 pr-12 py-2.5 glass-input rounded-2xl text-slate-900 text-sm font-semibold placeholder:text-slate-400 focus:outline-none shadow-2xs transition-all duration-200"
           />
           <button
             type="submit"
             onClick={handleSubmit}
             disabled={(!query.trim() && !attachedFile) || isDisabled}
-            className="absolute right-1.5 w-8 h-8 rounded-xl bg-gradient-to-r from-orange-600 to-rose-600 hover:from-orange-700 hover:to-rose-700 text-white flex items-center justify-center transition-all duration-200 shadow-md shadow-orange-600/20 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="absolute right-1.5 w-8 h-8 rounded-xl bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 hover:from-orange-700 hover:to-rose-700 text-white flex items-center justify-center transition-all duration-200 shadow-md shadow-orange-600/25 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
             title="Send query"
           >
             <Send className={`w-3.5 h-3.5 ${isDisabled ? 'animate-pulse' : ''}`} />
@@ -148,3 +148,4 @@ const ChatInput = ({ onSendMessage, onSendQuery, loading, disabled }) => {
 };
 
 export default ChatInput;
+

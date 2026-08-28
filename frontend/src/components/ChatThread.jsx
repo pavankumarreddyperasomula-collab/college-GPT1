@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Bot, User, FileText, Sparkles, BookOpen, Copy, Check } from 'lucide-react';
+import { Bot, User, FileText, Sparkles, BookOpen, Copy, Check, ArrowRight } from 'lucide-react';
 
 // Helper to format inline elements (**bold**, `code`, *italic*)
 const renderInline = (text) => {
@@ -16,13 +16,13 @@ const renderInline = (text) => {
     const token = match[0];
     if (token.startsWith('**') && token.endsWith('**')) {
       parts.push(
-        <strong key={match.index} className="font-extrabold text-slate-950">
+        <strong key={match.index} className="font-extrabold text-orange-950">
           {token.slice(2, -2)}
         </strong>
       );
     } else if (token.startsWith('`') && token.endsWith('`')) {
       parts.push(
-        <code key={match.index} className="px-1.5 py-0.5 mx-0.5 rounded bg-slate-100 text-orange-700 font-mono text-[11px] font-bold border border-slate-200">
+        <code key={match.index} className="px-1.5 py-0.5 mx-0.5 rounded-md bg-orange-100/80 text-orange-800 font-mono text-[11px] font-bold border border-orange-200/80">
           {token.slice(1, -1)}
         </code>
       );
@@ -60,7 +60,7 @@ const FormattedMarkdown = ({ text }) => {
     if (trimmed.startsWith('```')) {
       if (inCodeBlock) {
         elements.push(
-          <pre key={`code-${i}`} className="p-3 bg-slate-900 text-slate-100 rounded-xl text-xs font-mono overflow-x-auto border border-slate-800 my-2 shadow-inner">
+          <pre key={`code-${i}`} className="p-3 bg-slate-900 text-amber-200 rounded-2xl text-xs font-mono overflow-x-auto border border-orange-500/30 my-2 shadow-inner">
             <code>{codeLines.join('\n')}</code>
           </pre>
         );
@@ -87,22 +87,22 @@ const FormattedMarkdown = ({ text }) => {
           const header = tableRows[0];
           const body = tableRows.slice(1);
           elements.push(
-            <div key={`table-${i}`} className="overflow-x-auto my-2 rounded-xl border border-slate-200 shadow-2xs">
-              <table className="w-full text-xs text-left border-collapse bg-white">
-                <thead className="bg-slate-100 text-slate-800 border-b border-slate-200 font-bold">
+            <div key={`table-${i}`} className="overflow-x-auto my-2.5 rounded-2xl border border-orange-200/80 shadow-2xs">
+              <table className="w-full text-xs text-left border-collapse bg-white/90">
+                <thead className="bg-gradient-to-r from-orange-100/80 to-rose-100/80 text-orange-950 border-b border-orange-200 font-extrabold">
                   <tr>
                     {header.map((h, hIdx) => (
-                      <th key={hIdx} className="px-3 py-2 border-r border-slate-200 last:border-r-0">
+                      <th key={hIdx} className="px-3 py-2 border-r border-orange-200/60 last:border-r-0">
                         {renderInline(h)}
                       </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-orange-100">
                   {body.map((row, rIdx) => (
-                    <tr key={rIdx} className="hover:bg-orange-50/40 transition-colors">
+                    <tr key={rIdx} className="hover:bg-orange-50/70 transition-colors">
                       {row.map((cell, cIdx) => (
-                        <td key={cIdx} className="px-3 py-2 border-r border-slate-100 last:border-r-0 text-slate-700">
+                        <td key={cIdx} className="px-3 py-2 border-r border-orange-100 last:border-r-0 text-slate-800">
                           {renderInline(cell)}
                         </td>
                       ))}
@@ -124,13 +124,13 @@ const FormattedMarkdown = ({ text }) => {
     }
 
     if (trimmed === '---' || trimmed === '***' || trimmed === '___') {
-      elements.push(<hr key={`hr-${i}`} className="my-2.5 border-slate-200" />);
+      elements.push(<hr key={`hr-${i}`} className="my-2.5 border-orange-200/70" />);
       continue;
     }
 
     if (trimmed.startsWith('### ')) {
       elements.push(
-        <h3 key={`h3-${i}`} className="text-sm sm:text-base font-bold text-slate-950 mt-2.5 mb-1 tracking-tight">
+        <h3 key={`h3-${i}`} className="text-sm sm:text-base font-bold text-orange-950 mt-2.5 mb-1 tracking-tight">
           {renderInline(trimmed.slice(4))}
         </h3>
       );
@@ -138,7 +138,7 @@ const FormattedMarkdown = ({ text }) => {
     }
     if (trimmed.startsWith('## ')) {
       elements.push(
-        <h2 key={`h2-${i}`} className="text-base sm:text-lg font-extrabold text-slate-950 mt-3 mb-1.5 tracking-tight">
+        <h2 key={`h2-${i}`} className="text-base sm:text-lg font-extrabold text-orange-950 mt-3 mb-1.5 tracking-tight">
           {renderInline(trimmed.slice(3))}
         </h2>
       );
@@ -146,7 +146,7 @@ const FormattedMarkdown = ({ text }) => {
     }
     if (trimmed.startsWith('# ')) {
       elements.push(
-        <h1 key={`h1-${i}`} className="text-lg sm:text-xl font-black text-slate-950 mt-3.5 mb-2 tracking-tight">
+        <h1 key={`h1-${i}`} className="text-lg sm:text-xl font-black text-orange-950 mt-3.5 mb-2 tracking-tight">
           {renderInline(trimmed.slice(2))}
         </h1>
       );
@@ -156,7 +156,7 @@ const FormattedMarkdown = ({ text }) => {
     if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
       elements.push(
         <div key={`li-${i}`} className="flex items-start gap-2 my-0.5 text-slate-800 leading-relaxed">
-          <span className="text-orange-500 font-bold text-xs mt-1 shrink-0">•</span>
+          <span className="text-orange-600 font-extrabold text-xs mt-1 shrink-0">•</span>
           <span>{renderInline(trimmed.slice(2))}</span>
         </div>
       );
@@ -167,7 +167,7 @@ const FormattedMarkdown = ({ text }) => {
     if (numMatch) {
       elements.push(
         <div key={`num-${i}`} className="flex items-start gap-2 my-0.5 text-slate-800 leading-relaxed">
-          <span className="text-orange-600 font-bold text-xs shrink-0 mt-0.5">{numMatch[1]}.</span>
+          <span className="text-orange-600 font-extrabold text-xs shrink-0 mt-0.5">{numMatch[1]}.</span>
           <span>{renderInline(numMatch[2])}</span>
         </div>
       );
@@ -206,21 +206,25 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
   ];
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 max-w-3xl w-full mx-auto">
+    <div className="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-5 max-w-3xl w-full mx-auto">
       {messages.length === 0 && (
-        <div className="flex flex-col items-center justify-center min-h-[45vh] text-center p-6 animate-fade-in">
-          <div className="w-14 h-14 rounded-3xl bg-gradient-to-tr from-orange-600 via-rose-600 to-amber-600 text-white flex items-center justify-center shadow-xl shadow-orange-600/25 mb-4">
-            <Sparkles className="w-7 h-7 text-amber-200" />
+        <div className="flex flex-col items-center justify-center min-h-[45vh] text-center p-4 animate-fade-in">
+          <div className="relative group mb-3">
+            <div className="absolute -inset-1 rounded-3xl bg-gradient-to-tr from-orange-600 via-rose-600 to-amber-500 blur-md opacity-70 group-hover:opacity-100 transition duration-300" />
+            <div className="relative w-14 h-14 rounded-3xl bg-gradient-to-tr from-orange-600 via-rose-600 to-amber-600 text-white flex items-center justify-center shadow-lg shadow-orange-600/30">
+              <Sparkles className="w-7 h-7 text-amber-200 animate-pulse" />
+            </div>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-2 tracking-tight">
-            Ask <span className="bg-gradient-to-r from-orange-600 to-rose-600 bg-clip-text text-transparent">COLLEGE GPT</span> AI
+
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 mb-1.5 tracking-tight">
+            Ask <span className="orange-glow-text">COLLEGE GPT</span>
           </h2>
-          <p className="text-slate-600 text-xs max-w-xs mb-6 leading-relaxed font-medium">
-            SRKR rules, hostel curfew, notice info, exam dates & campus questions.
+          <p className="text-slate-600 text-xs max-w-xs mb-5 leading-relaxed font-semibold">
+            Instant answers on SRKR regulations, notice updates, curfew timings & exams.
           </p>
 
           <div className="w-full space-y-2">
-            <p className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 mb-2">
+            <p className="text-[10px] font-black uppercase tracking-wider text-orange-800/80 mb-2">
               Suggested Questions:
             </p>
             <div className="space-y-2">
@@ -228,10 +232,10 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
                 <button
                   key={qIdx}
                   onClick={() => onQuickQuery(q)}
-                  className="w-full p-3 rounded-2xl bg-slate-50 hover:bg-orange-50 border border-slate-200 hover:border-orange-300 text-left text-xs font-semibold text-slate-700 hover:text-orange-950 transition-all duration-200 shadow-2xs hover:shadow-md group flex items-center justify-between cursor-pointer"
+                  className="w-full p-3 rounded-2xl glass-card text-left text-xs font-bold text-slate-800 hover:text-orange-950 flex items-center justify-between group cursor-pointer"
                 >
-                  <span className="truncate">{q}</span>
-                  <span className="text-orange-600 font-bold group-hover:translate-x-0.5 transition-transform">→</span>
+                  <span className="truncate pr-2">{q}</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-orange-600 group-hover:translate-x-1 transition-transform shrink-0" />
                 </button>
               ))}
             </div>
@@ -246,28 +250,28 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
         return (
           <div
             key={idx}
-            className={`flex items-start gap-3 animate-fade-in ${
+            className={`flex items-start gap-2.5 animate-fade-in ${
               isUser ? 'flex-row-reverse' : 'flex-row'
             }`}
           >
             {/* Avatar */}
             <div
-              className={`w-8 h-8 rounded-2xl flex items-center justify-center shrink-0 text-xs font-bold shadow-md ${
+              className={`w-8 h-8 rounded-2xl flex items-center justify-center shrink-0 text-xs font-extrabold shadow-md ${
                 isUser
-                  ? 'bg-gradient-to-tr from-orange-600 to-rose-600 text-white shadow-orange-600/20'
-                  : 'bg-white border border-slate-200 text-orange-700 shadow-xs'
+                  ? 'bg-gradient-to-tr from-orange-600 via-rose-600 to-amber-600 text-white shadow-orange-600/30'
+                  : 'bg-white border border-orange-300 text-orange-600 shadow-2xs'
               }`}
             >
               {isUser ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4 text-orange-600" />}
             </div>
 
             {/* Message Bubble */}
-            <div className="max-w-[88%] sm:max-w-[80%] space-y-2 group relative">
+            <div className="max-w-[88%] sm:max-w-[82%] space-y-1.5 group relative">
               <div
                 className={`p-3.5 rounded-2xl text-xs sm:text-sm leading-relaxed relative ${
                   isUser
-                    ? 'bg-gradient-to-r from-orange-600 to-rose-600 text-white rounded-tr-none shadow-md shadow-orange-600/15 font-semibold'
-                    : 'bg-white border border-slate-200/90 text-slate-900 rounded-tl-none shadow-xs font-medium'
+                    ? 'bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white rounded-tr-none shadow-md shadow-orange-600/20 font-semibold'
+                    : 'glass-panel-orange text-slate-900 rounded-tl-none font-medium'
                 }`}
               >
                 {isUser ? (
@@ -280,7 +284,7 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
                 {!isUser && (
                   <button
                     onClick={() => handleCopy(msg.text, idx)}
-                    className="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-opacity opacity-0 group-hover:opacity-100 cursor-pointer"
+                    className="absolute top-2 right-2 p-1.5 rounded-xl bg-white/80 hover:bg-white border border-orange-200 text-orange-700 hover:text-orange-950 transition-opacity opacity-0 group-hover:opacity-100 cursor-pointer shadow-2xs"
                     title="Copy Answer"
                   >
                     {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
@@ -290,14 +294,14 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
 
               {/* Source Citations */}
               {!isUser && msg.sources && msg.sources.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 items-center pl-1 pt-1">
-                  <span className="text-[10px] font-extrabold text-slate-500 flex items-center gap-1">
+                <div className="flex flex-wrap gap-1.5 items-center pl-1 pt-0.5">
+                  <span className="text-[10px] font-black text-orange-800 flex items-center gap-1">
                     <BookOpen className="w-3 h-3 text-orange-600" /> Source:
                   </span>
                   {msg.sources.map((src, sIdx) => (
                     <span
                       key={sIdx}
-                      className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-xl bg-orange-50 border border-orange-200 text-[10px] font-semibold text-orange-900 shadow-2xs"
+                      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/90 border border-orange-300 text-[10px] font-extrabold text-orange-950 shadow-2xs"
                     >
                       <FileText className="w-3 h-3 text-orange-600" />
                       {src.title}
@@ -312,15 +316,15 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
 
       {/* Typing Indicator */}
       {loading && (
-        <div className="flex items-start gap-3 animate-fade-in">
-          <div className="w-8 h-8 rounded-2xl bg-white border border-slate-200 text-orange-600 flex items-center justify-center shrink-0 shadow-xs">
+        <div className="flex items-start gap-2.5 animate-fade-in">
+          <div className="w-8 h-8 rounded-2xl bg-white border border-orange-300 text-orange-600 flex items-center justify-center shrink-0 shadow-2xs">
             <Bot className="w-4 h-4 animate-pulse text-orange-600" />
           </div>
-          <div className="p-3 bg-white border border-slate-200 rounded-2xl rounded-tl-none flex items-center gap-2 shadow-xs">
+          <div className="p-3 glass-panel-orange rounded-2xl rounded-tl-none flex items-center gap-2 shadow-2xs">
             <div className="w-2 h-2 rounded-full bg-orange-600 animate-bounce" style={{ animationDelay: '0ms' }} />
             <div className="w-2 h-2 rounded-full bg-rose-600 animate-bounce" style={{ animationDelay: '150ms' }} />
             <div className="w-2 h-2 rounded-full bg-amber-500 animate-bounce" style={{ animationDelay: '300ms' }} />
-            <span className="text-xs text-slate-500 font-medium pl-1">COLLEGE GPT is thinking...</span>
+            <span className="text-xs text-orange-950 font-bold pl-1">COLLEGE GPT is thinking...</span>
           </div>
         </div>
       )}
@@ -331,3 +335,4 @@ const ChatThread = ({ messages, loading, onQuickQuery }) => {
 };
 
 export default ChatThread;
+

@@ -1,109 +1,5 @@
 [
   {
-    "id": "hostel_Hostel_Curfew_&_Entry_Rules_0",
-    "text": "[HOSTEL CURFEW & ENTRY RULES] (hostel): All hostel residents must return to the hostel premises by 9:30 PM on weekdays and 10:00 PM on weekends. Late entry requires prior written permission from the hostel warden. Gate access is restricted after curfew.",
-    "metadata": {
-      "title": "Hostel Curfew & Entry Rules",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_Hostel_Mess_Timings_&_Menu_Rules_0",
-    "text": "[HOSTEL MESS TIMINGS & MENU RULES] (hostel): Mess operating hours: Breakfast 7:30 AM - 9:30 AM, Lunch 12:30 PM - 2:30 PM, Evening Snacks 5:00 PM - 6:00 PM, Dinner 7:30 PM - 9:30 PM. The mess closes strictly at 9:30 PM. Outside food delivery is allowed in common dining areas only.",
-    "metadata": {
-      "title": "Hostel Mess Timings & Menu Rules",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_Hostel_Guest_Policy_0",
-    "text": "[HOSTEL GUEST POLICY] (hostel): Day visitors and family members are allowed in the visitor lounge between 10:00 AM and 6:00 PM. No overnight guests are allowed in student rooms without prior warden approval. Bringing unauthorized guests to rooms results in a fine.",
-    "metadata": {
-      "title": "Hostel Guest Policy",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_Hostel_Room_Maintenance_&_Electric_Appliances_0",
-    "text": "[HOSTEL ROOM MAINTENANCE & ELECTRIC APPLIANCES] (hostel): Students are responsible for room cleanliness. High wattage electrical appliances such as heaters, induction stoves, and iron boxes are strictly prohibited in hostel rooms. Routine inspections occur monthly.",
-    "metadata": {
-      "title": "Hostel Room Maintenance & Electric Appliances",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_Hostel_Laundry_Facilities_&_Timings_0",
-    "text": "[HOSTEL LAUNDRY FACILITIES & TIMINGS] (hostel): Washing machine facilities are accessible in Block A and Block B basement from 6:00 AM to 10:00 PM. Students can request laundry tokens at the warden's desk. Clothes drying is allowed only in designated balcony areas.",
-    "metadata": {
-      "title": "Hostel Laundry Facilities & Timings",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_Hostel_Night_Out_Pass_Procedure_0",
-    "text": "[HOSTEL NIGHT OUT PASS PROCEDURE] (hostel): Students requesting weekend night out passes must submit their request on the student portal or warden office before 5:00 PM on Friday. Parent approval via SMS/Call is verified before issuing passes.",
-    "metadata": {
-      "title": "Hostel Night Out Pass Procedure",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "college_Mid-Semester_Examination_Schedule_Notice_0",
-    "text": "[MID-SEMESTER EXAMINATION SCHEDULE NOTICE] (college): Mid-Semester examinations for B.Tech Semester 3 and 5 will commence from October 15th to October 22nd. Detailed timetable and room seating allocations will be published on the main department notice board.",
-    "metadata": {
-      "title": "Mid-Semester Examination Schedule Notice",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_Diwali_Festival_Holiday_Notice_0",
-    "text": "[DIWALI FESTIVAL HOLIDAY NOTICE] (college): The college campus, central library, and administrative offices will remain closed for Diwali holidays from November 1st to November 5th. Regular academic classes will resume on November 6th at 9:00 AM.",
-    "metadata": {
-      "title": "Diwali Festival Holiday Notice",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_Semester_Tuition_Fee_Payment_Deadline_0",
-    "text": "[SEMESTER TUITION FEE PAYMENT DEADLINE] (college): The final deadline for odd-semester tuition and exam fee submission is September 30th. Payments can be completed online via the ERP portal. Late fee penalty of Rs. 100 per day applies thereafter.",
-    "metadata": {
-      "title": "Semester Tuition Fee Payment Deadline",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_Central_Library_Rules_&_Book_Issue_Limit_0",
-    "text": "[CENTRAL LIBRARY RULES & BOOK ISSUE LIMIT] (college): The Central Library is open from 8:00 AM to 8:00 PM on weekdays. Undergraduate students can borrow up to 4 books for 14 days. Overdue fines are charged at Rs. 5 per day per book.",
-    "metadata": {
-      "title": "Central Library Rules & Book Issue Limit",
-      "category": "college"
-    }
-  },
-  {
-    "id": "hostel_FAQ:_How_to_Apply_for_Hostel_Room_Transfer_0",
-    "text": "[FAQ: HOW TO APPLY FOR HOSTEL ROOM TRANSFER] (hostel): To request a room transfer or change roommates, collect the Hostel Transfer Form from the Warden Office, obtain signatures from both room residents, and submit it during office hours (2:00 PM - 5:00 PM).",
-    "metadata": {
-      "title": "FAQ: How to Apply for Hostel Room Transfer",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "hostel_FAQ:_How_to_Report_Maintenance_Issues_in_Hostel_0",
-    "text": "[FAQ: HOW TO REPORT MAINTENANCE ISSUES IN HOSTEL] (hostel): To report electrical, plumbing, or carpenter maintenance issues in your room, log a complaint in the Hostel Maintenance Register located at the hostel security guard desk, or submit an online ticket.",
-    "metadata": {
-      "title": "FAQ: How to Report Maintenance Issues in Hostel",
-      "category": "hostel"
-    }
-  },
-  {
-    "id": "college_FAQ:_Campus_Sports_Facilities_Access_0",
-    "text": "[FAQ: CAMPUS SPORTS FACILITIES ACCESS] (college): Students can access the gymnasium, basketball court, and badminton arena using their student ID card between 6:00 AM - 8:30 AM and 4:30 PM - 8:00 PM daily. Equipment borrowing requires ID deposit.",
-    "metadata": {
-      "title": "FAQ: Campus Sports Facilities Access",
-      "category": "college"
-    }
-  },
-  {
     "id": "college_B.Tech_Computer_Science_Semester_3_Timetable_0",
     "text": "[B.TECH COMPUTER SCIENCE SEMESTER 3 TIMETABLE] (college): CS Sem 3 Weekly Timetable: Monday & Wednesday 9:00 AM - Data Structures Lecture (Room 201), 11:00 AM - Operating Systems (Room 203), 2:00 PM to 4:00 PM - Object Oriented Programming Lab (Lab 3). Tuesday & Thursday 10:00 AM - Discrete Mathematics.",
     "metadata": {
@@ -412,710 +308,6 @@
     "text": "[TIME TABLE] (college): help students build a successful and meaningful future.",
     "metadata": {
       "title": "time table",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH I YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech I Year I Semester Artificial Intelligence & Data Science Course Structure: - B23HS1101: Communicative English (HS, L:2, T:0, P:0, Cr:2, CIE:30, SEE:70, Total:100) - B23BS1101: Linear Algebra & Calculus (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1103: Chemistry (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) -",
-    "metadata": {
-      "title": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH I YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23CE1101: Basic Civil & Mechanical Engineering (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23CS1101: Introduction to Programming (C) (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT1101: IT Workshop (ES, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23BS1105: Chemistry Lab (BS, L:0, T:0, P:2, Cr:1, CIE:30,",
-    "metadata": {
-      "title": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH I YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Chemistry Lab (BS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23ME1102: Engineering Workshop (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23CS1102: Computer Programming Lab (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23HS1104: Health and Wellness, Yoga and Sports (HS, L:0, T:0, P:1, Cr:0.5, CIE:100, SEE:0, Total:100) Total Credits: 19.5, CIE: 370, SEE: 630,",
-    "metadata": {
-      "title": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH I YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Total:100) Total Credits: 19.5, CIE: 370, SEE: 630, Total Marks: 1000.",
-    "metadata": {
-      "title": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23HS1101_Communicative_English_Syllabus_0",
-    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Course Code: B23HS1101 Category: HS Credits: 2 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: COMMUNICATIVE ENGLISH (Common to all Engineering branches). Unit-I (10 Hrs): Lesson: HUMAN VALUES: Gift of Magi (Short Story). Listening: Topic identification & details. Speaking: Self-introduction & general questions. Reading: Skimming & Scanning. Writing: Mechanics of Writing (Capitalization, Punctuation, Parts of Sentences). Grammar: Parts",
-    "metadata": {
-      "title": "B23HS1101 Communicative English Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23HS1101_Communicative_English_Syllabus_1",
-    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Writing (Capitalization, Punctuation, Parts of Sentences). Grammar: Parts of Speech, Sentence Structures. Vocabulary: Affixes, Root words, Synonyms, Antonyms. Unit-II (10 Hrs): Lesson: NATURE: The Brook by Alfred Tennyson (Poem). Listening: Main and supporting ideas. Speaking: Group discussions & short talks. Reading: Sequence of ideas. Writing: Paragraph writing. Grammar: Cohesive devices, Articles, Prepositions. Vocabulary: Homonyms, Homophones, Homographs. Unit-III (10",
-    "metadata": {
-      "title": "B23HS1101 Communicative English Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23HS1101_Communicative_English_Syllabus_2",
-    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Articles, Prepositions. Vocabulary: Homonyms, Homophones, Homographs. Unit-III (10 Hrs): Lesson: BIOGRAPHY: Elon Musk. Listening: Global comprehension & summarizing. Speaking: Pair discussions & reporting. Reading: Context-specific clues. Writing: Summarizing, Note-making, Paraphrasing. Grammar: Tenses, Subject-Verb Agreement. Vocabulary: Words often confused, Jargons. Unit-IV (10 Hrs): Lesson: INSPIRATION: The Toys of Peace by Saki. Listening: Predictions in conversations. Speaking: Role plays. Reading:",
-    "metadata": {
-      "title": "B23HS1101 Communicative English Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23HS1101_Communicative_English_Syllabus_3",
-    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Listening: Predictions in conversations. Speaking: Role plays. Reading: Graphical representation & info transfer. Writing: Letter Writing (Official Letters, Resume). Grammar: Direct/Indirect speech, Active/Passive Voice. Vocabulary: Compound words, Collocations. Unit-V (10 Hrs): Lesson: MOTIVATION: The Power of Intrapersonal Communication. Listening: Key terms & concepts. Speaking: Formal oral presentations. Reading: Reading comprehension. Writing: Structured essays. Grammar: Text editing & error",
-    "metadata": {
-      "title": "B23HS1101 Communicative English Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23HS1101_Communicative_English_Syllabus_4",
-    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Writing: Structured essays. Grammar: Text editing & error correction. Vocabulary: Technical Jargons. Textbooks: Pathfinder: Communicative English (Orient BlackSwan 2023), Empowering with Language (Cengage 2023).",
-    "metadata": {
-      "title": "B23HS1101 Communicative English Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1101_Linear_Algebra_&_Calculus_Syllabus_0",
-    "text": "[B23BS1101 LINEAR ALGEBRA & CALCULUS SYLLABUS] (college): Course Code: B23BS1101 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: LINEAR ALGEBRA & CALCULUS. Unit-I (10 Hrs): Matrices: Rank of a matrix by Echelon & Normal form. Inverse by Gauss-Jordan method. System of linear equations: Homogeneous & Non-Homogeneous equations, Gauss elimination method, Jacobi & Gauss Seidel Iteration Methods. Unit-II (10 Hrs): Eigen values,",
-    "metadata": {
-      "title": "B23BS1101 Linear Algebra & Calculus Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1101_Linear_Algebra_&_Calculus_Syllabus_1",
-    "text": "[B23BS1101 LINEAR ALGEBRA & CALCULUS SYLLABUS] (college): Seidel Iteration Methods. Unit-II (10 Hrs): Eigen values, Eigenvectors & Orthogonal Transformation: Properties of Eigen values & Eigenvectors, Diagonalization, Cayley-Hamilton Theorem, Inverse & Power of matrix using Cayley-Hamilton, Quadratic forms, Canonical forms by Orthogonal Transformation. Unit-III (10 Hrs): Calculus & Mean Value Theorems: Rolle's Theorem, Lagrange's Mean Value Theorem, Cauchy's Mean Value Theorem, Taylor's and Maclaurin's series with",
-    "metadata": {
-      "title": "B23BS1101 Linear Algebra & Calculus Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1101_Linear_Algebra_&_Calculus_Syllabus_2",
-    "text": "[B23BS1101 LINEAR ALGEBRA & CALCULUS SYLLABUS] (college): Mean Value Theorem, Taylor's and Maclaurin's series with remainders. Unit-IV (10 Hrs): Partial Differentiation & Applications: Functions of several variables, Continuity, Differentiability, Partial & Total derivatives, Chain rule, Directional derivative, Jacobians, Maxima & Minima of two variables, Lagrange multipliers. Unit-V (10 Hrs): Multiple Integrals: Double integrals, Change of order of integration, Triple integrals, Change of variables to polar,",
-    "metadata": {
-      "title": "B23BS1101 Linear Algebra & Calculus Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1101_Linear_Algebra_&_Calculus_Syllabus_3",
-    "text": "[B23BS1101 LINEAR ALGEBRA & CALCULUS SYLLABUS] (college): integration, Triple integrals, Change of variables to polar, cylindrical & spherical coordinates, Finding areas & volumes. Textbooks: Higher Engineering Mathematics by B.S. Grewal (44th Ed), Advanced Engineering Mathematics by Erwin Kreyszig (10th Ed).",
-    "metadata": {
-      "title": "B23BS1101 Linear Algebra & Calculus Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1103_Chemistry_Syllabus_0",
-    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): Course Code: B23BS1103 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: CHEMISTRY (For AIDS, AIML, CSBS, CSG & CIC). Unit-I (10 Hrs): Electrochemistry & Applications: Electrodes, Calomel electrode, Primary cells (Zinc-air), Secondary cells (Lithium-ion battery), Fuel cells (Hydrogen-Oxygen, PEMFC), Potentiometric & Amperometric sensors. Corrosion: Dry corrosion, Pilling-Bedworth ratio, Electrochemical theory, Galvanic & Differential aeration",
-    "metadata": {
-      "title": "B23BS1103 Chemistry Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1103_Chemistry_Syllabus_1",
-    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): Pilling-Bedworth ratio, Electrochemical theory, Galvanic & Differential aeration corrosion, Cathodic protection (Sacrificial anodic, Impressed current), Galvanizing, Tinning, Electroplating. Unit-II (10 Hrs): Modern Engineering Materials: Semiconductors (Intrinsic, Extrinsic, Compound), Solar Cell construction & working, Superconductors (Type-1 & Type-2), Nanomaterials (Sol-gel, Chemical precipitation, Plant-derived synthesis, Applications in catalysis, medicine, sensors). Unit-III (10 Hrs): Structure & Bonding Models: Schrodinger Wave equation,",
-    "metadata": {
-      "title": "B23BS1103 Chemistry Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1103_Chemistry_Syllabus_2",
-    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): Hrs): Structure & Bonding Models: Schrodinger Wave equation, Psi & Psi^2, Particle in 1D box, Molecular Orbital Theory (O2, CO, N2 energy diagrams), Pi-molecular orbitals of butadiene and benzene, Bond order. Unit-IV (10 Hrs): Polymer Chemistry: Chain growth polymerization, Plastics (PVC, Teflon, Bakelite, Nylon-6,6, Kevlar), Elastomers (Buna-S, Buna-N), Conducting polymers (Polyacetylene, Polyaniline), Biodegradable polymers (PGA, PLA). Unit-V (10",
-    "metadata": {
-      "title": "B23BS1103 Chemistry Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1103_Chemistry_Syllabus_3",
-    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): (Polyacetylene, Polyaniline), Biodegradable polymers (PGA, PLA). Unit-V (10 Hrs): Instrumental Methods & Water Analysis: Beer-Lambert's law, UV-Visible Spectroscopy, IR Spectroscopy, Hard water & Soft water, EDTA method for total hardness, Winkler's method for Dissolved Oxygen. Textbooks: Engineering Chemistry by Jain & Jain (16th Ed), Text book of Applied Chemistry by IV Kasi Viswanath.",
-    "metadata": {
-      "title": "B23BS1103 Chemistry Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1103_Chemistry_Syllabus_4",
-    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): IV Kasi Viswanath.",
-    "metadata": {
-      "title": "B23BS1103 Chemistry Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_0",
-    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): Course Code: B23CS1101 Category: ES Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: INTRODUCTION TO PROGRAMMING (C Language). Unit-I (10 Hrs): Introduction to Computers & Programming: Basic organization of computer, Flowcharts, Algorithms, Pseudocode. C Basics: Data types, Keywords, Variables, Constants, Format Specifiers, Operators (Arithmetic, Relational, Logical, Assignment, Increment/Decrement, Bitwise, Special), Precedence & Associativity, Type conversion. Unit-II",
-    "metadata": {
-      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_1",
-    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): Bitwise, Special), Precedence & Associativity, Type conversion. Unit-II (10 Hrs): Control Structures: Decision Making (Simple if, if-else, nested if, else-if ladder, Switch-Case). Looping Statements (While, Do-while, For loops, Nested loops, Break and Continue). Unit-III (10 Hrs): Arrays & Strings: 1D & 2D Arrays, Bubble Sort, Insertion Sort, Selection Sort, Linear Search, Binary Search, Matrix Operations (Addition, Multiplication, Transpose).",
-    "metadata": {
-      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_2",
-    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): Search, Binary Search, Matrix Operations (Addition, Multiplication, Transpose). Strings: String handling functions, string copy & concatenation without library functions. Unit-IV (10 Hrs): Structures, Unions & Pointers: Structure definition, accessing elements, Array of structures, Pointer to structure, Unions vs Structures, Bit fields. Pointers: Dereferencing, Pointer arithmetic, Array access using pointers. Unit-V (10 Hrs): Functions & File Handling: Call by",
-    "metadata": {
-      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_3",
-    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): (10 Hrs): Functions & File Handling: Call by value, Call by reference, Passing arrays to functions, Dynamic memory allocation (malloc, calloc, realloc, free), Command line arguments. File Handling: File modes, Reading & Writing files, Random file access, Macros. Textbooks: The C Programming Language by Kernighan & Ritchie, Schaum's Outline of Programming with C by Byron Gottfried.",
-    "metadata": {
-      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_4",
-    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): Programming with C by Byron Gottfried.",
-    "metadata": {
-      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH I YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech I Year II Semester Artificial Intelligence & Data Science Course Structure: - B23BS1201: Differential Equations & Vector Calculus (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1202: Engineering Physics (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23EE1201: Basic Electrical and Electronics Engineering (ES, L:3, T:0, P:0,",
-    "metadata": {
-      "title": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH I YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Electrical and Electronics Engineering (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23ME1201: Engineering Graphics (ES, L:2, T:0, P:2, Cr:3, CIE:30, SEE:70, Total:100) - B23CS1203: Data Structures (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1204: Engineering Physics Lab (BS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23EE1202: Electrical and Electronics Engineering Workshop (ES, L:0,",
-    "metadata": {
-      "title": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH I YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): B23EE1202: Electrical and Electronics Engineering Workshop (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23CS1204: Data Structures Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23HS1201: Communicative English Lab (HS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23HS1203: NSS/NCC/Scouts & Guides/Community Service (HS, L:0, T:0, P:1, Cr:0.5, CIE:100, SEE:0, Total:100) Total Credits: 20.5, CIE:",
-    "metadata": {
-      "title": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_I_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH I YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Cr:0.5, CIE:100, SEE:0, Total:100) Total Credits: 20.5, CIE: 370, SEE: 630, Total Marks: 1000.",
-    "metadata": {
-      "title": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1203_Data_Structures_Syllabus_0",
-    "text": "[B23CS1203 DATA STRUCTURES SYLLABUS] (college): Course Code: B23CS1203 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DATA STRUCTURES (Common to AI&DS, CSE, IT, CSBS, etc). Unit-I (10 Hrs): Linear Data Structures & Algorithm Analysis: Definition & importance of ADTs, Time & Space complexity overview. Searching: Linear & Binary Search. Sorting: Bubble Sort, Selection Sort, Insertion Sort. Unit-II (10 Hrs):",
-    "metadata": {
-      "title": "B23CS1203 Data Structures Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1203_Data_Structures_Syllabus_1",
-    "text": "[B23CS1203 DATA STRUCTURES SYLLABUS] (college): Sort, Selection Sort, Insertion Sort. Unit-II (10 Hrs): Linked Lists: Singly Linked Lists (representation & operations), Doubly Linked Lists, Circular Linked Lists. Applications: Polynomial expression representation, addition & multiplication, Sparse matrix representation. Unit-III (10 Hrs): Stacks: Stack ADT, Array & Linked List implementations, Applications (Infix to Postfix conversion, Postfix evaluation, Backtracking, Reversing list). Unit-IV (8 Hrs): Queues &",
-    "metadata": {
-      "title": "B23CS1203 Data Structures Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1203_Data_Structures_Syllabus_2",
-    "text": "[B23CS1203 DATA STRUCTURES SYLLABUS] (college): Backtracking, Reversing list). Unit-IV (8 Hrs): Queues & Deques: Queue ADT, Array & Linked list implementations, Circular Queues, Priority Queues, BFS traversal. Deques (Double-ended Queues), Palindrome checking. Unit-V (12 Hrs): Trees & Hashing: Trees, Binary Search Tree (BST) insertion, deletion & traversals. Hashing: Hash functions, Collision resolution (Chaining, Open Addressing), Hash tables, Caching applications. Textbooks: Fundamentals of Data",
-    "metadata": {
-      "title": "B23CS1203 Data Structures Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23CS1203_Data_Structures_Syllabus_3",
-    "text": "[B23CS1203 DATA STRUCTURES SYLLABUS] (college): Hash tables, Caching applications. Textbooks: Fundamentals of Data Structures in C by Horowitz & Sahni, Data Structures and Algorithm Analysis in C by Mark Allen Weiss.",
-    "metadata": {
-      "title": "B23CS1203 Data Structures Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1202_Engineering_Physics_Syllabus_0",
-    "text": "[B23BS1202 ENGINEERING PHYSICS SYLLABUS] (college): Course Code: B23BS1202 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ENGINEERING PHYSICS. Unit-I (10 Hrs): Wave Optics: Interference in thin films, Newton's Rings. Diffraction: Fresnel & Fraunhofer diffractions, Single slit, Double slit, Diffraction Grating, Dispersive & Resolving power. Polarization: Double refraction, Nicol's Prism, Half & Quarter wave plates. Unit-II (10 Hrs): Crystallography &",
-    "metadata": {
-      "title": "B23BS1202 Engineering Physics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1202_Engineering_Physics_Syllabus_1",
-    "text": "[B23BS1202 ENGINEERING PHYSICS SYLLABUS] (college): Quarter wave plates. Unit-II (10 Hrs): Crystallography & X-Ray Diffraction: Space lattice, Unit cell, Bravais lattices, Packing fraction (SC, BCC, FCC), Miller indices, Bragg's law, X-ray Diffractometer, Powder method. Unit-III (10 Hrs): Dielectric & Magnetic Materials: Dielectric polarizability, Clausius-Mosotti equation, Dielectric loss. Magnetic materials: Dia, Para, Ferro, Antiferro, Ferri magnetism, Hysteresis curve, Soft & Hard magnetic materials. Unit-IV",
-    "metadata": {
-      "title": "B23BS1202 Engineering Physics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1202_Engineering_Physics_Syllabus_2",
-    "text": "[B23BS1202 ENGINEERING PHYSICS SYLLABUS] (college): Hysteresis curve, Soft & Hard magnetic materials. Unit-IV (10 Hrs): Quantum Mechanics & Free Electron Theory: Dual nature of matter, Heisenberg Uncertainty Principle, Schrodinger time independent wave equation, Particle in 1D box. Classical & Quantum free electron theory, Fermi energy, Fermi-Dirac distribution. Unit-V (10 Hrs): Semiconductors: Intrinsic & Extrinsic semiconductors, Fermi level, Drift & Diffusion currents, Einstein's equation,",
-    "metadata": {
-      "title": "B23BS1202 Engineering Physics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS1202_Engineering_Physics_Syllabus_3",
-    "text": "[B23BS1202 ENGINEERING PHYSICS SYLLABUS] (college): Fermi level, Drift & Diffusion currents, Einstein's equation, Hall Effect & applications. Textbooks: A Textbook of Engineering Physics by M.N. Avadhanulu & P.G. Kshirsagar, Engineering Physics by D.K. Bhattacharya.",
-    "metadata": {
-      "title": "B23BS1202 Engineering Physics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH II YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech II Year I Semester Artificial Intelligence & Data Science Course Structure: - B23BS2101: Discrete Mathematics and Graph Theory (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23HS2101: Universal Human Values-II : Understanding Harmony and Ethical Human Conduct (HS, L:2, T:1, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT2101: Database",
-    "metadata": {
-      "title": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH II YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT2101: Database Management Systems (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT2102: Object Oriented Programming through Java (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2101: Advanced Data Structures & Algorithm Analysis (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2102: Advanced Data Structures & Algorithms Lab (PC,",
-    "metadata": {
-      "title": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH II YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): B23AD2102: Advanced Data Structures & Algorithms Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23IT2105: Object Oriented Programming through JAVA Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23IT2106: Python Programming (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23MC2101: English Proficiency (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 20,",
-    "metadata": {
-      "title": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH II YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 20, CIE: 270, SEE: 560, Total Marks: 830.",
-    "metadata": {
-      "title": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS2101_Discrete_Mathematics_&_Graph_Theory_Syllabus_0",
-    "text": "[B23BS2101 DISCRETE MATHEMATICS & GRAPH THEORY SYLLABUS] (college): Course Code: B23BS2101 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DISCRETE MATHEMATICS AND GRAPH THEORY (Common to CSE, CSBS, AIML, IT, AIDS, CSG, CIC, CSIT). Unit-I (10 Hrs): Mathematical Logic: Propositional Calculus (Statements, Connectives, WFF, Truth Tables, Tautologies, Duality Law, Normal Forms, Rules of Inference, Consistency). Predicate Calculus (Predicates, Quantifiers, Free & Bound",
-    "metadata": {
-      "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS2101_Discrete_Mathematics_&_Graph_Theory_Syllabus_1",
-    "text": "[B23BS2101 DISCRETE MATHEMATICS & GRAPH THEORY SYLLABUS] (college): Consistency). Predicate Calculus (Predicates, Quantifiers, Free & Bound Variables). Unit-II (10 Hrs): Set Theory, Relations & Functions: Operations on Sets, Inclusion-Exclusion. Relations: Properties, Equivalence relations, Partial Ordering, Hasse Diagrams, Lattices. Functions: Bijective, Composition, Inverse, Permutation, Recursive functions. Unit-III (12 Hrs): Combinatorics & Recurrence Relations: Counting principles, Permutations & Combinations, Circular & Restricted permutations, Binomial & Multinomial Theorems. Recurrence",
-    "metadata": {
-      "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS2101_Discrete_Mathematics_&_Graph_Theory_Syllabus_2",
-    "text": "[B23BS2101 DISCRETE MATHEMATICS & GRAPH THEORY SYLLABUS] (college): & Restricted permutations, Binomial & Multinomial Theorems. Recurrence Relations: Generating functions, Solving homogeneous & inhomogeneous recurrence relations. Unit-IV (10 Hrs): Graph Theory: Graphs, Subgraphs, Adjacency & Incidence matrices, Isomorphic graphs, Paths, Circuits, Eulerian & Hamiltonian graphs. Unit-V (8 Hrs): Multi Graphs & Trees: Bipartite & Planar graphs, Euler's Theorem, Graph coloring, Chromatic number. Trees: Spanning trees, BFS &",
-    "metadata": {
-      "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23BS2101_Discrete_Mathematics_&_Graph_Theory_Syllabus_3",
-    "text": "[B23BS2101 DISCRETE MATHEMATICS & GRAPH THEORY SYLLABUS] (college): coloring, Chromatic number. Trees: Spanning trees, BFS & DFS spanning trees, Prim's and Kruskal's Algorithms. Textbooks: Discrete Mathematical Structures with Applications to Computer Science by Tremblay & Manohar, Discrete Mathematics for Computer Scientists by Mott, Kandel & Baker.",
-    "metadata": {
-      "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2101_Database_Management_Systems_(DBMS)_Syllabus_0",
-    "text": "[B23IT2101 DATABASE MANAGEMENT SYSTEMS (DBMS) SYLLABUS] (college): Course Code: B23IT2101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DATABASE MANAGEMENT SYSTEMS (DBMS). Unit-I (10 Hrs): Introduction: Database system vs File system, Users, Architecture (3-tier), Schema, Instance, ER Model (Entities, Attributes, Relationships, ER Diagrams, Specialization, Generalization). Unit-II (8 Hrs): Relational Model & SQL: Relational Algebra & Calculus. Basic SQL: DDL, DML operations",
-    "metadata": {
-      "title": "B23IT2101 Database Management Systems (DBMS) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2101_Database_Management_Systems_(DBMS)_Syllabus_1",
-    "text": "[B23IT2101 DATABASE MANAGEMENT SYSTEMS (DBMS) SYLLABUS] (college): Algebra & Calculus. Basic SQL: DDL, DML operations (Create, Alter, Insert, Delete, Update), Constraints (Domain, Key, Integrity). Unit-III (10 Hrs): Structured Query Language: Complex SQL Queries, Select & Where clauses, Joins, Grouping, Aggregation, Sub-queries, Views, Set operations. Unit-IV (10 Hrs): Schema Refinement (Normalization): Functional Dependencies, Normal Forms (1NF, 2NF, 3NF, BCNF, 4NF, 5NF), Lossless Join & Dependency Preservation.",
-    "metadata": {
-      "title": "B23IT2101 Database Management Systems (DBMS) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2101_Database_Management_Systems_(DBMS)_Syllabus_2",
-    "text": "[B23IT2101 DATABASE MANAGEMENT SYSTEMS (DBMS) SYLLABUS] (college): BCNF, 4NF, 5NF), Lossless Join & Dependency Preservation. Unit-V (12 Hrs): Transaction Management & Indexing: ACID properties, Serializability, Concurrency control (Lock-based, Timestamp-based, Optimistic), Deadlocks, Recovery. Indexing: B+ Trees, Hash Indexing. Textbooks: Database Management Systems by Raghu Ramakrishnan & Johannes Gehrke, Database System Concepts by Silberschatz, Korth & Sudarshan.",
-    "metadata": {
-      "title": "B23IT2101 Database Management Systems (DBMS) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2102_Object_Oriented_Programming_through_Java_Syllabus_0",
-    "text": "[B23IT2102 OBJECT ORIENTED PROGRAMMING THROUGH JAVA SYLLABUS] (college): Course Code: B23IT2102 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: OBJECT ORIENTED PROGRAMMING THROUGH JAVA. Unit-I (10 Hrs): Program Structure in Java: Tokens, I/O operations (Scanner), Data Types, Operators, Control Statements (if-else, switch, loops). Unit-II (10 Hrs): Classes, Objects & Methods: Class declarations, Constructors, Overloading, Access Control, Keyword 'this', Wrapper classes (Autoboxing/Unboxing), Static",
-    "metadata": {
-      "title": "B23IT2102 Object Oriented Programming through Java Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2102_Object_Oriented_Programming_through_Java_Syllabus_1",
-    "text": "[B23IT2102 OBJECT ORIENTED PROGRAMMING THROUGH JAVA SYLLABUS] (college): Access Control, Keyword 'this', Wrapper classes (Autoboxing/Unboxing), Static & Final attributes. Unit-III (10 Hrs): Arrays, Inheritance & Interfaces: 1D/2D Arrays, Inheritance types, 'super' keyword, Method Overriding, Abstract Classes, Interfaces, Default & Static methods, Annotations. Unit-IV (10 Hrs): Packages, Exception Handling & Multithreading: User-defined Packages. Exceptions: try, catch, finally, throw, throws, Custom Exceptions. Multithreading: Thread class, Runnable interface, Synchronization.",
-    "metadata": {
-      "title": "B23IT2102 Object Oriented Programming through Java Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2102_Object_Oriented_Programming_through_Java_Syllabus_2",
-    "text": "[B23IT2102 OBJECT ORIENTED PROGRAMMING THROUGH JAVA SYLLABUS] (college): Custom Exceptions. Multithreading: Thread class, Runnable interface, Synchronization. Java I/O streams. Unit-V (10 Hrs): String Handling, JDBC & JavaFX: String & StringBuffer classes. JDBC Architecture, Database connection, ResultSet. JavaFX GUI: Scene Builder, Layouts, Event handling. Textbooks: JAVA One Step Ahead by Anitha Seth & B.L. Juneja, Joy with JAVA by Debasis Samanta.",
-    "metadata": {
-      "title": "B23IT2102 Object Oriented Programming through Java Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23IT2102_Object_Oriented_Programming_through_Java_Syllabus_3",
-    "text": "[B23IT2102 OBJECT ORIENTED PROGRAMMING THROUGH JAVA SYLLABUS] (college): Debasis Samanta.",
-    "metadata": {
-      "title": "B23IT2102 Object Oriented Programming through Java Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2101_Advanced_Data_Structures_&_Algorithm_Analysis_Syllabus_0",
-    "text": "[B23AD2101 ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS SYLLABUS] (college): Course Code: B23AD2101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS (For AI & DS). Unit-I (10 Hrs): Advanced Trees: AVL Trees (Creation, Insertion, Deletion, Applications), B-Trees (Operations & Applications), Heap Trees (Min & Max Heaps, Priority Queues). Unit-II (10 Hrs): Graphs & Divide and Conquer: Graph traversals,",
-    "metadata": {
-      "title": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2101_Advanced_Data_Structures_&_Algorithm_Analysis_Syllabus_1",
-    "text": "[B23AD2101 ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS SYLLABUS] (college): Hrs): Graphs & Divide and Conquer: Graph traversals, Connected components. Algorithm Analysis: Time & Space complexity, Asymptotic notations. Divide & Conquer: Quick Sort, Merge Sort, Strassen's Matrix Multiplication, Convex Hull. Unit-III (10 Hrs): Greedy & Dynamic Programming: Greedy: Job Sequencing, Knapsack Problem, Minimum Cost Spanning Trees, Single Source Shortest Path. Dynamic Programming: All-Pairs Shortest Path (Floyd-Warshall), Bellman-Ford, 0/1",
-    "metadata": {
-      "title": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2101_Advanced_Data_Structures_&_Algorithm_Analysis_Syllabus_2",
-    "text": "[B23AD2101 ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS SYLLABUS] (college): Dynamic Programming: All-Pairs Shortest Path (Floyd-Warshall), Bellman-Ford, 0/1 Knapsack, Traveling Salesperson Problem (TSP). Unit-IV (10 Hrs): Backtracking & Branch and Bound: Backtracking: 8-Queens Problem, Sum of Subsets, Graph Coloring. Branch & Bound: 0/1 Knapsack, TSP. Unit-V (10 Hrs): NP-Hard & NP-Complete Problems: Cook's theorem, Clique Decision Problem, Chromatic Number Problem, Job Shop Scheduling. Textbooks: Fundamentals of Data Structures",
-    "metadata": {
-      "title": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2101_Advanced_Data_Structures_&_Algorithm_Analysis_Syllabus_3",
-    "text": "[B23AD2101 ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS SYLLABUS] (college): Job Shop Scheduling. Textbooks: Fundamentals of Data Structures in C++ by Horowitz, Sahni & Mehta, Computer Algorithms in C++ by Horowitz, Sahni & Rajasekaran.",
-    "metadata": {
-      "title": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH II YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech II Year II Semester Artificial Intelligence & Data Science Course Structure: - B23HS2201: Managerial Economics and Financial Analysis (HS, L:2, T:0, P:0, Cr:2, CIE:30, SEE:70, Total:100) - B23BS2202: Statistical Methods for Data Science (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2201: Introduction to Data Science (PC, L:3,",
-    "metadata": {
-      "title": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH II YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): - B23AD2201: Introduction to Data Science (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2202: Artificial Intelligence (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2203: Computer Organization (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2204: Artificial Intelligence Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD2205: Data Science using Python Lab",
-    "metadata": {
-      "title": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH II YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Total:100) - B23AD2205: Data Science using Python Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD2206: Full Stack Development-1 (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AD2207: Design Thinking & Innovation (ES, L:1, T:0, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23MC2202: Environmental Science (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 21,",
-    "metadata": {
-      "title": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_II_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH II YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 21, CIE: 300, SEE: 630, Total Marks: 930.",
-    "metadata": {
-      "title": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2202_Artificial_Intelligence_Syllabus_0",
-    "text": "[B23AD2202 ARTIFICIAL INTELLIGENCE SYLLABUS] (college): Course Code: B23AD2202 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ARTIFICIAL INTELLIGENCE (For AIDS). Unit-I (10 Hrs): Introduction to AI & Intelligent Agents: Foundations of AI, Agents and Environments, Rationality, Structure of agents, Problem solving agents, Tic-Tac-Toe game. Unit-II (10 Hrs): State-Space Search & Game Playing: Heuristic search techniques, A* algorithm, Constraint Satisfaction.",
-    "metadata": {
-      "title": "B23AD2202 Artificial Intelligence Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2202_Artificial_Intelligence_Syllabus_1",
-    "text": "[B23AD2202 ARTIFICIAL INTELLIGENCE SYLLABUS] (college): Playing: Heuristic search techniques, A* algorithm, Constraint Satisfaction. Game Playing: Alpha-Beta pruning, Two-player games. Unit-III (10 Hrs): Logic & Uncertainty: Propositional Logic, Predicate Logic, Resolution Refutation, Fuzzy Logic, Fuzzy Set operations. Unit-IV (8 Hrs): Knowledge Representation & Reasoning: Semantic Networks, Frames, Scripts, Conceptual Dependency, Reasoning under uncertainty, Bayes Probabilistic Inference, Dempster-Shafer theory. Unit-V (12 Hrs): Planning & Expert",
-    "metadata": {
-      "title": "B23AD2202 Artificial Intelligence Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD2202_Artificial_Intelligence_Syllabus_2",
-    "text": "[B23AD2202 ARTIFICIAL INTELLIGENCE SYLLABUS] (college): Dempster-Shafer theory. Unit-V (12 Hrs): Planning & Expert Systems: Goal Stack Planning, Non-linear planning. Expert Systems: Architecture, Knowledge Acquisition, MYCIN, DART, XCON. Textbooks: Artificial Intelligence by Saroj Kaushik, Artificial Intelligence: A Modern Approach by Stuart Russell & Peter Norvig.",
-    "metadata": {
-      "title": "B23AD2202 Artificial Intelligence Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH III YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech III Year I Semester Artificial Intelligence & Data Science Course Structure: - B23AD3101: Fundamentals of Data Mining (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3102: Principles of Machine Learning (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3103: Operating Systems (PC, L:3, T:0, P:0, Cr:3, CIE:30,",
-    "metadata": {
-      "title": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH III YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Operating Systems (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - Professional Elective-I (#PE-I): OOAD (B23AD3104), Soft Computing (B23AD3105), IoT (B23AD3106), EDA with Python (B23AD3107), Computer Networks (B23AD3108) (PE-I, Cr:3) - Open Elective-I (#OE-I): Offered by CE/ECE/EEE/ME/S&H (OE-I, Cr:3) - B23AD3110: Data Mining and Machine Learning Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3111: Data",
-    "metadata": {
-      "title": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH III YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3111: Data Visualization Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23BS3101: Soft Skills (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AD3112: User Interface Design Using Flutter (Tinkering Lab) (ES, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23AD3113: Evaluation of Community Service Internship (PR, Cr:2, CIE:0, SEE:50,",
-    "metadata": {
-      "title": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH III YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): of Community Service Internship (PR, Cr:2, CIE:0, SEE:50, Total:50) Total Credits: 23, CIE: 270, SEE: 680, Total Marks: 950.",
-    "metadata": {
-      "title": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3102_Principles_of_Machine_Learning_Syllabus_0",
-    "text": "[B23AD3102 PRINCIPLES OF MACHINE LEARNING SYLLABUS] (college): Course Code: B23AD3102 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: PRINCIPLES OF MACHINE LEARNING (For AIDS). Unit-I (10 Hrs): Introduction to Machine Learning: AI vs ML vs DL, Supervised/Unsupervised/Reinforcement Learning, Data Acquisition, Feature Selection & Extraction, Overfitting vs Underfitting, Bias-Variance Tradeoff. Unit-II (10 Hrs): Regression & Regularization: Linear Regression, Non-Linear Regression, Regularization (Ridge",
-    "metadata": {
-      "title": "B23AD3102 Principles of Machine Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3102_Principles_of_Machine_Learning_Syllabus_1",
-    "text": "[B23AD3102 PRINCIPLES OF MACHINE LEARNING SYLLABUS] (college): & Regularization: Linear Regression, Non-Linear Regression, Regularization (Ridge vs Lasso Regression), Logistic Regression for Binary Classification. Unit-III (10 Hrs): Classification & Decision Trees: Decision Trees (ID3 algorithm), Evaluation metrics (Accuracy, Precision, Recall, F1-score, ROC), Naive Bayes Classifier, K-Nearest Neighbors (KNN). Unit-IV (10 Hrs): Support Vector Machines & Ensemble Learning: SVM (Linear, Non-Linear, SVR), Ensemble methods (Bagging, Boosting, Stacking,",
-    "metadata": {
-      "title": "B23AD3102 Principles of Machine Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3102_Principles_of_Machine_Learning_Syllabus_2",
-    "text": "[B23AD3102 PRINCIPLES OF MACHINE LEARNING SYLLABUS] (college): (Linear, Non-Linear, SVR), Ensemble methods (Bagging, Boosting, Stacking, Random Forest). Clustering: K-Means, K-Medoids. Unit-V (10 Hrs): Advanced ML & Neural Networks: Dimensionality Reduction (PCA), Artificial Neural Networks (Perceptron, Multi-Layer Perceptron, Backpropagation), Reinforcement Learning basics. Textbooks: Machine Learning by Tom M. Mitchell, Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurelien Geron.",
-    "metadata": {
-      "title": "B23AD3102 Principles of Machine Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3102_Principles_of_Machine_Learning_Syllabus_3",
-    "text": "[B23AD3102 PRINCIPLES OF MACHINE LEARNING SYLLABUS] (college): Aurelien Geron.",
-    "metadata": {
-      "title": "B23AD3102 Principles of Machine Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3101_Fundamentals_of_Data_Mining_Syllabus_0",
-    "text": "[B23AD3101 FUNDAMENTALS OF DATA MINING SYLLABUS] (college): Course Code: B23AD3101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: FUNDAMENTALS OF DATA MINING (For AIDS). Unit-I (10 Hrs): Data Warehousing & OLAP: Data Warehouse Modeling, OLTP vs OLAP, ETL operations, Data Cube operations (Roll-Up, Drill-Down, Slice, Dice, Pivot). Intro to Data Mining. Unit-II (10 Hrs): Data Pre-processing: Data Cleaning, Integration, Reduction, Transformation,",
-    "metadata": {
-      "title": "B23AD3101 Fundamentals of Data Mining Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3101_Fundamentals_of_Data_Mining_Syllabus_1",
-    "text": "[B23AD3101 FUNDAMENTALS OF DATA MINING SYLLABUS] (college): Hrs): Data Pre-processing: Data Cleaning, Integration, Reduction, Transformation, Discretization, Data Similarity & Dissimilarity measures. Unit-III (10 Hrs): Classification: Decision Tree Induction, Rule-Based Classifiers, Bayesian Classification (Bayes Theorem, Naive Bayes). Unit-IV (10 Hrs): Association Analysis: Frequent Itemset Generation, Apriori Algorithm, Rule Pruning, FP-Growth Algorithm. Unit-V (10 Hrs): Cluster Analysis: K-Means, Bisecting K-Means, Agglomerative Hierarchical Clustering, BIRCH, DBSCAN, OPTICS. Textbooks:",
-    "metadata": {
-      "title": "B23AD3101 Fundamentals of Data Mining Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3101_Fundamentals_of_Data_Mining_Syllabus_2",
-    "text": "[B23AD3101 FUNDAMENTALS OF DATA MINING SYLLABUS] (college): K-Means, Agglomerative Hierarchical Clustering, BIRCH, DBSCAN, OPTICS. Textbooks: Data Mining Concepts and Techniques by Jiawei Han & Michel Kamber, Introduction to Data Mining by Pang-Ning Tan.",
-    "metadata": {
-      "title": "B23AD3101 Fundamentals of Data Mining Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3103_Operating_Systems_Syllabus_0",
-    "text": "[B23AD3103 OPERATING SYSTEMS SYLLABUS] (college): Course Code: B23AD3103 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: OPERATING SYSTEMS (For AIDS). Unit-I (10 Hrs): OS Overview & System Structures: OS Functions, System Calls, Operating System Design & Building/Booting. Unit-II (10 Hrs): Processes, Threads & CPU Scheduling: Process Concept, Inter-process Communication, Multithreading models, CPU Scheduling algorithms (FCFS, SJF, Priority, Round Robin).",
-    "metadata": {
-      "title": "B23AD3103 Operating Systems Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3103_Operating_Systems_Syllabus_1",
-    "text": "[B23AD3103 OPERATING SYSTEMS SYLLABUS] (college): CPU Scheduling algorithms (FCFS, SJF, Priority, Round Robin). Unit-III (10 Hrs): Synchronization & Deadlocks: Critical Section problem, Peterson's solution, Mutex Locks, Semaphores, Monitors. Deadlocks: Characterization, Prevention, Avoidance (Banker's Algorithm), Detection & Recovery. Unit-IV (10 Hrs): Memory Management: Contiguous allocation, Paging, Page Tables, Virtual Memory (Demand Paging, Page Replacement algorithms FIFO, LRU, Optimal, Thrashing). Unit-V (10 Hrs): File System",
-    "metadata": {
-      "title": "B23AD3103 Operating Systems Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3103_Operating_Systems_Syllabus_2",
-    "text": "[B23AD3103 OPERATING SYSTEMS SYLLABUS] (college): LRU, Optimal, Thrashing). Unit-V (10 Hrs): File System & System Protection: File Concept, Directory Structure, File System Implementation, Access Matrix, Protection Domains. Textbooks: Operating System Concepts by Silberschatz, Galvin & Gagne (10th Ed), Modern Operating Systems by Tanenbaum.",
-    "metadata": {
-      "title": "B23AD3103 Operating Systems Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0",
-    "text": "[B.TECH III YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech III Year II Semester Artificial Intelligence & Data Science Course Structure: - B23AD3201: Big Data Analytics (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3202: Deep Learning (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3203: Natural Language Processing (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100)",
-    "metadata": {
-      "title": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_1",
-    "text": "[B.TECH III YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - Professional Elective-II (#PE-II): Cryptography & Network Security (B23AD3204), OOSE (B23AD3205), Recommender Systems (B23AD3206), Computer Vision (B23AD3207), Automata & Compiler Design (B23AD3208) (PE-II, Cr:3) - Professional Elective-III (#PE-III): Quantum Computing (B23AD3210), NoSQL Databases (B23AD3211), Cloud Computing (B23AD3212), Social Media Analytics (B23AD3213) (PE-III, Cr:3) - Open Elective-II (#OE-II): Open Elective II",
-    "metadata": {
-      "title": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_2",
-    "text": "[B.TECH III YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Cr:3) - Open Elective-II (#OE-II): Open Elective II (Cr:3) - B23AD3215: Deep Learning & NLP Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3216: Big Data Analytics Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3217: Full Stack Development-2 (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AC3201: Technical Paper Writing & IPR",
-    "metadata": {
-      "title": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B.Tech_III_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_3",
-    "text": "[B.TECH III YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): Total:100) - B23AC3201: Technical Paper Writing & IPR (AC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) - B23MC3201: Employability Skills (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 23, CIE: 330, SEE: 630, Total Marks: 960.",
-    "metadata": {
-      "title": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3202_Deep_Learning_Syllabus_0",
-    "text": "[B23AD3202 DEEP LEARNING SYLLABUS] (college): Course Code: B23AD3202 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DEEP LEARNING (For AIDS). Unit-I (10 Hrs): Introduction to Deep Learning: Biological Neuron, McCulloch-Pitts unit, Thresholding logic, Linear Perceptron, Perceptron Learning Algorithm, Convergence theorem. Unit-II (10 Hrs): Artificial Neural Networks (ANN): Multilayer Perceptrons, Backpropagation, Gradient Descent, Activation Functions (ReLU, Sigmoid, Tanh, Softmax), Loss",
-    "metadata": {
-      "title": "B23AD3202 Deep Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3202_Deep_Learning_Syllabus_1",
-    "text": "[B23AD3202 DEEP LEARNING SYLLABUS] (college): Descent, Activation Functions (ReLU, Sigmoid, Tanh, Softmax), Loss Functions (MSE, Cross-Entropy), Dropout, L1/L2 Regularization. Unit-III (10 Hrs): Convolutional Neural Networks (CNN): Convolution & Pooling, CNN Architectures (LeNet, AlexNet, VGG, ResNet), Transfer Learning, Object Detection (YOLO, SSD, Faster R-CNN). Unit-IV (10 Hrs): Recurrent Neural Networks (RNN) & NLP: Sequential Data Processing, RNN, LSTMs, Word Embeddings (Word2Vec, GloVe), Attention Mechanisms,",
-    "metadata": {
-      "title": "B23AD3202 Deep Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3202_Deep_Learning_Syllabus_2",
-    "text": "[B23AD3202 DEEP LEARNING SYLLABUS] (college): RNN, LSTMs, Word Embeddings (Word2Vec, GloVe), Attention Mechanisms, Transformers, LLMs (BERT, GPT). Unit-V (10 Hrs): Advanced Deep Learning: Generative Models (GANs, VAEs), Deep Q Networks, Explainable AI, Model Deployment (Flask, FastAPI). Textbooks: Deep Learning by Ian Goodfellow, Yoshua Bengio & Aaron Courville.",
-    "metadata": {
-      "title": "B23AD3202 Deep Learning Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3203_Natural_Language_Processing_(NLP)_Syllabus_0",
-    "text": "[B23AD3203 NATURAL LANGUAGE PROCESSING (NLP) SYLLABUS] (college): Course Code: B23AD3203 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: NATURAL LANGUAGE PROCESSING (For AIDS). Unit-I (10 Hrs): Introduction & Language Modeling: Grammar-based LM, Statistical LM, Regular Expressions, Finite-State Automata, Tokenization, Spelling Correction, Minimum Edit Distance. Unit-II (10 Hrs): Word Level Analysis: N-grams, Smoothing, Part-of-Speech (POS) Tagging (Rule-based, Stochastic, HMM). Unit-III (10 Hrs):",
-    "metadata": {
-      "title": "B23AD3203 Natural Language Processing (NLP) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3203_Natural_Language_Processing_(NLP)_Syllabus_1",
-    "text": "[B23AD3203 NATURAL LANGUAGE PROCESSING (NLP) SYLLABUS] (college): (POS) Tagging (Rule-based, Stochastic, HMM). Unit-III (10 Hrs): Syntactic Analysis: Context-Free Grammars (CFG), Dependency Grammar, Parsing (CYK algorithm), Probabilistic CFGs. Unit-IV (10 Hrs): Semantics & Pragmatics: First-Order Logic, Word Sense Disambiguation (WSD), Thesaurus methods, Distributional similarity. Unit-V (10 Hrs): Discourse Analysis & Lexical Resources: Anaphora resolution, Coreference resolution, WordNet, Penn Treebank, Brown Corpus. Textbooks: Speech and Language Processing",
-    "metadata": {
-      "title": "B23AD3203 Natural Language Processing (NLP) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3203_Natural_Language_Processing_(NLP)_Syllabus_2",
-    "text": "[B23AD3203 NATURAL LANGUAGE PROCESSING (NLP) SYLLABUS] (college): Treebank, Brown Corpus. Textbooks: Speech and Language Processing by Daniel Jurafsky & James H. Martin.",
-    "metadata": {
-      "title": "B23AD3203 Natural Language Processing (NLP) Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3201_Big_Data_Analytics_Syllabus_0",
-    "text": "[B23AD3201 BIG DATA ANALYTICS SYLLABUS] (college): Course Code: B23AD3201 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: BIG DATA ANALYTICS (For AIDS). Unit-I (10 Hrs): Intro to Big Data & HDFS: Characteristics of Big Data, Distributed File Systems (GFS, HDFS v1 & v2 architecture). Unit-II (10 Hrs): HDFS Design & MapReduce: HDFS Blocks, Replication, Rack awareness, MapReduce job execution (YARN,",
-    "metadata": {
-      "title": "B23AD3201 Big Data Analytics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3201_Big_Data_Analytics_Syllabus_1",
-    "text": "[B23AD3201 BIG DATA ANALYTICS SYLLABUS] (college): Blocks, Replication, Rack awareness, MapReduce job execution (YARN, Shuffle & Sort). Unit-III (12 Hrs): Hadoop Data Analysis: Hadoop Streaming, Java MapReduce (Mapper, Reducer, Driver, Word Count, Matrix Multiplication). Unit-IV (8 Hrs): Stream Processing & Spark: Mining Data Streams (Bloom Filter, DGIM algorithm), Apache Spark RDD operations & Architecture. Unit-V (10 Hrs): Pig, Hive & HBase: Pig Latin scripting,",
-    "metadata": {
-      "title": "B23AD3201 Big Data Analytics Syllabus",
-      "category": "college"
-    }
-  },
-  {
-    "id": "college_B23AD3201_Big_Data_Analytics_Syllabus_2",
-    "text": "[B23AD3201 BIG DATA ANALYTICS SYLLABUS] (college): Hrs): Pig, Hive & HBase: Pig Latin scripting, Hive Architecture & HiveQL queries, HBase data model & Zookeeper. Textbooks: Hadoop: The Definitive Guide by Tom White (3rd Ed).",
-    "metadata": {
-      "title": "B23AD3201 Big Data Analytics Syllabus",
       "category": "college"
     }
   },
@@ -1819,6 +1011,376 @@
       "category": "college",
       "file_name": "B.Tech_R23_I_Year_AIDS_Syllabus_FINAL.pdf",
       "content_hash": "86a12e4beba96e7c39e9f5fd8addf9aa"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Curfew_&_Entry_Rules_0_f749",
+    "text": "[HOSTEL CURFEW & ENTRY RULES] (hostel): All hostel residents must return to the hostel premises by 9:30 PM on weekdays and 10:00 PM on weekends. Late entry requires prior written permission from the hostel warden. Gate access is restricted after curfew.",
+    "metadata": {
+      "title": "Hostel Curfew & Entry Rules",
+      "category": "hostel",
+      "file_name": "Hostel Curfew & Entry Rules",
+      "content_hash": "3227cce40a2ad911d7706e774da310c9"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Mess_Timings_&_Menu_Rules_0_467d",
+    "text": "[HOSTEL MESS TIMINGS & MENU RULES] (hostel): Mess operating hours: Breakfast 7:30 AM - 9:30 AM, Lunch 12:30 PM - 2:30 PM, Evening Snacks 5:00 PM - 6:00 PM, Dinner 7:30 PM - 9:30 PM. The mess closes strictly at 9:30 PM. Outside food delivery is allowed in common dining areas only.",
+    "metadata": {
+      "title": "Hostel Mess Timings & Menu Rules",
+      "category": "hostel",
+      "file_name": "Hostel Mess Timings & Menu Rules",
+      "content_hash": "ede5a44d656f8846af8146371e943442"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Guest_Policy_0_136a",
+    "text": "[HOSTEL GUEST POLICY] (hostel): Day visitors and family members are allowed in the visitor lounge between 10:00 AM and 6:00 PM. No overnight guests are allowed in student rooms without prior warden approval. Bringing unauthorized guests to rooms results in a fine.",
+    "metadata": {
+      "title": "Hostel Guest Policy",
+      "category": "hostel",
+      "file_name": "Hostel Guest Policy",
+      "content_hash": "f56c8b9330d6ead225be2293fe475eae"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Room_Maintenance_&_Electric_Appliances_0_4308",
+    "text": "[HOSTEL ROOM MAINTENANCE & ELECTRIC APPLIANCES] (hostel): Students are responsible for room cleanliness. High wattage electrical appliances such as heaters, induction stoves, and iron boxes are strictly prohibited in hostel rooms. Routine inspections occur monthly.",
+    "metadata": {
+      "title": "Hostel Room Maintenance & Electric Appliances",
+      "category": "hostel",
+      "file_name": "Hostel Room Maintenance & Electric Appliances",
+      "content_hash": "b13118cef084ce9c828d1233d553defa"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Laundry_Facilities_&_Timings_0_50d8",
+    "text": "[HOSTEL LAUNDRY FACILITIES & TIMINGS] (hostel): Washing machine facilities are accessible in Block A and Block B basement from 6:00 AM to 10:00 PM. Students can request laundry tokens at the warden's desk. Clothes drying is allowed only in designated balcony areas.",
+    "metadata": {
+      "title": "Hostel Laundry Facilities & Timings",
+      "category": "hostel",
+      "file_name": "Hostel Laundry Facilities & Timings",
+      "content_hash": "025d8b1f34a17b2ee0eeb2f7b654d2c8"
+    }
+  },
+  {
+    "id": "hostel_Hostel_Night_Out_Pass_Procedure_0_6f18",
+    "text": "[HOSTEL NIGHT OUT PASS PROCEDURE] (hostel): Students requesting weekend night out passes must submit their request on the student portal or warden office before 5:00 PM on Friday. Parent approval via SMS/Call is verified before issuing passes.",
+    "metadata": {
+      "title": "Hostel Night Out Pass Procedure",
+      "category": "hostel",
+      "file_name": "Hostel Night Out Pass Procedure",
+      "content_hash": "7fbc610d21810f6e936c568b97b3901e"
+    }
+  },
+  {
+    "id": "college_Mid-Semester_Examination_Schedule_Notice_0_20c4",
+    "text": "[MID-SEMESTER EXAMINATION SCHEDULE NOTICE] (college): Mid-Semester examinations for B.Tech Semester 3 and 5 will commence from October 15th to October 22nd. Detailed timetable and room seating allocations will be published on the main department notice board.",
+    "metadata": {
+      "title": "Mid-Semester Examination Schedule Notice",
+      "category": "college",
+      "file_name": "Mid-Semester Examination Schedule Notice",
+      "content_hash": "8e2857e3fb831d42b5f2ecbeca459b90"
+    }
+  },
+  {
+    "id": "college_Diwali_Festival_Holiday_Notice_0_c5e6",
+    "text": "[DIWALI FESTIVAL HOLIDAY NOTICE] (college): The college campus, central library, and administrative offices will remain closed for Diwali holidays from November 1st to November 5th. Regular academic classes will resume on November 6th at 9:00 AM.",
+    "metadata": {
+      "title": "Diwali Festival Holiday Notice",
+      "category": "college",
+      "file_name": "Diwali Festival Holiday Notice",
+      "content_hash": "e33799df4fdab0cf002c0fb4d4c55026"
+    }
+  },
+  {
+    "id": "college_Semester_Tuition_Fee_Payment_Deadline_0_6744",
+    "text": "[SEMESTER TUITION FEE PAYMENT DEADLINE] (college): The final deadline for odd-semester tuition and exam fee submission is September 30th. Payments can be completed online via the ERP portal. Late fee penalty of Rs. 100 per day applies thereafter.",
+    "metadata": {
+      "title": "Semester Tuition Fee Payment Deadline",
+      "category": "college",
+      "file_name": "Semester Tuition Fee Payment Deadline",
+      "content_hash": "3f2f4f050f4f2141ad93a4d0aa853c91"
+    }
+  },
+  {
+    "id": "college_Central_Library_Rules_&_Book_Issue_Limit_0_5324",
+    "text": "[CENTRAL LIBRARY RULES & BOOK ISSUE LIMIT] (college): The Central Library is open from 8:00 AM to 8:00 PM on weekdays. Undergraduate students can borrow up to 4 books for 14 days. Overdue fines are charged at Rs. 5 per day per book.",
+    "metadata": {
+      "title": "Central Library Rules & Book Issue Limit",
+      "category": "college",
+      "file_name": "Central Library Rules & Book Issue Limit",
+      "content_hash": "23e0d27ccf23d64546efd99ab3bb0b3f"
+    }
+  },
+  {
+    "id": "hostel_FAQ:_How_to_Apply_for_Hostel_Room_Transfer_0_4cfd",
+    "text": "[FAQ: HOW TO APPLY FOR HOSTEL ROOM TRANSFER] (hostel): To request a room transfer or change roommates, collect the Hostel Transfer Form from the Warden Office, obtain signatures from both room residents, and submit it during office hours (2:00 PM - 5:00 PM).",
+    "metadata": {
+      "title": "FAQ: How to Apply for Hostel Room Transfer",
+      "category": "hostel",
+      "file_name": "FAQ: How to Apply for Hostel Room Transfer",
+      "content_hash": "a996f38fa56dc5887fd0e7467efca2b4"
+    }
+  },
+  {
+    "id": "hostel_FAQ:_How_to_Report_Maintenance_Issues_in_Hostel_0_d107",
+    "text": "[FAQ: HOW TO REPORT MAINTENANCE ISSUES IN HOSTEL] (hostel): To report electrical, plumbing, or carpenter maintenance issues in your room, log a complaint in the Hostel Maintenance Register located at the hostel security guard desk, or submit an online ticket.",
+    "metadata": {
+      "title": "FAQ: How to Report Maintenance Issues in Hostel",
+      "category": "hostel",
+      "file_name": "FAQ: How to Report Maintenance Issues in Hostel",
+      "content_hash": "125de09299da34e76c105688b0783890"
+    }
+  },
+  {
+    "id": "college_FAQ:_Campus_Sports_Facilities_Access_0_6b40",
+    "text": "[FAQ: CAMPUS SPORTS FACILITIES ACCESS] (college): Students can access the gymnasium, basketball court, and badminton arena using their student ID card between 6:00 AM - 8:30 AM and 4:30 PM - 8:00 PM daily. Equipment borrowing requires ID deposit.",
+    "metadata": {
+      "title": "FAQ: Campus Sports Facilities Access",
+      "category": "college",
+      "file_name": "FAQ: Campus Sports Facilities Access",
+      "content_hash": "8c5e309a982f1e7914cfad332eb95e2f"
+    }
+  },
+  {
+    "id": "college_B.Tech_I_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0_1a4a",
+    "text": "[B.TECH I YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech I Year I Semester Artificial Intelligence & Data Science Course Structure: - B23HS1101: Communicative English (HS, L:2, T:0, P:0, Cr:2, CIE:30, SEE:70, Total:100) - B23BS1101: Linear Algebra & Calculus (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1103: Chemistry (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23CE1101: Basic Civil & Mechanical Engineering (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23CS1101: Introduction to Programming (C) (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT1101: IT Workshop (ES, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23BS1105: Chemistry Lab (BS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23ME1102: Engineering Workshop (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23CS1102: Computer Programming Lab (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23HS1104: Health and Wellness, Yoga and Sports (HS, L:0, T:0, P:1, Cr:0.5, CIE:100, SEE:0, Total:100) Total Credits: 19.5, CIE: 370, SEE: 630, Total Marks: 1000.",
+    "metadata": {
+      "title": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech I Year I Semester Course Structure (R23 AI & DS)",
+      "content_hash": "04e37517a4acf8f83831b721f36a14f8"
+    }
+  },
+  {
+    "id": "college_B23HS1101_Communicative_English_Syllabus_0_83a0",
+    "text": "[B23HS1101 COMMUNICATIVE ENGLISH SYLLABUS] (college): Course Code: B23HS1101 Category: HS Credits: 2 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: COMMUNICATIVE ENGLISH (Common to all Engineering branches). Unit-I (10 Hrs): Lesson: HUMAN VALUES: Gift of Magi (Short Story). Listening: Topic identification & details. Speaking: Self-introduction & general questions. Reading: Skimming & Scanning. Writing: Mechanics of Writing (Capitalization, Punctuation, Parts of Sentences). Grammar: Parts of Speech, Sentence Structures. Vocabulary: Affixes, Root words, Synonyms, Antonyms. Unit-II (10 Hrs): Lesson: NATURE: The Brook by Alfred Tennyson (Poem). Listening: Main and supporting ideas. Speaking: Group discussions & short talks. Reading: Sequence of ideas. Writing: Paragraph writing. Grammar: Cohesive devices, Articles, Prepositions. Vocabulary: Homonyms, Homophones, Homographs. Unit-III (10 Hrs): Lesson: BIOGRAPHY: Elon Musk. Listening: Global comprehension & summarizing. Speaking: Pair discussions & reporting. Reading: Context-specific clues. Writing: Summarizing, Note-making, Paraphrasing. Grammar: Tenses, Subject-Verb Agreement. Vocabulary: Words often confused, Jargons. Unit-IV (10 Hrs): Lesson: INSPIRATION: The Toys of Peace by Saki. Listening: Predictions in conversations. Speaking: Role plays. Reading: Graphical representation & info transfer. Writing: Letter Writing (Official Letters, Resume). Grammar: Direct/Indirect speech, Active/Passive Voice. Vocabulary: Compound words, Collocations. Unit-V (10 Hrs): Lesson: MOTIVATION: The Power of Intrapersonal Communication. Listening: Key terms & concepts. Speaking: Formal oral presentations. Reading: Reading comprehension. Writing: Structured essays. Grammar: Text editing & error correction. Vocabulary: Technical Jargons. Textbooks: Pathfinder: Communicative English (Orient BlackSwan 2023), Empowering with Language (Cengage 2023).",
+    "metadata": {
+      "title": "B23HS1101 Communicative English Syllabus",
+      "category": "college",
+      "file_name": "B23HS1101 Communicative English Syllabus",
+      "content_hash": "41036e97dc1b2692f804f5c2b2680d41"
+    }
+  },
+  {
+    "id": "college_B23BS1101_Linear_Algebra_&_Calculus_Syllabus_0_a134",
+    "text": "[B23BS1101 LINEAR ALGEBRA & CALCULUS SYLLABUS] (college): Course Code: B23BS1101 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: LINEAR ALGEBRA & CALCULUS. Unit-I (10 Hrs): Matrices: Rank of a matrix by Echelon & Normal form. Inverse by Gauss-Jordan method. System of linear equations: Homogeneous & Non-Homogeneous equations, Gauss elimination method, Jacobi & Gauss Seidel Iteration Methods. Unit-II (10 Hrs): Eigen values, Eigenvectors & Orthogonal Transformation: Properties of Eigen values & Eigenvectors, Diagonalization, Cayley-Hamilton Theorem, Inverse & Power of matrix using Cayley-Hamilton, Quadratic forms, Canonical forms by Orthogonal Transformation. Unit-III (10 Hrs): Calculus & Mean Value Theorems: Rolle's Theorem, Lagrange's Mean Value Theorem, Cauchy's Mean Value Theorem, Taylor's and Maclaurin's series with remainders. Unit-IV (10 Hrs): Partial Differentiation & Applications: Functions of several variables, Continuity, Differentiability, Partial & Total derivatives, Chain rule, Directional derivative, Jacobians, Maxima & Minima of two variables, Lagrange multipliers. Unit-V (10 Hrs): Multiple Integrals: Double integrals, Change of order of integration, Triple integrals, Change of variables to polar, cylindrical & spherical coordinates, Finding areas & volumes. Textbooks: Higher Engineering Mathematics by B.S. Grewal (44th Ed), Advanced Engineering Mathematics by Erwin Kreyszig (10th Ed).",
+    "metadata": {
+      "title": "B23BS1101 Linear Algebra & Calculus Syllabus",
+      "category": "college",
+      "file_name": "B23BS1101 Linear Algebra & Calculus Syllabus",
+      "content_hash": "87af4dd1eba2c9b132df17281b9df6cc"
+    }
+  },
+  {
+    "id": "college_B23BS1103_Chemistry_Syllabus_0_c6f4",
+    "text": "[B23BS1103 CHEMISTRY SYLLABUS] (college): Course Code: B23BS1103 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: CHEMISTRY (For AIDS, AIML, CSBS, CSG & CIC). Unit-I (10 Hrs): Electrochemistry & Applications: Electrodes, Calomel electrode, Primary cells (Zinc-air), Secondary cells (Lithium-ion battery), Fuel cells (Hydrogen-Oxygen, PEMFC), Potentiometric & Amperometric sensors. Corrosion: Dry corrosion, Pilling-Bedworth ratio, Electrochemical theory, Galvanic & Differential aeration corrosion, Cathodic protection (Sacrificial anodic, Impressed current), Galvanizing, Tinning, Electroplating. Unit-II (10 Hrs): Modern Engineering Materials: Semiconductors (Intrinsic, Extrinsic, Compound), Solar Cell construction & working, Superconductors (Type-1 & Type-2), Nanomaterials (Sol-gel, Chemical precipitation, Plant-derived synthesis, Applications in catalysis, medicine, sensors). Unit-III (10 Hrs): Structure & Bonding Models: Schrodinger Wave equation, Psi & Psi^2, Particle in 1D box, Molecular Orbital Theory (O2, CO, N2 energy diagrams), Pi-molecular orbitals of butadiene and benzene, Bond order. Unit-IV (10 Hrs): Polymer Chemistry: Chain growth polymerization, Plastics (PVC, Teflon, Bakelite, Nylon-6,6, Kevlar), Elastomers (Buna-S, Buna-N), Conducting polymers (Polyacetylene, Polyaniline), Biodegradable polymers (PGA, PLA). Unit-V (10 Hrs): Instrumental Methods & Water Analysis: Beer-Lambert's law, UV-Visible Spectroscopy, IR Spectroscopy, Hard water & Soft water, EDTA method for total hardness, Winkler's method for Dissolved Oxygen. Textbooks: Engineering Chemistry by Jain & Jain (16th Ed), Text book of Applied Chemistry by IV Kasi Viswanath.",
+    "metadata": {
+      "title": "B23BS1103 Chemistry Syllabus",
+      "category": "college",
+      "file_name": "B23BS1103 Chemistry Syllabus",
+      "content_hash": "2a52c38f3e471624351ca43a05c069ae"
+    }
+  },
+  {
+    "id": "college_B23CS1101_Introduction_to_Programming_(C_Language)_Syllabus_0_3226",
+    "text": "[B23CS1101 INTRODUCTION TO PROGRAMMING (C LANGUAGE) SYLLABUS] (college): Course Code: B23CS1101 Category: ES Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: INTRODUCTION TO PROGRAMMING (C Language). Unit-I (10 Hrs): Introduction to Computers & Programming: Basic organization of computer, Flowcharts, Algorithms, Pseudocode. C Basics: Data types, Keywords, Variables, Constants, Format Specifiers, Operators (Arithmetic, Relational, Logical, Assignment, Increment/Decrement, Bitwise, Special), Precedence & Associativity, Type conversion. Unit-II (10 Hrs): Control Structures: Decision Making (Simple if, if-else, nested if, else-if ladder, Switch-Case). Looping Statements (While, Do-while, For loops, Nested loops, Break and Continue). Unit-III (10 Hrs): Arrays & Strings: 1D & 2D Arrays, Bubble Sort, Insertion Sort, Selection Sort, Linear Search, Binary Search, Matrix Operations (Addition, Multiplication, Transpose). Strings: String handling functions, string copy & concatenation without library functions. Unit-IV (10 Hrs): Structures, Unions & Pointers: Structure definition, accessing elements, Array of structures, Pointer to structure, Unions vs Structures, Bit fields. Pointers: Dereferencing, Pointer arithmetic, Array access using pointers. Unit-V (10 Hrs): Functions & File Handling: Call by value, Call by reference, Passing arrays to functions, Dynamic memory allocation (malloc, calloc, realloc, free), Command line arguments. File Handling: File modes, Reading & Writing files, Random file access, Macros. Textbooks: The C Programming Language by Kernighan & Ritchie, Schaum's Outline of Programming with C by Byron Gottfried.",
+    "metadata": {
+      "title": "B23CS1101 Introduction to Programming (C Language) Syllabus",
+      "category": "college",
+      "file_name": "B23CS1101 Introduction to Programming (C Language) Syllabus",
+      "content_hash": "21155320a82f179d462f471aef354bbd"
+    }
+  },
+  {
+    "id": "college_B.Tech_I_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0_2a88",
+    "text": "[B.TECH I YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech I Year II Semester Artificial Intelligence & Data Science Course Structure: - B23BS1201: Differential Equations & Vector Calculus (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1202: Engineering Physics (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23EE1201: Basic Electrical and Electronics Engineering (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23ME1201: Engineering Graphics (ES, L:2, T:0, P:2, Cr:3, CIE:30, SEE:70, Total:100) - B23CS1203: Data Structures (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23BS1204: Engineering Physics Lab (BS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23EE1202: Electrical and Electronics Engineering Workshop (ES, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23CS1204: Data Structures Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23HS1201: Communicative English Lab (HS, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23HS1203: NSS/NCC/Scouts & Guides/Community Service (HS, L:0, T:0, P:1, Cr:0.5, CIE:100, SEE:0, Total:100) Total Credits: 20.5, CIE: 370, SEE: 630, Total Marks: 1000.",
+    "metadata": {
+      "title": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech I Year II Semester Course Structure (R23 AI & DS)",
+      "content_hash": "165e9d92b7b299b1426096e7cff52783"
+    }
+  },
+  {
+    "id": "college_B23CS1203_Data_Structures_Syllabus_0_eb7c",
+    "text": "[B23CS1203 DATA STRUCTURES SYLLABUS] (college): Course Code: B23CS1203 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DATA STRUCTURES (Common to AI&DS, CSE, IT, CSBS, etc). Unit-I (10 Hrs): Linear Data Structures & Algorithm Analysis: Definition & importance of ADTs, Time & Space complexity overview. Searching: Linear & Binary Search. Sorting: Bubble Sort, Selection Sort, Insertion Sort. Unit-II (10 Hrs): Linked Lists: Singly Linked Lists (representation & operations), Doubly Linked Lists, Circular Linked Lists. Applications: Polynomial expression representation, addition & multiplication, Sparse matrix representation. Unit-III (10 Hrs): Stacks: Stack ADT, Array & Linked List implementations, Applications (Infix to Postfix conversion, Postfix evaluation, Backtracking, Reversing list). Unit-IV (8 Hrs): Queues & Deques: Queue ADT, Array & Linked list implementations, Circular Queues, Priority Queues, BFS traversal. Deques (Double-ended Queues), Palindrome checking. Unit-V (12 Hrs): Trees & Hashing: Trees, Binary Search Tree (BST) insertion, deletion & traversals. Hashing: Hash functions, Collision resolution (Chaining, Open Addressing), Hash tables, Caching applications. Textbooks: Fundamentals of Data Structures in C by Horowitz & Sahni, Data Structures and Algorithm Analysis in C by Mark Allen Weiss.",
+    "metadata": {
+      "title": "B23CS1203 Data Structures Syllabus",
+      "category": "college",
+      "file_name": "B23CS1203 Data Structures Syllabus",
+      "content_hash": "c65e111d15964d4efb5e9e82176f8579"
+    }
+  },
+  {
+    "id": "college_B23BS1202_Engineering_Physics_Syllabus_0_1891",
+    "text": "[B23BS1202 ENGINEERING PHYSICS SYLLABUS] (college): Course Code: B23BS1202 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ENGINEERING PHYSICS. Unit-I (10 Hrs): Wave Optics: Interference in thin films, Newton's Rings. Diffraction: Fresnel & Fraunhofer diffractions, Single slit, Double slit, Diffraction Grating, Dispersive & Resolving power. Polarization: Double refraction, Nicol's Prism, Half & Quarter wave plates. Unit-II (10 Hrs): Crystallography & X-Ray Diffraction: Space lattice, Unit cell, Bravais lattices, Packing fraction (SC, BCC, FCC), Miller indices, Bragg's law, X-ray Diffractometer, Powder method. Unit-III (10 Hrs): Dielectric & Magnetic Materials: Dielectric polarizability, Clausius-Mosotti equation, Dielectric loss. Magnetic materials: Dia, Para, Ferro, Antiferro, Ferri magnetism, Hysteresis curve, Soft & Hard magnetic materials. Unit-IV (10 Hrs): Quantum Mechanics & Free Electron Theory: Dual nature of matter, Heisenberg Uncertainty Principle, Schrodinger time independent wave equation, Particle in 1D box. Classical & Quantum free electron theory, Fermi energy, Fermi-Dirac distribution. Unit-V (10 Hrs): Semiconductors: Intrinsic & Extrinsic semiconductors, Fermi level, Drift & Diffusion currents, Einstein's equation, Hall Effect & applications. Textbooks: A Textbook of Engineering Physics by M.N. Avadhanulu & P.G. Kshirsagar, Engineering Physics by D.K. Bhattacharya.",
+    "metadata": {
+      "title": "B23BS1202 Engineering Physics Syllabus",
+      "category": "college",
+      "file_name": "B23BS1202 Engineering Physics Syllabus",
+      "content_hash": "ec61d55e7cca108e7338ebca1581ed29"
+    }
+  },
+  {
+    "id": "college_B.Tech_II_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0_1194",
+    "text": "[B.TECH II YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech II Year I Semester Artificial Intelligence & Data Science Course Structure: - B23BS2101: Discrete Mathematics and Graph Theory (BS, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23HS2101: Universal Human Values-II : Understanding Harmony and Ethical Human Conduct (HS, L:2, T:1, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT2101: Database Management Systems (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23IT2102: Object Oriented Programming through Java (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2101: Advanced Data Structures & Algorithm Analysis (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2102: Advanced Data Structures & Algorithms Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23IT2105: Object Oriented Programming through JAVA Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23IT2106: Python Programming (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23MC2101: English Proficiency (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 20, CIE: 270, SEE: 560, Total Marks: 830.",
+    "metadata": {
+      "title": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech II Year I Semester Course Structure (R23 AI & DS)",
+      "content_hash": "f62208b44cbc2d50c7b5a7485df7565f"
+    }
+  },
+  {
+    "id": "college_B23HS2101_Universal_Human_Values-II_Syllabus_0_a113",
+    "text": "[B23HS2101 UNIVERSAL HUMAN VALUES-II SYLLABUS] (college): Course Code: B23HS2101 Category: HS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: UNIVERSAL HUMAN VALUES-II: UNDERSTANDING HARMONY AND ETHICAL HUMAN CONDUCT (Common to all Programmes of Engineering). Unit-I (10 Hrs): Introduction to Value Education & Self Exploration: Need, Basic Guidelines, Content and Process for Value Education. Self-Exploration: Content and Process, Natural Acceptance, Experiential Validation, Continuous Happiness and Prosperity. Unit-II (10 Hrs): Harmony in the Human Being (Self and Body): Understanding Human Being as Co-existence of Self ('I') and Body. Harmony of 'I' with Body: Sanyam and Health, Correct Appraisal of Physical Needs. Unit-III (10 Hrs): Harmony in the Family and Society: Understanding Harmony in Family (Basic unit of human interaction), Trust (Vishwas) and Respect (Samman) as Foundational Values, Justice in Human Relationships, Extension of Family Values to Society (Undivided Society, Universal Human Order). Unit-IV (10 Hrs): Harmony in Nature/Existence: Interconnectedness and Mutual Fulfillment among the Four Orders of Nature (Human, Animal, Bio/Plant, Physical), Recyclability and Self-regulation, Holistic Perception of Harmony in Existence. Unit-V (10 Hrs): Implications of Holistic Understanding & Professional Ethics: Natural Acceptance of Human Values, Definitiveness of Ethical Human Conduct, Basis for Humanistic Education, Humanistic Constitution and Universal Human Order, Competence in Professional Ethics, Eco-friendly Production Systems. Textbooks: Human Values and Professional Ethics by R.R. Gaur, R. Sangal, G.P. Bagaria.",
+    "metadata": {
+      "title": "B23HS2101 Universal Human Values-II Syllabus",
+      "category": "college",
+      "file_name": "B23HS2101 Universal Human Values-II Syllabus",
+      "content_hash": "a3c06e35e01a0ff0a032e3258e8400e3"
+    }
+  },
+  {
+    "id": "college_B23BS2101_Discrete_Mathematics_&_Graph_Theory_Syllabus_0_b665",
+    "text": "[B23BS2101 DISCRETE MATHEMATICS & GRAPH THEORY SYLLABUS] (college): Course Code: B23BS2101 Category: BS Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DISCRETE MATHEMATICS AND GRAPH THEORY (Common to CSE, CSBS, AIML, IT, AIDS, CSG, CIC, CSIT). Unit-I (10 Hrs): Mathematical Logic: Propositional Calculus (Statements, Connectives, WFF, Truth Tables, Tautologies, Duality Law, Normal Forms, Rules of Inference, Consistency). Predicate Calculus (Predicates, Quantifiers, Free & Bound Variables). Unit-II (10 Hrs): Set Theory, Relations & Functions: Operations on Sets, Inclusion-Exclusion. Relations: Properties, Equivalence relations, Partial Ordering, Hasse Diagrams, Lattices. Functions: Bijective, Composition, Inverse, Permutation, Recursive functions. Unit-III (12 Hrs): Combinatorics & Recurrence Relations: Counting principles, Permutations & Combinations, Circular & Restricted permutations, Binomial & Multinomial Theorems. Recurrence Relations: Generating functions, Solving homogeneous & inhomogeneous recurrence relations. Unit-IV (10 Hrs): Graph Theory: Graphs, Subgraphs, Adjacency & Incidence matrices, Isomorphic graphs, Paths, Circuits, Eulerian & Hamiltonian graphs. Unit-V (8 Hrs): Multi Graphs & Trees: Bipartite & Planar graphs, Euler's Theorem, Graph coloring, Chromatic number. Trees: Spanning trees, BFS & DFS spanning trees, Prim's and Kruskal's Algorithms. Textbooks: Discrete Mathematical Structures with Applications to Computer Science by Tremblay & Manohar, Discrete Mathematics for Computer Scientists by Mott, Kandel & Baker.",
+    "metadata": {
+      "title": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
+      "category": "college",
+      "file_name": "B23BS2101 Discrete Mathematics & Graph Theory Syllabus",
+      "content_hash": "11c1c401a6c6ca974447e830f44ff69d"
+    }
+  },
+  {
+    "id": "college_B23IT2101_Database_Management_Systems_(DBMS)_Syllabus_0_909f",
+    "text": "[B23IT2101 DATABASE MANAGEMENT SYSTEMS (DBMS) SYLLABUS] (college): Course Code: B23IT2101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DATABASE MANAGEMENT SYSTEMS (DBMS). Unit-I (10 Hrs): Introduction: Database system vs File system, Users, Architecture (3-tier), Schema, Instance, ER Model (Entities, Attributes, Relationships, ER Diagrams, Specialization, Generalization). Unit-II (8 Hrs): Relational Model & SQL: Relational Algebra & Calculus. Basic SQL: DDL, DML operations (Create, Alter, Insert, Delete, Update), Constraints (Domain, Key, Integrity). Unit-III (10 Hrs): Structured Query Language: Complex SQL Queries, Select & Where clauses, Joins, Grouping, Aggregation, Sub-queries, Views, Set operations. Unit-IV (10 Hrs): Schema Refinement (Normalization): Functional Dependencies, Normal Forms (1NF, 2NF, 3NF, BCNF, 4NF, 5NF), Lossless Join & Dependency Preservation. Unit-V (12 Hrs): Transaction Management & Indexing: ACID properties, Serializability, Concurrency control (Lock-based, Timestamp-based, Optimistic), Deadlocks, Recovery. Indexing: B+ Trees, Hash Indexing. Textbooks: Database Management Systems by Raghu Ramakrishnan & Johannes Gehrke, Database System Concepts by Silberschatz, Korth & Sudarshan.",
+    "metadata": {
+      "title": "B23IT2101 Database Management Systems (DBMS) Syllabus",
+      "category": "college",
+      "file_name": "B23IT2101 Database Management Systems (DBMS) Syllabus",
+      "content_hash": "81440ca5a7237dd71397667f511e386b"
+    }
+  },
+  {
+    "id": "college_B23IT2102_Object_Oriented_Programming_through_Java_Syllabus_0_9f4f",
+    "text": "[B23IT2102 OBJECT ORIENTED PROGRAMMING THROUGH JAVA SYLLABUS] (college): Course Code: B23IT2102 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: OBJECT ORIENTED PROGRAMMING THROUGH JAVA. Unit-I (10 Hrs): Program Structure in Java: Tokens, I/O operations (Scanner), Data Types, Operators, Control Statements (if-else, switch, loops). Unit-II (10 Hrs): Classes, Objects & Methods: Class declarations, Constructors, Overloading, Access Control, Keyword 'this', Wrapper classes (Autoboxing/Unboxing), Static & Final attributes. Unit-III (10 Hrs): Arrays, Inheritance & Interfaces: 1D/2D Arrays, Inheritance types, 'super' keyword, Method Overriding, Abstract Classes, Interfaces, Default & Static methods, Annotations. Unit-IV (10 Hrs): Packages, Exception Handling & Multithreading: User-defined Packages. Exceptions: try, catch, finally, throw, throws, Custom Exceptions. Multithreading: Thread class, Runnable interface, Synchronization. Java I/O streams. Unit-V (10 Hrs): String Handling, JDBC & JavaFX: String & StringBuffer classes. JDBC Architecture, Database connection, ResultSet. JavaFX GUI: Scene Builder, Layouts, Event handling. Textbooks: JAVA One Step Ahead by Anitha Seth & B.L. Juneja, Joy with JAVA by Debasis Samanta.",
+    "metadata": {
+      "title": "B23IT2102 Object Oriented Programming through Java Syllabus",
+      "category": "college",
+      "file_name": "B23IT2102 Object Oriented Programming through Java Syllabus",
+      "content_hash": "783446ec85fbe4a0d214580963fab779"
+    }
+  },
+  {
+    "id": "college_B23AD2101_Advanced_Data_Structures_&_Algorithm_Analysis_Syllabus_0_7192",
+    "text": "[B23AD2101 ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS SYLLABUS] (college): Course Code: B23AD2101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ADVANCED DATA STRUCTURES & ALGORITHM ANALYSIS (For AI & DS). Unit-I (10 Hrs): Advanced Trees: AVL Trees (Creation, Insertion, Deletion, Applications), B-Trees (Operations & Applications), Heap Trees (Min & Max Heaps, Priority Queues). Unit-II (10 Hrs): Graphs & Divide and Conquer: Graph traversals, Connected components. Algorithm Analysis: Time & Space complexity, Asymptotic notations. Divide & Conquer: Quick Sort, Merge Sort, Strassen's Matrix Multiplication, Convex Hull. Unit-III (10 Hrs): Greedy & Dynamic Programming: Greedy: Job Sequencing, Knapsack Problem, Minimum Cost Spanning Trees, Single Source Shortest Path. Dynamic Programming: All-Pairs Shortest Path (Floyd-Warshall), Bellman-Ford, 0/1 Knapsack, Traveling Salesperson Problem (TSP). Unit-IV (10 Hrs): Backtracking & Branch and Bound: Backtracking: 8-Queens Problem, Sum of Subsets, Graph Coloring. Branch & Bound: 0/1 Knapsack, TSP. Unit-V (10 Hrs): NP-Hard & NP-Complete Problems: Cook's theorem, Clique Decision Problem, Chromatic Number Problem, Job Shop Scheduling. Textbooks: Fundamentals of Data Structures in C++ by Horowitz, Sahni & Mehta, Computer Algorithms in C++ by Horowitz, Sahni & Rajasekaran.",
+    "metadata": {
+      "title": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
+      "category": "college",
+      "file_name": "B23AD2101 Advanced Data Structures & Algorithm Analysis Syllabus",
+      "content_hash": "570c4bf68b97b30bc8c0da8e50d65cc0"
+    }
+  },
+  {
+    "id": "college_B.Tech_II_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0_36cc",
+    "text": "[B.TECH II YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech II Year II Semester Artificial Intelligence & Data Science Course Structure: - B23HS2201: Managerial Economics and Financial Analysis (HS, L:2, T:0, P:0, Cr:2, CIE:30, SEE:70, Total:100) - B23BS2202: Statistical Methods for Data Science (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2201: Introduction to Data Science (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2202: Artificial Intelligence (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2203: Computer Organization (ES, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD2204: Artificial Intelligence Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD2205: Data Science using Python Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD2206: Full Stack Development-1 (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AD2207: Design Thinking & Innovation (ES, L:1, T:0, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23MC2202: Environmental Science (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 21, CIE: 300, SEE: 630, Total Marks: 930.",
+    "metadata": {
+      "title": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech II Year II Semester Course Structure (R23 AI & DS)",
+      "content_hash": "5f8a94e9673a3e957fbfdfd9fc577045"
+    }
+  },
+  {
+    "id": "college_B23AD2202_Artificial_Intelligence_Syllabus_0_8f27",
+    "text": "[B23AD2202 ARTIFICIAL INTELLIGENCE SYLLABUS] (college): Course Code: B23AD2202 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: ARTIFICIAL INTELLIGENCE (For AIDS). Unit-I (10 Hrs): Introduction to AI & Intelligent Agents: Foundations of AI, Agents and Environments, Rationality, Structure of agents, Problem solving agents, Tic-Tac-Toe game. Unit-II (10 Hrs): State-Space Search & Game Playing: Heuristic search techniques, A* algorithm, Constraint Satisfaction. Game Playing: Alpha-Beta pruning, Two-player games. Unit-III (10 Hrs): Logic & Uncertainty: Propositional Logic, Predicate Logic, Resolution Refutation, Fuzzy Logic, Fuzzy Set operations. Unit-IV (8 Hrs): Knowledge Representation & Reasoning: Semantic Networks, Frames, Scripts, Conceptual Dependency, Reasoning under uncertainty, Bayes Probabilistic Inference, Dempster-Shafer theory. Unit-V (12 Hrs): Planning & Expert Systems: Goal Stack Planning, Non-linear planning. Expert Systems: Architecture, Knowledge Acquisition, MYCIN, DART, XCON. Textbooks: Artificial Intelligence by Saroj Kaushik, Artificial Intelligence: A Modern Approach by Stuart Russell & Peter Norvig.",
+    "metadata": {
+      "title": "B23AD2202 Artificial Intelligence Syllabus",
+      "category": "college",
+      "file_name": "B23AD2202 Artificial Intelligence Syllabus",
+      "content_hash": "4b342ba0179f1aaffc5f358a6f049de4"
+    }
+  },
+  {
+    "id": "college_B.Tech_III_Year_I_Semester_Course_Structure_(R23_AI_&_DS)_0_bd5b",
+    "text": "[B.TECH III YEAR I SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech III Year I Semester Artificial Intelligence & Data Science Course Structure: - B23AD3101: Fundamentals of Data Mining (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3102: Principles of Machine Learning (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3103: Operating Systems (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - Professional Elective-I (#PE-I): OOAD (B23AD3104), Soft Computing (B23AD3105), IoT (B23AD3106), EDA with Python (B23AD3107), Computer Networks (B23AD3108) (PE-I, Cr:3) - Open Elective-I (#OE-I): Offered by CE/ECE/EEE/ME/S&H (OE-I, Cr:3) - B23AD3110: Data Mining and Machine Learning Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3111: Data Visualization Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23BS3101: Soft Skills (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AD3112: User Interface Design Using Flutter (Tinkering Lab) (ES, L:0, T:0, P:2, Cr:1, CIE:30, SEE:70, Total:100) - B23AD3113: Evaluation of Community Service Internship (PR, Cr:2, CIE:0, SEE:50, Total:50) Total Credits: 23, CIE: 270, SEE: 680, Total Marks: 950.",
+    "metadata": {
+      "title": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech III Year I Semester Course Structure (R23 AI & DS)",
+      "content_hash": "178392fa46c9a6e1c4757f646441409c"
+    }
+  },
+  {
+    "id": "college_B23AD3102_Principles_of_Machine_Learning_Syllabus_0_77fd",
+    "text": "[B23AD3102 PRINCIPLES OF MACHINE LEARNING SYLLABUS] (college): Course Code: B23AD3102 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: PRINCIPLES OF MACHINE LEARNING (For AIDS). Unit-I (10 Hrs): Introduction to Machine Learning: AI vs ML vs DL, Supervised/Unsupervised/Reinforcement Learning, Data Acquisition, Feature Selection & Extraction, Overfitting vs Underfitting, Bias-Variance Tradeoff. Unit-II (10 Hrs): Regression & Regularization: Linear Regression, Non-Linear Regression, Regularization (Ridge vs Lasso Regression), Logistic Regression for Binary Classification. Unit-III (10 Hrs): Classification & Decision Trees: Decision Trees (ID3 algorithm), Evaluation metrics (Accuracy, Precision, Recall, F1-score, ROC), Naive Bayes Classifier, K-Nearest Neighbors (KNN). Unit-IV (10 Hrs): Support Vector Machines & Ensemble Learning: SVM (Linear, Non-Linear, SVR), Ensemble methods (Bagging, Boosting, Stacking, Random Forest). Clustering: K-Means, K-Medoids. Unit-V (10 Hrs): Advanced ML & Neural Networks: Dimensionality Reduction (PCA), Artificial Neural Networks (Perceptron, Multi-Layer Perceptron, Backpropagation), Reinforcement Learning basics. Textbooks: Machine Learning by Tom M. Mitchell, Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow by Aurelien Geron.",
+    "metadata": {
+      "title": "B23AD3102 Principles of Machine Learning Syllabus",
+      "category": "college",
+      "file_name": "B23AD3102 Principles of Machine Learning Syllabus",
+      "content_hash": "c2e33d20150c373d735bba3c174dbb26"
+    }
+  },
+  {
+    "id": "college_B23AD3101_Fundamentals_of_Data_Mining_Syllabus_0_7834",
+    "text": "[B23AD3101 FUNDAMENTALS OF DATA MINING SYLLABUS] (college): Course Code: B23AD3101 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: FUNDAMENTALS OF DATA MINING (For AIDS). Unit-I (10 Hrs): Data Warehousing & OLAP: Data Warehouse Modeling, OLTP vs OLAP, ETL operations, Data Cube operations (Roll-Up, Drill-Down, Slice, Dice, Pivot). Intro to Data Mining. Unit-II (10 Hrs): Data Pre-processing: Data Cleaning, Integration, Reduction, Transformation, Discretization, Data Similarity & Dissimilarity measures. Unit-III (10 Hrs): Classification: Decision Tree Induction, Rule-Based Classifiers, Bayesian Classification (Bayes Theorem, Naive Bayes). Unit-IV (10 Hrs): Association Analysis: Frequent Itemset Generation, Apriori Algorithm, Rule Pruning, FP-Growth Algorithm. Unit-V (10 Hrs): Cluster Analysis: K-Means, Bisecting K-Means, Agglomerative Hierarchical Clustering, BIRCH, DBSCAN, OPTICS. Textbooks: Data Mining Concepts and Techniques by Jiawei Han & Michel Kamber, Introduction to Data Mining by Pang-Ning Tan.",
+    "metadata": {
+      "title": "B23AD3101 Fundamentals of Data Mining Syllabus",
+      "category": "college",
+      "file_name": "B23AD3101 Fundamentals of Data Mining Syllabus",
+      "content_hash": "18701aa85251b7b6e576cd2d4b0079ac"
+    }
+  },
+  {
+    "id": "college_B23AD3103_Operating_Systems_Syllabus_0_b6e9",
+    "text": "[B23AD3103 OPERATING SYSTEMS SYLLABUS] (college): Course Code: B23AD3103 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: OPERATING SYSTEMS (For AIDS). Unit-I (10 Hrs): OS Overview & System Structures: OS Functions, System Calls, Operating System Design & Building/Booting. Unit-II (10 Hrs): Processes, Threads & CPU Scheduling: Process Concept, Inter-process Communication, Multithreading models, CPU Scheduling algorithms (FCFS, SJF, Priority, Round Robin). Unit-III (10 Hrs): Synchronization & Deadlocks: Critical Section problem, Peterson's solution, Mutex Locks, Semaphores, Monitors. Deadlocks: Characterization, Prevention, Avoidance (Banker's Algorithm), Detection & Recovery. Unit-IV (10 Hrs): Memory Management: Contiguous allocation, Paging, Page Tables, Virtual Memory (Demand Paging, Page Replacement algorithms FIFO, LRU, Optimal, Thrashing). Unit-V (10 Hrs): File System & System Protection: File Concept, Directory Structure, File System Implementation, Access Matrix, Protection Domains. Textbooks: Operating System Concepts by Silberschatz, Galvin & Gagne (10th Ed), Modern Operating Systems by Tanenbaum.",
+    "metadata": {
+      "title": "B23AD3103 Operating Systems Syllabus",
+      "category": "college",
+      "file_name": "B23AD3103 Operating Systems Syllabus",
+      "content_hash": "d587ce1e8f0616e9c30ecb939a86c92f"
+    }
+  },
+  {
+    "id": "college_B.Tech_III_Year_II_Semester_Course_Structure_(R23_AI_&_DS)_0_4cd5",
+    "text": "[B.TECH III YEAR II SEMESTER COURSE STRUCTURE (R23 AI & DS)] (college): SRKR Engineering College (Autonomous) - R23 Regulation - B.Tech III Year II Semester Artificial Intelligence & Data Science Course Structure: - B23AD3201: Big Data Analytics (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3202: Deep Learning (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - B23AD3203: Natural Language Processing (PC, L:3, T:0, P:0, Cr:3, CIE:30, SEE:70, Total:100) - Professional Elective-II (#PE-II): Cryptography & Network Security (B23AD3204), OOSE (B23AD3205), Recommender Systems (B23AD3206), Computer Vision (B23AD3207), Automata & Compiler Design (B23AD3208) (PE-II, Cr:3) - Professional Elective-III (#PE-III): Quantum Computing (B23AD3210), NoSQL Databases (B23AD3211), Cloud Computing (B23AD3212), Social Media Analytics (B23AD3213) (PE-III, Cr:3) - Open Elective-II (#OE-II): Open Elective II (Cr:3) - B23AD3215: Deep Learning & NLP Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3216: Big Data Analytics Lab (PC, L:0, T:0, P:3, Cr:1.5, CIE:30, SEE:70, Total:100) - B23AD3217: Full Stack Development-2 (SEC, L:0, T:1, P:2, Cr:2, CIE:30, SEE:70, Total:100) - B23AC3201: Technical Paper Writing & IPR (AC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) - B23MC3201: Employability Skills (MC, L:2, T:0, P:0, Cr:0, CIE:30, SEE:0, Total:30) Total Credits: 23, CIE: 330, SEE: 630, Total Marks: 960.",
+    "metadata": {
+      "title": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
+      "category": "college",
+      "file_name": "B.Tech III Year II Semester Course Structure (R23 AI & DS)",
+      "content_hash": "c0a3fc5aeb71a401f6fc4e1c408cbe7a"
+    }
+  },
+  {
+    "id": "college_B23AD3202_Deep_Learning_Syllabus_0_e6e9",
+    "text": "[B23AD3202 DEEP LEARNING SYLLABUS] (college): Course Code: B23AD3202 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: DEEP LEARNING (For AIDS). Unit-I (10 Hrs): Introduction to Deep Learning: Biological Neuron, McCulloch-Pitts unit, Thresholding logic, Linear Perceptron, Perceptron Learning Algorithm, Convergence theorem. Unit-II (10 Hrs): Artificial Neural Networks (ANN): Multilayer Perceptrons, Backpropagation, Gradient Descent, Activation Functions (ReLU, Sigmoid, Tanh, Softmax), Loss Functions (MSE, Cross-Entropy), Dropout, L1/L2 Regularization. Unit-III (10 Hrs): Convolutional Neural Networks (CNN): Convolution & Pooling, CNN Architectures (LeNet, AlexNet, VGG, ResNet), Transfer Learning, Object Detection (YOLO, SSD, Faster R-CNN). Unit-IV (10 Hrs): Recurrent Neural Networks (RNN) & NLP: Sequential Data Processing, RNN, LSTMs, Word Embeddings (Word2Vec, GloVe), Attention Mechanisms, Transformers, LLMs (BERT, GPT). Unit-V (10 Hrs): Advanced Deep Learning: Generative Models (GANs, VAEs), Deep Q Networks, Explainable AI, Model Deployment (Flask, FastAPI). Textbooks: Deep Learning by Ian Goodfellow, Yoshua Bengio & Aaron Courville.",
+    "metadata": {
+      "title": "B23AD3202 Deep Learning Syllabus",
+      "category": "college",
+      "file_name": "B23AD3202 Deep Learning Syllabus",
+      "content_hash": "6f0280686a4493cab25e0019b5404050"
+    }
+  },
+  {
+    "id": "college_B23AD3203_Natural_Language_Processing_(NLP)_Syllabus_0_652d",
+    "text": "[B23AD3203 NATURAL LANGUAGE PROCESSING (NLP) SYLLABUS] (college): Course Code: B23AD3203 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: NATURAL LANGUAGE PROCESSING (For AIDS). Unit-I (10 Hrs): Introduction & Language Modeling: Grammar-based LM, Statistical LM, Regular Expressions, Finite-State Automata, Tokenization, Spelling Correction, Minimum Edit Distance. Unit-II (10 Hrs): Word Level Analysis: N-grams, Smoothing, Part-of-Speech (POS) Tagging (Rule-based, Stochastic, HMM). Unit-III (10 Hrs): Syntactic Analysis: Context-Free Grammars (CFG), Dependency Grammar, Parsing (CYK algorithm), Probabilistic CFGs. Unit-IV (10 Hrs): Semantics & Pragmatics: First-Order Logic, Word Sense Disambiguation (WSD), Thesaurus methods, Distributional similarity. Unit-V (10 Hrs): Discourse Analysis & Lexical Resources: Anaphora resolution, Coreference resolution, WordNet, Penn Treebank, Brown Corpus. Textbooks: Speech and Language Processing by Daniel Jurafsky & James H. Martin.",
+    "metadata": {
+      "title": "B23AD3203 Natural Language Processing (NLP) Syllabus",
+      "category": "college",
+      "file_name": "B23AD3203 Natural Language Processing (NLP) Syllabus",
+      "content_hash": "000e2b7a99399547a564bf7bfb6836cb"
+    }
+  },
+  {
+    "id": "college_B23AD3201_Big_Data_Analytics_Syllabus_0_67da",
+    "text": "[B23AD3201 BIG DATA ANALYTICS SYLLABUS] (college): Course Code: B23AD3201 Category: PC Credits: 3 CIE: 30 SEE: 70 Exam: 3 Hrs. Course: BIG DATA ANALYTICS (For AIDS). Unit-I (10 Hrs): Intro to Big Data & HDFS: Characteristics of Big Data, Distributed File Systems (GFS, HDFS v1 & v2 architecture). Unit-II (10 Hrs): HDFS Design & MapReduce: HDFS Blocks, Replication, Rack awareness, MapReduce job execution (YARN, Shuffle & Sort). Unit-III (12 Hrs): Hadoop Data Analysis: Hadoop Streaming, Java MapReduce (Mapper, Reducer, Driver, Word Count, Matrix Multiplication). Unit-IV (8 Hrs): Stream Processing & Spark: Mining Data Streams (Bloom Filter, DGIM algorithm), Apache Spark RDD operations & Architecture. Unit-V (10 Hrs): Pig, Hive & HBase: Pig Latin scripting, Hive Architecture & HiveQL queries, HBase data model & Zookeeper. Textbooks: Hadoop: The Definitive Guide by Tom White (3rd Ed).",
+    "metadata": {
+      "title": "B23AD3201 Big Data Analytics Syllabus",
+      "category": "college",
+      "file_name": "B23AD3201 Big Data Analytics Syllabus",
+      "content_hash": "c3262f37a16ec8ef6c90fad7d1cf9de7"
     }
   }
 ]
