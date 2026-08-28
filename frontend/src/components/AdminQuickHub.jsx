@@ -53,7 +53,7 @@ const AdminQuickHub = ({
         </div>
 
         <div className="relative z-10">
-          <h3 className="text-2xl font-black tracking-tight text-white">{getRoleTitle()}</h3>
+          <h3 className="text-2xl font-extrabold tracking-tight text-white">{getRoleTitle()}</h3>
           <p className="text-xs text-orange-100 font-medium">Logged in as: <span className="font-extrabold text-white">{user?.username}</span> ({user?.designation || user?.role})</p>
         </div>
 
@@ -85,134 +85,134 @@ const AdminQuickHub = ({
         </div>
       </div>
 
-      {/* Hero Admin Tools Grid */}
+      {/* Hero Admin Tools Grid - PURE REDDISH ORANGE GLASSMORPHISM LAYOUT */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-base font-black text-slate-900 tracking-tight flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-orange-600" />
             Official Administration & Dispatch Controls
           </h3>
-          <span className="text-xs font-bold text-slate-500">Admin Action Center</span>
+          <span className="text-xs font-bold text-slate-600">Admin Action Center</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-5">
           {/* 1. 📢 NOTICE BROADCAST & INBOX */}
-          <div className="p-6 rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-700 to-emerald-800 text-white shadow-lg hover:shadow-2xl hover:shadow-emerald-600/30 transition-all duration-300 flex flex-col justify-between min-h-[190px] border border-emerald-500 relative overflow-hidden">
-            <div className="absolute right-3 top-3 opacity-10 pointer-events-none">
-              <Megaphone className="w-24 h-24" />
+          <div className="glass-box-orange-pure p-6 text-slate-900 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between min-h-[190px] relative overflow-hidden group">
+            <div className="absolute right-3 top-3 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+              <Megaphone className="w-24 h-24 text-orange-600" />
             </div>
 
             <div className="space-y-2 relative z-10">
               <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner">
-                  <Megaphone className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl glass-icon-orange-pure flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Megaphone className="w-6 h-6 text-orange-600" />
                 </div>
                 {unreadCount > 0 && (
-                  <span className="px-3 py-1 rounded-full bg-white text-emerald-800 text-xs font-black shadow-md">
+                  <span className="px-3 py-1 rounded-full bg-rose-600 text-white text-xs font-black shadow-md">
                     {unreadCount} Circulars
                   </span>
                 )}
               </div>
-              <h4 className="text-xl font-black tracking-tight text-white">Campus Notices & Circulars</h4>
-              <p className="text-xs text-emerald-100 font-medium leading-relaxed">
+              <h4 className="text-xl font-extrabold tracking-tight text-slate-900">Campus Notices & Circulars</h4>
+              <p className="text-xs text-slate-700 font-semibold leading-relaxed">
                 Create, broadcast & embed targeted notices directly into the campus knowledge base.
               </p>
             </div>
 
-            <div className="pt-4 flex items-center gap-2.5 relative z-10 border-t border-white/20 mt-3">
+            <div className="pt-4 flex items-center gap-2.5 relative z-10 border-t border-orange-500/20 mt-3">
               <button
                 onClick={onOpenAddNotice}
-                className="flex-1 py-2 px-3 rounded-xl bg-white text-emerald-800 hover:bg-emerald-50 text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
+                className="flex-1 py-2 px-3 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-sm transition-all cursor-pointer"
               >
-                <PlusCircle className="w-3.5 h-3.5 text-emerald-700" />
+                <PlusCircle className="w-3.5 h-3.5 text-white" />
                 <span>+ Publish Notice</span>
               </button>
               <button
                 onClick={onOpenNotices}
-                className="py-2 px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
+                className="py-2 px-3 rounded-xl bg-orange-100/80 hover:bg-orange-200/90 text-orange-900 border border-orange-300 text-xs font-extrabold flex items-center justify-center gap-1.5 transition-all cursor-pointer"
               >
-                <Bell className="w-3.5 h-3.5 text-amber-200" />
+                <Bell className="w-3.5 h-3.5 text-orange-700" />
                 <span>View Inbox</span>
               </button>
             </div>
           </div>
 
-          {/* 2. 🩶 AI DOCUMENT FORMATTER & DISPATCH */}
+          {/* 2. 📁 AI DOCUMENT FORMATTER & DISPATCH */}
           <div
             onClick={onOpenDocuments}
-            className="group relative p-6 rounded-3xl bg-gradient-to-br from-slate-700 via-slate-800 to-zinc-900 text-white shadow-lg hover:shadow-2xl hover:shadow-slate-800/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-slate-600 overflow-hidden flex flex-col justify-between min-h-[190px]"
+            className="group relative glass-box-orange-pure p-6 text-slate-900 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer overflow-hidden flex flex-col justify-between min-h-[190px]"
           >
             <div className="absolute right-3 top-3 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
-              <Folder className="w-24 h-24" />
+              <Folder className="w-24 h-24 text-rose-600" />
             </div>
 
             <div className="space-y-2 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                <FileText className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl glass-icon-orange-pure flex items-center justify-center group-hover:scale-110 transition-transform">
+                <FileText className="w-6 h-6 text-rose-600" />
               </div>
-              <h4 className="text-xl font-black tracking-tight text-white">AI Document Tools</h4>
-              <p className="text-xs text-slate-300 font-medium leading-relaxed">
+              <h4 className="text-xl font-extrabold tracking-tight text-slate-900">AI Document Tools</h4>
+              <p className="text-xs text-slate-700 font-semibold leading-relaxed">
                 Convert raw text into clean documents & send directly to your students based on code.
               </p>
             </div>
 
-            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-slate-300">Convert & Send to Students</span>
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-slate-900 transition-all">
+            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-orange-500/20 mt-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-orange-800">Convert & Send to Students</span>
+              <div className="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center group-hover:bg-orange-700 transition-all shadow-sm">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
           </div>
 
-          {/* 3. 🟪 CAMPUS EVENTS & REGISTRATION POSTING */}
+          {/* 3. 🎟️ CAMPUS EVENTS & REGISTRATION POSTING */}
           <div
             onClick={onOpenEvents}
-            className="group relative p-6 rounded-3xl bg-gradient-to-br from-rose-700 via-purple-700 to-indigo-800 text-white shadow-lg hover:shadow-2xl hover:shadow-purple-700/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-rose-500 overflow-hidden flex flex-col justify-between min-h-[190px]"
+            className="group relative glass-box-orange-pure p-6 text-slate-900 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer overflow-hidden flex flex-col justify-between min-h-[190px]"
           >
             <div className="absolute right-3 top-3 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
-              <Calendar className="w-24 h-24" />
+              <Calendar className="w-24 h-24 text-rose-600" />
             </div>
 
             <div className="space-y-2 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                <Calendar className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl glass-icon-orange-pure flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Calendar className="w-6 h-6 text-rose-600" />
               </div>
-              <h4 className="text-xl font-black tracking-tight text-white">Events & Registrations</h4>
-              <p className="text-xs text-rose-100 font-medium leading-relaxed">
+              <h4 className="text-xl font-extrabold tracking-tight text-slate-900">Events & Registrations</h4>
+              <p className="text-xs text-slate-700 font-semibold leading-relaxed">
                 Post event registration links that appear specifically in your respective students' event lists.
               </p>
             </div>
 
-            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-rose-200">Post & Manage Events</span>
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-rose-700 transition-all">
+            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-orange-500/20 mt-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-orange-800">Post & Manage Events</span>
+              <div className="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center group-hover:bg-orange-700 transition-all shadow-sm">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
           </div>
 
-          {/* 4. 🟧 CAMPUS MAPS & LOCATIONS */}
+          {/* 4. 📍 CAMPUS MAPS & LOCATIONS */}
           <div
             onClick={onOpenMaps}
-            className="group relative p-6 rounded-3xl bg-gradient-to-br from-amber-500 via-orange-600 to-rose-600 text-white shadow-lg hover:shadow-2xl hover:shadow-amber-500/30 transition-all duration-300 transform hover:-translate-y-1 cursor-pointer border border-amber-400 overflow-hidden flex flex-col justify-between min-h-[190px]"
+            className="group relative glass-box-orange-pure p-6 text-slate-900 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer overflow-hidden flex flex-col justify-between min-h-[190px]"
           >
             <div className="absolute right-3 top-3 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
-              <MapPin className="w-24 h-24" />
+              <MapPin className="w-24 h-24 text-orange-600" />
             </div>
 
             <div className="space-y-2 relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md text-white flex items-center justify-center shadow-inner group-hover:scale-110 transition-transform">
-                <Compass className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl glass-icon-orange-pure flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Compass className="w-6 h-6 text-orange-600" />
               </div>
-              <h4 className="text-xl font-black tracking-tight text-white">Campus Navigator</h4>
-              <p className="text-xs text-amber-100 font-medium leading-relaxed">
+              <h4 className="text-xl font-extrabold tracking-tight text-slate-900">Campus Navigator</h4>
+              <p className="text-xs text-slate-700 font-semibold leading-relaxed">
                 Campus maps for departments, admin buildings, research centers & student hostels.
               </p>
             </div>
 
-            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-white/20 mt-3">
-              <span className="text-[11px] font-extrabold uppercase tracking-wider text-amber-200">Open Campus Map</span>
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-amber-600 transition-all">
+            <div className="pt-4 flex items-center justify-between relative z-10 border-t border-orange-500/20 mt-3">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-orange-800">Open Campus Map</span>
+              <div className="w-8 h-8 rounded-full bg-orange-600 text-white flex items-center justify-center group-hover:bg-orange-700 transition-all shadow-sm">
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>
@@ -224,3 +224,4 @@ const AdminQuickHub = ({
 };
 
 export default AdminQuickHub;
+
