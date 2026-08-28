@@ -276,6 +276,7 @@ const App = () => {
             onOpenMaps={() => setIsMapsOpen(true)}
             onOpenNotifications={handleOpenNoticeInbox}
             onOpenProfile={() => setIsProfileOpen(true)}
+            onOpenAddNotice={() => setIsAddNoticeOpen(true)}
           />
 
           {/* Live Search Results Overlay Dropdown */}
@@ -373,10 +374,10 @@ const App = () => {
               }}
             />
 
-            {/* Main Content Area */}
+            {/* Main Content Area: 50% / 50% Dashboard Split */}
             <main className="flex-1 flex flex-col lg:flex-row overflow-hidden p-4 sm:p-6 gap-6 w-full">
-              {/* HERO 5 FEATURE BLOCKS PANEL (65-70% WIDTH - BIGGER & PROMINENT) */}
-              <div className="flex-1 overflow-y-auto pr-1">
+              {/* LEFT HALF: CAMPUS QUICK HUB (50% WIDTH) */}
+              <div className="w-full lg:w-1/2 overflow-y-auto pr-1">
                 {user?.role === 'student' ? (
                   <StudentQuickHub
                     user={user}
@@ -405,8 +406,8 @@ const App = () => {
                 )}
               </div>
 
-              {/* COMPACT AI CHAT SIDEBAR (30-35% WIDTH - COMPACT SIDE PANEL) */}
-              <div className="w-full lg:w-[380px] shrink-0 flex flex-col glass-panel border border-orange-200/90 rounded-3xl overflow-hidden shadow-xl max-h-[85vh] lg:max-h-none">
+              {/* RIGHT HALF: EXPANDED AI CHAT PANEL (50% WIDTH) */}
+              <div className="w-full lg:w-1/2 shrink-0 flex flex-col glass-panel border border-orange-200/90 rounded-3xl overflow-hidden shadow-xl max-h-[85vh] lg:max-h-none">
                 <div className="p-3.5 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 text-white font-black text-xs flex items-center justify-between shrink-0 shadow-xs">
                   <span className="flex items-center gap-1.5 tracking-tight">
                     ✨ SRKR Assistant Chat
@@ -453,7 +454,14 @@ const App = () => {
         user={user}
         initialTab={profileModalTab}
         onUserUpdated={(updatedUser) => setUser(updatedUser)}
+        onLogout={() => {
+          setUser(null);
+          setMessages([]);
+          setView('role_selection');
+          setIsProfileOpen(false);
+        }}
       />
+
 
       <CampusMapModal
         isOpen={isMapsOpen}

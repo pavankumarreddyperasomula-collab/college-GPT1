@@ -188,62 +188,11 @@ const Sidebar = ({
             )}
           </div>
         )}
-
-        {/* Profile & Admin Actions */}
-        <div className="p-4 border-t border-orange-200/60 bg-gradient-to-b from-white/60 to-orange-50/70 space-y-3">
-          {/* Notification Bell Inbox Button */}
-          <button
-            onClick={onOpenNotifications}
-            className="w-full py-2.5 px-4 rounded-2xl glass-card text-slate-900 font-extrabold text-xs flex items-center justify-center gap-2 hover:border-orange-400 hover:bg-white transition-all duration-200 cursor-pointer shadow-2xs"
-          >
-            <Bell className="w-4 h-4 text-orange-600" />
-            <span>Open Notice Inbox</span>
-          </button>
-
-          {isNoticeCreator && (
-            <button
-              onClick={handleAddNoticeClick}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 hover:from-orange-700 hover:to-rose-700 text-white font-extrabold rounded-2xl text-xs flex items-center justify-center gap-2 shadow-md shadow-orange-600/20 transition-all duration-200 cursor-pointer"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Create Notice</span>
-            </button>
-          )}
-
-          <div
-            onClick={onOpenProfile}
-            className="flex items-center justify-between p-3 rounded-2xl glass-card cursor-pointer hover:border-orange-400 group"
-          >
-            <div className="flex items-center gap-3 overflow-hidden">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-600 to-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-md shadow-orange-600/20">
-                {isNoticeCreator ? <ShieldCheck className="w-4 h-4 text-white" /> : <User className="w-4 h-4 text-white" />}
-              </div>
-              <div className="truncate">
-                <div className="text-xs font-black text-slate-900 truncate">{user?.username || 'User'}</div>
-                <div className="text-[10px] text-orange-800 capitalize flex items-center gap-1 font-bold">
-                  <span>{user?.designation || user?.role}</span>
-                  {user?.hod_code && (
-                    <span className="px-1.5 py-0.5 rounded-md bg-orange-100 text-orange-800 font-mono text-[9px] font-extrabold border border-orange-200">
-                      {user.hod_code}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={(e) => { e.stopPropagation(); onLogout(); }}
-              title="Logout"
-              className="p-1.5 rounded-xl hover:bg-red-50 text-slate-400 hover:text-red-600 transition-colors cursor-pointer"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
       </aside>
     </>
   );
 };
 
 export default Sidebar;
+
 

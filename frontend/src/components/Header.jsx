@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, ShieldCheck, User, MapPin, Bell, Search, X, Sparkles } from 'lucide-react';
+import { Menu, ShieldCheck, User, MapPin, Bell, Search, X, Sparkles, PlusCircle } from 'lucide-react';
 
 const Header = ({
   user,
@@ -9,8 +9,11 @@ const Header = ({
   onToggleSidebar,
   onOpenMaps,
   onOpenNotifications,
-  onOpenProfile
+  onOpenProfile,
+  onOpenAddNotice
 }) => {
+  const isNoticeCreator = user?.role === 'hod' || user?.role === 'hostel_admin' || user?.role === 'super_admin';
+
   return (
     <header className="h-16 glass-header px-4 sm:px-6 flex items-center justify-between sticky top-0 z-20 shadow-xs gap-4">
       {/* Brand & Logo */}
@@ -63,6 +66,18 @@ const Header = ({
 
       {/* Action Controls */}
       <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        {/* Create Notice Button for Authorized Roles */}
+        {isNoticeCreator && (
+          <button
+            onClick={onOpenAddNotice}
+            className="px-3 py-2 rounded-2xl bg-gradient-to-r from-orange-600 via-rose-600 to-amber-600 hover:from-orange-700 hover:to-rose-700 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-md shadow-orange-600/20 transition-all duration-200 cursor-pointer"
+            title="Create and Publish Official Notice"
+          >
+            <PlusCircle className="w-4 h-4" />
+            <span className="hidden md:inline">Create Notice</span>
+          </button>
+        )}
+
         {/* Notification Bell Icon */}
         <button
           onClick={onOpenNotifications}
@@ -91,7 +106,7 @@ const Header = ({
         <button
           onClick={onOpenProfile}
           className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-gradient-to-r from-orange-50/90 via-rose-50/70 to-white border border-orange-200/80 hover:border-orange-400 text-xs text-slate-800 font-semibold shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer"
-          title="Click to view profile panel"
+          title="Click to view profile panel & log out"
         >
           <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-orange-500 to-rose-500 text-white flex items-center justify-center text-xs shadow-xs">
             {user?.role === 'hod' || user?.role === 'super_admin' || user?.role === 'hostel_admin' ? (
@@ -123,4 +138,5 @@ const Header = ({
 };
 
 export default Header;
+
 

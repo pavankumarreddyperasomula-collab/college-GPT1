@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, User, ShieldCheck, Key, Home, Building, Phone, Briefcase, GitBranch, GraduationCap, Lock, Upload, UserPlus, FileText, Trash2, CheckCircle2 } from 'lucide-react';
+import { X, User, ShieldCheck, Key, Home, Building, Phone, Briefcase, GitBranch, GraduationCap, Lock, Upload, UserPlus, FileText, Trash2, CheckCircle2, LogOut } from 'lucide-react';
 import { API_URL } from '../config';
 
-const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'profile' }) => {
+const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, onLogout, initialTab = 'profile' }) => {
   if (!isOpen || !user) return null;
 
   const role = (user.role || 'student').toLowerCase();
@@ -188,15 +188,17 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'prof
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-lg rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
-        {/* Header */}
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+      <div className="bg-white border border-slate-200 w-full max-w-xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+        {/* Modal Header */}
+        <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-gradient-to-r from-orange-50/70 via-rose-50/50 to-white">
           <div className="flex items-center gap-3">
-            <img src="/srkr_logo.png" alt="SRKR Logo" className="h-9 object-contain" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-orange-600 to-rose-600 text-white flex items-center justify-center shadow-md shadow-orange-600/20">
+              <User className="w-5 h-5 text-white" />
+            </div>
             <div>
-              <h3 className="text-lg font-extrabold text-slate-900">
-                {isHostelSuperAdmin ? 'Hostel Super Admin Hub' : (isCollegeSuperAdmin ? 'College Super Admin Hub' : 'User Account & Profile')}
+              <h3 className="text-base font-black text-slate-900 tracking-tight">
+                User Profile & Settings
               </h3>
               <p className="text-xs text-slate-500 font-medium">
                 SRKR COLLEGE GPT account & settings
@@ -259,14 +261,14 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'prof
           {activeTab === 'profile' && (
             <div className="space-y-4">
               <div className={`p-4 rounded-2xl border flex items-center justify-between ${
-                isHostelSuperAdmin ? 'bg-amber-50 border-amber-200' : 'bg-violet-50/60 border-violet-100'
+                isHostelSuperAdmin ? 'bg-amber-50 border-amber-200' : 'bg-orange-50/60 border-orange-200'
               }`}>
                 <div>
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">Account Holder</span>
                   <h4 className="text-lg font-extrabold text-slate-900">{user.username || user.name || 'User'}</h4>
                 </div>
                 <span className={`px-3 py-1 rounded-full text-white text-xs font-bold uppercase tracking-wider shadow-xs ${
-                  isHostelSuperAdmin ? 'bg-amber-600' : 'bg-violet-600'
+                  isHostelSuperAdmin ? 'bg-amber-600' : 'bg-gradient-to-r from-orange-600 to-rose-600'
                 }`}>
                   {isHostelSuperAdmin ? 'Hostel Super Admin' : (user.designation || user.role)}
                 </span>
@@ -277,7 +279,7 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'prof
                   <>
                     <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
                       <span className="font-bold text-slate-600 flex items-center gap-2">
-                        <GraduationCap className="w-4 h-4 text-violet-600" /> Department
+                        <GraduationCap className="w-4 h-4 text-orange-600" /> Department
                       </span>
                       <span className="font-bold text-slate-900 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
                         {user.department || 'CSE'}
@@ -286,7 +288,7 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'prof
 
                     <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs">
                       <span className="font-bold text-slate-600 flex items-center gap-2">
-                        <Home className="w-4 h-4 text-orange-600" /> Hostel Resident Status
+                        <Home className="w-4 h-4 text-rose-600" /> Hostel Resident Status
                       </span>
                       <span className={`font-bold px-2.5 py-1 rounded-lg ${
                         user.is_hostel_resident
@@ -320,6 +322,21 @@ const ProfileModal = ({ isOpen, onClose, user, onUserUpdated, initialTab = 'prof
                     </p>
                   </div>
                 )}
+
+                {/* LOG OUT BUTTON FOR ALL ROLES */}
+                <div className="pt-3 border-t border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (onLogout) onLogout();
+                      if (onClose) onClose();
+                    }}
+                    className="w-full py-3 px-4 rounded-2xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white font-extrabold text-xs flex items-center justify-center gap-2 shadow-md shadow-red-600/20 transition-all duration-200 cursor-pointer"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>Log Out of Account</span>
+                  </button>
+                </div>
               </div>
             </div>
           )}
