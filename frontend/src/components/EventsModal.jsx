@@ -129,10 +129,10 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/25 backdrop-blur-md animate-fade-in">
+      <div className="bg-white/85 backdrop-blur-2xl border border-white/50 w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+        <div className="p-5 border-b border-slate-200/60 flex items-center justify-between bg-white/50 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-600/20">
               <Calendar className="w-5 h-5" />
@@ -172,7 +172,7 @@ const EventsModal = ({ isOpen, onClose, user, notifications = [] }) => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 overflow-y-auto space-y-5 flex-1">
+        <div className="p-6 overflow-y-auto space-y-5 flex-1 bg-white/30 backdrop-blur-md">
           {error && (
             <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-xs font-medium flex items-center gap-2">
               <AlertCircle className="w-4 h-4 flex-shrink-0" />

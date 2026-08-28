@@ -128,10 +128,10 @@ const CampusMapModal = ({ isOpen, onClose }) => {
   const arrowWaypoints = startLoc !== destLoc ? [0.22, 0.45, 0.68, 0.88] : [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-md animate-fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[94vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/25 backdrop-blur-md animate-fade-in">
+      <div className="bg-white/85 backdrop-blur-2xl border border-white/50 w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[94vh]">
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/90">
+        <div className="p-4 sm:p-5 border-b border-slate-200/60 flex items-center justify-between bg-white/50 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-teal-600 to-emerald-600 text-white flex items-center justify-center shadow-md shadow-teal-600/20">
               <Compass className="w-5 h-5" />
@@ -160,7 +160,7 @@ const CampusMapModal = ({ isOpen, onClose }) => {
                 setStartLoc(destLoc);
                 setDestLoc(temp);
               }}
-              className="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold items-center gap-1.5 transition-colors cursor-pointer"
+              className="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-800 text-xs font-bold items-center gap-1.5 transition-colors cursor-pointer border border-slate-200"
               title="Swap Start & Destination"
             >
               ⇄ Reverse Route

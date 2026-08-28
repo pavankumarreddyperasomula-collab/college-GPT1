@@ -30,10 +30,10 @@ const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAs
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-      <div className="bg-slate-100 border border-slate-300 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/25 backdrop-blur-md animate-fade-in">
+      <div className="bg-white/85 backdrop-blur-2xl border border-white/50 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="p-5 border-b border-slate-200 flex items-center justify-between bg-white">
+        <div className="p-5 border-b border-slate-200/60 flex items-center justify-between bg-white/50 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-orange-600 text-white flex items-center justify-center shadow-md shadow-orange-600/20">
               <Bell className="w-5 h-5" />
@@ -41,18 +41,18 @@ const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAs
             <div>
               <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 Official SRKR Campus Circulars
-                <span className="px-2.5 py-0.5 rounded-full bg-orange-100 text-orange-800 text-xs font-black">
+                <span className="px-2.5 py-0.5 rounded-full bg-orange-100/90 text-orange-900 text-xs font-black border border-orange-200">
                   {notifications.length} Circulars
                 </span>
               </h3>
-              <p className="text-xs text-slate-500 font-medium">SAGI RAMA KRISHNAM RAJU ENGINEERING COLLEGE (AUTONOMOUS)</p>
+              <p className="text-xs text-slate-600 font-medium">SAGI RAMA KRISHNAM RAJU ENGINEERING COLLEGE (AUTONOMOUS)</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-200"
             >
               <Printer className="w-3.5 h-3.5" /> Print Circular
             </button>
@@ -68,7 +68,7 @@ const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAs
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-white/60 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -76,18 +76,18 @@ const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAs
         </div>
 
         {/* Official Printed Paper Circular List */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-8 flex-1 bg-slate-200/60">
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-8 flex-1 bg-white/20 backdrop-blur-md">
           {notifications.length === 0 ? (
-            <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 shadow-sm text-slate-500">
-              <Bell className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-              <p className="text-base font-bold text-slate-800">No active circulars in your inbox right now.</p>
-              <p className="text-xs text-slate-400 mt-1">Official announcements published by HODs or Admins will appear here.</p>
+            <div className="text-center py-16 bg-white/70 backdrop-blur-md rounded-3xl border border-white/60 shadow-sm text-slate-600">
+              <Bell className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+              <p className="text-base font-bold text-slate-900">No active circulars in your inbox right now.</p>
+              <p className="text-xs text-slate-500 mt-1">Official announcements published by HODs or Admins will appear here.</p>
             </div>
           ) : (
             notifications.map((notif) => (
               <div
                 key={notif.id}
-                className="bg-white border border-slate-300 shadow-md p-6 sm:p-10 rounded-2xl space-y-6 text-slate-900 font-serif relative transition-all hover:shadow-xl group"
+                className="bg-white/90 backdrop-blur-md border border-slate-300 shadow-md p-6 sm:p-10 rounded-2xl space-y-6 text-slate-900 font-serif relative transition-all hover:shadow-xl group"
               >
                 {/* Admin Delete Action Button */}
                 {isAdmin && (
@@ -216,8 +216,8 @@ const NotificationModal = ({ isOpen, onClose, user, notifications = [], onMarkAs
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-slate-200 bg-white flex justify-between items-center">
-          <span className="text-xs text-slate-500 font-bold">
+        <div className="p-4 border-t border-slate-200/60 bg-white/50 backdrop-blur-md flex justify-between items-center">
+          <span className="text-xs text-slate-600 font-bold">
             Official SRKR Engineering College Notice Circular Format
           </span>
           <button

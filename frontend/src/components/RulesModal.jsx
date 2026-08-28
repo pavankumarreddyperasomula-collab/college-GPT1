@@ -255,10 +255,10 @@ const RulesModal = ({ isOpen, onClose, user }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white border border-slate-200 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/25 backdrop-blur-md animate-fade-in">
+      <div className="bg-white/85 backdrop-blur-2xl border border-white/50 w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Header */}
-        <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+        <div className="p-5 border-b border-slate-200/60 flex items-center justify-between bg-white/50 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-red-600 text-white flex items-center justify-center shadow-md shadow-red-600/20">
               <BookOpen className="w-5 h-5" />
@@ -267,21 +267,21 @@ const RulesModal = ({ isOpen, onClose, user }) => {
               <h3 className="text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 SRKR College General Rules & Regulations
               </h3>
-              <p className="text-xs text-slate-500 font-medium">Official student conduct policy & campus guidelines</p>
+              <p className="text-xs text-slate-600 font-medium">Official student conduct policy & campus guidelines</p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer"
+              className="px-3 py-1.5 rounded-xl bg-white/70 hover:bg-white text-slate-800 text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-200"
               title="Print or Save Rules PDF"
             >
               <Printer className="w-3.5 h-3.5" /> Print PDF
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-white/60 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -346,7 +346,7 @@ const RulesModal = ({ isOpen, onClose, user }) => {
         </div>
 
         {/* Search Bar */}
-        <div className="p-4 border-b border-slate-100 bg-white">
+        <div className="p-4 border-b border-slate-200/60 bg-white/40 backdrop-blur-md">
           <div className="relative">
             <input
               type="text"
@@ -361,14 +361,14 @@ const RulesModal = ({ isOpen, onClose, user }) => {
               }`}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-900 focus:bg-white focus:border-red-500 outline-none transition-all"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white/70 backdrop-blur-md border border-slate-200 text-xs font-medium text-slate-900 focus:bg-white focus:border-red-500 outline-none transition-all"
             />
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
           </div>
         </div>
 
         {/* Document Content View */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 bg-slate-50/30 font-sans">
+        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1 bg-white/30 backdrop-blur-md font-sans">
           {/* Document Header Page */}
           <div className="text-center border-b border-slate-200 pb-6 mb-6">
             <img
