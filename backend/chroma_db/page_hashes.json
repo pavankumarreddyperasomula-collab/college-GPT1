@@ -16,15 +16,207 @@
     "updated_at": "2026-08-29T22:37:19.712817"
   },
   "https://www.srkrec.ac.in/code-of-conduct/": {
-    "hash": "6c9b3297ed0659992d1ab07c146a7adf3961e9d769a93a365ec68bbe7063f152",
-    "updated_at": "2026-08-29T22:37:20.964902"
+    "hash": "87ca6481f2d88527d312e994f804de7a8172497dd1294bd9957fd9ee58d50bbe",
+    "updated_at": "2026-08-29T23:37:25.624229"
   },
   "https://www.srkrec.ac.in/departments/cse/": {
     "hash": "73683ad487035b73f9dab6fcb056022e323f070b0c72bab798716210a05405bc",
     "updated_at": "2026-08-29T22:37:22.953110"
   },
   "https://www.srkrec.ac.in/fee/": {
-    "hash": "c578795e144733086d3a77524f3d6013374587d348f88ba6d84157d866d6891d",
-    "updated_at": "2026-08-29T22:37:24.870160"
+    "hash": "bce970f6acc1efa6f19f6b5cd10ac33e2431fab932b12953962ef51eafd72247",
+    "updated_at": "2026-08-29T23:37:28.120988"
+  },
+  "https://www.srkrec.ac.in/files/ac/academic_calendar_2017_2018.pdf": {
+    "hash": "b1ac58e8d51399f757209dd30da8d9b58f8d63a783636a261bd93f110d9b601f",
+    "updated_at": "2026-08-29T22:59:10.239234"
+  },
+  "https://www.srkrec.ac.in/files/ac/mtech_academic_calendar_2023_2024.pdf": {
+    "hash": "fc071474ed516e9b2b839c375ba9a59c1f02bc604d94afebf7abf216aeedd7fc",
+    "updated_at": "2026-08-29T22:59:10.361299"
+  },
+  "https://www.srkrec.ac.in/files/ac/II_YEAR_M.TECH_ACADEMIC_CALENDAR_2025-26.pdf": {
+    "hash": "975732d845bbd85f490033904e54fbd3c41faa48b843353fb59eef1d4592eb60",
+    "updated_at": "2026-08-29T22:59:16.022063"
+  },
+  "https://www.srkrec.ac.in/files/ac/IV_B.Tech_Academic_Calendar_2025-26.pdf": {
+    "hash": "8c10253fcb78141e6215b8ee764fe7930c9a72eadd531daa657c3d7059cc8510",
+    "updated_at": "2026-08-29T22:59:16.411849"
+  },
+  "https://www.srkrec.ac.in/files/ac/btech_academic_calendar_2023_2024.pdf": {
+    "hash": "3c15b626d51ffade62a0d3860c30ad4c2cb95caa68fdaaa3f7ca1eb9f2866465",
+    "updated_at": "2026-08-29T22:59:22.145083"
+  },
+  "https://www.srkrec.ac.in/files/ac/I_YEAR_B.TECH_ACADEMIC_CALENDAR_2025-26.pdf": {
+    "hash": "53ea64964fbb5f0a6d770ef592e3964c71fb3ef4f165ff3e9feea57c71a75d05",
+    "updated_at": "2026-08-29T22:59:26.147595"
+  },
+  "https://www.srkrec.ac.in/files/ac/academic_calendar_2016_2017.pdf": {
+    "hash": "9471a9b4760f8470d00b6e34ca3e5a3ec9bd2408c3678328e01e3aff1265df05",
+    "updated_at": "2026-08-29T22:59:27.366151"
+  },
+  "https://www.srkrec.ac.in/files/ac/II_III_B.Tech_Academic_Calendar_2025-26.pdf": {
+    "hash": "10ca0e526db43140d2ca4810217bca8d87970d37aecceb02481320a2d0ecf995",
+    "updated_at": "2026-08-29T22:59:54.698211"
+  },
+  "https://www.srkrec.ac.in/files/ac/M.Tech Academic Calendar 2024-25.pdf": {
+    "hash": "67c04c546ba76e9e66595ec5d003ad2f35776eb074987c590656baa986fd7931",
+    "updated_at": "2026-08-29T22:59:55.120044"
+  },
+  "https://www.srkrec.ac.in/files/ac/II_III_IV_B_TECH_AC 2026-27.pdf": {
+    "hash": "ccc3b7c941c3b72fd4f697f13c130fb9b0477a14c8189d8feea8e798c62ec7fc",
+    "updated_at": "2026-08-29T22:59:56.064731"
+  },
+  "https://www.srkrec.ac.in/files/ac/II_M_TECH_AC 2026-27.pdf": {
+    "hash": "cee413ac2601f7f187c5d01c1a056095041892bcbab5da08a561ea6344bdf84f",
+    "updated_at": "2026-08-29T22:59:57.167796"
+  },
+  "https://www.srkrec.ac.in/files/ac/II_YEAR_BBA_ACADEMIC_2025-26.pdf": {
+    "hash": "f6587f38a267fbe725b9b344651788ef01fc04a577e15caeea4d808098a656fb",
+    "updated_at": "2026-08-29T22:59:57.795262"
+  },
+  "https://www.srkrec.ac.in/files/ac/academic_calendar_2018_2019.pdf": {
+    "hash": "effad93119cc94e69a1ce1f548b4e4a71f9adb169b9cdbf942c0cad668ad8f75",
+    "updated_at": "2026-08-29T22:59:58.147133"
+  },
+  "https://www.srkrec.ac.in/files/ac/I_YEAR_BBA_ACADEMIC_2025-26.pdf": {
+    "hash": "2919679c6d8d67fe1b6de6fc3ee74919d784a8f67ac617f565d37a3bbf7d6287",
+    "updated_at": "2026-08-29T23:00:00.148852"
+  },
+  "https://www.srkrec.ac.in": {
+    "hash": "fe02c4da4d574bcfc788076d82724da8153ce293d02347888cdcbe97d24d7a0d",
+    "updated_at": "2026-08-29T23:25:08.060800"
+  },
+  "https://www.srkrec.ac.in/academic-council": {
+    "hash": "3ee06b8dfa3f23e1ba5b8ded42b436035c62480d6ca7de2be3b68838961b3423",
+    "updated_at": "2026-08-29T23:25:11.738968"
+  },
+  "https://www.srkrec.ac.in/accreditations": {
+    "hash": "f8fcb343b1b784ae88c4b473a1f0a840084e0b884d65cc61e70ae13d7d68a318",
+    "updated_at": "2026-08-29T23:25:16.116466"
+  },
+  "https://www.srkrec.ac.in/aqar": {
+    "hash": "8b3b0ac5e44a8fab741d1ab95f71bb371f8b4369825a48c6180a9a0b71d99d40",
+    "updated_at": "2026-08-29T23:25:22.178767"
+  },
+  "https://www.srkrec.ac.in/audit": {
+    "hash": "2f2807183374f8451171736731b7891fc3dd9cf992b09140a46f0eea716dfa80",
+    "updated_at": "2026-08-29T23:25:23.741171"
+  },
+  "https://www.srkrec.ac.in/career-guidance": {
+    "hash": "4bd41741d048c4388a82a5e0885742a66600b05519f3e0ae1a3ae2d331db5fb4",
+    "updated_at": "2026-08-29T23:25:26.936538"
+  },
+  "https://www.srkrec.ac.in/center-for-it-infrastructure": {
+    "hash": "57dac9f4a937a04f1fabab36bc9b3921f0f63e44a31edcb11e36b5db09f17031",
+    "updated_at": "2026-08-29T23:25:28.808915"
+  },
+  "https://www.srkrec.ac.in/central-committee": {
+    "hash": "96ffb54ac8e795c2bdfeb1978e49550235a42118232c9a0160f6063fece70571",
+    "updated_at": "2026-08-29T23:25:42.145445"
+  },
+  "https://www.srkrec.ac.in/code-of-conduct": {
+    "hash": "6c9b3297ed0659992d1ab07c146a7adf3961e9d769a93a365ec68bbe7063f152",
+    "updated_at": "2026-08-29T23:25:43.814587"
+  },
+  "https://www.srkrec.ac.in/departments": {
+    "hash": "49cc37dac726e8d101f05efada0a0de51cf50f4c8d35ec321071c23c6cebda12",
+    "updated_at": "2026-08-29T23:25:46.684013"
+  },
+  "https://www.srkrec.ac.in/departments/ash/faculty-physics": {
+    "hash": "edc5cbfe2ecbf5d7ce38c8e03d5f8759067d92c3d48c1f89b9f9a91c73d9c87a",
+    "updated_at": "2026-08-29T23:26:20.427882"
+  },
+  "https://www.srkrec.ac.in/departments/ash/ielts-test-centre": {
+    "hash": "792017471018e30239c8a847061d56acd1910ca2c9252de49b762e4465a973a7",
+    "updated_at": "2026-08-29T23:26:22.191536"
+  },
+  "https://www.srkrec.ac.in/departments/ash/indian-knowledge-traditions": {
+    "hash": "2a7a82ad7a28c45821411b3078e85bc22951bd0f22b6f84866842f2d0d19ffdb",
+    "updated_at": "2026-08-29T23:26:23.913478"
+  },
+  "https://www.srkrec.ac.in/departments/cse/brochure": {
+    "hash": "d8a2f9b0e9811c3fb96bbfcc19af9aaf3fda2d7c949e8ef7c00506bab3577197",
+    "updated_at": "2026-08-29T23:26:45.426579"
+  },
+  "https://www.srkrec.ac.in/departments/cse/committees": {
+    "hash": "11f9a2947ac14a8e96b14dfaa6aa337163f7bbc5bf0cb3cc417ab5e37b1fe45f",
+    "updated_at": "2026-08-29T23:26:47.276929"
+  },
+  "https://www.srkrec.ac.in/departments/cse/facilities": {
+    "hash": "502d55ec60c1926e56946be314f52c024f7c9719f5f077102f478b028de74cc2",
+    "updated_at": "2026-08-29T23:26:48.890503"
+  },
+  "https://www.srkrec.ac.in/departments/cse/faculty-csd": {
+    "hash": "0cf9db7b12cc08c78a79f28ac1ca4699011c0a48f8c1e6d95638ded173c57712",
+    "updated_at": "2026-08-29T23:26:51.262451"
+  },
+  "https://www.srkrec.ac.in/departments/cse/newsletter": {
+    "hash": "4e08f502f7fdeb7d3bc849e6568589337564b15f0ee079e85d145ad826e5dbb9",
+    "updated_at": "2026-08-29T23:26:52.800365"
+  },
+  "https://www.srkrec.ac.in/departments/cse/placements": {
+    "hash": "087aa1a4fa57ca5fc2e8367eb9312a3328e97ac53029dfd340a22d62092ad1d9",
+    "updated_at": "2026-08-29T23:26:54.758492"
+  },
+  "https://www.srkrec.ac.in/departments/cse/research-consultancy": {
+    "hash": "df72a41821f2cbef9f091f8035a3e68b80790168e7e4c590604f2dbca79ab1d1",
+    "updated_at": "2026-08-29T23:26:56.460836"
+  },
+  "https://www.srkrec.ac.in/departments/cse/faculty/": {
+    "hash": "11b294ae36362b8db69aee563bcefee29bd746a062e0dd239766ab76aa46c2d1",
+    "updated_at": "2026-08-29T23:37:09.098967"
+  },
+  "https://www.srkrec.ac.in/departments/cse/faculty-csd/": {
+    "hash": "3699fc8c87b4eec571dffdb749689d02c164fb91e287d1b7e6f675baa7aee32f",
+    "updated_at": "2026-08-29T23:37:10.583298"
+  },
+  "https://www.srkrec.ac.in/departments/ece/faculty/": {
+    "hash": "6108ad8cd83da2baab9e01ea56491fb688daf0c63d2b554d2a9a44f544d43f0c",
+    "updated_at": "2026-08-29T23:37:13.536301"
+  },
+  "https://www.srkrec.ac.in/departments/eee/faculty/": {
+    "hash": "0095fede8ec930f353851120186c0c5e8bc09789ce74206524c4c4e3f5d2af4a",
+    "updated_at": "2026-08-29T23:37:14.833668"
+  },
+  "https://www.srkrec.ac.in/departments/it/faculty/": {
+    "hash": "6efa1e7d131f4f4f0a8e305b98f720ba9fc28f5aa7694d2aaa2b7f054d73a16a",
+    "updated_at": "2026-08-29T23:37:15.942809"
+  },
+  "https://www.srkrec.ac.in/departments/it/faculty-csit/": {
+    "hash": "25b2678d7b6ef022c19c158376778289fd3369a9bc0317adb4a08dbbcb04dafd",
+    "updated_at": "2026-08-29T23:37:17.033170"
+  },
+  "https://www.srkrec.ac.in/departments/civil/faculty/": {
+    "hash": "673f79dd80080a57e59eccb650ad3742e56727c49ed3b53d1f79127e19465094",
+    "updated_at": "2026-08-29T23:37:18.379321"
+  },
+  "https://www.srkrec.ac.in/departments/mechanical/faculty/": {
+    "hash": "9b50aa9eec471758789e1c3dd182ff680bd43e1433c2009d5ddf928cf703d4d6",
+    "updated_at": "2026-08-29T23:37:19.428676"
+  },
+  "https://www.srkrec.ac.in/departments/ms/faculty/": {
+    "hash": "01eee895e0b991416b24420cafa6530635ad421f7b5f6e708a658f61c827f64e",
+    "updated_at": "2026-08-29T23:37:20.429749"
+  },
+  "https://www.srkrec.ac.in/departments/ash/faculty-physics/": {
+    "hash": "c4a38e38c21bc4f602b23a00cf754231c729bcfe9bbf10415c7fab25aafbb345",
+    "updated_at": "2026-08-29T23:37:21.517011"
+  },
+  "https://www.srkrec.ac.in/departments/ash/faculty-maths/": {
+    "hash": "70196e17ffd68367f0e42fcc4af00bf61fc6c0e3b9c1fde555ca7fb4f72362ac",
+    "updated_at": "2026-08-29T23:37:22.426096"
+  },
+  "https://www.srkrec.ac.in/departments/ash/faculty-chemistry/": {
+    "hash": "498656830d7491bdcf2347773b758fa5bf1d75c89a1a3e2aa69ae553af470e0f",
+    "updated_at": "2026-08-29T23:37:23.387860"
+  },
+  "https://www.srkrec.ac.in/departments/ash/faculty-english/": {
+    "hash": "154ebadb5e5f8feeaf4bd295ec7969788834e428dd12e2022b5513c8e4282438",
+    "updated_at": "2026-08-29T23:37:24.360080"
+  },
+  "https://www.srkrec.ac.in/procedure/": {
+    "hash": "09476ebc2e6764613c6910865305825f8b63f1e5bc5b10446ba5d53edccba175",
+    "updated_at": "2026-08-29T23:37:26.799582"
   }
 }
