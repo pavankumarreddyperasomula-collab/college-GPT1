@@ -6,7 +6,7 @@ import hashlib
 import uuid
 from typing import List, Dict, Any, Optional
 from datetime import datetime
-from app.config import CHROMA_DB_DIR, GROQ_API_KEY
+from app.config import CHROMA_DB_DIR, GROQ_API_KEY, GEMINI_API_KEY
 
 VECTOR_STORE_FILE = os.path.join(CHROMA_DB_DIR, "campus_knowledge_vectors.json")
 NOTIFICATIONS_FILE = os.path.join(CHROMA_DB_DIR, "campus_notifications.json")
@@ -32,18 +32,24 @@ class LocalVectorStore:
         with open(self.storage_file, "w", encoding="utf-8") as f:
             json.dump(self.documents, f, indent=2)
 
-    def add(self, ids: List[str], documents: List[str], metadatas: List[dict]):
-        for doc_id, text, meta in zip(ids, documents, metadatas):
+    def add(self, ids: List[str], documents: List[str], metadatas: List[dict], embeddings: Optional[List[List[float]]] = None):
+        for i, (doc_id, text, meta) in enumerate(zip(ids, documents, metadatas)):
+            emb = embeddings[i] if (embeddings and i < len(embeddings)) else None
             existing = next((d for d in self.documents if d["id"] == doc_id), None)
             if existing:
                 existing["text"] = text
                 existing["metadata"] = meta
+                if emb is not None:
+                    existing["embedding"] = emb
             else:
-                self.documents.append({
+                entry = {
                     "id": doc_id,
                     "text": text,
                     "metadata": meta
-                })
+                }
+                if emb is not None:
+                    entry["embedding"] = emb
+                self.documents.append(entry)
         self._save()
 
     def delete(self, identifier: str) -> bool:
@@ -565,6 +571,7 @@ def add_document_to_rag(
 
     # Generate fresh comprehensive chunks (550 words each)
     chunks = chunk_text(body, title, category)
+    print(f"[PDF LOG] Created {len(chunks)} chunks from body text ({len(body)} chars, {len(body.split())} words)")
     if not chunks:
         return {
             "status": "error",
@@ -578,15 +585,16 @@ def add_document_to_rag(
         collection.delete(file_name)
     collection.delete(title)
 
-    ids = [c["id"] for c in chunks]
-    documents = [c["text"] for c in chunks]
-    metadatas = [{**c["metadata"], "file_name": file_name or title, "content_hash": body_hash} for c in chunks]
-
-    collection.add(
-        ids=ids,
-        documents=documents,
-        metadatas=metadatas
-    )
+    for i, c in enumerate(chunks):
+        try:
+            collection.add(
+                ids=[c["id"]],
+                documents=[c["text"]],
+                metadatas=[{**c["metadata"], "file_name": file_name or title, "content_hash": body_hash}]
+            )
+            print(f"[PDF LOG] Stored chunk {i+1}/{len(chunks)} (ID: {c['id']})")
+        except Exception as e:
+            print(f"[PDF LOG] FAILED on chunk {i+1}: {e}")
 
     now_str = datetime.now().strftime("%d-%m-%Y at %I:%M %p")
     doc_entry = {
@@ -647,12 +655,19 @@ def process_uploaded_file(file_name: str, file_bytes: Any, category: str = "coll
                 import pypdf
                 pdf_stream = io.BytesIO(raw_bytes)
                 reader = pypdf.PdfReader(pdf_stream)
+                print(f"[PDF LOG] Total pages detected in PDF: {len(reader.pages)}")
                 pages_text = []
                 for i, page in enumerate(reader.pages):
-                    extracted = page.extract_text()
-                    if extracted and len(extracted.strip()) > 3:
-                        pages_text.append(f"--- Page {i+1} ---\n" + extracted.strip())
+                    try:
+                        extracted = page.extract_text()
+                        char_cnt = len(extracted) if extracted else 0
+                        print(f"[PDF LOG] Page {i+1}/{len(reader.pages)}: extracted {char_cnt} characters")
+                        if extracted and len(extracted.strip()) > 3:
+                            pages_text.append(f"--- Page {i+1} ---\n" + extracted.strip())
+                    except Exception as pe_elem:
+                        print(f"[PDF LOG] FAILED extracting Page {i+1}: {pe_elem}")
                 text_content = "\n\n".join(pages_text).strip()
+                print(f"[PDF LOG] Extracted {len(reader.pages)} pages, {len(text_content)} characters total")
             except Exception as pe:
                 print(f"pypdf extraction warning for {clean_name}: {pe}")
                 text_content = ""
@@ -1117,6 +1132,37 @@ def generate_llm_answer(
         "If the answer isn't in the provided context, I am instructed to inform you that I don't have that information rather than guessing. "
         "Please check official college notices or upload a readable text document."
     )
+
+def embed_text(text: str) -> List[float]:
+    if not GEMINI_API_KEY:
+        print("[EMBED LOG] Warning: GEMINI_API_KEY is not set. Returning dummy 3072-dimensional vector.")
+        return [0.0] * 3072
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        response = client.models.embed_content(
+            model="gemini-embedding-001",
+            contents=text
+        )
+        if response and response.embeddings and len(response.embeddings) > 0:
+            return response.embeddings[0].values
+        return [0.0] * 3072
+    except Exception as e:
+        print(f"[EMBED LOG] Error generating Gemini embedding: {e}. Returning dummy vector.")
+        return [0.0] * 3072
+
+def delete_chunks_for_source(source_url: str):
+    clean_url = source_url.strip().lower()
+    initial_len = len(collection.documents)
+    collection.documents = [
+        d for d in collection.documents
+        if (d["metadata"].get("source") or "").strip().lower() != clean_url
+        and (d["metadata"].get("file_name") or "").strip().lower() != clean_url
+    ]
+    if len(collection.documents) < initial_len:
+        collection._save()
+        print(f"[DELETE LOG] Deleted chunks for source: {source_url} ({initial_len - len(collection.documents)} chunk(s) removed)")
+
 
 
 

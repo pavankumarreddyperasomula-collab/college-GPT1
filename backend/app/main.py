@@ -37,6 +37,9 @@ from app.rag import (
 
 app = FastAPI(title="Campus Assistant API", version="3.0.0")
 
+from app.website_ingest import router as website_router
+app.include_router(website_router)
+
 origins = [
     "https://college-gpt-1.vercel.app",
     "https://college-gpt1.onrender.com",

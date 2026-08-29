@@ -13,6 +13,7 @@ import CampusMapModal from './components/CampusMapModal';
 import RulesModal from './components/RulesModal';
 import DocFormatterModal from './components/DocFormatterModal';
 import EventsModal from './components/EventsModal';
+import WebsiteIngestModal from './components/WebsiteIngestModal';
 import StudentQuickHub from './components/StudentQuickHub';
 import AdminQuickHub from './components/AdminQuickHub';
 import Aurora from './components/Aurora';
@@ -34,6 +35,7 @@ const App = () => {
   const [isRulesOpen, setIsRulesOpen] = useState(false);
   const [isDocFormatterOpen, setIsDocFormatterOpen] = useState(false);
   const [isEventsOpen, setIsEventsOpen] = useState(false);
+  const [isWebsiteIngestOpen, setIsWebsiteIngestOpen] = useState(false);
 
   // Chat Panel Toggle State
   const [isChatOpen, setIsChatOpen] = useState(true);
@@ -414,6 +416,7 @@ const App = () => {
                     onOpenRules={() => setIsRulesOpen(true)}
                     onOpenProfile={() => { setProfileModalTab('profile'); setIsProfileOpen(true); }}
                     onOpenAddStaff={() => { setProfileModalTab('create_staff'); setIsProfileOpen(true); }}
+                    onOpenWebsiteIngest={() => setIsWebsiteIngestOpen(true)}
                   />
                 )}
               </div>
@@ -512,6 +515,11 @@ const App = () => {
         onClose={() => setIsEventsOpen(false)}
         user={user}
         notifications={notifications}
+      />
+
+      <WebsiteIngestModal
+        isOpen={isWebsiteIngestOpen}
+        onClose={() => setIsWebsiteIngestOpen(false)}
       />
     </div>
   );
