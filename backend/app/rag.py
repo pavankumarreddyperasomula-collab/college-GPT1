@@ -663,6 +663,7 @@ def process_uploaded_file(file_name: str, file_bytes: Any, category: str = "coll
                 pass
 
     if clean_name.lower().endswith(".pdf"):
+        text_content = ""
         # 1. Primary: Try pypdf extraction if file has PDF header
         if raw_bytes.startswith(b"%PDF") or b"%PDF" in raw_bytes[:1024]:
             try:
@@ -675,25 +676,53 @@ def process_uploaded_file(file_name: str, file_bytes: Any, category: str = "coll
                     try:
                         extracted = page.extract_text()
                         char_cnt = len(extracted) if extracted else 0
-                        print(f"[PDF LOG] Page {i+1}/{len(reader.pages)}: extracted {char_cnt} characters")
+                        print(f"[PDF LOG] Page {i+1}/{len(reader.pages)}: extracted {char_cnt} characters via pypdf")
                         if extracted and len(extracted.strip()) > 3:
-                            pages_text.append(f"--- Page {i+1} ---\n" + extracted.strip())
+                            pages_text.append(extracted.strip())
+                        else:
+                            pages_text.append("")
                     except Exception as pe_elem:
-                        print(f"[PDF LOG] FAILED extracting Page {i+1}: {pe_elem}")
-                text_content = "\n\n".join(pages_text).strip()
-                print(f"[PDF LOG] Extracted {len(reader.pages)} pages, {len(text_content)} characters total")
+                        print(f"[PDF LOG] pypdf FAILED extracting Page {i+1}: {pe_elem}")
+                        pages_text.append("")
+                
+                # Check if we need pdfplumber fallback (e.g. if many pages are empty or have very little text)
+                total_chars = sum(len(p) for p in pages_text)
+                if total_chars < 100:
+                    print("[PDF LOG] pypdf extracted very little text. Attempting pdfplumber fallback...")
+                    try:
+                        import pdfplumber
+                        pdf_stream.seek(0)
+                        with pdfplumber.open(pdf_stream) as pdf:
+                            for idx, pl_page in enumerate(pdf.pages):
+                                pl_text = pl_page.extract_text()
+                                pl_char_cnt = len(pl_text) if pl_text else 0
+                                print(f"[PDF LOG] Page {idx+1}/{len(pdf.pages)}: extracted {pl_char_cnt} characters via pdfplumber")
+                                if pl_text and len(pl_text.strip()) > len(pages_text[idx]):
+                                    pages_text[idx] = pl_text.strip()
+                    except Exception as ple:
+                        print(f"[PDF LOG] pdfplumber fallback failed: {ple}")
+                
+                # Form final text content
+                final_pages = []
+                for idx, text in enumerate(pages_text):
+                    if text:
+                        final_pages.append(f"--- Page {idx+1} ---\n{text}")
+                text_content = "\n\n".join(final_pages).strip()
+                print(f"[PDF LOG] Final extraction: {len(text_content)} characters total")
+
             except Exception as pe:
-                print(f"pypdf extraction warning for {clean_name}: {pe}")
+                print(f"Primary PDF extraction warning for {clean_name}: {pe}")
                 text_content = ""
 
-        # 2. Fallback: Try decoding UTF-8 text if pypdf yielded empty text
-        if not text_content or len(re.sub(r'\s+', '', text_content)) < 15:
-            try:
-                decoded_text = raw_bytes.decode("utf-8", errors="ignore").strip()
-                if len(re.sub(r'\s+', '', decoded_text)) > 20:
-                    text_content = decoded_text
-            except Exception as fe:
-                print(f"Text fallback decoding error: {fe}")
+        # 2. Fallback: Try decoding UTF-8 text only if it is NOT a binary PDF file
+        if not (raw_bytes.startswith(b"%PDF") or b"%PDF" in raw_bytes[:1024]):
+            if not text_content or len(re.sub(r'\s+', '', text_content)) < 15:
+                try:
+                    decoded_text = raw_bytes.decode("utf-8", errors="ignore").strip()
+                    if len(re.sub(r'\s+', '', decoded_text)) > 20:
+                        text_content = decoded_text
+                except Exception as fe:
+                    print(f"Text fallback decoding error: {fe}")
 
         # Check for scanned PDF (image only without selectable text)
         non_space_chars = re.sub(r'\s+', '', text_content)
