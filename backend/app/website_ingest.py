@@ -49,10 +49,20 @@ hashes_store = PageHashesStore(PAGE_HASHES_FILE)
 
 def fetch_clean_text(url: str) -> str:
     clean_url = url.strip()
-    downloaded = trafilatura.fetch_url(clean_url)
-    if not downloaded:
-        raise ValueError(f"Could not fetch content from {clean_url}")
-    text = trafilatura.extract(downloaded)
+    try:
+        import cloudscraper
+        scraper = cloudscraper.create_scraper()
+        response = scraper.get(clean_url, timeout=10)
+        if response.status_code != 200:
+            raise ValueError(f"Server returned status code {response.status_code}")
+        html_content = response.text
+    except Exception as e:
+        print(f"[FETCH WARNING] cloudscraper failed for {clean_url}: {e}. Trying trafilatura fallback...")
+        html_content = trafilatura.fetch_url(clean_url)
+        if not html_content:
+            raise ValueError(f"Could not fetch content from {clean_url}: {e}")
+
+    text = trafilatura.extract(html_content)
     return text or ""
 
 def content_hash(text: str) -> str:

@@ -1,0 +1,30 @@
+{
+  "https://www.srkrec.ac.in/": {
+    "hash": "fe02c4da4d574bcfc788076d82724da8153ce293d02347888cdcbe97d24d7a0d",
+    "updated_at": "2026-08-29T22:37:14.160280"
+  },
+  "https://www.srkrec.ac.in/college-profile/": {
+    "hash": "e28d29aefbc255da73ff3d223c5081d7108a693fa1eb1e10162a7aca3f2ef8aa",
+    "updated_at": "2026-08-29T22:37:16.046894"
+  },
+  "https://www.srkrec.ac.in/calender/": {
+    "hash": "45ad23ca2b1c05f8328de04c9f870066844e9e79dc40acd52f4e9a97fe6a7903",
+    "updated_at": "2026-08-29T22:37:18.302884"
+  },
+  "https://www.srkrec.ac.in/hostels/": {
+    "hash": "b58f047cfbe1749e92e9bb92666a8bc7511677d7e00cbe0b34c89ab6d51190df",
+    "updated_at": "2026-08-29T22:37:19.712817"
+  },
+  "https://www.srkrec.ac.in/code-of-conduct/": {
+    "hash": "6c9b3297ed0659992d1ab07c146a7adf3961e9d769a93a365ec68bbe7063f152",
+    "updated_at": "2026-08-29T22:37:20.964902"
+  },
+  "https://www.srkrec.ac.in/departments/cse/": {
+    "hash": "73683ad487035b73f9dab6fcb056022e323f070b0c72bab798716210a05405bc",
+    "updated_at": "2026-08-29T22:37:22.953110"
+  },
+  "https://www.srkrec.ac.in/fee/": {
+    "hash": "c578795e144733086d3a77524f3d6013374587d348f88ba6d84157d866d6891d",
+    "updated_at": "2026-08-29T22:37:24.870160"
+  }
+}

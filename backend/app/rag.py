@@ -85,38 +85,48 @@ class LocalVectorStore:
         if not filtered_docs:
             return {"documents": [[]], "metadatas": [[]]}
 
-        q_words = set(self._tokenize(query_text))
+        # 1. Try to compute query embedding for cosine similarity
+        q_emb = None
+        try:
+            # Import dynamically to avoid circular references
+            from app.rag import embed_text
+            q_emb = embed_text(query_text)
+        except Exception as e:
+            print(f"Error embedding query in search: {e}")
 
         scored = []
+        q_words = set(self._tokenize(query_text))
+
         for doc in filtered_docs:
-            doc_text_lower = doc["text"].lower()
-            doc_words = set(self._tokenize(doc["text"]))
+            score = 0.0
+            doc_emb = doc.get("embedding")
             
-            overlap = len(q_words.intersection(doc_words))
-            
-            phrase_boost = 0.0
-            for w in q_words:
-                if w in doc_text_lower:
-                    phrase_boost += 1.5
-                if w in doc["metadata"].get("title", "").lower():
-                    phrase_boost += 3.0
+            # Semantic search if both query and doc have embeddings
+            if q_emb and doc_emb and len(q_emb) == len(doc_emb) and any(v != 0.0 for v in q_emb):
+                dot_product = sum(a*b for a, b in zip(q_emb, doc_emb))
+                norm_a = sum(a*a for a in q_emb) ** 0.5
+                norm_b = sum(b*b for b in doc_emb) ** 0.5
+                if norm_a > 0 and norm_b > 0:
+                    score = (dot_product / (norm_a * norm_b)) * 100.0 # Scale to 0-100
+            else:
+                # Fallback to word-overlap score if no embeddings (max score scaled to 0-25 range)
+                doc_text_lower = doc["text"].lower()
+                doc_words = set(self._tokenize(doc["text"]))
+                overlap = len(q_words.intersection(doc_words))
+                phrase_boost = 0.0
+                for w in q_words:
+                    if w in doc_text_lower:
+                        phrase_boost += 0.5
+                    if w in doc["metadata"].get("title", "").lower():
+                        phrase_boost += 1.0
+                score = (overlap * 0.5 + phrase_boost) * 2.0
 
-            total_score = overlap * 2.0 + phrase_boost
-
-            scored.append((total_score, doc))
+            scored.append((score, doc))
 
         scored.sort(key=lambda x: x[0], reverse=True)
-        # Require meaningful score threshold (>= 2.5) to avoid matching common stop-words
-        scored_relevant = [item for item in scored if item[0] >= 2.5]
-
-        if not scored_relevant:
-            return {
-                "documents": [[]],
-                "metadatas": [[]]
-            }
-
-        top_docs = [item[1]["text"] for item in scored_relevant[:n_results]]
-        top_metas = [item[1]["metadata"] for item in scored_relevant[:n_results]]
+        
+        top_docs = [item[1]["text"] for item in scored[:n_results]]
+        top_metas = [item[1]["metadata"] for item in scored[:n_results]]
 
         return {
             "documents": [top_docs],
@@ -468,7 +478,11 @@ class DocumentsStore:
             json.dump(self.documents, f, indent=2)
 
     def add_document(self, doc_data: dict):
-        self.documents.insert(0, doc_data)
+        existing = next((d for d in self.documents if d.get("content_hash") == doc_data.get("content_hash") or d.get("title") == doc_data.get("title") or d.get("file_name") == doc_data.get("file_name")), None)
+        if existing:
+            existing.update(doc_data)
+        else:
+            self.documents.insert(0, doc_data)
         self._save()
 
     def delete_document(self, doc_id: str) -> bool:
@@ -920,8 +934,8 @@ def query_rag(query: str, top_k: int = 3, attached_file_name: Optional[str] = No
         documents = attached_docs + search_docs
         metadatas = attached_metas + search_metas
 
-        # Ensure total context text stays under 14,000 characters to prevent Groq 413 token limit errors
-        max_context_chars = 14000
+        # Ensure total context text stays under 120,000 characters to optimize retrieval
+        max_context_chars = 120000
         current_chars = 0
         trimmed_docs = []
         trimmed_metas = []
@@ -946,8 +960,8 @@ def query_rag(query: str, top_k: int = 3, attached_file_name: Optional[str] = No
                     })
                     seen_titles.add(meta.get("title"))
 
-        # High output token budget (3500 tokens) so full document answers are never truncated
-        max_tokens = 3500 if (attached_file_name or is_full_doc) else 2000
+        # High output token budget (4000/6000 tokens) so answers are never truncated
+        max_tokens = 6000 if (attached_file_name or is_full_doc) else 4000
 
         # Trigger Map-Reduce pattern for very long attached documents (> 6 chunks)
         if len(attached_docs) > 6 and (is_full_doc or sum(len(d) for d in attached_docs) > 5000):
@@ -1046,7 +1060,7 @@ def generate_llm_answer(
     documents: List[str], 
     metadatas: List[dict], 
     is_greeting: bool = False,
-    max_tokens: int = 3000
+    max_tokens: int = 4000
 ) -> str:
     if is_greeting:
         fallback_greeting = "Hello! Greetings! I am your SRKR Campus AI Assistant (SRKR College GPT). I am here to help you with SRKR Engineering College R23 B.Tech syllabus details, course structures, hostel guidelines, exam schedules, campus notices, and general questions. How may I assist you today?"
@@ -1079,8 +1093,8 @@ def generate_llm_answer(
                 print(f"Groq import or init error on greeting: {ge}")
         return fallback_greeting
 
-    if max_tokens <= 3000 and is_full_document_query(query):
-        max_tokens = 6000
+    if max_tokens <= 4000 and is_full_document_query(query):
+        max_tokens = 8000
 
     if GROQ_API_KEY:
         try:

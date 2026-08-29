@@ -10,3 +10,4 @@ google-genai>=0.1.1
 python-multipart>=0.0.9
 pypdf>=4.0.0
 trafilatura>=2.2.0
+cloudscraper>=1.2.71
